@@ -1,0 +1,201 @@
+<style>
+  .ante-image-carousel-image {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+  }
+
+  .ante-image-carousel .splide__slide,
+  .ante-image-carousel .splide__track {
+    overflow: hidden;
+    border-radius: var(--radius-large);
+  }
+
+  .ante-image-carousel .splide__slide {
+    margin-right: var(--spacing-small);
+  }
+
+  .ante-image-carousel img,
+  .splide-preview.ante-image-carousel-image {
+    display: block;
+    border-radius: var(--radius-large);
+  }
+
+  .ante-image-carousel-thumbs {
+    margin-top: calc(var(--micropad-x-large) - 1px);
+    margin-bottom: -1px;
+  }
+
+  .ante-image-carousel-thumbs .splide__track {
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+
+  .ante-image-carousel-thumbs .splide__slide {
+    width: clamp(
+      calc(100% / 6 - (var(--micropad-x-large) * 5) / 6 - 1px / 6),
+      calc(100% / {{ images.size }} - (var(--micropad-x-large) * {{ images.size | minus: 1 }}) / {{ images.size }} - 1px / {{ images.size }}),
+      calc(100% / 4 - (var(--micropad-x-large) * 3) / 4 - 1px / 4)
+    ) !important;
+    border: none !important;
+    outline: none;
+    margin: 0 calc(var(--micropad-x-large) - 1px) 0 1px !important;
+  }
+
+  .ante-image-carousel-thumbs .splide__slide div {
+    border-radius: var(--radius-small);
+    overflow: hidden;
+    position: relative;
+    outline: none;
+    border: 1px solid var(--color-border);
+    outline: 1px solid transparent;
+    transition: border .15s, outline .15s;
+    outline-offset: 0;
+    border-radius: var(--radius-medium);
+  }
+
+  .ante-image-carousel-thumbs .splide__slide:hover div {
+    outline: 1px solid var(--color-border);
+  }
+
+  .ante-image-carousel-thumbs .splide__slide.is-active div {
+    border: 1px solid var(--color-border-alt) !important;
+    outline: 1px solid var(--color-border-alt);
+  }
+
+  .ante-image-carousel-thumbs .splide__slide:last-child {
+    padding-right: 2px;
+  }
+
+  .ante-image-carousel-thumb {
+    width: 100%;
+  }
+
+  @media (max-width: 1024px) {
+    .ante-image-carousel,
+    .ante-image-carousel-thumbs,
+    .splide-preview.ante-image-carousel-image {
+      max-width: var(--width-6);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ante-image-carousel .splide__track {
+      overflow: visible;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .ante-image-carousel,
+    .splide-preview.ante-image-carousel-image {
+      max-width: initial;
+    }
+
+    .ante-image-carousel-thumbs {
+      margin-left: calc(var(--section-horizontal-padding) * -1 + var(--micropad-x-large));
+      margin-right: calc(var(--section-horizontal-padding) * -1 + var(--micropad-x-large));
+    }
+
+    .ante-image-carousel-thumbs {
+      max-width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .ante-image-carousel-thumbs .splide__slide {
+      width: clamp(
+        calc(100% / 5 - (var(--micropad-x-large) * 4) / 5 - 1px / 5),
+        calc(100% / {{ images.size }} - (var(--micropad-x-large) * {{ images.size | minus: 1 }}) / {{ images.size }} - 1px / {{ images.size }}),
+        calc(100% / 4 - (var(--micropad-x-large) * 3) / 4 - 1px / 4)
+      ) !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .ante-image-carousel-thumbs .splide__slide {
+      width: calc(100% / 4 - (var(--micropad-x-large) * 3) / 4 - 1px / 4) !important;
+    }
+  }
+</style>
+
+{% assign first = images.first | split: "___" %}
+<link rel="preload" as="image" href="{{ first.first }}">
+
+<div class="ante-image-carousel-container">
+  <img
+    class="splide-preview ante-image-carousel-image"
+    src="{{ first.first }}"
+  >
+
+  <div class="splide ante-image-carousel ante-image-carousel-{{ id }}">
+    <div class="splide__track">
+      <ul class="splide__list">
+        {% for image in images %}
+          {% assign split = image | split: "___" %}
+          <li class="splide__slide">
+            <img
+              class="ante-image-carousel-image"
+              data-splide-lazy="{{ split.first }}"
+              alt="Carousel Image"
+              {% if split[1] %}
+                data-modal='<video controls playsinline autoplay src="{{ split[1] | escape }}"></video>'
+                data-modal-title=""
+                data-modal-id="video-modal"
+                style="cursor: pointer"
+              {% else %}
+                data-popupable
+              {% endif %}
+            >
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="splide ante-image-carousel-thumbs ante-image-carousel-thumbs-{{ id }}">
+    <div class="splide__track">
+      <ul class="splide__list">
+        {% for image in images %}
+          {% assign split = image | split: "___" %}
+          <li class="splide__slide">
+            <div>
+              <img
+                class="ante-image-carousel-thumb"
+                src="{{ split.first | replace: "width=1024", "width=128" }}"
+                loading="lazy"
+                alt="Thumbnail"
+              >
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  await initSplide()
+
+  const carousel = document.querySelector(".ante-image-carousel-{{ id }}")
+
+  const main = new Splide(carousel, {
+    type: "loop",
+    arrows: false,
+    pagination: false,
+    lazyLoad: "nearby"
+  })
+
+  const thumbs = new Splide(".ante-image-carousel-thumbs-{{ id }}", {
+    rewind: true,
+    pagination: false,
+    isNavigation: true,
+    arrows: false
+  })
+
+  main.sync(thumbs)
+  main.mount()
+  thumbs.mount()
+</script>

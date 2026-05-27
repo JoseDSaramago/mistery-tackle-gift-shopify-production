@@ -1,0 +1,1348 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "ante_page_config_eaMRw3": {
+      "type": "ante-page-config",
+      "name": "Page Config | UTA ✅",
+      "settings": {
+        "default_buy_button_text": "GET YOUR BOX",
+        "default_buy_button_label": "/month",
+        "style_override": "none",
+        "use_original_headerfooter": false,
+        "particles": "none"
+      }
+    },
+    "ante_lander_nav_qYpcak": {
+      "type": "ante-nav-bar",
+      "blocks": {
+        "cta_fact_yhX4rx": {
+          "type": "cta_fact",
+          "name": "Sticky bullet #1 ",
+          "settings": {
+            "text": "Cancel or switch species anytime"
+          }
+        },
+        "cta_fact_H3GyUA": {
+          "type": "cta_fact",
+          "name": "Sticky bullet #2",
+          "settings": {
+            "text": "Discover baits you’d never buy yourself"
+          }
+        }
+      },
+      "block_order": [
+        "cta_fact_yhX4rx",
+        "cta_fact_H3GyUA"
+      ],
+      "name": "Lander Nav | UTA ✅",
+      "settings": {
+        "nav_style": "bar",
+        "inverted_colours": true,
+        "invert_on_scroll": false,
+        "nav_contrast_style": "solid_border",
+        "logo": "shopify://shop_images/MTB_logo.webp",
+        "logo_inverse": "shopify://shop_images/MTB_logo_d0b14c35-52f0-41ba-8bb1-3a515a2ba7d6.webp",
+        "menu": "ante-menu",
+        "enable_cart_button": false,
+        "enable_account_button": false,
+        "use_cta": true,
+        "cta_title": "Start your flexible monthly box today.",
+        "hide_elements": "#buy-box",
+        "cta_hide_buffer": 15,
+        "section_visible": true
+      }
+    },
+    "ante_announcement_bar_jzyCN6": {
+      "type": "ante-announcement-bar",
+      "name": "Announcement Bar | UTA ✅",
+      "settings": {
+        "announcement": "Rated Best Fishing Gift!",
+        "link": "",
+        "background_colour": "#ffc982",
+        "text_colour": "",
+        "section_visible": true
+      }
+    },
+    "ante_lander_hero_r6dT4V": {
+      "type": "ante-lander-hero",
+      "blocks": {
+        "review_stars_UAAkFD": {
+          "type": "review_stars",
+          "settings": {
+            "rating": 4.5,
+            "text": "Rated 4.59/5 (7808+ reviews)",
+            "link": "#reviewticker",
+            "side": "left",
+            "below_gap": "spacing-small",
+            "show_on": "both"
+          }
+        },
+        "text_bwmtmq": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>The Gift That Keeps Them Fishing All Year Long</h2><p>Mystery Tackle Box is a fun monthly plan that allows anglers to get quality products every month so they can discover new tackle and CATCH MORE FISH!</p>",
+            "side": "left",
+            "below_gap": "spacing-small",
+            "show_on": "both"
+          }
+        },
+        "bullet_list_bA6dkE": {
+          "type": "bullet_list",
+          "settings": {
+            "bullet_list": "✅ The perfect gift for any angler!\n✅ Hand-picked gear by pros \n✅ 100% happiness guarantee!",
+            "side": "left",
+            "below_gap": "spacing-small",
+            "show_on": "both"
+          }
+        },
+        "spacer_KEdwma": {
+          "type": "spacer",
+          "settings": {
+            "height": 0,
+            "stretch": true,
+            "side": "left",
+            "show_on": "tablet-mobile"
+          }
+        },
+        "buy_button_jG4Fck": {
+          "type": "buy_button",
+          "settings": {
+            "button_text": "Get $10 off",
+            "show_price": false,
+            "show_footer": false,
+            "side": "left",
+            "below_gap": "none",
+            "show_on": "both"
+          }
+        },
+        "background_image_qrUGeU": {
+          "type": "background_image",
+          "name": "Small Desktop",
+          "settings": {
+            "background_image": "shopify://shop_images/Lifestyle-BLat-ContentShoot-111322-144_1_1.jpg",
+            "kick_in": 1919
+          }
+        },
+        "background_image_J7EN9M": {
+          "type": "background_image",
+          "name": "Tablet & Mobile",
+          "settings": {
+            "background_image": "shopify://shop_images/MTB-Pro-OpenBox-Organic-V2-02012023_2_1.jpg",
+            "kick_in": 1024
+          }
+        }
+      },
+      "block_order": [
+        "review_stars_UAAkFD",
+        "text_bwmtmq",
+        "bullet_list_bA6dkE",
+        "spacer_KEdwma",
+        "buy_button_jG4Fck",
+        "background_image_qrUGeU",
+        "background_image_J7EN9M"
+      ],
+      "name": "Lander Hero [UTA] 🚦",
+      "settings": {
+        "background_image": "shopify://shop_images/hero_desktop_mtb.webp",
+        "content_alignment": "center",
+        "content_background": false,
+        "min_height": "0",
+        "max_height": "650",
+        "min_height_mobile": "0",
+        "max_height_mobile": "600",
+        "background_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 0.68) 5%, rgba(0, 0, 0, 0) 62%)",
+        "background_gradient_mobile": "linear-gradient(180deg, rgba(0, 0, 0, 0.76), rgba(255, 228, 49, 0) 62%)",
+        "heading": "",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": true,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-bottom",
+        "custom_id": "hero",
+        "section_visible": true
+      }
+    },
+    "cc0573b75b2c4bbb866af6a9368e9303_builder_io_KR9x9F": {
+      "type": "cc0573b75b2c4bbb866af6a9368e9303-builder-io",
+      "name": "Product gift plan",
+      "settings": {
+        "builder_content_entry_preview": "f028d18a543343dd85e6852294ffdb37"
+      }
+    },
+    "ante_product_steps_EChPLt": {
+      "type": "ante-multi-step-variants",
+      "blocks": {
+        "product_fnURHe": {
+          "type": "product",
+          "name": "Regular Monthly",
+          "settings": {
+            "product": "regular-monthly-plan-1",
+            "custom_title": "REGULAR BOX",
+            "custom_image": "shopify://shop_images/regular_box_cutout_e707860d-c9ae-40da-bd31-d650a7bc0c11.png",
+            "use_custom_price": true,
+            "custom_price": 2499,
+            "use_custom_compare_at_price": false,
+            "custom_compare_at_price": 0,
+            "facts": "4-6 Items in every box\nMost affordable",
+            "outer_tag_text": "",
+            "inner_tag_text": "",
+            "outer_tag_text_step3": "Flexible option",
+            "inner_tag_text_step3": "",
+            "preselected": false,
+            "preselected_step_3": true,
+            "info_message": "This plan will automatically renew for $24.99 (plus applicable tax)."
+          }
+        },
+        "product_frequency_option_WVcUJD": {
+          "type": "product_frequency_option",
+          "name": "\" 6 Month",
+          "settings": {
+            "parent_product": "regular-monthly-plan-1",
+            "frequency_product": "regular-6-month-2",
+            "frequency_title": "EVERY 6 BOXES",
+            "frequency_description": "Prepay for 6 boxes, save $30 compared to monthly.",
+            "frequency_duration": "/6 months",
+            "use_custom_price": true,
+            "custom_price": 11999,
+            "use_custom_compare_at_price": true,
+            "custom_compare_at_price": 14994,
+            "outer_tag_text": "",
+            "inner_tag_text": "<p><strong>$10</strong> Extra saving</p>",
+            "preselected": false,
+            "info_message": "This plan will automatically renew for $129.99 (plus applicable tax)."
+          }
+        },
+        "product_KiWAQc": {
+          "type": "product",
+          "name": "Pro Monthly",
+          "settings": {
+            "product": "pro-monthly-plan-copy",
+            "custom_title": "PRO BOX",
+            "custom_image": "shopify://shop_images/pro_box_cutout.png",
+            "use_custom_price": true,
+            "custom_price": 2699,
+            "use_custom_compare_at_price": true,
+            "custom_compare_at_price": 3699,
+            "facts": "6-8 Items in every box\nBest value",
+            "outer_tag_text": "Best value",
+            "inner_tag_text": "<p><strong>$10</strong> Coupon activated</p>",
+            "outer_tag_text_step3": "Flexible option",
+            "inner_tag_text_step3": "<p><strong>$10</strong> Coupon activated</p>",
+            "preselected": true,
+            "preselected_step_3": false,
+            "info_message": "This plan will automatically renew for $36.99 (plus applicable tax)."
+          }
+        },
+        "product_frequency_option_BiK7d3": {
+          "type": "product_frequency_option",
+          "name": "\" 6 Month",
+          "settings": {
+            "parent_product": "pro-monthly-plan-copy",
+            "frequency_product": "pro-6-month-2",
+            "frequency_title": "EVERY 6 BOXES",
+            "frequency_description": "Prepay for 6 boxes, save $32 compared to monthly... also get $10 off your first subscription.",
+            "frequency_duration": "/6 months",
+            "use_custom_price": true,
+            "custom_price": 17999,
+            "use_custom_compare_at_price": true,
+            "custom_compare_at_price": 22194,
+            "outer_tag_text": "",
+            "inner_tag_text": "<p><strong>$42</strong> Total saving</p>",
+            "preselected": true,
+            "info_message": "This plan will automatically renew for $189.99 (plus applicable tax)."
+          }
+        },
+        "product_QMt86q": {
+          "type": "product",
+          "name": "Elite Monthly",
+          "settings": {
+            "product": "elite-monthly-plan-copy",
+            "custom_title": "ELITE",
+            "custom_image": "shopify://shop_images/elite_box_cutout.png",
+            "use_custom_price": true,
+            "custom_price": 3999,
+            "use_custom_compare_at_price": true,
+            "custom_compare_at_price": 4999,
+            "facts": "8-10 Items in every box\nOur biggest & best box!",
+            "outer_tag_text": "",
+            "inner_tag_text": "<p><strong>$10</strong> Coupon activated</p>",
+            "outer_tag_text_step3": "",
+            "inner_tag_text_step3": "",
+            "preselected": false,
+            "preselected_step_3": true,
+            "info_message": "This plan will automatically renew for $49.99 (plus applicable tax)."
+          }
+        },
+        "product_frequency_option_CGkB6a": {
+          "type": "product_frequency_option",
+          "name": "\" 6 Month",
+          "settings": {
+            "parent_product": "elite-monthly-plan-copy",
+            "frequency_product": "elite-6-month-2",
+            "frequency_title": "EVERY 6 BOXES",
+            "frequency_description": "Prepay for 6 boxes, save $25 compared to monthly... also get $10 off your first subscription.",
+            "frequency_duration": "/6 months",
+            "use_custom_price": true,
+            "custom_price": 26499,
+            "use_custom_compare_at_price": true,
+            "custom_compare_at_price": 29994,
+            "outer_tag_text": "",
+            "inner_tag_text": "<p><strong>$35</strong> Total saving</p>",
+            "preselected": false,
+            "info_message": "This plan will automatically renew for $274.99 (plus applicable tax)."
+          }
+        },
+        "info_3JGpYR": {
+          "type": "info",
+          "name": "curated by pros",
+          "settings": {
+            "image": "shopify://shop_images/curated_by_pros_dfd9dcd6-fa71-40ad-8e63-486da9230483.png",
+            "text": "curated by pros",
+            "description": "Tested by anglers who know what catches."
+          }
+        },
+        "info_MfGae4": {
+          "type": "info",
+          "name": "switch out species",
+          "settings": {
+            "image": "shopify://shop_images/switch_out_species_7cfc8122-94f5-4977-bdc9-b263cf67b85b.png",
+            "text": "switch out species",
+            "description": "Target the fish you want, swap whenever you want."
+          }
+        },
+        "info_n8ywyC": {
+          "type": "info",
+          "name": "cancel at anytime",
+          "settings": {
+            "image": "shopify://shop_images/cancel_anytime_2c7153f1-5e00-46a7-9aa7-69cbc7129695.png",
+            "text": "cancel at anytime",
+            "description": "Pause, skip, or cancel whenever you need to. No stress"
+          }
+        },
+        "media_qa3B6h": {
+          "type": "media",
+          "name": "YouTube Modal",
+          "settings": {
+            "heading": "See what’s inside before you buy",
+            "text": "Every lure is expert-vetted and full-sized. Watch anglers unbox their boxes and see the quality for yourself.",
+            "image": "shopify://shop_images/f7b0420715d147e3163b35061abf6ee3136d6a21.png",
+            "video_url": "https://www.youtube.com/watch?v=sc5c1Zs7LAc"
+          }
+        },
+        "drop_Liitit": {
+          "type": "drop",
+          "name": "What’s in the box?",
+          "settings": {
+            "title": "What’s in the box?",
+            "content": "<p>You’ll get 6–10 pieces of tackle depending on your plan. Hardbaits, soft plastics, hooks, jigs, and sometimes exclusive drops or stickers. Every lure is full-sized, not samples. We also include tips so you know how to fish them</p>"
+          }
+        },
+        "drop_wfBzmJ": {
+          "type": "drop",
+          "name": "Can I cancel or switch?",
+          "settings": {
+            "title": "Can I cancel or switch?",
+            "content": "<p>Commitment issues? We get it. Bail whenever you want with one click. Bored with bass? Switch to walleye like you're changing Netflix shows. Need a fishing detox? Hit pause and come back when the itch returns. You're the captain of this ship.</p>"
+          }
+        },
+        "drop_4ymUEM": {
+          "type": "drop",
+          "name": "Is the gear legit?",
+          "settings": {
+            "title": "Is the gear legit?",
+            "content": "<p>We skip the clearance rack entirely. Each lure is professionally selected for one purpose: putting fish in your boat, not collecting cobwebs in storage. Our customers love discovering hard-to-find baits that local shops either sell out of or never stock.</p>"
+          }
+        },
+        "image_nGMWL6": {
+          "type": "image",
+          "name": "PHG #1",
+          "settings": {
+            "image": "shopify://shop_images/phg_1_a2257237-cd5c-424d-a03a-7c5b0f864623.webp",
+            "position": "before"
+          }
+        },
+        "image_wjeanq": {
+          "type": "image",
+          "name": "PHG #2",
+          "settings": {
+            "image": "shopify://shop_images/phg_2_46317d73-8019-48bc-a24c-defa99cd25de.webp",
+            "position": "after"
+          }
+        },
+        "image_niQqxe": {
+          "type": "image",
+          "name": "PHG #3",
+          "settings": {
+            "image": "shopify://shop_images/phg_3.webp",
+            "position": "after"
+          }
+        },
+        "image_aCU7Xf": {
+          "type": "image",
+          "name": "PHG #4",
+          "settings": {
+            "image": "shopify://shop_images/phg_4_1.webp",
+            "position": "after"
+          }
+        },
+        "image_F9bKRt": {
+          "type": "image",
+          "name": "PHG #5",
+          "settings": {
+            "image": "shopify://shop_images/phg_5.webp",
+            "position": "after"
+          }
+        },
+        "image_E4fBai": {
+          "type": "image",
+          "name": "PHG #6",
+          "settings": {
+            "image": "shopify://shop_images/phg_5_1.webp",
+            "position": "after"
+          }
+        },
+        "image_kBP7yy": {
+          "type": "image",
+          "name": "PHG #7",
+          "settings": {
+            "image": "shopify://shop_images/phg_6.webp",
+            "position": "after"
+          }
+        }
+      },
+      "block_order": [
+        "product_fnURHe",
+        "product_frequency_option_WVcUJD",
+        "product_KiWAQc",
+        "product_frequency_option_BiK7d3",
+        "product_QMt86q",
+        "product_frequency_option_CGkB6a",
+        "info_3JGpYR",
+        "info_MfGae4",
+        "info_n8ywyC",
+        "media_qa3B6h",
+        "drop_Liitit",
+        "drop_wfBzmJ",
+        "drop_4ymUEM",
+        "image_nGMWL6",
+        "image_wjeanq",
+        "image_niQqxe",
+        "image_aCU7Xf",
+        "image_F9bKRt",
+        "image_E4fBai",
+        "image_kBP7yy"
+      ],
+      "disabled": true,
+      "name": "Multi-Step Buy Box | UTA 🟠",
+      "settings": {
+        "carousel_product": "pro-gift-credit",
+        "star_rating": 4.5,
+        "star_review_count": 7547,
+        "star_link": "#reviewticker",
+        "custom_heading": "Grow your tackle collection with new gear every month!",
+        "steps_description": "Choose your box size and species. You can change species whenever, pause, or cancel anytime! Free Shipping on all orders before 21st September.",
+        "steps_description_modal_title": "",
+        "steps_description_modal_content": "",
+        "step_1_heading": "CHOOSE BOX SIZE",
+        "step_1_info_title": "",
+        "step_1_info": "",
+        "step_1_button_text": "CHOOSE FISH SPECIES",
+        "step_2_heading": "CHOOSE YOUR FISH SPECIES",
+        "step_2_info_title": "",
+        "step_2_info": "",
+        "step_2_button_text": "CHOOSE SUBSCRIPTION",
+        "step_3_heading": "CHOOSE YOUR PAYMENT FREQUENCY",
+        "step_3_info_title": "",
+        "step_3_info": "",
+        "step_3_button_text": "GET YOUR BOX",
+        "default_frequency_title": "EVERY BOX",
+        "default_frequency_description": "Change your species every single month to get it flexible for you!",
+        "delivered_count": "10,982,138",
+        "delivered_text": "boxes delivered across North America",
+        "discount_code": "TRYMTB10",
+        "heading": "",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": false,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-top-bottom",
+        "custom_id": "buy-box",
+        "section_visible": true
+      }
+    },
+    "ante_testimonial_ticker_YTqFBY": {
+      "type": "ante-testimonial-ticker",
+      "blocks": {
+        "brand_xawtLJ": {
+          "type": "marquee-item",
+          "name": "Teddy D",
+          "settings": {
+            "logo": "shopify://shop_images/trustpilot_5.svg",
+            "text": "“If all this sounds a little too much like a science experiment to you, here’s the thing: these two products really work on unruly skin.”",
+            "name": "Teddy D, MTB Subscriber",
+            "customer_image": "shopify://shop_images/Screenshot_2025-09-12_at_14.27.11.png"
+          }
+        },
+        "brand_LBFpfG": {
+          "type": "marquee-item",
+          "name": "outdoor life",
+          "settings": {
+            "logo": "shopify://shop_images/outdoor_life.svg",
+            "text": "“MTB allows you to dabble in different species, sticking with your favorite or switching as the months progress.”",
+            "name": ""
+          }
+        },
+        "brand_EbD8WX": {
+          "type": "marquee-item",
+          "name": "Jay P",
+          "settings": {
+            "logo": "shopify://shop_images/trustpilot_5.svg",
+            "text": "“MTB keeps my arsenal growing with new lures every month. The variety fuels my fishing and my YouTube content.”",
+            "name": "Jay P, MTB Subscriber",
+            "customer_image": "shopify://shop_images/Screenshot_2025-09-12_at_14.32.14.png"
+          }
+        },
+        "brand_3eXDzN": {
+          "type": "marquee-item",
+          "name": "us today",
+          "settings": {
+            "logo": "shopify://shop_images/us_today.svg",
+            "text": "“We’re big fans of any gift that gets kids outside for a bit of adventure!”",
+            "name": ""
+          }
+        },
+        "brand_96qcM3": {
+          "type": "marquee-item",
+          "name": "Michael M",
+          "settings": {
+            "logo": "shopify://shop_images/truspilot_4.svg",
+            "text": "“MTB helped me get familiar with what works now. A great way to learn without getting overwhelmed.”",
+            "name": "Michael M, MTB subscriber",
+            "customer_image": "shopify://shop_images/Screenshot_2025-09-12_at_14.39.40.png"
+          }
+        },
+        "brand_TxcWfQ": {
+          "type": "marquee-item",
+          "name": "outdoor life",
+          "settings": {
+            "logo": "shopify://shop_images/field_and_stream.svg",
+            "text": "“For anglers wanting to try new techniques, this is a great way to test new baits”",
+            "name": ""
+          }
+        },
+        "brand_7b7pwG": {
+          "type": "marquee-item",
+          "name": "Manuel M",
+          "settings": {
+            "logo": "shopify://shop_images/trustpilot_5.svg",
+            "text": "“I started during COVID and stuck with it. Every box delivers real lures, variety, and a push to learn.”",
+            "name": "Manuel M, MTB subscriber",
+            "customer_image": "shopify://shop_images/Screenshot_2025-09-12_at_14.37.24.png"
+          }
+        },
+        "brand_r4mfRi": {
+          "type": "marquee-item",
+          "name": "us angler",
+          "settings": {
+            "logo": "shopify://shop_images/US_angler.svg",
+            "text": "“For new or less experienced anglers, this box is simply awesome. You’re getting good tackle that’s going to catch fish.”",
+            "name": ""
+          }
+        },
+        "brand_bjtDMU": {
+          "type": "marquee-item",
+          "name": "Jonathan M",
+          "settings": {
+            "logo": "shopify://shop_images/trustpilot_5.svg",
+            "text": "“Fishing tournaments pushed me to try new baits. MTB makes it easy with quality gear at a price I trust.”",
+            "name": "Jonathan M, MTB Subscriber",
+            "customer_image": "shopify://shop_images/Screenshot_2025-09-12_at_14.35.53.png"
+          }
+        },
+        "brand_Fwx4HV": {
+          "type": "marquee-item",
+          "name": "forbes",
+          "settings": {
+            "logo": "shopify://shop_images/forbes.svg",
+            "text": "“Best overall fishing tackle subscription box out there!”",
+            "name": ""
+          }
+        },
+        "sticker_MfcaXK": {
+          "type": "sticker",
+          "settings": {
+            "image": "shopify://shop_images/ticker_desktop_b9ae78bc-1fcd-4ada-ab80-b0c43868f906.webp",
+            "layer_order": "below",
+            "width": 240,
+            "rotation": 0,
+            "horizontal_position": "right",
+            "vertical_position": "top_content",
+            "offset_x": 0,
+            "offset_y": 0,
+            "override_1_visibility": "enabled",
+            "override_1_page_width": 1438,
+            "override_1_layer_order": "below",
+            "override_1_width": 180,
+            "override_1_rotation": 0,
+            "override_1_horizontal_position": "right",
+            "override_1_vertical_position": "top_content",
+            "override_1_offset_x": 0,
+            "override_1_offset_y": 48,
+            "override_2_visibility": "enabled",
+            "override_2_page_width": 1230,
+            "override_2_image": "shopify://shop_images/ticker_mobile_24b834f9-28a7-4c38-9ec3-f53a792915fd.webp",
+            "override_2_layer_order": "below",
+            "override_2_width": 180,
+            "override_2_rotation": 0,
+            "override_2_horizontal_position": "right",
+            "override_2_vertical_position": "bottom_section",
+            "override_2_offset_x": 0,
+            "override_2_offset_y": -20,
+            "override_3_visibility": "enabled",
+            "override_3_page_width": 768,
+            "override_3_image": "shopify://shop_images/ticker_mobile_803a3ea7-a161-4c85-b657-3068383a45fe.webp",
+            "override_3_layer_order": "below",
+            "override_3_width": 150,
+            "override_3_rotation": 0,
+            "override_3_horizontal_position": "right",
+            "override_3_vertical_position": "bottom_section",
+            "override_3_offset_x": 0,
+            "override_3_offset_y": -30
+          }
+        }
+      },
+      "block_order": [
+        "brand_xawtLJ",
+        "brand_LBFpfG",
+        "brand_EbD8WX",
+        "brand_3eXDzN",
+        "brand_96qcM3",
+        "brand_TxcWfQ",
+        "brand_7b7pwG",
+        "brand_r4mfRi",
+        "brand_bjtDMU",
+        "brand_Fwx4HV",
+        "sticker_MfcaXK"
+      ],
+      "custom_css": [
+        ".ante-section-content {margin-top: 200px;}",
+        "@media (max-width: 1919px) {.ante-section-content {margin-top: 160px; }}",
+        "@media (max-width: 1230px) {.ante-section-content {margin-bottom: 96px; } .ante-section-content {margin-top: var(--spacing-large); }}"
+      ],
+      "name": "Testimonial Ticker | UTA ✅",
+      "settings": {
+        "speed": 128,
+        "always_scroll": true,
+        "pause_on_hover": true,
+        "heading": "<h1>The perfect tackle box <strong>doesn’t</strong> <em>does</em> exist</h1>",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": true,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-top-bottom",
+        "custom_id": "reviewticker",
+        "section_visible": true
+      }
+    },
+    "ante_multi_comparison_tkay9n": {
+      "type": "ante-multi-comparison",
+      "blocks": {
+        "tab_QHjGa9": {
+          "type": "tab",
+          "name": "beginner",
+          "settings": {
+            "tab": "beginner",
+            "before_title": "Before MTB",
+            "before_content": "Wandering tackle shops like a lost tourist\nThrowing the same tired bait while fish laugh at you\nNew lures = expensive decorations for your tackle box",
+            "after_title": "after MTB",
+            "after_content": "Expert-curated lures picked for your waters\nFresh variety every month keeps fishing fun\nTips included so you can rig and fish with confidence",
+            "image": "shopify://shop_images/beginner.webp"
+          }
+        },
+        "tab_zH8x6z": {
+          "type": "tab",
+          "name": "intermediate",
+          "settings": {
+            "tab": "intermediate",
+            "before_title": "Before MTB",
+            "before_content": "Spending $70–$80 on two lures at corporate fishing warehouses\nStuck fishing the same 3 “confidence baits”\nFrustrated by repeats and limited variety",
+            "after_title": "After MTB",
+            "after_content": "A full box of pro-selected baits for less\nSeasonal picks that push you into new patterns\nFresh artillery every month... zero repeats, zero bottom-shelf garbage",
+            "image": "shopify://shop_images/ccaa4fc8d25425c2708b71686e894584462aa2a3.jpg"
+          }
+        },
+        "tab_DbzJtY": {
+          "type": "tab",
+          "name": "pro",
+          "settings": {
+            "tab": "Pro",
+            "before_title": "Before MTB",
+            "before_content": "Research takes time you don't have between work and water\nRegional stores can't stock the cutting-edge gear you need\nYour proven setup needs fresh blood to stay competitive",
+            "after_title": "After MTB",
+            "after_content": "Tournament-grade selections made by full-time pros\nDirect pipeline to premium baits often unavailable locally\nMonthly opportunities to expand your techniques and stay sharp",
+            "image": "shopify://shop_images/pro_7b35bd8b-2d08-4afc-bc45-de8ca1678124.webp"
+          }
+        }
+      },
+      "block_order": [
+        "tab_QHjGa9",
+        "tab_zH8x6z",
+        "tab_DbzJtY"
+      ],
+      "name": "Multi Comparison | UTA ✅",
+      "settings": {
+        "heading": "<h1>Built for <span style=\"text-decoration:underline\"><em>every</em></span> angler, from first cast to PB.</h1>",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": false,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-top",
+        "custom_id": "",
+        "section_visible": true
+      }
+    },
+    "ante_reasons_wd9Unh": {
+      "type": "ante-reasons-why",
+      "blocks": {
+        "reason_bgF498": {
+          "type": "reason",
+          "name": " right baits",
+          "settings": {
+            "heading": "#1 The right baits for the right species",
+            "text": "Expensive lures don’t guarantee success. MTB boxes are curated by real anglers so you get the exact baits that are working for your species and season.",
+            "icon": "shopify://shop_images/right_bait.webp"
+          }
+        },
+        "reason_X6KYmD": {
+          "type": "reason",
+          "name": "Quality tackle",
+          "settings": {
+            "heading": "#2 Quality tackle without the clutter",
+            "text": "Most anglers hoard lures they never touch. MTB sends a lean, tailored box... gear you’ll actually fish, not pile in a drawer.",
+            "icon": "shopify://shop_images/quality_tackle.webp"
+          }
+        },
+        "reason_Kh7ytx": {
+          "type": "reason",
+          "name": "Pro-picked",
+          "settings": {
+            "heading": "#3 Pro-picked lures that catch right now",
+            "text": "Store shelves push old stock. MTB works with pros who fish daily, so your box is filled with baits tested to catch right now, not last year.",
+            "icon": "shopify://shop_images/pro_picked.webp"
+          }
+        },
+        "sticker_7WBLfk": {
+          "type": "sticker",
+          "settings": {
+            "image": "shopify://shop_images/offer-callout-uta.svg",
+            "layer_order": "above",
+            "width": 87,
+            "rotation": 0,
+            "horizontal_position": "right",
+            "vertical_position": "top_content",
+            "offset_x": -20,
+            "offset_y": -20,
+            "override_1_visibility": "enabled",
+            "override_1_page_width": 1024,
+            "override_1_layer_order": "above",
+            "override_1_width": 87,
+            "override_1_rotation": 0,
+            "override_1_horizontal_position": "right",
+            "override_1_vertical_position": "bottom_content",
+            "override_1_offset_x": 0,
+            "override_1_offset_y": -10,
+            "override_2_visibility": "disabled",
+            "override_2_page_width": 768,
+            "override_2_layer_order": "below",
+            "override_2_width": 0,
+            "override_2_rotation": 0,
+            "override_2_horizontal_position": "left",
+            "override_2_vertical_position": "bottom_content",
+            "override_2_offset_x": 0,
+            "override_2_offset_y": 0,
+            "override_3_visibility": "disabled",
+            "override_3_page_width": 768,
+            "override_3_layer_order": "below",
+            "override_3_width": 128,
+            "override_3_rotation": 0,
+            "override_3_horizontal_position": "left",
+            "override_3_vertical_position": "top_content",
+            "override_3_offset_x": 0,
+            "override_3_offset_y": 0
+          }
+        }
+      },
+      "block_order": [
+        "reason_bgF498",
+        "reason_X6KYmD",
+        "reason_Kh7ytx",
+        "sticker_7WBLfk"
+      ],
+      "name": "Reasons Why | UTA ✅",
+      "settings": {
+        "content_heading": "<p><strong>3 REASONS</strong> YOU'LL DITCH THE TACKLE SHOP FOREVER</p>",
+        "image": "shopify://shop_images/first_frame.png",
+        "image_mobile": "shopify://shop_images/Screenshot_2025-11-11_090454.png",
+        "video_url": "https://cdn.shopify.com/videos/c/o/v/1dfab206d89a4ee18fd1e6806eb4fa4e.mp4",
+        "heading": "",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": false,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-top-bottom",
+        "custom_id": "",
+        "section_visible": true
+      }
+    },
+    "ante_column_callout_A9qHUU": {
+      "type": "ante-column-callout",
+      "blocks": {
+        "item_ijhgeR": {
+          "type": "item",
+          "name": "reason 1",
+          "settings": {
+            "heading": "test out new lures & bait",
+            "text": "Stuck casting the same worms and lures? With Mystery Tackle Box, you get to try out new gear and see what makes the fish bite!",
+            "icon": "shopify://shop_images/test_variety.webp"
+          }
+        },
+        "item_mJjztL": {
+          "type": "item",
+          "name": "reason 2",
+          "settings": {
+            "heading": "discover new techniques",
+            "text": "Whether you’re an experienced fisherman or have a child showing interest, our inhouse pros curate and film new content suitable for levels.",
+            "icon": "shopify://shop_images/discover_new_009d0258-45e3-4bfe-b94b-07d345a8d5f6.webp"
+          }
+        },
+        "item_TYXLjV": {
+          "type": "item",
+          "name": "reason 3",
+          "settings": {
+            "heading": "expand your tackle selection",
+            "text": "Tackle shops and sporting goods stores all have the same selection. Try something new and enjoy a surprise every single month.",
+            "icon": "shopify://shop_images/expand_tackle.webp"
+          }
+        },
+        "item_fJJ86B": {
+          "type": "item",
+          "name": "reason 4",
+          "settings": {
+            "heading": "Limited Edition CUSTOM DECALS",
+            "text": "We partner with artists to bring you custom, limited edition decals. Personalize your tackle box or truck and show off your angler pride.",
+            "icon": "shopify://shop_images/limited_edition_4b7f2da4-7c82-48de-9231-5a2163209f48.webp"
+          }
+        },
+        "item_fQjH8w": {
+          "type": "item",
+          "name": "reason 5",
+          "settings": {
+            "heading": "Monthly prize draws",
+            "text": "When you subscribe, you automatically get entered into our monthly competitions where you can win fishing prizes worth over $150.",
+            "icon": "shopify://shop_images/monthly_comp_6171c2db-1be8-4fec-9f4a-cf930e305c07.webp"
+          }
+        },
+        "item_L8THxT": {
+          "type": "item",
+          "name": "reason 6",
+          "settings": {
+            "heading": "Change species month-by-month",
+            "text": "Bass, trout, Walleye, Redfish and more - you can change your box whenever you feel like fishing different bodies of water or species.",
+            "icon": "shopify://shop_images/change_species.webp"
+          }
+        },
+        "logo_E8cnjM": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/frame_1484586567_4x_99e304be-3643-4934-abc7-2d7501bedd2c.webp",
+            "link": ""
+          }
+        },
+        "logo_DLAtDp": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/frame_1484586568_4x_e080c441-707a-4d96-89db-4df72e6acfcb.webp",
+            "link": ""
+          }
+        },
+        "logo_tVPEUx": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/frame_1484586569_4x_75458bde-8d9c-4d42-90fc-92fd887dc454.webp",
+            "link": ""
+          }
+        },
+        "logo_r9n73g": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/frame_1484586570_4x_1dab1929-77df-4414-93b1-d4ab9615d1f0.webp",
+            "link": ""
+          }
+        },
+        "logo_E8nUrX": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/frame_1484586571_4x_56662572-669c-4529-a5ea-cd8dca1a16ed.webp",
+            "link": ""
+          }
+        },
+        "logo_CfgKap": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/frame_1484586572_4x_2946a0ec-377d-4b56-97ca-dee03caf5134.webp",
+            "link": ""
+          }
+        },
+        "logo_VfbB7U": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/frame_1484586573_4x_98a84a14-0c27-4ce6-88f8-564126ea9772.webp",
+            "link": ""
+          }
+        },
+        "logo_fqRQAX": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/frame_1484586574_4x_33bcc408-c59f-455c-820c-70e7b369da36.webp",
+            "link": ""
+          }
+        },
+        "logo_nMW68N": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/frame_1484586576_4x_0f9ecb8b-eef2-4287-979b-79d2799e39c2.webp",
+            "link": ""
+          }
+        },
+        "logo_AeXQyr": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/frame_1484586577_4x_21e968a8-dec9-424d-a521-191cb683e103.webp",
+            "link": ""
+          }
+        },
+        "logo_7dQJQx": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/frame_1484586578_4x_a2e1009e-00f6-4ce8-979f-439d2e5934ec.webp",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_ijhgeR",
+        "item_mJjztL",
+        "item_TYXLjV",
+        "item_fJJ86B",
+        "item_fQjH8w",
+        "item_L8THxT",
+        "logo_E8cnjM",
+        "logo_DLAtDp",
+        "logo_tVPEUx",
+        "logo_r9n73g",
+        "logo_E8nUrX",
+        "logo_CfgKap",
+        "logo_VfbB7U",
+        "logo_fqRQAX",
+        "logo_nMW68N",
+        "logo_AeXQyr",
+        "logo_7dQJQx"
+      ],
+      "name": "What's in the box? | UTA ✅",
+      "settings": {
+        "heading": "<h1><em>What</em> Keeps Our members hooked?</h1>",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": false,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-bottom",
+        "custom_id": "whymtb",
+        "section_visible": true
+      }
+    },
+    "ante_how_to_wgkmTV": {
+      "type": "ante-how-to",
+      "blocks": {
+        "step_Ezwpwg": {
+          "type": "step",
+          "name": "Step 1",
+          "settings": {
+            "image": "shopify://shop_images/step_1_1.webp",
+            "step_name": "Step 1",
+            "step_icon": "shopify://shop_images/checklist_icon_paper_1_2x_71cce930-9aa4-45e0-b47f-1559ffe0a122.webp",
+            "content": "<h3>pick a plan</h3><p>Choose your species and plan<br/>duration (save $ the longer you<br/>go!). Change species, pause, or<br/>cancel anytime!</p>"
+          }
+        },
+        "step_CMHHjr": {
+          "type": "step",
+          "name": "Step 2",
+          "settings": {
+            "image": "shopify://shop_images/step_2.webp",
+            "step_name": "Step 2",
+            "step_icon": "shopify://shop_images/icons.webp",
+            "content": "<h3>WE BUILD YOUR BOX</h3><p>Our team of expert anglers will<br/>curate & ship your box for free!<br/>There is no deadline for ordering -<br/>we ship all month long.</p>"
+          }
+        },
+        "step_ArtXbm": {
+          "type": "step",
+          "name": "Step 3",
+          "settings": {
+            "image": "shopify://shop_images/step_3.webp",
+            "step_name": "Step 3",
+            "step_icon": "shopify://shop_images/icons_2x_d144c821-4cf5-4861-aad2-7ced7f6f6006.webp",
+            "content": "<h3>HAPPY FISHING!</h3><p>Get ready for the best mail day of<br/>the month. Discover new baits and<br/>learn tips & tricks to catch more<br/>fish!</p>"
+          }
+        },
+        "sticker_pEG4Mn": {
+          "type": "sticker",
+          "settings": {
+            "image": "shopify://shop_images/offer-callout-uta.svg",
+            "layer_order": "above",
+            "width": 87,
+            "rotation": 0,
+            "horizontal_position": "center",
+            "vertical_position": "bottom_content",
+            "offset_x": -570,
+            "offset_y": 309,
+            "override_1_visibility": "enabled",
+            "override_1_page_width": 1919,
+            "override_1_layer_order": "above",
+            "override_1_width": 87,
+            "override_1_rotation": 0,
+            "override_1_horizontal_position": "center",
+            "override_1_vertical_position": "bottom_content",
+            "override_1_offset_x": -427,
+            "override_1_offset_y": 234,
+            "override_2_visibility": "enabled",
+            "override_2_page_width": 1024,
+            "override_2_layer_order": "above",
+            "override_2_width": 78,
+            "override_2_rotation": 0,
+            "override_2_horizontal_position": "center",
+            "override_2_vertical_position": "bottom_content",
+            "override_2_offset_x": -248,
+            "override_2_offset_y": 614,
+            "override_3_visibility": "enabled",
+            "override_3_page_width": 768,
+            "override_3_layer_order": "above",
+            "override_3_width": 54,
+            "override_3_rotation": 0,
+            "override_3_horizontal_position": "left",
+            "override_3_vertical_position": "center",
+            "override_3_offset_x": -10,
+            "override_3_offset_y": -116
+          }
+        }
+      },
+      "block_order": [
+        "step_Ezwpwg",
+        "step_CMHHjr",
+        "step_ArtXbm",
+        "sticker_pEG4Mn"
+      ],
+      "name": "How it works | UTA 🟠",
+      "settings": {
+        "auto_scroll": true,
+        "pause_on_hover": true,
+        "heading": "<h1>what's <span style=\"text-decoration:underline\"><em>the deal</em></span> with this magic tackle delivery?</h1>",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": true,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-top-bottom",
+        "custom_id": "",
+        "section_visible": true
+      }
+    },
+    "ante_faq_bbGdh4": {
+      "type": "ante-faq",
+      "blocks": {
+        "faq_9MxfPN": {
+          "type": "faq",
+          "name": "subscription #1",
+          "settings": {
+            "category": "subscription",
+            "title": "Question",
+            "content": "<p>Answer</p>"
+          }
+        },
+        "faq_6qbzUh": {
+          "type": "faq",
+          "name": "subscription #2",
+          "settings": {
+            "category": "subscription",
+            "title": "Question",
+            "content": "<p>Answer</p>"
+          }
+        },
+        "faq_ey66Va": {
+          "type": "faq",
+          "name": "subscription #3",
+          "settings": {
+            "category": "subscription",
+            "title": "Question",
+            "content": "<p>Answer</p>"
+          }
+        },
+        "faq_MWAqz4": {
+          "type": "faq",
+          "name": "subscription #4",
+          "settings": {
+            "category": "subscription",
+            "title": "Question",
+            "content": "<p>Answer</p>"
+          }
+        },
+        "faq_9j6tt9": {
+          "type": "faq",
+          "name": "Delivery & Returns #1",
+          "settings": {
+            "category": "Delivery & Returns",
+            "title": "Question",
+            "content": "<p>Answer</p>"
+          }
+        },
+        "faq_PdQMNG": {
+          "type": "faq",
+          "name": "Delivery & Returns #2",
+          "settings": {
+            "category": "Delivery & Returns",
+            "title": "Question",
+            "content": "<p>Answer</p>"
+          }
+        },
+        "faq_3xdT9j": {
+          "type": "faq",
+          "name": "Delivery & Returns #3",
+          "settings": {
+            "category": "Delivery & Returns",
+            "title": "Question",
+            "content": "<p>Answer</p>"
+          }
+        },
+        "faq_FQTPGn": {
+          "type": "faq",
+          "name": "Delivery & Returns #4",
+          "settings": {
+            "category": "Delivery & Returns",
+            "title": "Question",
+            "content": "<p>Answer</p>"
+          }
+        },
+        "sticker_h7VGaw": {
+          "type": "sticker",
+          "settings": {
+            "image": "shopify://shop_images/sticker_faq.webp",
+            "layer_order": "below",
+            "width": 270,
+            "rotation": 0,
+            "horizontal_position": "right",
+            "vertical_position": "bottom_section",
+            "offset_x": 0,
+            "offset_y": -32,
+            "override_1_visibility": "enabled",
+            "override_1_page_width": 1919,
+            "override_1_layer_order": "below",
+            "override_1_width": 270,
+            "override_1_rotation": 0,
+            "override_1_horizontal_position": "right",
+            "override_1_vertical_position": "bottom_section",
+            "override_1_offset_x": 0,
+            "override_1_offset_y": -160,
+            "override_2_visibility": "enabled",
+            "override_2_page_width": 1390,
+            "override_2_layer_order": "below",
+            "override_2_width": 270,
+            "override_2_rotation": 0,
+            "override_2_horizontal_position": "right",
+            "override_2_vertical_position": "bottom_section",
+            "override_2_offset_x": -50,
+            "override_2_offset_y": -150,
+            "override_3_visibility": "enabled",
+            "override_3_page_width": 890,
+            "override_3_layer_order": "below",
+            "override_3_width": 190,
+            "override_3_rotation": 0,
+            "override_3_horizontal_position": "right",
+            "override_3_vertical_position": "bottom_section",
+            "override_3_offset_x": 0,
+            "override_3_offset_y": -95
+          }
+        }
+      },
+      "block_order": [
+        "faq_9MxfPN",
+        "faq_6qbzUh",
+        "faq_ey66Va",
+        "faq_MWAqz4",
+        "faq_9j6tt9",
+        "faq_PdQMNG",
+        "faq_3xdT9j",
+        "faq_FQTPGn",
+        "sticker_h7VGaw"
+      ],
+      "custom_css": [
+        "@media (max-width: 1390px) {.faqs {margin-bottom: 60px; }}",
+        "@media (max-width: 890px) {.faqs {margin-bottom: 100px; }}"
+      ],
+      "name": "FAQ | UTA ✅",
+      "settings": {
+        "show_indexes": true,
+        "video_url": "",
+        "video_caption": "Video",
+        "media_position": "right",
+        "media_position_mobile": "below",
+        "heading": "<h1>What Most Anglers <em>Ask Us</em> First...</h1>",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": false,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-top-bottom",
+        "custom_id": "faqs",
+        "section_visible": true
+      }
+    },
+    "ante_footer_rDhftJ": {
+      "type": "ante-footer",
+      "blocks": {
+        "social_media_6KGbqW": {
+          "type": "social_media",
+          "settings": {
+            "icon": "shopify://shop_images/icons8-facebook_b8b56da9-6bda-49ba-966d-2319e318fa6a.svg",
+            "link": "https://www.facebook.com/mysterytacklebox"
+          }
+        },
+        "social_media_gDGqjP": {
+          "type": "social_media",
+          "settings": {
+            "icon": "shopify://shop_images/instagram-with-circle-svgrepo-com_31c8ae9f-b472-4f10-9024-5f3da8ebefc0.svg",
+            "link": "https://www.instagram.com/mysterytacklebox"
+          }
+        },
+        "social_media_yrGpAE": {
+          "type": "social_media",
+          "settings": {
+            "icon": "shopify://shop_images/icons8-twitter-circled_932bc513-cbf1-48f9-9939-412f326ece2a.svg",
+            "link": "https://x.com/mysterytacklebx"
+          }
+        },
+        "social_media_ekdi3a": {
+          "type": "social_media",
+          "settings": {
+            "icon": "shopify://shop_images/youtube-with-circle_93dbf91d-4398-4323-9960-1366715a2094.svg",
+            "link": "https://www.youtube.com/@MysteryTackleBox"
+          }
+        },
+        "menu_hdwRcy": {
+          "type": "menu",
+          "name": "Plans & Boxes",
+          "settings": {
+            "menu": "mystery-tackle-box",
+            "name": "PLANS & BOXES"
+          }
+        },
+        "menu_neaLjp": {
+          "type": "menu",
+          "settings": {
+            "menu": "ante-help",
+            "name": "NEED HELP?"
+          }
+        },
+        "payment_icon_n7LzUB": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "shopify://shop_images/amex.webp"
+          }
+        },
+        "payment_icon_8GbWJj": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "shopify://shop_images/apple_pay.webp"
+          }
+        },
+        "payment_icon_7qBHVJ": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "shopify://shop_images/shoppay.webp"
+          }
+        },
+        "payment_icon_rX66Td": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "shopify://shop_images/visa.webp"
+          }
+        },
+        "payment_icon_qx8jDb": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "shopify://shop_images/mastercard.webp"
+          }
+        }
+      },
+      "block_order": [
+        "social_media_6KGbqW",
+        "social_media_gDGqjP",
+        "social_media_yrGpAE",
+        "social_media_ekdi3a",
+        "menu_hdwRcy",
+        "menu_neaLjp",
+        "payment_icon_n7LzUB",
+        "payment_icon_8GbWJj",
+        "payment_icon_7qBHVJ",
+        "payment_icon_rX66Td",
+        "payment_icon_qx8jDb"
+      ],
+      "name": "Footer | UTA ✅",
+      "settings": {
+        "background_image": "shopify://shop_images/bg.webp",
+        "logo": "shopify://shop_images/MTB_logo.webp",
+        "description": "<p>Pro-picked tackle, delivered with a little mystery and a lot of fish.</p>",
+        "legal_menu": "ante-legal",
+        "credit": "Page designed by Ante Studio",
+        "credit_link": "https://ante.studio/",
+        "section_inverse": true,
+        "section_background_colour": "section-background-colour-normal",
+        "section_visible": true
+      }
+    }
+  },
+  "order": [
+    "ante_page_config_eaMRw3",
+    "ante_lander_nav_qYpcak",
+    "ante_announcement_bar_jzyCN6",
+    "ante_lander_hero_r6dT4V",
+    "cc0573b75b2c4bbb866af6a9368e9303_builder_io_KR9x9F",
+    "ante_product_steps_EChPLt",
+    "ante_testimonial_ticker_YTqFBY",
+    "ante_multi_comparison_tkay9n",
+    "ante_reasons_wd9Unh",
+    "ante_column_callout_A9qHUU",
+    "ante_how_to_wgkmTV",
+    "ante_faq_bbGdh4",
+    "ante_footer_rDhftJ"
+  ]
+}

@@ -1,0 +1,36 @@
+.brands-component {
+  overflow: hidden;
+}
+
+.brands-component__content {
+  display: flex;
+  justify-content: center;
+}
+
+.blands-list-wrap {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.brand_wrap {
+  flex: none;
+  padding: 0 1.5rem;
+}
+
+.brand-component__img {
+  max-width: 100%;
+  height: auto;
+}
+
+.brands-component_text {
+  line-height: normal;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+@media screen and (min-width: 990px) {
+  .brands-component_text {
+    font-size: 1.3rem;
+  }
+}

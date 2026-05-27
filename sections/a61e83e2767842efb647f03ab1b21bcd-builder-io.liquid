@@ -1,0 +1,42 @@
+{% if request.design_mode and section.settings.builder_content_entry_preview == '96653570aa644dda99586951d21a5a1e' %}
+{% include 'content.96653570aa644dda99586951d21a5a1e.builder' %}
+  {% else %}
+    {% include 'model.pdp-texas-elite.builder' %}
+  {% endif %}
+  
+  {% schema %}
+   {
+  "name": "Pdp texas elite",
+  "tag": "section",
+  "settings":[
+    {
+      "type": "header",
+      "content": "Custom Builder.io Section"
+    },
+    {
+      "type": "paragraph",
+      "content": "To edit and customize this section, visit the [model in Builder](https://builder.io/content?model=a61e83e2767842efb647f03ab1b21bcd). To learn more about how sections in Builder work with Shopify, [visit the docs](https://www.builder.io/c/docs/shopify/sections-everywhere)."
+    },
+    {
+      "type": "select",
+      "id": "builder_content_entry_preview",
+      "label": "Content Entry Preview",
+      "info": "Targeting is not used while previewing sections in the Shopify theme editor, meaning this preview will not change based on the targeting you have set. If you are using targeting, you need to manually select an entry to preview it. This setting only affects the preview, not what displays on your live site.",
+      "options": [
+        { "value": "96653570aa644dda99586951d21a5a1e", "label": "PDP | TEXAS ELITE - 10/2/2025"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Builder entries used"
+    },
+    {
+    "type": "paragraph",
+    "content": "Name: PDP | TEXAS ELITE - 10/2/2025. Targeting: no targeting. Visit the [entry in Builder](https://builder.io/content/96653570aa644dda99586951d21a5a1e)"
+  }
+  ],
+  "presets":[{
+    "name": "Pdp texas elite"
+  }]
+}
+  {% endschema %}

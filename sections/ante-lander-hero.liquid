@@ -1,0 +1,961 @@
+{% assign id = section.settings.custom_id | default: section.id %}
+
+{% assign min_height_str = section.settings.min_height | downcase %}
+{% if min_height_str contains 'px' %}
+  {% assign min_height = min_height_str | remove: 'px' %}
+  {% assign min_height_units = 'px' %}
+{% elsif min_height_str contains 'vw' %}
+  {% assign min_height = min_height_str | remove: 'vw' %}
+  {% assign min_height_units = 'vw' %}
+{% elsif min_height_str contains 'vh' %}
+  {% assign min_height = min_height_str | remove: 'vh' %}
+  {% assign min_height_units = 'vh' %}
+{% elsif min_height_str contains '%' %}
+  {% assign min_height = min_height_str | remove: '%' %}
+  {% assign min_height_units = 'vw' %}
+{% else %}
+  {% assign min_height = min_height_str | default: "0" %}
+  {% assign min_height_units = 'px' %}
+{% endif %}
+
+{% assign max_height_str = section.settings.max_height | downcase %}
+{% if max_height_str contains 'px' %}
+  {% assign max_height = max_height_str | remove: 'px' %}
+  {% assign max_height_units = 'px' %}
+{% elsif max_height_str contains 'vw' %}
+  {% assign max_height = max_height_str | remove: 'vw' %}
+  {% assign max_height_units = 'vw' %}
+{% elsif max_height_str contains 'vh' %}
+  {% assign max_height = max_height_str | remove: 'vh' %}
+  {% assign max_height_units = 'vh' %}
+{% elsif max_height_str contains '%' %}
+  {% assign max_height = max_height_str | remove: '%' %}
+  {% assign max_height_units = 'vw' %}
+{% else %}
+  {% assign max_height = max_height_str | default: "0" %}
+  {% assign max_height_units = 'px' %}
+{% endif %}
+
+{% assign min_height_mobile_str = section.settings.min_height_mobile | downcase %}
+{% if min_height_mobile_str contains 'px' %}
+  {% assign min_height_mobile = min_height_mobile_str | remove: 'px' %}
+  {% assign min_height_mobile_units = 'px' %}
+{% elsif min_height_mobile_str contains 'vw' %}
+  {% assign min_height_mobile = min_height_mobile_str | remove: 'vw' %}
+  {% assign min_height_mobile_units = 'vw' %}
+{% elsif min_height_mobile_str contains 'vh' %}
+  {% assign min_height_mobile = min_height_mobile_str | remove: 'vh' %}
+  {% assign min_height_mobile_units = 'vh' %}
+{% elsif min_height_mobile_str contains '%' %}
+  {% assign min_height_mobile = min_height_mobile_str | remove: '%' %}
+  {% assign min_height_mobile_units = 'vw' %}
+{% else %}
+  {% assign min_height_mobile = min_height_mobile_str | default: "0" %}
+  {% assign min_height_mobile_units = 'px' %}
+{% endif %}
+
+{% assign max_height_mobile_str = section.settings.max_height_mobile | downcase %}
+{% if max_height_mobile_str contains 'px' %}
+  {% assign max_height_mobile = max_height_mobile_str | remove: 'px' %}
+  {% assign max_height_mobile_units = 'px' %}
+{% elsif max_height_mobile_str contains 'vw' %}
+  {% assign max_height_mobile = max_height_mobile_str | remove: 'vw' %}
+  {% assign max_height_mobile_units = 'vw' %}
+{% elsif max_height_mobile_str contains 'vh' %}
+  {% assign max_height_mobile = max_height_mobile_str | remove: 'vh' %}
+  {% assign max_height_mobile_units = 'vh' %}
+{% elsif max_height_mobile_str contains '%' %}
+  {% assign max_height_mobile = max_height_mobile_str | remove: '%' %}
+  {% assign max_height_mobile_units = 'vw' %}
+{% else %}
+  {% assign max_height_mobile = max_height_mobile_str | default: "0" %}
+  {% assign max_height_mobile_units = 'px' %}
+{% endif %}
+
+<style>
+  [id*="ante_lander_nav"]:has(:is(.nav-type-bar, .nav-type-bar_floating_cta)) + [id*="ante_announcement_bar"] + #shopify-section-{{ section.id }} {
+    margin-top: calc(min(var(--section-horizontal-padding), 40px) * -1);
+  }
+
+  #shopify-section-{{ section.id }} {
+    {% if max_height == "0"%}
+      min-height: {% if min_height == "0" %}calc(100svh - var(--ante-header-height)){% else %}{{ min_height }}{{ min_height_units }}{% endif %};
+    {% else %}
+      min-height: min({{ max_height }}{{ max_height_units }}, {% if min_height == "0" %}100svh - var(--ante-header-height){% else %}{{ min_height }}{{ min_height_units }}{% endif %});
+      max-height: {{ max_height }}{{ max_height_units }};
+    {% endif %}
+  }
+
+  {% if min_height == "0" %}
+    [id*="ante_lander_nav"]:has(:is(.nav-type-bar, .nav-type-bar_floating_cta)) + [id*="ante_announcement_bar"] + #shopify-section-{{ section.id }},
+    [id*="ante_announcement_bar"] + [id*="ante_lander_nav"]:has(:is(.nav-type-bar, .nav-type-bar_floating_cta)) + #shopify-section-{{ section.id }} {
+      {% if max_height == "0" %}
+        min-height: calc(100svh - var(--ante-header-height) - clamp(28px, var(--section-horizontal-padding), 40px));
+      {% else %}
+        min-height: min({{ max_height }}{{ max_height_units }}, 100svh - var(--ante-header-height) - clamp(28px, var(--section-horizontal-padding), 40px));
+      {% endif %}
+    }
+  {% endif %}
+
+  [id*="ante_lander_nav"]:has(:is(.nav-type-floating, .nav-type-floating_separate_logo)) + #shopify-section-{{ section.id }} {
+    margin-top: calc(var(--ante-header-height) * -1);
+    padding-top: calc(var(--ante-header-height) + min(var(--section-horizontal-padding), 40px));
+    {% if min_height == "0" %}
+      {% if max_height == "0" %}
+        min-height: 100svh;
+      {% else %}
+        min-height: min({{ max_height }}{{ max_height_units }}, 100svh);
+      {% endif %}
+    {% endif %}
+  }
+
+  [id*="ante_announcement_bar"] + [id*="ante_lander_nav"]:has(:is(.nav-type-floating, .nav-type-floating_separate_logo)) + #shopify-section-{{ section.id }} {
+    margin-top: calc((var(--ante-header-height) + clamp(28px, var(--section-horizontal-padding), 40px)) * -1);
+    padding-top: calc(var(--ante-header-height) + clamp(28px, var(--section-horizontal-padding), 40px));
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      {% if max_height_mobile == "0" %}
+        {% if min_height_mobile == "0" %}
+          min-height: calc(100svh - var(--ante-header-height));
+          max-height: none;
+        {% else %}
+          min-height: {{ min_height_mobile }}{{ min_height_mobile_units }};
+          max-height: none;
+        {% endif %}
+      {% else %}
+        {% if min_height_mobile == "0" %}
+          min-height: min({{ max_height_mobile }}{{ max_height_mobile_units }}, 100svh - var(--ante-header-height));
+        {% else %}
+          min-height: min({{ max_height_mobile }}{{ max_height_mobile_units }}, {{ min_height_mobile }}{{ min_height_mobile_units }});
+        {% endif %}
+        max-height: {{ max_height_mobile }}{{ max_height_mobile_units }};
+      {% endif %}
+    }
+
+    {% if min_height_mobile == "0" %}
+      [id*="ante_lander_nav"]:has(:is(.nav-type-bar, .nav-type-bar_floating_cta)) + [id*="ante_announcement_bar"] + #shopify-section-{{ section.id }},
+      [id*="ante_announcement_bar"] + [id*="ante_lander_nav"]:has(:is(.nav-type-bar, .nav-type-bar_floating_cta)) + #shopify-section-{{ section.id }} {
+        {% if max_height_mobile == "0" %}
+          min-height: calc(100svh - var(--ante-header-height) - clamp(28px, var(--section-horizontal-padding), 40px));
+        {% else %}
+          min-height: min({{ max_height_mobile }}{{ max_height_mobile_units }}, 100svh - var(--ante-header-height) - clamp(28px, var(--section-horizontal-padding), 40px));
+        {% endif %}
+      }
+    {% else %}
+      [id*="ante_lander_nav"]:has(:is(.nav-type-bar, .nav-type-bar_floating_cta)) + [id*="ante_announcement_bar"] + #shopify-section-{{ section.id }},
+      [id*="ante_announcement_bar"] + [id*="ante_lander_nav"]:has(:is(.nav-type-bar, .nav-type-bar_floating_cta)) + #shopify-section-{{ section.id }} {
+        min-height: {{ min_height_mobile }}{{ min_height_mobile_units }};
+      }
+    {% endif %}
+
+    [id*="ante_lander_nav"]:has(:is(.nav-type-floating, .nav-type-floating_separate_logo)) + #shopify-section-{{ section.id }} {
+      {% if min_height_mobile == "0" %}
+        {% if max_height_mobile == "0" %}
+          min-height: 100svh;
+        {% else %}
+          min-height: min({{ max_height_mobile }}{{ max_height_mobile_units }}, 100svh);
+        {% endif %}
+      {% else %}
+        min-height: {{ min_height_mobile }}{{ min_height_mobile_units }};
+      {% endif %}
+    }
+  }
+
+  #shopify-section-{{ section.id }} {
+    {% if section.settings.background_image %}
+      background-image: url("{{ section.settings.background_image | image_url: width: section.settings.background_image.width }}");
+    {% endif %}
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    display: flex !important;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }}::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: {{ section.settings.background_gradient }};
+  }
+
+  #{{ id }} {
+    flex-direction: row;
+    background-color: initial;
+    background-image: initial;
+    margin-top: 0 !important;
+    width: 100%;
+  }
+
+  #{{ id }}::before {
+    display: none;
+  }
+
+  {% for block in section.blocks %}
+    {% if block.type == "background_image" and block.settings.background_image %}
+      @media (max-width: {{ block.settings.kick_in }}px) {
+        #shopify-section-{{ section.id }} {
+          background-image: url("{{ block.settings.background_image | image_url: width: block.settings.background_image.width }}");
+        }
+      }
+    {% endif %}
+  {% endfor %}
+
+  #{{ id }} .ante-container {
+    height: 100%;
+    padding: var(--section-horizontal-padding) 0 !important;
+  }
+
+  #{{ id }} .ante-section-content {
+    height: 100%;
+    align-items: stretch;
+    {% if section.settings.content_alignment == "center" %}
+      justify-content: center;
+    {% elsif section.settings.content_alignment == "bottom" %}
+      justify-content: flex-end;
+    {% endif %}
+  }
+
+  #{{ id }} .hero-sides {
+    display: flex;
+    {% if section.settings.content_alignment == "center_stretch" %}
+      height: 100%;
+    {% endif %}
+    flex-direction: row;
+    gap: var(--spacing-large);
+  }
+
+  {% if section.settings.content_background %}
+    #{{ id }} .hero-sides.background,
+    #{{ id }} .hero-sides > .background {
+      background-color: var(--color-glaze);
+      border-radius: var(--radius-large);
+      padding: var(--padding-medium);
+      backdrop-filter: var(--blur-glaze);
+    }
+  {% endif %}
+
+  #{{ id }} .hero-sides > * {
+    max-width: 50%;
+    width: 100%;
+    height: 100%;
+    flex: 1 1 0px;
+    display: flex;
+    flex-direction: column;
+    {% if section.settings.content_alignment == "center" %}
+      justify-content: center;
+    {% elsif section.settings.content_alignment == "bottom" %}
+      justify-content: flex-end;
+    {% endif %}
+  }
+
+  #{{ id }} .banner-bullet-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--micropad-x-large);
+  }
+
+  #{{ id }} .banner-bullet {
+    display: flex;
+    align-items: center;
+    gap: var(--micropad-x-small);
+  }
+
+  #{{ id }} .banner-button {
+    display: flex;
+    align-self: stretch;
+  }
+
+  #{{ id }} .hero-content-right .banner-button {
+    justify-content: flex-end;
+  }
+
+  #{{ id }} .section-mobile,
+  #{{ id }} .section-tablet-mobile,
+  #{{ id }} .section-tablet {
+    display: none;
+  }
+
+  @media (min-width: 1025px) {
+    #{{ id }} .hero-sides > * > :last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    #{{ id }} .section-desktop {
+      display: none;
+    }
+
+    #{{ id }} .section-tablet,
+    #{{ id }} .section-tablet-mobile {
+      display: flex;
+    }
+
+    #{{ id }} .hero-sides {
+      flex-direction: column;
+      gap: 0;
+      flex: 1;
+    }
+
+    #{{ id }} .hero-sides > * {
+      max-width: 100%;
+    }
+
+    #{{ id }} .banner-text {
+      text-align: center;
+    }
+
+    #{{ id }} .banner-button {
+      justify-content: center !important;
+    }
+
+    #{{ id }} .review-stars {
+      justify-content: center;
+    }
+
+    #{{ id }} .review-stars span {
+      text-align: center;
+    }
+
+    {% if section.settings.background_gradient_mobile %}
+      #shopify-section-{{ section.id }}::before {
+        background: {{ section.settings.background_gradient_mobile }};
+      }
+    {% endif %}
+  }
+
+  @media (max-width: 600px) {
+    #{{ id }} .section-desktop-tablet,
+    #{{ id }} .section-tablet {
+      display: none;
+    }
+
+    #{{ id }} .section-mobile {
+      display: flex;
+    }
+
+    #{{ id }} .ante-button,
+    #{{ id }} .ante-buy-button-container {
+      max-width: 100%;
+      min-width: 100%;
+    }
+  }
+</style>
+
+{% render "ante-section-structure", section: section %}
+  {% assign sides = "left,right" | split: "," %}
+  {% assign has_left = false %}
+  {% assign has_right = false %}
+  {% for block in section.blocks %}
+    {% if block.settings.side == "left" %}
+      {% assign has_left = true %}
+    {% elsif block.settings.side == "right" %}
+      {% assign has_right = true %}
+    {% endif %}
+  {% endfor %}
+  {% if has_left and has_right %}
+    {% assign has_both_sides = true %}
+  {% else %}
+    {% assign has_both_sides = false %}
+  {% endif %}
+  <div class="hero-sides{% if has_both_sides and section.settings.content_background %} background{% endif %}">
+    {% for side in sides %}
+      {% assign has_side = false %}
+      {% for block in section.blocks %}
+        {% if block.settings.side == side %}
+          {% assign has_side = true %}
+        {% endif %}
+      {% endfor %}
+      {% if has_side %}
+        <div class="hero-content-{{ side }}{% if has_both_sides == false and section.settings.content_background %} background{% endif %}">
+          {% for block in section.blocks %}
+            {% if block.settings.side == side %}
+              {% if block.type == "review_stars" %}
+                <div class="banner-reviews section-{{ block.settings.show_on }}"{% if block.settings.below_gap != "none" %} style="margin-bottom: var(--{{ block.settings.below_gap }});"{% endif %}>
+                  {% render "ante-stars", rating: block.settings.rating, text: block.settings.text, link: block.settings.link %}
+                </div>
+              {% elsif block.type == "text" %}
+                <div class="banner-text richtext section-{{ block.settings.show_on }}"{% if block.settings.below_gap != "none" %} style="margin-bottom: var(--{{ block.settings.below_gap }});"{% endif %}>{{ block.settings.text }}</div>
+              {% elsif block.type == "bullet_list" %}
+                <div class="banner-bullet-list section-{{ block.settings.show_on }}"{% if block.settings.below_gap != "none" %} style="margin-bottom: var(--{{ block.settings.below_gap }});"{% endif %}>
+                  {% assign items = block.settings.bullet_list | newline_to_br | split: '<br />' %}
+                  {% for item in items %}
+                    <div class="banner-bullet body-base">
+                      {% if block.settings.bullet_icon != blank %}
+                        {{ block.settings.bullet_icon | image_url: width: 20 | image_tag: loading: 'lazy' }}
+                      {% endif %}
+                      {{ item }}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% elsif block.type == "button" %}
+                <div class="banner-button ante-button-row section-{{ block.settings.show_on }}"{% if block.settings.below_gap != "none" %} style="margin-bottom: var(--{{ block.settings.below_gap }});"{% endif %}>
+                  {% if block.settings.url %}
+                    <a class="ante-button" href="{{ block.settings.url }}"{% if block.settings.open_in_new_tab %} target="_blank"{% endif %}>{{ block.settings.text }}</a>
+                  {% endif %}
+                  {% if block.settings.secondary_url %}
+                    <a class="ante-button secondary" href="{{ block.settings.secondary_url }}"{% if block.settings.secondary_open_in_new_tab %} target="_blank"{% endif %}>{{ block.settings.secondary_text }}</a>
+                  {% endif %}
+                </div>
+              {% elsif block.type == "buy_button" %}
+                <div class="banner-button ante-button-row section-{{ block.settings.show_on }}"{% if block.settings.below_gap != "none" %} style="margin-bottom: var(--{{ block.settings.below_gap }});"{% endif %}>
+                  {% render "ante-buy-button", text: block.settings.button_text, show_price: block.settings.show_price, footer: block.settings.show_footer %}
+                </div>
+              {% elsif block.type == "spacer" %}
+                <div
+                  class="banner-spacer section-{{ block.settings.show_on }}"
+                  style="min-height: {{ block.settings.height }}px;{% if block.settings.stretch %} flex: 1;{% endif %}"
+                ></div>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% render "ante-section-structure", end: true %}
+
+{% schema %}
+  {
+    "name": "Lander Hero [UTA]",
+    "presets": [
+      {
+        "name": "Lander Hero [UTA]"
+      }
+    ],
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "select",
+        "id": "content_alignment",
+        "label": "Content Alignment",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "center_stretch",
+            "label": "Center (Stretch)"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "default": "center"
+      },
+      {
+        "type": "checkbox",
+        "id": "content_background",
+        "label": "Content Background",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "min_height",
+        "label": "Min Height",
+        "default": "0",
+        "info": "The minimum height in pixels that the hero is allowed to be. When 0, the minimum height will be the height of the screen. Units can be provided to use that unit instead of pixels"
+      },
+      {
+        "type": "text",
+        "id": "max_height",
+        "label": "Max Height",
+        "default": "0",
+        "info": "The maximum height in pixels that the hero is allowed to be. When 0, the maximum height is ignored. Units can be provided to use that unit instead of pixels"
+      },
+      {
+        "type": "text",
+        "id": "min_height_mobile",
+        "label": "Min Height (Mobile)",
+        "default": "0"
+      },
+      {
+        "type": "text",
+        "id": "max_height_mobile",
+        "label": "Max Height (Mobile)",
+        "default": "0"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Background Gradient"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient_mobile",
+        "label": "Background Gradient (Mobile)"
+      },
+      {"type":"header","content":"Section Heading"},{"type":"richtext","id":"heading","label":"Heading"},{"type":"select","id":"heading_alignment","label":"Heading Alignment","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"},{"value":"row","label":"Row"}],"default":"center"},{"type":"select","id":"heading_alignment_mobile","label":"Heading Alignment (Mobile)","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"center"},{"type":"checkbox","id":"limit_heading_width","label":"Limit Heading Width","default": true},{"type":"header","content":"Section Settings"},{"type":"checkbox","id":"section_inverse","label":"Inverted Section","default":false},{"type":"select","id":"section_background_style","label":"Section Background Style","options":[{"value":"section-background-style-normal","label":"Normal"},{"value":"section-background-style-floating","label":"Floating"}],"default":"section-background-style-normal"},{"type":"select","id":"section_background_colour","label":"Section Background Colour","options":[{"value":"section-background-colour-normal","label":"Normal"},{"value":"section-background-colour-alt-100","label":"Alt (100)"},{"value":"section-background-colour-alt","label":"Alt"},{"value":"section-background-colour-alt-900","label":"Alt (900)"},{"value":"section-background-colour-surface-100","label":"Surface (100)"},{"value":"section-background-colour-surface","label":"Surface"},{"value":"section-background-colour-surface-900","label":"Surface (900)"}],"default":"section-background-colour-normal"},{"type":"select","id":"section_spacing","label":"Section Spacing","options":[{"value":"section-spacing-top-bottom","label":"Top & Bottom"},{"value":"section-spacing-top","label":"Top"},{"value":"section-spacing-bottom","label":"Bottom"},{"value":"section-spacing-none","label":"None"}],"default":"section-spacing-bottom"},{"type":"text","id":"custom_id","label":"Custom ID","placeholder":"id","info":"Assign a custom ID to this section, allowing you to easily reference it"},{"type": "checkbox","id": "section_visible","label":"Section Visible","default":true,"info": "Turning this off hides the section but doesn't remove it from the page."}
+    ],
+    "blocks": [
+      {
+        "name": "Background Image",
+        "type": "background_image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "background_image",
+            "label": "Background Image"
+          },
+          {
+            "type": "number",
+            "id": "kick_in",
+            "label": "Kick In",
+            "default": 600,
+            "info": "The page width for this image to kick in at. It will kick in at this size and below."
+          }
+        ]
+      },
+      {
+        "name": "Review Stars",
+        "type": "review_stars",
+        "settings": [
+          {
+            "type": "range",
+            "id": "rating",
+            "label": "Rating",
+            "min": 0,
+            "max": 5,
+            "step": 0.5,
+            "default": 4.5,
+            "info": "The rating the stars should show"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text",
+            "default": "(100)",
+            "placeholder": "(100)",
+            "info": "The text to show after the stars"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link",
+            "info": "The link to go to when clicking the stars"
+          },
+          {
+            "type": "header",
+            "content": "Hero Settings"
+          },
+          {
+            "type": "select",
+            "id": "side",
+            "label": "Side",
+            "options": [
+              { "value": "left", "label": "Left" },
+              { "value": "right", "label": "Right" }
+            ],
+            "default": "left"
+          },
+          {
+            "type": "select",
+            "id": "below_gap",
+            "label": "Below Gap",
+            "options": [
+              { "value": "none", "label": "None" },
+              { "value": "spacing-large", "label": "Spacing Large" },
+              { "value": "spacing-medium", "label": "Spacing Medium" },
+              { "value": "spacing-small", "label": "Spacing Small" },
+              { "value": "spacing-x-small", "label": "Spacing X-Small" },
+              { "value": "padding-x-large", "label": "Padding X-Large" },
+              { "value": "padding-large", "label": "Padding Large" },
+              { "value": "padding-medium", "label": "Padding Medium" },
+              { "value": "padding-small", "label": "Padding Small" },
+              { "value": "micropad-x-large", "label": "Micropad X-Large" },
+              { "value": "micropad-large", "label": "Micropad Large" },
+              { "value": "micropad-medium", "label": "Micropad Medium" },
+              { "value": "micropad-small", "label": "Micropad Small" },
+              { "value": "micropad-x-small", "label": "Micropad X-Small" }
+            ],
+            "default": "none",
+            "info": "A gap to have below this block"
+          },
+          {
+            "type": "select",
+            "id": "show_on",
+            "label": "Show on",
+            "options": [
+              { "value": "desktop", "label": "Desktop" },
+              { "value": "desktop-tablet", "label": "Desktop & Tablet" },
+              { "value": "tablet", "label": "Tablet" },
+              { "value": "tablet-mobile", "label": "Tablet & Mobile" },
+              { "value": "mobile", "label": "Mobile" },
+              { "value": "both", "label": "All" }
+            ],
+            "default": "both"
+          }
+        ]
+      },
+      {
+        "name": "Text",
+        "type": "text",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+          },
+          {
+            "type": "header",
+            "content": "Hero Settings"
+          },
+          {
+            "type": "select",
+            "id": "side",
+            "label": "Side",
+            "options": [
+              { "value": "left", "label": "Left" },
+              { "value": "right", "label": "Right" }
+            ],
+            "default": "left"
+          },
+          {
+            "type": "select",
+            "id": "below_gap",
+            "label": "Below Gap",
+            "options": [
+              { "value": "none", "label": "None" },
+              { "value": "spacing-large", "label": "Spacing Large" },
+              { "value": "spacing-medium", "label": "Spacing Medium" },
+              { "value": "spacing-small", "label": "Spacing Small" },
+              { "value": "spacing-x-small", "label": "Spacing X-Small" },
+              { "value": "padding-x-large", "label": "Padding X-Large" },
+              { "value": "padding-large", "label": "Padding Large" },
+              { "value": "padding-medium", "label": "Padding Medium" },
+              { "value": "padding-small", "label": "Padding Small" },
+              { "value": "micropad-x-large", "label": "Micropad X-Large" },
+              { "value": "micropad-large", "label": "Micropad Large" },
+              { "value": "micropad-medium", "label": "Micropad Medium" },
+              { "value": "micropad-small", "label": "Micropad Small" },
+              { "value": "micropad-x-small", "label": "Micropad X-Small" }
+            ],
+            "default": "none",
+            "info": "A gap to have below this block"
+          },
+          {
+            "type": "select",
+            "id": "show_on",
+            "label": "Show on",
+            "options": [
+              { "value": "desktop", "label": "Desktop" },
+              { "value": "desktop-tablet", "label": "Desktop & Tablet" },
+              { "value": "tablet", "label": "Tablet" },
+              { "value": "tablet-mobile", "label": "Tablet & Mobile" },
+              { "value": "mobile", "label": "Mobile" },
+              { "value": "both", "label": "All" }
+            ],
+            "default": "both"
+          }
+        ]
+      },
+      {
+        "name": "Bullet List",
+        "type": "bullet_list",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "bullet_icon",
+            "label": "Bullet Icon"
+          },
+          {
+            "type": "textarea",
+            "id": "bullet_list",
+            "label": "Bullet List",
+            "default": "Item 1\nItem 2\nItem 3",
+            "info": "Put each item on a separate line"
+          },
+          {
+            "type": "header",
+            "content": "Hero Settings"
+          },
+          {
+            "type": "select",
+            "id": "side",
+            "label": "Side",
+            "options": [
+              { "value": "left", "label": "Left" },
+              { "value": "right", "label": "Right" }
+            ],
+            "default": "left"
+          },
+          {
+            "type": "select",
+            "id": "below_gap",
+            "label": "Below Gap",
+            "options": [
+              { "value": "none", "label": "None" },
+              { "value": "spacing-large", "label": "Spacing Large" },
+              { "value": "spacing-medium", "label": "Spacing Medium" },
+              { "value": "spacing-small", "label": "Spacing Small" },
+              { "value": "spacing-x-small", "label": "Spacing X-Small" },
+              { "value": "padding-x-large", "label": "Padding X-Large" },
+              { "value": "padding-large", "label": "Padding Large" },
+              { "value": "padding-medium", "label": "Padding Medium" },
+              { "value": "padding-small", "label": "Padding Small" },
+              { "value": "micropad-x-large", "label": "Micropad X-Large" },
+              { "value": "micropad-large", "label": "Micropad Large" },
+              { "value": "micropad-medium", "label": "Micropad Medium" },
+              { "value": "micropad-small", "label": "Micropad Small" },
+              { "value": "micropad-x-small", "label": "Micropad X-Small" }
+            ],
+            "default": "none",
+            "info": "A gap to have below this block"
+          },
+          {
+            "type": "select",
+            "id": "show_on",
+            "label": "Show on",
+            "options": [
+              { "value": "desktop", "label": "Desktop" },
+              { "value": "desktop-tablet", "label": "Desktop & Tablet" },
+              { "value": "tablet", "label": "Tablet" },
+              { "value": "tablet-mobile", "label": "Tablet & Mobile" },
+              { "value": "mobile", "label": "Mobile" },
+              { "value": "both", "label": "All" }
+            ],
+            "default": "both"
+          }
+        ]
+      },
+      {
+        "name": "Button",
+        "type": "button",
+        "settings": [
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text",
+            "default": "Text",
+            "placeholder": "Text"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "URL"
+          },
+          {
+            "type": "checkbox",
+            "id": "open_in_new_tab",
+            "label": "Open in new tab",
+            "default": false
+          },
+          {
+            "type": "header",
+            "content": "Secondary Button"
+          },
+          {
+            "type": "text",
+            "id": "secondary_text",
+            "label": "Button Text",
+            "default": "Button Text",
+            "placeholder": "Text"
+          },
+          {
+            "type": "url",
+            "id": "secondary_url",
+            "label": "URL"
+          },
+          {
+            "type": "checkbox",
+            "id": "secondary_open_in_new_tab",
+            "label": "Open in new tab",
+            "default": false
+          },
+          {
+            "type": "header",
+            "content": "Hero Settings"
+          },
+          {
+            "type": "select",
+            "id": "side",
+            "label": "Side",
+            "options": [
+              { "value": "left", "label": "Left" },
+              { "value": "right", "label": "Right" }
+            ],
+            "default": "left"
+          },
+          {
+            "type": "select",
+            "id": "below_gap",
+            "label": "Below Gap",
+            "options": [
+              { "value": "none", "label": "None" },
+              { "value": "spacing-large", "label": "Spacing Large" },
+              { "value": "spacing-medium", "label": "Spacing Medium" },
+              { "value": "spacing-small", "label": "Spacing Small" },
+              { "value": "spacing-x-small", "label": "Spacing X-Small" },
+              { "value": "padding-x-large", "label": "Padding X-Large" },
+              { "value": "padding-large", "label": "Padding Large" },
+              { "value": "padding-medium", "label": "Padding Medium" },
+              { "value": "padding-small", "label": "Padding Small" },
+              { "value": "micropad-x-large", "label": "Micropad X-Large" },
+              { "value": "micropad-large", "label": "Micropad Large" },
+              { "value": "micropad-medium", "label": "Micropad Medium" },
+              { "value": "micropad-small", "label": "Micropad Small" },
+              { "value": "micropad-x-small", "label": "Micropad X-Small" }
+            ],
+            "default": "none",
+            "info": "A gap to have below this block"
+          },
+          {
+            "type": "select",
+            "id": "show_on",
+            "label": "Show on",
+            "options": [
+              { "value": "desktop", "label": "Desktop" },
+              { "value": "desktop-tablet", "label": "Desktop & Tablet" },
+              { "value": "tablet", "label": "Tablet" },
+              { "value": "tablet-mobile", "label": "Tablet & Mobile" },
+              { "value": "mobile", "label": "Mobile" },
+              { "value": "both", "label": "All" }
+            ],
+            "default": "both"
+          }
+        ]
+      },
+      {
+        "name": "Buy button",
+        "type": "buy_button",
+        "settings": [
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "Add to Cart",
+            "placeholder": "Add to Cart"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_price",
+            "label": "Show Price",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "show_footer",
+            "label": "Show Button Footer",
+            "default": false
+          },
+          {
+            "type": "header",
+            "content": "Hero Settings"
+          },
+          {
+            "type": "select",
+            "id": "side",
+            "label": "Side",
+            "options": [
+              { "value": "left", "label": "Left" },
+              { "value": "right", "label": "Right" }
+            ],
+            "default": "left"
+          },
+          {
+            "type": "select",
+            "id": "below_gap",
+            "label": "Below Gap",
+            "options": [
+              { "value": "none", "label": "None" },
+              { "value": "spacing-large", "label": "Spacing Large" },
+              { "value": "spacing-medium", "label": "Spacing Medium" },
+              { "value": "spacing-small", "label": "Spacing Small" },
+              { "value": "spacing-x-small", "label": "Spacing X-Small" },
+              { "value": "padding-x-large", "label": "Padding X-Large" },
+              { "value": "padding-large", "label": "Padding Large" },
+              { "value": "padding-medium", "label": "Padding Medium" },
+              { "value": "padding-small", "label": "Padding Small" },
+              { "value": "micropad-x-large", "label": "Micropad X-Large" },
+              { "value": "micropad-large", "label": "Micropad Large" },
+              { "value": "micropad-medium", "label": "Micropad Medium" },
+              { "value": "micropad-small", "label": "Micropad Small" },
+              { "value": "micropad-x-small", "label": "Micropad X-Small" }
+            ],
+            "default": "none",
+            "info": "A gap to have below this block"
+          },
+          {
+            "type": "select",
+            "id": "show_on",
+            "label": "Show on",
+            "options": [
+              { "value": "desktop", "label": "Desktop" },
+              { "value": "desktop-tablet", "label": "Desktop & Tablet" },
+              { "value": "tablet", "label": "Tablet" },
+              { "value": "tablet-mobile", "label": "Tablet & Mobile" },
+              { "value": "mobile", "label": "Mobile" },
+              { "value": "both", "label": "All" }
+            ],
+            "default": "both"
+          }
+        ]
+      },
+      {
+        "name": "Spacer",
+        "type": "spacer",
+        "settings": [
+          {
+            "type": "number",
+            "id": "height",
+            "label": "Min Height",
+            "default": 0
+          },
+          {
+            "type": "checkbox",
+            "id": "stretch",
+            "label": "Stretch",
+            "default": true,
+            "info": "If the spacer should stretch to fill as much space as it can"
+          },
+          {
+            "type": "header",
+            "content": "Hero Settings"
+          },
+          {
+            "type": "select",
+            "id": "side",
+            "label": "Side",
+            "options": [
+              { "value": "left", "label": "Left" },
+              { "value": "right", "label": "Right" }
+            ],
+            "default": "left"
+          },
+          {
+            "type": "select",
+            "id": "show_on",
+            "label": "Show on",
+            "options": [
+              { "value": "desktop", "label": "Desktop" },
+              { "value": "desktop-tablet", "label": "Desktop & Tablet" },
+              { "value": "tablet", "label": "Tablet" },
+              { "value": "tablet-mobile", "label": "Tablet & Mobile" },
+              { "value": "mobile", "label": "Mobile" },
+              { "value": "both", "label": "All" }
+            ],
+            "default": "both"
+          }
+        ]
+      },
+      {
+        "type": "sticker",
+        "name": "Sticker",
+        "settings": [{"type":"image_picker","id":"image","label":"Image","info":"Main sticker image that will be displayed"},{"type":"select","id":"layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below","info":"Choose if the sticker should appear above or below the content"},{"type":"number","id":"width","label":"Width","default":128,"info":"Width of the sticker in pixels"},{"type":"number","id":"rotation","label":"Rotation","default":0,"info":"Rotate the sticker in degrees"},{"type":"header","content":"Position Settings"},{"type":"select","id":"horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left","info":"Choose horizontal position of the sticker"},{"type":"select","id":"vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content","info":"Choose vertical position of the sticker"},{"type":"number","id":"offset_x","label":"Horizontal Offset","default":0,"info":"Shift in pixels left or right from chosen horizontal position"},{"type":"number","id":"offset_y","label":"Vertical Offset","default":0,"info":"Shift in pixels up or down from chosen vertical position"},{"type":"header","content":"Override 1"},{"type":"select","id":"override_1_visibility","label":"Override Visibility","options":[{"value":"disabled","label":"Disabled"},{"value":"enabled","label":"Enabled"},{"value":"hidden","label":"Hidden"}],"default":"disabled","info":"Override settings are applied at the selected width and below"},{"type":"number","id":"override_1_page_width","label":"Page Width","default":1920,"info":"Screen width when this override will activate (and below)"},{"type":"image_picker","id":"override_1_image","label":"Image","info":"Override image for this screen size"},{"type":"select","id":"override_1_layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below"},{"type":"number","id":"override_1_width","label":"Width","default":128},{"type":"number","id":"override_1_rotation","label":"Rotation","default":0},{"type":"select","id":"override_1_horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"override_1_vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content"},{"type":"number","id":"override_1_offset_x","label":"Horizontal Offset","default":0},{"type":"number","id":"override_1_offset_y","label":"Vertical Offset","default":0},{"type":"header","content":"Override 2"},{"type":"select","id":"override_2_visibility","label":"Override Visibility","options":[{"value":"disabled","label":"Disabled"},{"value":"enabled","label":"Enabled"},{"value":"hidden","label":"Hidden"}],"default":"disabled","info":"Override settings are applied at the selected width and below"},{"type":"number","id":"override_2_page_width","label":"Page Width","default":1024,"info":"Screen width when this override will activate (and below)"},{"type":"image_picker","id":"override_2_image","label":"Image","info":"Override image for this screen size"},{"type":"select","id":"override_2_layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below"},{"type":"number","id":"override_2_width","label":"Width","default":128},{"type":"number","id":"override_2_rotation","label":"Rotation","default":0},{"type":"select","id":"override_2_horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"override_2_vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content"},{"type":"number","id":"override_2_offset_x","label":"Horizontal Offset","default":0},{"type":"number","id":"override_2_offset_y","label":"Vertical Offset","default":0},{"type":"header","content":"Override 3"},{"type":"select","id":"override_3_visibility","label":"Override Visibility","options":[{"value":"disabled","label":"Disabled"},{"value":"enabled","label":"Enabled"},{"value":"hidden","label":"Hidden"}],"default":"disabled","info":"Override settings are applied at the selected width and below"},{"type":"number","id":"override_3_page_width","label":"Page Width","default":600,"info":"Screen width when this override will activate (and below)"},{"type":"image_picker","id":"override_3_image","label":"Image","info":"Override image for this screen size"},{"type":"select","id":"override_3_layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below"},{"type":"number","id":"override_3_width","label":"Width","default":128},{"type":"number","id":"override_3_rotation","label":"Rotation","default":0},{"type":"select","id":"override_3_horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"override_3_vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content"},{"type":"number","id":"override_3_offset_x","label":"Horizontal Offset","default":0},{"type":"number","id":"override_3_offset_y","label":"Vertical Offset","default":0}]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,40 @@
+.video-component__header-wrap {
+  text-align: center;
+}
+
+.video-component__header {
+  margin: 0;
+}
+
+.video-component__items-wrap {
+  padding-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+}
+
+.video-component__item_wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+
+.video-component__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video-component .ytp-impression-link {
+  display: block;
+}
+
+@media screen and (min-width: 990px) {
+  .video-component__items-wrap {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

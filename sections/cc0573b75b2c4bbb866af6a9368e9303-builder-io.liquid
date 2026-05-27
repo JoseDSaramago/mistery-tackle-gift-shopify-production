@@ -1,0 +1,42 @@
+{% if request.design_mode and section.settings.builder_content_entry_preview == 'f028d18a543343dd85e6852294ffdb37' %}
+{% render 'content.f028d18a543343dd85e6852294ffdb37.builder' %}
+  {% else %}
+    {% render 'model.product-gift-plan.builder' %}
+  {% endif %}
+  
+  {% schema %}
+   {
+  "name": "Product gift plan",
+  "tag": "section",
+  "settings":[
+    {
+      "type": "header",
+      "content": "Custom Builder.io Section"
+    },
+    {
+      "type": "paragraph",
+      "content": "To edit and customize this section, visit the [model in Builder](https://builder.io/content?model=cc0573b75b2c4bbb866af6a9368e9303). To learn more about how sections in Builder work with Shopify, [visit the docs](https://www.builder.io/c/docs/shopify/sections-everywhere)."
+    },
+    {
+      "type": "select",
+      "id": "builder_content_entry_preview",
+      "label": "Content Entry Preview",
+      "info": "Targeting is not used while previewing sections in the Shopify theme editor, meaning this preview will not change based on the targeting you have set. If you are using targeting, you need to manually select an entry to preview it. This setting only affects the preview, not what displays on your live site.",
+      "options": [
+        { "value": "f028d18a543343dd85e6852294ffdb37", "label": "Product | Gift Plan for Recharge"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Builder entries used"
+    },
+    {
+    "type": "paragraph",
+    "content": "Name: Product | Gift Plan for Recharge. Targeting: no targeting. Visit the [entry in Builder](https://builder.io/content/f028d18a543343dd85e6852294ffdb37)"
+  }
+  ],
+  "presets":[{
+    "name": "Product gift plan"
+  }]
+}
+  {% endschema %}

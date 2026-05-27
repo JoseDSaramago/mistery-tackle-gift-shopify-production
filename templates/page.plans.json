@@ -1,0 +1,681 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "mtb_border_component_hFBfp6": {
+      "type": "MTB-border-component",
+      "settings": {
+        "component_mobile_pt": 0,
+        "component_mobile_pb": 0,
+        "component_tablet_pt": 0,
+        "component_tablet_pb": 0,
+        "component_desktop_pt": 0,
+        "component_desktop_pb": 0
+      }
+    },
+    "mtb_why_component_YK7LX4": {
+      "type": "MTB-why-component",
+      "blocks": {
+        "point_h3tGkt": {
+          "type": "point",
+          "settings": {
+            "point_image": "shopify://shop_images/assets_e7417059554e462db0236fef8a2c1fc1_54d1a786d2154be79bb16ecba76b02fc.webp",
+            "point_text_1": "Perfectly paired",
+            "point_header": "<strong>LURES </strong><em><strong>and</strong></em><strong>  TACKLE</strong>",
+            "point_text_2": "delivered monthly."
+          }
+        },
+        "point_6aLLij": {
+          "type": "point",
+          "settings": {
+            "point_image": "shopify://shop_images/assets_e7417059554e462db0236fef8a2c1fc1_f53a340bd60d4e46bb7d6e62fce33c69.webp",
+            "point_text_1": "Exclusive and",
+            "point_header": "<strong>LIMITED EDITION</strong>",
+            "point_text_2": "fishing stuff."
+          }
+        },
+        "point_7ciiXm": {
+          "type": "point",
+          "settings": {
+            "point_image": "shopify://shop_images/1112222_1.png",
+            "point_text_1": "How-to videos,",
+            "point_header": "<strong>EXPERT CONTENT</strong>",
+            "point_text_2": "contests & more."
+          }
+        },
+        "point_JKkbaL": {
+          "type": "point",
+          "settings": {
+            "point_image": "shopify://shop_images/assets_e7417059554e462db0236fef8a2c1fc1_af46c9794df34205a304ba1513239144.webp",
+            "point_text_1": "Up to",
+            "point_header": "<strong>40% OFF RETAIL</strong>",
+            "point_text_2": "plus member perks."
+          }
+        }
+      },
+      "block_order": [
+        "point_h3tGkt",
+        "point_6aLLij",
+        "point_7ciiXm",
+        "point_JKkbaL"
+      ],
+      "settings": {
+        "component_header": "<strong>WHY TRY MTB?</strong>",
+        "component_header_color": "#dd5638",
+        "header_img": "shopify://shop_images/assets_e7417059554e462db0236fef8a2c1fc1_b5a82562e267484f81a2ce0218321186.svg",
+        "component_subheader": "Simple: it’s the most fun way to discover new fishing tackle, become a better angler, and CATCH MORE FISH",
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 40,
+        "component_tablet_pt": 40,
+        "component_tablet_pb": 40,
+        "component_desktop_pt": 40,
+        "component_desktop_pb": 40
+      }
+    },
+    "mtb_border_component_yqHFH8": {
+      "type": "MTB-border-component",
+      "settings": {
+        "component_mobile_pt": 0,
+        "component_mobile_pb": 0,
+        "component_tablet_pt": 0,
+        "component_tablet_pb": 0,
+        "component_desktop_pt": 0,
+        "component_desktop_pb": 0
+      }
+    },
+    "mtb_how_it_works_GJQy99": {
+      "type": "MTB-how-it-works",
+      "blocks": {
+        "item_yie7ym": {
+          "type": "item",
+          "settings": {
+            "item_number": "<strong>1</strong>",
+            "item_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_381cb17dd3144b6eb4cc22d33bfdfed2.webp",
+            "item_header": "<strong>PICK A PLAN</strong>",
+            "item_text": "Choose your species and plan duration (save $ the longer you go!). Change species, pause, or cancel anytime!"
+          }
+        },
+        "item_bUfAFx": {
+          "type": "item",
+          "settings": {
+            "item_number": "<strong>2</strong>",
+            "item_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_6c52f7de8fc34eada5c56a0cb32d37a9.webp",
+            "item_header": "<strong>WE BUILD YOUR BOX</strong>",
+            "item_text": "Our team of expert anglers will curate & ship your box for free! There is no deadline for ordering - we ship all month long."
+          }
+        },
+        "item_xcDCrn": {
+          "type": "item",
+          "settings": {
+            "item_number": "<strong>3</strong>",
+            "item_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_85d44acab1464f648769aed65c3e6625.webp",
+            "item_header": "<strong>HAPPY FISHING!</strong>",
+            "item_text": "Get ready for the best mail day of the month. Discover new baits and learn tips & tricks to catch more fish!"
+          }
+        }
+      },
+      "block_order": [
+        "item_yie7ym",
+        "item_bUfAFx",
+        "item_xcDCrn"
+      ],
+      "settings": {
+        "component_header": "<strong>HOW IT WORKS</strong>",
+        "header_color": "#dd5739",
+        "item_number_color": "#ffffff",
+        "item_number_bg_color": "#dd5739",
+        "item_header_color": "#33534b",
+        "item_text_color": "#212529",
+        "item_img_height": 120,
+        "component_mobile_pt": 40,
+        "component_mobile_pb": 40,
+        "component_tablet_pt": 40,
+        "component_tablet_pb": 40,
+        "component_desktop_pt": 40,
+        "component_desktop_pb": 40
+      }
+    },
+    "mtb_table_KXKzD3": {
+      "type": "MTB-table",
+      "blocks": {
+        "row_4itT7K": {
+          "type": "row",
+          "settings": {
+            "row_color": "#ffffff",
+            "summary_color": "#ffffff",
+            "row_bg": "#d05a11",
+            "summary_bg": "#9f450d",
+            "use_column_marker": false,
+            "column_1": "<strong>IF YOU...</strong>",
+            "column_2": "",
+            "column_3": "",
+            "summary": "<p><strong>PICK THIS PLAN</strong></p>",
+            "summary_banner": "",
+            "summary_banner_color": "#ffffff",
+            "summary_banner_bg": "#31554b",
+            "item_text": ""
+          }
+        },
+        "row_WeqAiG": {
+          "type": "row",
+          "settings": {
+            "row_color": "#212529",
+            "summary_color": "#31554b",
+            "row_bg": "#ffffff",
+            "summary_bg": "#a8e46c",
+            "use_column_marker": true,
+            "column_1": "Mostly fish in lakes or ponds",
+            "column_2": "Release most or all of the fish you catch",
+            "column_3": "You're likely to say: \"topwater,\" \"baitcaster,\" \"PB (personal best),\" \"Frog,\" \"Wacky Worm\"",
+            "summary_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_1e4d71ee8a1943d08ddbf77d171a7a9a.webp",
+            "summary": "<p><strong>BASS</strong></p>",
+            "summary_marker_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_4d365d52d7fc427882e57df1d753f915.webp",
+            "summary_banner": "<strong>MOST POPULAR!</strong>",
+            "summary_banner_color": "#ffffff",
+            "summary_banner_bg": "#31554b",
+            "item_text": ""
+          }
+        },
+        "row_PdXyb3": {
+          "type": "row",
+          "settings": {
+            "row_color": "#212529",
+            "summary_color": "#31554b",
+            "row_bg": "#f9f5ec",
+            "summary_bg": "#95ca60",
+            "use_column_marker": true,
+            "column_1": "Fish mostly in creeks or stocked ponds",
+            "column_2": "Often keep your catch for dinner",
+            "column_3": "You're likely to say: \"rainbow,\" \"brown trout,\" \"crappie,\" \"brushpile,\" \"weekend opener,\" or \"waders\"",
+            "summary_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_59ca85128fb24af3a94c797c75f74515.webp",
+            "summary": "<p><strong>PANFISH & </strong></p><p><strong>TROUT</strong></p>",
+            "summary_marker_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_b293e1a45d0341cbb071ccca9bbe6534.webp",
+            "summary_banner": "",
+            "summary_banner_color": "#ffffff",
+            "summary_banner_bg": "#31554b",
+            "item_text": ""
+          }
+        },
+        "row_wqXinH": {
+          "type": "row",
+          "settings": {
+            "row_color": "#212529",
+            "summary_color": "#31554b",
+            "row_bg": "#ffffff",
+            "summary_bg": "#a8e46c",
+            "use_column_marker": true,
+            "column_1": "Most likely fish in the Atlantic or Pacific Ocean",
+            "column_2": "Often target Snook, Redfish, Jack, Speckled Trout, Striped Bass, Bluefish, Halibut or Rockfish",
+            "column_3": "You're likely to say: \"beach,\" \"canal\", \"drum\", \"crab\", \"shark,\" or \"tide\"",
+            "summary_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_9aaaa26648b34abb991ac56d46d0b4b5.webp",
+            "summary": "<p><strong>INSHORE </strong></p><p><strong>SALTWATER</strong></p>",
+            "summary_marker_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_4d365d52d7fc427882e57df1d753f915.webp",
+            "summary_banner": "",
+            "summary_banner_color": "#ffffff",
+            "summary_banner_bg": "#31554b",
+            "item_text": ""
+          }
+        },
+        "row_hch6y6": {
+          "type": "row",
+          "settings": {
+            "row_color": "#212529",
+            "summary_color": "#31554b",
+            "row_bg": "#f9f5ec",
+            "summary_bg": "#95ca60",
+            "use_column_marker": true,
+            "column_1": "Fish only in freshwater (no ocean fishing)",
+            "column_2": "You want the most versatile box for targeting an array of freshwater species",
+            "column_3": "",
+            "summary_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_c01f1e18258c41a29f707904f9280ad8.webp",
+            "summary": "<p><strong>MULTI-SPECIES</strong></p>",
+            "summary_marker_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_b293e1a45d0341cbb071ccca9bbe6534.webp",
+            "summary_banner": "<strong>MOST VERSATILE!</strong>",
+            "summary_banner_color": "#ffffff",
+            "summary_banner_bg": "#31554b",
+            "item_text": ""
+          }
+        },
+        "row_AG9bi6": {
+          "type": "row",
+          "settings": {
+            "row_color": "#212529",
+            "summary_color": "#31554b",
+            "row_bg": "#ffffff",
+            "summary_bg": "#a8e46c",
+            "use_column_marker": true,
+            "column_1": "",
+            "column_2": "Only pick this species if. you are a dedicated walleye angler",
+            "column_3": "",
+            "summary_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_13771758b8e14b92b23315a703ca0f0a.webp",
+            "summary": "<p><strong>WALLEYE</strong></p>",
+            "summary_marker_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_4d365d52d7fc427882e57df1d753f915.webp",
+            "summary_banner": "",
+            "summary_banner_color": "#ffffff",
+            "summary_banner_bg": "#31554b",
+            "item_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_4itT7K",
+        "row_WeqAiG",
+        "row_PdXyb3",
+        "row_wqXinH",
+        "row_hch6y6",
+        "row_AG9bi6"
+      ],
+      "settings": {
+        "component_header": "<strong>UNSURE WHICH SPECIES TO PICK?</strong>",
+        "header_color": "#ffffff",
+        "component_subheader": "Follow the guide below to help pick the perfect MTB based on your targeted species. Change species from your account anytime!",
+        "subheader_color": "#ffffff",
+        "bg_color": "#33534b",
+        "item_img_height": 120,
+        "marker_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_24540eb5338c4d4bb16a1aeb088b2a86.svg",
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 20,
+        "component_tablet_pt": 30,
+        "component_tablet_pb": 40,
+        "component_desktop_pt": 30,
+        "component_desktop_pb": 40
+      }
+    },
+    "mtb_video_mBMhgm": {
+      "type": "MTB-video",
+      "blocks": {
+        "video_YHEtFz": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=SOr6xEdswR4&ab_channel=MysteryTackleBox"
+          }
+        },
+        "video_zpQJCA": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=2apBPHSOxng&t=34s&ab_channel=MysteryTackleBox"
+          }
+        }
+      },
+      "block_order": [
+        "video_YHEtFz",
+        "video_zpQJCA"
+      ],
+      "settings": {
+        "component_header": "<strong>MTB BOX BREAKDOWN</strong>",
+        "header_color": "#dd5739",
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 20,
+        "component_tablet_pt": 20,
+        "component_tablet_pb": 20,
+        "component_desktop_pt": 20,
+        "component_desktop_pb": 20
+      }
+    },
+    "mtb_border_component_8P37xL": {
+      "type": "MTB-border-component",
+      "settings": {
+        "component_mobile_pt": 0,
+        "component_mobile_pb": 0,
+        "component_tablet_pt": 0,
+        "component_tablet_pb": 0,
+        "component_desktop_pt": 0,
+        "component_desktop_pb": 0
+      }
+    },
+    "mtb_trustpilot_component_yzUB7H": {
+      "type": "MTB-Trustpilot-component",
+      "settings": {
+        "header_img": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_9cfacda4c16d4bf6a1f417ae299fd7c8.gif",
+        "header_copy": "And counting...",
+        "trustpilot_widgets": "trustpilot_slider",
+        "theme_color": "light",
+        "button_text": "<strong>READ ALL REVIEWS</strong>",
+        "button_url": "shopify://pages/reviews",
+        "is_mobile_only": false,
+        "component_header_img_mobile_width": 288,
+        "component_header_logo_mobile_width": 60,
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 20,
+        "component_header_img_tablet_width": 520,
+        "component_header_logo_tablet_width": 60,
+        "component_tablet_pt": 20,
+        "component_tablet_pb": 20,
+        "component_header_img_desktop_width": 700,
+        "component_header_logo_desktop_width": 90,
+        "component_desktop_pt": 20,
+        "component_desktop_pb": 20
+      }
+    },
+    "mtb_border_component_XYBDzk": {
+      "type": "MTB-border-component",
+      "settings": {
+        "component_mobile_pt": 0,
+        "component_mobile_pb": 0,
+        "component_tablet_pt": 0,
+        "component_tablet_pb": 0,
+        "component_desktop_pt": 0,
+        "component_desktop_pb": 0
+      }
+    },
+    "mtb_slideshow_component_tLrRmP": {
+      "type": "MTB-slideshow-component",
+      "blocks": {
+        "slide_Tk836c": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_cf625195ecab4cf18af014cd5cfb64c6.webp"
+          }
+        },
+        "slide_CANyLj": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_95a3e06f9d96461191a9c4e279c6d6a3.webp"
+          }
+        },
+        "slide_f6nrTn": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_ab3987e53283408382b1a8b73dbe3bb3.webp"
+          }
+        },
+        "slide_3XbifQ": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_a591f63b15b241c1992d45a3e10adf17.webp"
+          }
+        },
+        "slide_xfRAHy": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_c09200c6b2204a34a4c18967372072a8.webp"
+          }
+        },
+        "slide_XiXMME": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_de19a92769e44dbd8d7c102615f3930b.webp"
+          }
+        },
+        "slide_EzkpyL": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_2ed11b5ee02d4d4ba633452919f2e801.webp"
+          }
+        },
+        "slide_wNxPe8": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_62ba832f76b14032836ffb13230b55c7.webp"
+          }
+        },
+        "slide_Pjy7jN": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_0d4e33838bc942f7bf83a423cb272e74.webp"
+          }
+        },
+        "slide_V4LatM": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_5fad887eb8e547fdb4d04ac26532d06f.webp"
+          }
+        }
+      },
+      "block_order": [
+        "slide_Tk836c",
+        "slide_CANyLj",
+        "slide_f6nrTn",
+        "slide_3XbifQ",
+        "slide_xfRAHy",
+        "slide_XiXMME",
+        "slide_EzkpyL",
+        "slide_wNxPe8",
+        "slide_Pjy7jN",
+        "slide_V4LatM"
+      ],
+      "settings": {
+        "auto_rotate": true,
+        "change_slides_speed": 3,
+        "slides_to_show_mobile": 5,
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 20,
+        "slides_to_show_tablet": 5,
+        "component_tablet_pt": 40,
+        "component_tablet_pb": 40,
+        "slides_to_show_desktop": 5,
+        "component_desktop_pt": 40,
+        "component_desktop_pb": 40
+      }
+    },
+    "mtb_border_component_U8RxLG": {
+      "type": "MTB-border-component",
+      "settings": {
+        "component_mobile_pt": 0,
+        "component_mobile_pb": 0,
+        "component_tablet_pt": 0,
+        "component_tablet_pb": 0,
+        "component_desktop_pt": 0,
+        "component_desktop_pb": 0
+      }
+    },
+    "mtb_fa_qs_preview_3mXDnY": {
+      "type": "MTB-FAQs-preview",
+      "blocks": {
+        "brand_Q8NHUA": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_251caf3a1bd4480892e681fadccbca74.webp"
+          }
+        },
+        "brand_NgxbaX": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_fd8dab03c76e47608426c28aa121468f.webp"
+          }
+        },
+        "brand_mkKckc": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_67b24e90a2444ca4a30b6d9c044c2722.webp"
+          }
+        },
+        "brand_WR4z6i": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_124cef65b8164678ac9dee9e213c628a.webp"
+          }
+        },
+        "brand_8gTRwK": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_c73483f823e94b5eb735857c0c83af3d.webp"
+          }
+        },
+        "brand_Ww6fRw": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_59208373102b410e91ef6bc36c280e31.webp"
+          }
+        },
+        "brand_FWk6mT": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_dce624a84ccc4ff8b773fb66275ef9b7.webp"
+          }
+        },
+        "brand_FrTwHD": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_15969c7c3eb94af0a3c9e9ab3b55cc67.webp"
+          }
+        },
+        "brand_kFGFqY": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_47b05d4b2c35460f99c9777c0fe3a2a6.webp"
+          }
+        },
+        "brand_8txtn6": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_0cda314e055a4bc09a9e4a2a1d5f9153.webp"
+          }
+        },
+        "brand_THwRf4": {
+          "type": "brand",
+          "settings": {}
+        },
+        "question_AhkfrD": {
+          "type": "question",
+          "settings": {
+            "question_header": "What is Mystery Tackle Box?",
+            "question_text": "<p>Mystery Tackle Box is a fun and affordable way to discover new fishing products every single month! Our subscription plans introduce beginner and expert anglers alike to new fishing lures and tackle, and the best way to use them.</p>"
+          }
+        },
+        "question_9qbPAL": {
+          "type": "question",
+          "settings": {
+            "question_header": "How Much Does it Cost?",
+            "question_text": "<p>Mystery Tackle Box is only $19.99 a month for our regular box, $29.99 a month for our PRO box, and $39.99 for our Elite box (plus any applicable shipping and tax). You can cancel or change species any time! Most anglers spend at least $25-$50 per month on fishing gear, so our service exposes anglers to new quality lures at a fraction of the price.</p>"
+          }
+        },
+        "question_MYhzNk": {
+          "type": "question",
+          "settings": {
+            "question_header": "What Will I Get?",
+            "question_text": "<p>Each month you will get a variety of quality fishing tackle from both large and small manufacturers. We curate a unique mix of brands and product types in each box so you can discover new tackle and techniques every single month. Our team of seasoned tournament anglers meticulously assess each bait we send to ensure your greatest chance of success and satisfaction on the water.</p>"
+          }
+        },
+        "question_T9Uh4D": {
+          "type": "question",
+          "settings": {
+            "question_header": "How Do I Cancel?",
+            "question_text": "<p>If you decide you no longer want to receive a Mystery Tackle Box each month you can easily cancel by logging into your account. From there you will see all your active subscriptions. You can scroll to the bottom and select to pause your subscription for a selected number of months or stop it completely.</p><p></p><p>*Please note that when you stop your subscription, you won't be billed anything further although you will still receive the boxes you've paid for in your last order.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "brand_Q8NHUA",
+        "brand_NgxbaX",
+        "brand_mkKckc",
+        "brand_WR4z6i",
+        "brand_8gTRwK",
+        "brand_Ww6fRw",
+        "brand_FWk6mT",
+        "brand_FrTwHD",
+        "brand_kFGFqY",
+        "brand_8txtn6",
+        "brand_THwRf4",
+        "question_AhkfrD",
+        "question_9qbPAL",
+        "question_MYhzNk",
+        "question_T9Uh4D"
+      ],
+      "settings": {
+        "header_brand_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_c0a6a30318934360a45e1dd93979ec99.webp",
+        "brand_header": "<strong>FEATURED BRANDS</strong>",
+        "brand_subheader": "There's no such thing as too much tackle.",
+        "header_faq_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_84fb3f37dd3b4b2cadfec2cc316d80aa.webp",
+        "faq_header": "<strong>FAQS</strong>",
+        "faq_subheader": "",
+        "faq_color": "#31554b",
+        "slides_to_show_mobile": 5,
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 20,
+        "slides_to_show_tablet": 5,
+        "component_tablet_pt": 40,
+        "component_tablet_pb": 40,
+        "slides_to_show_desktop": 5,
+        "component_desktop_pt": 40,
+        "component_desktop_pb": 40
+      }
+    },
+    "mtb_border_component_BGVG7e": {
+      "type": "MTB-border-component",
+      "settings": {
+        "component_mobile_pt": 0,
+        "component_mobile_pb": 0,
+        "component_tablet_pt": 0,
+        "component_tablet_pb": 0,
+        "component_desktop_pt": 0,
+        "component_desktop_pb": 0
+      }
+    },
+    "mtb_previous_boxes_component_tiUbA9": {
+      "type": "MTB-previous-boxes-component",
+      "blocks": {
+        "box_WJdFkj": {
+          "type": "box",
+          "settings": {
+            "box_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_a8c94d12751d4bf5911467fb7200887e.webp",
+            "box_text": "<strong>Bass Regular</strong>"
+          }
+        },
+        "box_r9cB4Q": {
+          "type": "box",
+          "settings": {
+            "box_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_ec402826a78843e3a27caebfbb8acdd5.webp",
+            "box_text": "<strong>Bass Regular</strong>"
+          }
+        },
+        "box_3DH7fR": {
+          "type": "box",
+          "settings": {
+            "box_image": "shopify://shop_images/assets_6f04b2fd148b431f930c28ad27c9b489_2bdd80dcf35c45a796122c301f47055c.webp",
+            "box_text": "<strong>Bass Regular</strong>"
+          }
+        }
+      },
+      "block_order": [
+        "box_WJdFkj",
+        "box_r9cB4Q",
+        "box_3DH7fR"
+      ],
+      "settings": {
+        "component_header": "<strong>PREVIOUS BOXES</strong>",
+        "header_color": "#00574f",
+        "box_text_color": "#ffffff",
+        "box_border_color": "#bbbbbb",
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 20,
+        "component_tablet_pt": 20,
+        "component_tablet_pb": 20,
+        "component_desktop_pt": 20,
+        "component_desktop_pb": 20
+      }
+    }
+  },
+  "order": [
+    "main",
+    "mtb_border_component_hFBfp6",
+    "mtb_why_component_YK7LX4",
+    "mtb_border_component_yqHFH8",
+    "mtb_how_it_works_GJQy99",
+    "mtb_table_KXKzD3",
+    "mtb_video_mBMhgm",
+    "mtb_border_component_8P37xL",
+    "mtb_trustpilot_component_yzUB7H",
+    "mtb_border_component_XYBDzk",
+    "mtb_slideshow_component_tLrRmP",
+    "mtb_border_component_U8RxLG",
+    "mtb_fa_qs_preview_3mXDnY",
+    "mtb_border_component_BGVG7e",
+    "mtb_previous_boxes_component_tiUbA9"
+  ]
+}

@@ -1,0 +1,11 @@
+<div class="ante-buy-button-container">
+  <buy-button
+    class="light ante-button ante-buy-button{% if show_price == false %} price-hidden{% endif %}{% if small %} small{% endif %}"
+    {% if disabled %}disabled{% endif %}
+    {% if show_price %}show-price{% endif %}
+    text="{{ text }}"
+    price="{{ price }}"
+    compare-price="{% if compare %}{{ compare }}{% endif %}"
+    label="{{ label }}">
+  </buy-button>
+</div>

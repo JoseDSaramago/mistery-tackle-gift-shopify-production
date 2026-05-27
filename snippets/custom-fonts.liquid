@@ -1,0 +1,19 @@
+{%- comment -%} 
+ Use custom uploaded fonts
+{%- endcomment -%}
+
+{%- if settings.is_heading_font_custom -%}
+    <style>
+        @font-face {
+            font-family: "{{ settings.heading_font_custom_name }}";
+            font-weight: 400;
+            src: url("{{ settings.heading_font_custom_url }}") format("{{ settings.heading_font_custom_format }}");
+        }
+        @font-face {
+            font-family: "{{ settings.heading_font_custom_name }}";
+            font-weight: 700;
+            src: url("{{ settings.heading_font_bold_custom_url }}") format("{{ settings.heading_font_custom_format }}");
+        }
+
+    </style>
+{%- endif -%}

@@ -1,0 +1,344 @@
+<style>
+  .ante-button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-small);
+  }
+
+  .ante-button,
+  .ante-button-tabs button {
+    all: unset;
+    background-color: var(--color-button);
+    border-radius: 100px;
+    padding: var(--padding-button);
+    min-height: 72px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--micropad-medium);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 110%;
+    color: var(--color-button-text) !important;
+    cursor: pointer;
+    transition: transform .15s, box-shadow .15s, opacity .15s;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: var(--font);
+    box-shadow: 2px 4px 0 0 var(--color-elevated-shadow);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    user-select: none;
+    min-width: 120px;
+    text-transform: uppercase;
+  }
+
+  .ante-button::before,
+  .ante-button-tabs button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: .2;
+    pointer-events: none;
+    background-image: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/smaller.jpg?v=1757504298");
+    background-position: 50%;
+    background-size: cover;
+  }
+
+  .ante-button.flat {
+    color: var(--color-text-default) !important;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    box-shadow: 2px 4px 0 0 var(--color-border);
+  }
+
+  .ante-button.flat::before {
+    display: none;
+  }
+
+  .ante-button.small {
+    padding: var(--padding-button-small);
+    min-height: 62px;
+  }
+
+  .ante-button * {
+    color: inherit;
+  }
+
+  .ante-button:hover,
+  .ante-button-tabs button:hover {
+    transform: translate(-1px, -2px);
+    box-shadow: 3px 6px 0 0 var(--color-elevated-shadow);
+  }
+
+  .ante-button.flat:hover {
+    box-shadow: 3px 6px 0 0 var(--color-border);
+  }
+
+  .ante-button:active,
+  .ante-button-tabs button:active {
+    transform: translate(1px, 2px);
+    box-shadow: 1px 2px 0 0 var(--color-elevated-shadow);
+  }
+
+  .ante-button.flat:active {
+    box-shadow: 1px 2px 0 0 var(--color-border);
+  }
+
+  .ante-button[disabled],
+  .ante-button[loading] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: initial;
+    box-shadow: 2px 4px 0 0 var(--color-elevated-shadow);
+  }
+
+  .ante-button[loading] {
+    cursor: progress;
+    color: transparent !important;
+  }
+
+  .ante-button[loading]::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 38"><defs><linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="A"><stop stop-color="%23ffffff" stop-opacity="0" offset="0%"/><stop stop-color="%23ffffff" stop-opacity=".631" offset="63.146%"/><stop stop-color="%23ffffff" offset="100%"/></linearGradient></defs><g fill="none" fill-rule="evenodd"><g transform="translate(1 1)"><path d="M36 18c0-9.94-8.06-18-18-18" stroke="url(%23A)" stroke-width="2"/></g></g></svg>');
+    background-size: 100% 100%;
+    width: 32px;
+    height: 32px;
+    animation: loadingspin 0.9s linear infinite;
+  }
+
+  .ante-button[loading] * {
+    visibility: hidden;
+  }
+
+  .ante-button-tabs {
+    display: flex;
+    justify-content: center;
+    gap: var(--micropad-x-large);
+    padding: var(--micropad-x-small);
+    margin-bottom: var(--spacing-medium);
+  }
+
+  .ante-button-tabs button {
+    background-color: var(--color-sale);
+    padding: var(--padding-button);
+    min-height: 52px;
+    min-width: 90px;
+  }
+
+  .ante-button-tabs button:not(.active) {
+    box-shadow: 2px 4px 0 0 var(--color-border);
+    background-color: var(--color-surface-100);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-default) !important;
+  }
+
+  .ante-button-tabs button:not(.active)::before {
+    display: none;
+  }
+
+  .ante-button-tabs button::before {
+    opacity: 1;
+  }
+
+  .ante-button-tabs button:not(.active):hover {
+    box-shadow: 3px 6px 0 0 var(--color-border);
+  }
+
+  .ante-button-tabs button:not(.active):active {
+    box-shadow: 1px 2px 0 0 var(--color-border);
+  }
+
+  @media (max-width: 1919px) {
+    .ante-button {
+      font-size: 16px;
+      min-height: 70px;
+    }
+
+    .ante-button-tabs button {
+      font-size: 14px;
+    }
+
+    .ante-button.small {
+      min-height: 54px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .ante-button {
+      min-height: 54px;
+    }
+
+    .ante-button-tabs button {
+      font-size: 12px;
+    }
+
+    .ante-button.small {
+      min-height: 42px;
+    }
+  }
+
+  /* Loader Button */
+
+  .ante-button {
+    position: relative !important;
+    user-select: none !important;
+  }
+
+  .ante-button.loading {
+    color: transparent !important;
+    cursor: progress !important;
+  }
+
+  .ante-button.loading * {
+    visibility: hidden !important;
+  }
+
+  .ante-button.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 38"><defs><linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="A"><stop stop-color="%23000" stop-opacity="0" offset="0%"/><stop stop-color="%23000" stop-opacity=".631" offset="63.146%"/><stop stop-color="%23000" offset="100%"/></linearGradient></defs><g fill="none" fill-rule="evenodd"><g transform="translate(1 1)"><path d="M36 18c0-9.94-8.06-18-18-18" stroke="url(%23A)" stroke-width="2"/></g></g></svg>');
+    background-size: 100% 100%;
+    width: 32px;
+    height: 32px;
+    animation: loadingspin 0.9s linear infinite;
+  }
+
+  @keyframes loadingspin {
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  .ante-button.light.loading::after {
+    filter: invert();
+  }
+</style>
+
+<script>
+  // Loader Button
+
+  class LoaderButton extends HTMLElement {
+    static get observedAttributes() {
+      return ["loading", "disabled"]
+    }
+
+    get loading() {
+      return this.hasAttribute("loading")
+    }
+
+    set loading(value) {
+      this.toggleAttribute("loading", !!value)
+    }
+
+    get disabled() {
+      return this.hasAttribute("disabled")
+    }
+
+    set disabled(value) {
+      this.toggleAttribute("disabled", !!value)
+    }
+
+    connectedCallback() {
+      this.classList.add("ante-button")
+      this.addEventListener("click", e => {
+        if (this.loading || this.disabled) e.stopImmediatePropagation()
+      }, true)
+    }
+  }
+
+  customElements.define("loader-button", LoaderButton)
+
+  // Buy Button
+
+  class BuyButton extends LoaderButton {
+    static get observedAttributes() {
+      return [...super.observedAttributes, "price", "compare-price", "label", "text", "show-price"]
+    }
+    connectedCallback() {
+      super.connectedCallback()
+      this.classList.add("ante-buy-button")
+      this.innerHTML = `
+        <div class="ante-buy-button-text"></div>
+        <div class="ante-price ante-buy-button-price">
+          <span class="ante-buy-compare-price callout-price"><span></span></span>
+          <div class="ante-buy-price callout-price"></div>
+          <div class="ante-buy-label body-caption bold" hidden></div>
+        </div>
+        <div class="ante-buy-arrow" hidden>
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="13" viewBox="0 0 21 13" fill="none">
+            <path d="M10.9964 12.2276C10.6781 11.5235 11.2656 10.7621 11.7028 10.1463C12.0388 9.67285 12.4388 9.24836 12.8915 8.885C13.206 8.65053 13.5078 8.39939 13.7954 8.13265C11.2271 8.16303 5.60659 8.31091 2.96366 8.43899C1.29828 8.55918 1.00986 7.94457 0.978516 7.5063C1.04515 6.57361 1.41914 5.66356 2.524 5.53452C4.26328 5.33135 5.80145 5.25476 7.60005 5.21476C9.53188 5.17183 12.1925 5.12077 13.9817 5.01495C13.3237 4.55433 12.3379 4.02721 11.6478 3.61909C11.2928 3.40909 10.1847 2.94986 9.95241 2.25212C9.74193 1.61981 10.0932 0.153029 10.9174 0.223654C12.1031 0.325433 13.9762 1.58212 15.1377 2.13346C16.7261 2.94798 18.4839 3.63687 19.7706 4.90269C20.1238 5.32452 20.4063 5.9487 20.1349 6.46096C19.7503 7.18692 17.8575 8.84668 17.2725 9.33173C16.1202 10.2871 14.7544 11.57 13.495 12.5739C12.5427 13.333 11.2771 12.849 10.9964 12.2276Z" fill="currentColor"/>
+          </svg>
+        </div>
+      `
+      this.updateFromAttributes()
+    }
+    attributeChangedCallback(name) {
+      super.attributeChangedCallback?.(name)
+      this.updateFromAttributes()
+    }
+    updateFromAttributes() {
+      setTimeout(() => {
+        const textEl = this.querySelector(".ante-buy-button-text")
+        const compareEl = this.querySelector(".ante-buy-compare-price")
+        const compareElText = this.querySelector(".ante-buy-compare-price span")
+        const priceEl = this.querySelector(".ante-buy-price")
+        const labelEl = this.querySelector(".ante-buy-label")
+        const priceContainer = this.querySelector(".ante-buy-button-price")
+        const arrowEl = this.querySelector(".ante-buy-arrow")
+        const price = this.getAttribute("price")
+        const comparePrice = this.getAttribute("compare-price")
+        const label = this.getAttribute("label") || currentDefaultLabel
+        const text = this.getAttribute("text")
+        const showPrice = this.hasAttribute("show-price")
+        
+        textEl.textContent = text || globalDefaultText
+        textEl.classList.toggle("default", !text)
+        
+        if (label) {
+          labelEl.textContent = label
+          labelEl.hidden = false
+        } else {
+          labelEl.hidden = true
+        }
+        
+        const finalPrice = parseFloat(price || globalDefaultPrice) || 0
+        const finalComparePrice = parseFloat(comparePrice || globalDefaultComparePrice) || 0
+        
+        priceEl.textContent = formatPrice(finalPrice)
+
+        if (finalComparePrice > finalPrice) {
+          compareElText.textContent = formatPrice(finalComparePrice)
+          compareEl.hidden = false
+        } else {
+          compareEl.hidden = true
+        }
+
+        if (showPrice) {
+          priceContainer.hidden = false
+          arrowEl.hidden = true
+        } else {
+          priceContainer.hidden = true
+          arrowEl.hidden = false
+        }
+      }, 0)
+    }
+    setValues(price, comparePrice, label) {
+      this.setAttribute("price", price)
+      if (comparePrice) this.setAttribute("compare-price", comparePrice)
+      if (label) this.setAttribute("label", label)
+      else this.removeAttribute("label")
+    }
+  }
+
+  customElements.define("buy-button", BuyButton)
+</script>

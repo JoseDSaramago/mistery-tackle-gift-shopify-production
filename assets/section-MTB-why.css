@@ -1,0 +1,51 @@
+.why-component__content {
+  text-align: center;
+}
+
+.why-component__header {
+  margin: 0.5rem 0;
+}
+
+.why-component__subheader {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.why-component__points-wrap {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  padding-top: 2rem;
+}
+
+.why-component__point-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.why-component__point_wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.why-component__point-text {
+  margin: 0;
+}
+
+.why-component__point-header {
+  margin: 0;
+}
+
+
+@media screen and (min-width: 641px) {
+  .why-component__points-wrap {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .why-component__point-text {
+    font-size: 1.6rem;
+  }
+}

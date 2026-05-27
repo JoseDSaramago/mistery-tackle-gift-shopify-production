@@ -1,0 +1,202 @@
+<style>
+  .ante-section h1,
+  .ante-section h2,
+  .ante-section h3,
+  .ante-section h4,
+  .ante-section h5,
+  .ante-section h6 {
+    all: unset;
+    margin: 0;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    color: var(--color-text-default);
+    text-transform: uppercase;
+  }
+
+  .ante-section h1 {
+    font-size: 84px;
+    line-height: 110%;
+  }
+  @media (max-width: 1919px) {
+    .ante-section h1 { font-size: 72px }
+  }
+  @media (max-width: 1024px) {
+    .ante-section h1 { font-size: 60px }
+  }
+  @media (max-width: 600px) {
+    .ante-section h1 { font-size: 44px }
+  }
+
+  .ante-section h2 {
+    font-size: 48px;
+    line-height: 110%;
+  }
+  @media (max-width: 1919px) {
+    .ante-section h2 { font-size: 44px }
+  }
+  @media (max-width: 1024px) {
+    .ante-section h2 { font-size: 36px }
+  }
+  @media (max-width: 600px) {
+    .ante-section h2 { font-size: 24px }
+  }
+
+  .ante-section h3 {
+    font-size: 36px;
+    line-height: 120%;
+  }
+  @media (max-width: 1919px) {
+    .ante-section h3 { font-size: 32px }
+  }
+  @media (max-width: 1024px) {
+    .ante-section h3 { font-size: 28px }
+  }
+  @media (max-width: 600px) {
+    .ante-section h3 { font-size: 20px }
+  }
+
+  .ante-section h4 {
+    font-size: 32px;
+    line-height: 120%;
+  }
+  @media (max-width: 1919px) {
+    .ante-section h4 { font-size: 28px }
+  }
+  @media (max-width: 1024px) {
+    .ante-section h4 { font-size: 24px }
+  }
+  @media (max-width: 600px) {
+    .ante-section h4 { font-size: 18px }
+  }
+
+  .ante-section h5 {
+    font-size: 26px;
+    line-height: 120%;
+  }
+  @media (max-width: 1919px) {
+    .ante-section h5 { font-size: 22px }
+  }
+  @media (max-width: 1024px) {
+    .ante-section h5 { font-size: 20px }
+  }
+  @media (max-width: 600px) {
+    .ante-section h5 { font-size: 16px }
+  }
+
+  .ante-section h6 {
+    font-size: 20px;
+    line-height: 120%;
+  }
+  @media (max-width: 1919px) {
+    .ante-section h6 { font-size: 18px }
+  }
+  @media (max-width: 1024px) {
+    .ante-section h6 { font-size: 16px }
+  }
+  @media (max-width: 600px) {
+    .ante-section h6 { font-size: 14px }
+  }
+
+  .ante-section strong,
+  .ante-section b,
+  .ante-section .bold {
+    font-weight: 700;
+  }
+
+  .ante-section .muted {
+    color: var(--color-text-muted);
+  }
+
+  .ante-section .faint {
+    color: var(--color-text-faint);
+  }
+
+  .body-large {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 150%;
+  }
+  @media (max-width: 1919px) {
+    .body-large { font-size: 18px }
+  }
+  @media (max-width: 600px) {
+    .body-large { font-size: 16px }
+  }
+
+  .ante-section,
+  .body-base {
+    font-size: 18px;
+    line-height: 150%;
+    font-weight: 400;
+  }
+  @media (max-width: 1919px) {
+    .ante-section,
+    .body-base { font-size: 16px }
+  }
+  @media (max-width: 600px) {
+    .ante-section,
+    .body-base { font-size: 14px }
+  }
+
+  .body-small {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 150%;
+  }
+  @media (max-width: 1919px) {
+    .body-small { font-size: 11px }
+  }
+  @media (max-width: 600px) {
+    .body-small { font-size: 10px }
+  }
+
+  .body-caption {
+    font-size: 16px;
+    line-height: 150%;
+    font-weight: 400;
+  }
+  @media (max-width: 1919px) {
+    .body-caption { font-size: 16px }
+  }
+  @media (max-width: 600px) {
+    .body-caption { font-size: 12px }
+  }
+
+  .body-caption.alt {
+    font-family: var(--font-caption-alt), helvetica;
+  }
+
+  .callout-base {
+    font-size: 40px;
+    line-height: 130%;
+  }
+  @media (max-width: 1919px) {
+    .callout-base { font-size: 36px }
+  }
+  @media (max-width: 600px) {
+    .callout-base { font-size: 20px }
+  }
+
+  .callout-price {
+    font-size: 20px;
+    line-height: 130%;
+    font-weight: 500;
+  }
+  @media (max-width: 1024px) {
+    .callout-price { font-size: 18px }
+  }
+  @media (max-width: 600px) {
+    .callout-price { font-size: 16px }
+  }
+
+  .callout-price.large {
+    font-size: 28px;
+    line-height: 110%;
+  }
+  @media (max-width: 1024px) {
+    .callout-price.large { font-size: 24px }
+  }
+  @media (max-width: 600px) {
+    .callout-price.large { font-size: 20px }
+  }
+</style>

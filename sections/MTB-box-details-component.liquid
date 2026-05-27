@@ -1,0 +1,392 @@
+{{ 'section-MTB-box-details.css' | asset_url | stylesheet_tag }}
+
+<section class="box-details-component">
+  <style>
+     .box-details-component {
+      padding-top: {{ section.settings.component_mobile_pt }}px;
+      padding-bottom: {{ section.settings.component_mobile_pb }}px;
+    }
+
+    .box-details-component__header {
+      color: {{ section.settings.component_header_color }};
+    }
+
+    @media screen and (min-width: 641px) and (max-width: 989px) {
+      .box-details-component {
+        padding-top: {{ section.settings.component_tablet_pt }}px;
+        padding-bottom: {{ section.settings.component_tablet_pb }}px;
+      }
+    }
+
+    @media screen and (min-width: 990px) {
+     .box-details-component {
+        padding-top: {{ section.settings.component_desktop_pt }}px;
+        padding-bottom: {{ section.settings.component_desktop_pb }}px;
+      }
+
+      {%- if section.settings.main_desktop_img != blank -%}
+        .box-details-component__boxes-wrap {
+          background-image: url('{{ section.settings.main_desktop_img | image_url: width: 750 }}');
+        }
+      {% endif %}
+    }
+  </style>
+  <div class="box-details-component__content">
+    <div class="page-width">
+      <div class="box-details-component__header-wrap">
+        {%- if section.settings.header_img != blank -%}
+          {{
+            section.settings.header_img
+            | image_url: width: '100'
+            | image_tag: loading: 'lazy', widths: '100', class: 'lazyload box-details-component__img'
+          }}
+        {%- endif -%}
+        <h2 class="box-details-component__header">{{ section.settings.component_header }}</h2>
+      </div>
+      <div>
+        <p class="box-details-component__subheader mobile-tablet">{{ section.settings.component_subheader }}</p>
+        <p class="box-details-component__subheader desktop">{{ section.settings.component_desktop_subheader }}</p>
+      </div>
+    </div>
+
+    <div class="box-details-component__content-wrap mobile-tablet">
+      <div class="box-details-component__box-wrap">
+        <div class="page-width text-align-right box-details-component__box-text">
+          <div class="box-details-component__box-text-wrap">
+            <p class="box-details-component__subcopy header_font mobile">
+              {{ section.settings.mobile_box_1_subcopy }}
+            </p>
+            <p class="box-details-component__subcopy tablet">{{ section.settings.mobile_box_1_subcopy }}</p>
+            <p class="box-details-component__copy">{{ section.settings.mobile_box_1_copy }}</p>
+          </div>
+          <div class="box-details-component__box-text-wrap">
+            <p class="box-details-component__subcopy header_font mobile">
+              {{ section.settings.mobile_box_2_subcopy }}
+            </p>
+            <p class="box-details-component__subcopy tablet">{{ section.settings.mobile_box_2_subcopy }}</p>
+            <p class="box-details-component__copy">{{ section.settings.mobile_box_2_copy }}</p>
+          </div>
+        </div>
+        <div>
+          {%- if section.settings.mobile_img_box_1 != blank -%}
+            {{
+              section.settings.mobile_img_box_1
+              | image_url: width: '500'
+              | image_tag: loading: 'lazy', widths: '500', class: 'lazyload box-details-component__box_img'
+            }}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="box-details-component__box-wrap">
+        <div>
+          {%- if section.settings.mobile_img_box_2 != blank -%}
+            {{
+              section.settings.mobile_img_box_2
+              | image_url: width: '500'
+              | image_tag: loading: 'lazy', widths: '500', class: 'lazyload box-details-component__box_img'
+            }}
+          {%- endif -%}
+        </div>
+        <div class="page-width text-align-left box-details-component__box-text">
+          <div class="box-details-component__box-text-wrap">
+            <p class="box-details-component__subcopy header_font mobile">
+              {{ section.settings.mobile_box_3_subcopy }}
+            </p>
+            <p class="box-details-component__subcopy tablet">{{ section.settings.mobile_box_3_subcopy }}</p>
+            <p class="box-details-component__copy">{{ section.settings.mobile_box_3_copy }}</p>
+          </div>
+          <div class="box-details-component__box-text-wrap">
+            <p class="box-details-component__subcopy header_font mobile">
+              {{ section.settings.mobile_box_4_subcopy }}
+            </p>
+            <p class="box-details-component__subcopy tablet">{{ section.settings.mobile_box_4_subcopy }}</p>
+            <p class="box-details-component__copy">{{ section.settings.mobile_box_4_copy }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- if section.settings.button_text != blank -%}
+      <div class="page-width box-details-component__btn-wrap">
+        <a class="big_btn mtb-button primary-button header_font" href="{{ section.settings.button_url }}">
+          {{- section.settings.button_text -}}
+        </a>
+      </div>
+    {%- endif -%}
+
+    <div class="box-details-component__boxes-wrap desktop page-width">
+      <div class="box-details-component__box-column">
+        {% render 'small-box-details',
+          img: section.settings.desktop_img_box_1,
+          subcopy: section.settings.desktop_box_1_subcopy,
+          copy: section.settings.desktop_box_1_copy
+        %}
+        {% render 'small-box-details',
+          img: section.settings.desktop_img_box_2,
+          subcopy: section.settings.desktop_box_2_subcopy,
+          copy: section.settings.desktop_box_2_copy
+        %}
+      </div>
+      <div class="d-block"></div>
+      <div class="box-details-component__box-column">
+        {% render 'small-box-details',
+          img: section.settings.desktop_img_box_3,
+          subcopy: section.settings.desktop_box_3_subcopy,
+          copy: section.settings.desktop_box_3_copy
+        %}
+        {% render 'small-box-details',
+          img: section.settings.desktop_img_box_4,
+          subcopy: section.settings.desktop_box_4_subcopy,
+          copy: section.settings.desktop_box_4_copy
+        %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MTB Box Details",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "component_header",
+      "label": "Component header"
+    },
+    {
+      "type": "color",
+      "id": "component_header_color",
+      "label": "Component header color",
+      "default": "#31554B"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_img",
+      "label": "Header image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "button_text",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button Link"
+    },
+
+    {
+      "type": "header",
+      "content": "Mobile-Tablet Settings"
+    },
+
+    {
+      "type": "inline_richtext",
+      "id": "component_subheader",
+      "label": "Component mobile-tablet subheader"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_img_box_1",
+      "label": "Mobile-Tablet Box 1 image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "mobile_box_1_subcopy",
+      "label": "Mobile-Tablet Box 1 subcopy"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "mobile_box_1_copy",
+      "label": "Mobile-Tablet Box 1 copy"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "mobile_box_2_subcopy",
+      "label": "Mobile-Tablet Box 2 subcopy"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "mobile_box_2_copy",
+      "label": "Mobile-Tablet Box 2 copy"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_img_box_2",
+      "label": "Mobile-Tablet Box 3 image "
+    },
+    {
+      "type": "inline_richtext",
+      "id": "mobile_box_3_subcopy",
+      "label": "Mobile-Tablet Box 3 subcopy"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "mobile_box_3_copy",
+      "label": "Mobile-Tablet Box 3 copy"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "mobile_box_4_subcopy",
+      "label": "Mobile-Tablet Box 4 subcopy"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "mobile_box_4_copy",
+      "label": "Mobile-Tablet Box 4 copy"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pt",
+      "label": "Component mobile padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pb",
+      "label": "Component mobile padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+
+    {
+      "type": "header",
+      "content": "Tablet Settings"
+    },
+
+    {
+      "type": "range",
+      "id": "component_tablet_pt",
+      "label": "Component tablet padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pb",
+      "label": "Component tablet padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "component_desktop_subheader",
+      "label": "Component Desktop subheader"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_desktop_img",
+      "label": "Main Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_img_box_1",
+      "label": "Desktop Box 1 Image "
+    },
+    {
+      "type": "inline_richtext",
+      "id": "desktop_box_1_subcopy",
+      "label": "Desktop Box 1 subcopy"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "desktop_box_1_copy",
+      "label": "Desktop Box 1 copy"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_img_box_2",
+      "label": "Desktop Box 2 Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "desktop_box_2_subcopy",
+      "label": "Desktop Box 2 subcopy"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "desktop_box_2_copy",
+      "label": "Desktop Box 2 copy"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_img_box_3",
+      "label": "Desktop Box 3 Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "desktop_box_3_subcopy",
+      "label": "Desktop Box 3 subcopy"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "desktop_box_3_copy",
+      "label": "Desktop Box 3 copy"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_img_box_4",
+      "label": "Desktop Box 4 Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "desktop_box_4_subcopy",
+      "label": "Desktop Box 4 subcopy"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "desktop_box_4_copy",
+      "label": "Desktop Box 4 copy"
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pt",
+      "label": "Component desktop padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pb",
+      "label": "Component desktop padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "limit": 1,
+  "blocks": [],
+  "presets": [
+    {
+      "name": "MTB Box Details"
+    }
+  ]
+}
+{% endschema %}

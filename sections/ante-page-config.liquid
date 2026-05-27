@@ -1,0 +1,196 @@
+<script type="module">
+  document.body.classList.add("ante-page")
+
+  {% if section.settings.default_buy_button_text %}
+    setDefaultText("{{ section.settings.default_buy_button_text }}")
+    setDefaultLabel("{{ section.settings.default_buy_button_label }}")
+  {% endif %}
+</script>
+
+{% if section.settings.style_override %}
+  {% render "ante-theme-overrides", override: section.settings.style_override %}
+{% endif %}
+
+<style>
+  sticky-header,
+  .announcement-bar-section,
+  style,
+  .needsclick,
+  .userway_p3,
+  .rebuy-widget,
+  footer,
+  #beacon-container {
+    display: none !important;
+  }
+</style>
+
+{% if section.settings.use_original_headerfooter %}
+  <style>
+    :root {
+      --sticky-top: calc(80px + var(--section-horizontal-padding));
+    }
+
+    sticky-header,
+    .announcement-bar-section,
+    footer {
+      display: block !important;
+    }
+
+    body {
+      --ante-header-height: 81px;
+    }  
+  </style>
+{% endif %}
+
+{% if section.settings.particles != "none" %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tsparticles/3.9.1/tsparticles.bundle.min.js" integrity="sha512-LGuO2AmmzgQ9Y2878Olrq8Om4F1EZLJRL6s3Y1XyJLCqRMe1435MnoVybPMnFC+ZwY9CSSj1rLlRcEVYG+MvVw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    #tsparticles canvas {
+      transition: opacity 1s;
+    }
+
+    #tsparticles canvas.invisible {
+      opacity: 0;
+    }
+  </style>
+  {% if section.settings.particles == "snow" %}
+    <script type="module">
+      await loadFull(tsParticles)
+      await tsParticles.load({
+        id: "tsparticles",
+        options: {
+          "fullScreen": {
+            "zIndex": 1
+          },
+          "particles": {
+            "move": {
+              "direction": "bottom",
+              "enable": true,
+              "outModes": {
+                "default": "out"
+              },
+              "size": true,
+              "speed": {
+                "min": 1,
+                "max": 3
+              }
+            },
+            "number": {
+              "value": 10,
+              "density": {
+                "enable": true,
+                "area": 800
+              }
+            },
+            "rotate": {
+              "value": {
+                "min": 0,
+                "max": 360
+              },
+              "direction": "random",
+              "move": true,
+              "animation": {
+                "enable": true,
+                "speed": 20
+              }
+            },
+            size: {
+              value: { min: 10, max: 40 }
+            },
+            "shape": {
+              "type": "image",
+              "options": {
+                "image": [
+                  {
+                    src: "https://cdn.shopify.com/s/files/1/0672/1794/8724/files/Snowflake_icon__light_blue__fixed_width.png?v=1763561026",
+                    "width": 32,
+                    "height": 32
+                  }
+                ]
+              }
+            },
+            "wobble": {
+              "distance": 30,
+              "enable": true,
+              "move": true,
+              "speed": {
+                "min": -15,
+                "max": 15
+              }
+            }
+          }
+        }
+      })
+      setTimeout(() => {
+        const canvas = document.querySelector("#tsparticles canvas")
+        if (canvas) {
+          canvas.classList.add("invisible")
+        }
+      }, 10000)
+    </script>
+  {% endif %}
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Page Config [UTA]",
+    "presets": [
+      {
+        "name": "Page Config [UTA]"
+      }
+    ],
+    "settings": [
+      {
+        "type": "text",
+        "id": "default_buy_button_text",
+        "label": "Default Buy Button Text"
+      },
+      {
+        "type": "text",
+        "id": "default_buy_button_label",
+        "label": "Default Buy Button Label",
+        "default": "/month",
+        "placeholder": "/month"
+      },
+      {
+        "type": "select",
+        "id": "style_override",
+        "label": "Style Override",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "christmas",
+            "label": "Christmas"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_original_headerfooter",
+        "label": "Use original header & footer",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "particles",
+        "label": "Particles",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "snow",
+            "label": "Snow"
+          }
+        ],
+        "default": "none",
+        "info": "The particles to show"
+      }
+    ]
+  }  
+{% endschema %}

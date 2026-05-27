@@ -1,0 +1,67 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_dCXfWG": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_9nCXLh": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>FISH TALES</strong>",
+            "heading_size": "h0"
+          }
+        },
+        "text_jhMGw7": {
+          "type": "text",
+          "settings": {
+            "text": "The go-to hub for jaw-dropping fishing stories, viral catches, and pro tips to help you reel in your next big win.",
+            "text_style": "subtitle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_9nCXLh",
+        "text_jhMGw7"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/brett-holding-bass.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "blog_title": "",
+        "layout": "grid",
+        "show_image": true,
+        "image_height": "medium",
+        "show_date": true,
+        "show_author": false,
+        "padding_top": 48,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "image_banner_dCXfWG",
+    "main"
+  ]
+}

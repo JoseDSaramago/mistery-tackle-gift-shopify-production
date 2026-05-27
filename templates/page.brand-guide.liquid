@@ -1,0 +1,1380 @@
+{%- layout none -%}
+{%- comment -%}
+  ============================================================
+  MTB Brand Identity Guide — Shopify page template
+  ============================================================
+  Uses {% layout none %} so the theme's default header/footer
+  do NOT render. The page is fully self-contained: its own
+  sticky topnav, hero, logos, color, type, doodles, downloads,
+  and footer.
+
+  HOW TO INSTALL
+  1. Online Store → Themes → Edit code → Templates → Add a new
+     template → type "page", format "liquid", name "brand-guide".
+  2. Replace the file contents with everything in this file.
+  3. Online Store → Pages → Add page. In the right-side
+     "Theme template" dropdown, select "page.brand-guide".
+
+  HOW TO INSTALL THE LOGO + DOODLE FILES
+  Upload to Settings → Files (NOT to the theme assets folder).
+  The template references files by their Shopify-stored name
+  (Title Case, spaces become underscores) via the `file_url`
+  filter. The names below must match exactly. If you change a
+  filename, update the matching entry in the data strings near
+  the top of each section.
+
+  Required logo files:
+    MTB_Primary_Badge_Fill_White.png
+    MTB_Primary_Badge_Fill_Green.png
+    MTB_Primary_Badge_Fill_Black.png
+    MTB_Horizontal_Lockup_White.png
+    MTB_Horizontal_Lockup_Green.png
+    MTB_Horizontal_Lockup_Black.png
+    MTB_Horizontal_Lockup_Small_White.png
+    MTB_Horizontal_Lockup_Small_Green.png
+    MTB_Horizontal_Lockup_Small_Black.png
+    MTB_Badge_Only_Fill_White.png
+    MTB_Badge_Only_Fill_Green.png
+    MTB_Badge_Only_Fill_Black.png
+    MTB_Badge_Only_Outline_White.png
+    MTB_Badge_Only_Outline_Green.png
+    MTB_Badge_Only_Outline_Black.png
+    MTB_Badge_Only_Outline_Yellow.png
+    Catch_Co_Logo_Green.png      (single colorway)
+    Logo_BioSpawn.png            (single colorway)
+    Logo_10000_Fish.png          (single colorway)
+    Logo_Salt_Native.png         (single colorway)
+
+  Required doodle files (4 of each — replace with your own
+  filenames if different):
+    Doodle_Bait_1.png … Doodle_Bait_4.png
+    Doodle_Character_1.png … Doodle_Character_4.png
+    Doodle_Fish_1.png … Doodle_Fish_4.png
+    Doodle_Other_1.png … Doodle_Other_4.png
+
+  Required brand font files (upload to Settings → Files):
+    Brandon Printed (display / letterpress)
+      BrandonPrinted-One.woff
+
+    Zing Script Rust (script accent)
+      ZingScriptRustSB-BaseG.woff      (SemiBold, 600)
+      ZingScriptRust-Bold.otf          (Bold, 700 — optional)
+
+    Cervo Neue (tall display)
+      CervoNeue-Light.otf              (300)
+      CervoNeue-Regular.otf            (400)
+      CervoNeue-Medium.otf             (500)
+      CervoNeue-Bold.otf               (700)
+      CervoNeue-Black.otf              (900)
+
+    Gotham SSm (body workhorse)
+      GothamSSm-Book.woff              (400)
+      GothamSSm-Medium.otf             (500)
+      GothamSSm-Bold.woff              (700)
+      GothamSSm-Black.otf              (900)
+
+    Brandon Grotesque (display statement)
+      Brandon-Regular.otf              (400)
+      Brandon-Medium.otf               (500)
+      Brandon-Bold.otf                 (700)
+      Brandon-Black.otf                (900)
+
+  If your uploaded filenames differ, update the matching
+  @font-face src URLs in the <style> block below.
+
+  Required download bundles (Settings → Files):
+    MTB_Logos.zip               — every primary, secondary, affiliated mark
+    MTB_Fonts.zip               — all five brand font families (.otf + .woff)
+    MTB_Color_Swatches.zip      — Adobe ASE + Photoshop ACO swatch files
+
+  The "Open shared folder" button links to the Google Drive
+  folder — no upload needed for that one.
+  ============================================================
+{%- endcomment -%}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <title>{{ page.title | default: 'MTB · Brand Identity Guide 2026' }}</title>
+  {{ content_for_header }}
+  <style>
+    /* ============================================================
+       Brand fonts — loaded from Shopify Files via file_url.
+       If a file isn't uploaded yet, the @font-face fails silently
+       and the fallback stack ("Impact", "Bebas Neue", system-ui…)
+       takes over.
+       ============================================================ */
+
+    /* Brandon Printed — display / letterpress
+       Note: the file is named .woff but is actually WOFF2 internally,
+       so the format() hint must be "woff2" or the browser rejects it. */
+    @font-face {
+      font-family: "Brandon Printed";
+      src: url("{{ 'BrandonPrinted-One.woff' | file_url }}") format("woff2");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* Zing Script Rust — script accent
+       Same WOFF2-inside-.woff situation as Brandon Printed. */
+    @font-face {
+      font-family: "Zing Script Rust";
+      src: url("{{ 'ZingScriptRustSB-BaseG.woff' | file_url }}") format("woff2");
+      font-weight: 100 900;
+      font-style: italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Zing Script Rust";
+      src: url("{{ 'ZingScriptRust-Bold.otf' | file_url }}") format("opentype");
+      font-weight: 700;
+      font-style: italic;
+      font-display: swap;
+    }
+
+    /* Cervo Neue — tall condensed display */
+    @font-face {
+      font-family: "Cervo Neue";
+      src: url("{{ 'CervoNeue-Light.otf' | file_url }}") format("opentype");
+      font-weight: 300;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Cervo Neue";
+      src: url("{{ 'CervoNeue-Regular.otf' | file_url }}") format("opentype");
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Cervo Neue";
+      src: url("{{ 'CervoNeue-Medium.otf' | file_url }}") format("opentype");
+      font-weight: 500;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Cervo Neue";
+      src: url("{{ 'CervoNeue-Bold.otf' | file_url }}") format("opentype");
+      font-weight: 700;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Cervo Neue";
+      src: url("{{ 'CervoNeue-Black.otf' | file_url }}") format("opentype");
+      font-weight: 900;
+      font-display: swap;
+    }
+
+    /* Gotham SSm — body workhorse */
+    @font-face {
+      font-family: "Gotham SSm";
+      src: url("{{ 'GothamSSm-Book.woff' | file_url }}") format("woff");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Gotham SSm";
+      src: url("{{ 'GothamSSm-Medium.otf' | file_url }}") format("opentype");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Gotham SSm";
+      src: url("{{ 'GothamSSm-Bold.woff' | file_url }}") format("woff");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Gotham SSm";
+      src: url("{{ 'GothamSSm-Black.otf' | file_url }}") format("opentype");
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* Brandon Grotesque — display statement */
+    @font-face {
+      font-family: "Brandon Grotesque";
+      src: url("{{ 'Brandon-Regular.otf' | file_url }}") format("opentype");
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Brandon Grotesque";
+      src: url("{{ 'Brandon-Medium.otf' | file_url }}") format("opentype");
+      font-weight: 500;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Brandon Grotesque";
+      src: url("{{ 'Brandon-Bold.otf' | file_url }}") format("opentype");
+      font-weight: 700;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Brandon Grotesque";
+      src: url("{{ 'Brandon-Black.otf' | file_url }}") format("opentype");
+      font-weight: 900;
+      font-display: swap;
+    }
+
+    /* ============================================================
+       MTB Brand Guide — fully scoped under .mtb-bg
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    /* Letterpress (Brandon Printed) renders at weight 500 across
+       all headings and the .f-letterpress utility. */
+    .mtb-bg h1,
+    .mtb-bg h2,
+    .mtb-bg h3,
+    .mtb-bg h4 { font-weight: 500; }
+
+    html, body { margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+
+    .mtb-bg {
+      --mtb-cream:        #f8f3ea;
+      --mtb-cream-warm:   #faf6ef;
+      --mtb-green:        #33534b;
+      --mtb-green-deep:   #00594f;
+      --mtb-orange:       #fe602c;
+      --mtb-orange-burn:  #d14424;
+      --mtb-emerald:      #37b777;
+      --mtb-yellow:       #ffcb12;
+      --mtb-yellow-warm:  #fbad18;
+      --mtb-ink:          #101820;
+      --mtb-ink-navy:     #142648;
+      --mtb-sky:          #35ade2;
+      --mtb-red-flag:     #b53035;
+      --mtb-white:        #ffffff;
+      --mtb-gray-70:      #4a4a4a;
+      --mtb-gray-50:      #8a8a8a;
+      --rule:             rgba(49, 83, 75, 0.16);
+
+      --font-body:        "Gotham SSm", "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --font-display-letterpress: "Brandon Printed", "Impact", system-ui, sans-serif;
+      --font-display-tall: "Cervo Neue", "Bebas Neue", "Oswald", "Impact", sans-serif;
+      --font-display-script: "Zing Script Rust", "Caveat Brush", cursive;
+
+      background: var(--mtb-cream);
+      color: var(--mtb-green);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    .mtb-bg .wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+    .mtb-bg section { padding: 96px 0; position: relative; }
+
+    /* ----- Sticky topnav ----- */
+    .mtb-bg .topnav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(248, 243, 234, 0.92);
+      backdrop-filter: saturate(140%) blur(10px);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .mtb-bg .topnav-inner {
+      max-width: 1280px; margin: 0 auto;
+      padding: 18px 32px;
+      display: flex; align-items: center; gap: 24px;
+      min-height: 84px;
+    }
+    .mtb-bg .topnav-brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 13px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--mtb-green);
+    }
+    .mtb-bg .topnav-brand img {
+      height: 70px; width: auto; object-fit: contain;
+      margin: -9px 0;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.18));
+    }
+    .mtb-bg .topnav-links {
+      display: flex; gap: 22px; margin-left: auto;
+      flex-wrap: wrap; align-items: center;
+    }
+    .mtb-bg .topnav-links a {
+      font-weight: 500; font-size: 12px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--mtb-green); text-decoration: none;
+      position: relative; padding: 4px 0;
+    }
+    .mtb-bg .topnav-links a::after {
+      content: ''; position: absolute;
+      left: 0; right: 0; bottom: -2px;
+      height: 2px; background: var(--mtb-orange);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 200ms ease;
+    }
+    .mtb-bg .topnav-links a:hover::after,
+    .mtb-bg .topnav-links a.active::after { transform: scaleX(1); }
+    .mtb-bg .topnav-cta {
+      font-family: "Gotham SSm", "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-weight: 700; font-size: 11px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      background: var(--mtb-orange); color: #fff;
+      padding: 10px 18px; border-radius: 999px;
+      border: none; cursor: pointer; white-space: nowrap;
+      text-decoration: none;
+      transition: background 120ms ease, transform 120ms ease;
+    }
+    .mtb-bg .topnav-cta:hover { background: var(--mtb-orange-burn); text-decoration: none; }
+    .mtb-bg .topnav-cta:active { transform: translateY(1px); }
+    @media (max-width: 720px) {
+      .mtb-bg .topnav-links { display: none; }
+    }
+
+    /* ----- Hero ----- */
+    .mtb-bg .hero { padding: 80px 0 48px; }
+    .mtb-bg .hero-eyebrow {
+      font-weight: 700; font-size: 13px; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--mtb-orange);
+      margin-bottom: 18px; display: flex; align-items: center; gap: 12px;
+    }
+    .mtb-bg .hero-eyebrow::before {
+      content: ''; width: 36px; height: 3px; background: var(--mtb-orange);
+    }
+    .mtb-bg .hero h1 {
+      font-family: var(--font-display-letterpress);
+      text-transform: uppercase;
+      font-size: clamp(56px, 9vw, 140px);
+      line-height: 0.86; margin: 0 0 24px; color: var(--mtb-ink);
+      letter-spacing: 0.01em;
+    }
+    .mtb-bg .hero .script {
+      display: block; font-family: var(--font-display-script);
+      font-style: italic; font-weight: 700; color: var(--mtb-orange);
+      font-size: clamp(40px, 6vw, 96px); transform: rotate(-3deg);
+      margin: 0 0 -10px -6px; text-transform: none;
+    }
+    .mtb-bg .hero p.lede {
+      font-size: clamp(17px, 1.4vw, 21px); line-height: 1.45;
+      max-width: 640px; margin-top: 24px; color: var(--mtb-green);
+    }
+
+    /* ----- Section header ----- */
+    .mtb-bg .section-head {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      flex-wrap: wrap; gap: 24px; margin-bottom: 56px; padding-bottom: 24px;
+      border-bottom: 2px solid var(--mtb-green);
+    }
+    .mtb-bg .section-head .num {
+      font-family: var(--font-display-tall); font-size: 20px;
+      letter-spacing: 0.05em; color: var(--mtb-orange); margin-bottom: 8px;
+    }
+    .mtb-bg .section-head h2 {
+      font-family: var(--font-display-letterpress);
+      text-transform: uppercase;
+      font-size: clamp(48px, 6vw, 96px);
+      line-height: 0.9; margin: 0; color: var(--mtb-ink);
+      letter-spacing: 0.01em;
+    }
+    .mtb-bg .section-head .blurb {
+      max-width: 420px; font-size: 16px; color: var(--mtb-green); opacity: 0.85;
+    }
+
+    /* ----- Logos ----- */
+    .mtb-bg .logo-group { margin-bottom: 64px; }
+    .mtb-bg .logo-group-head {
+      display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+      border-bottom: 1px solid var(--rule); padding-bottom: 16px; margin-bottom: 24px;
+    }
+    .mtb-bg .logo-group-head .gnum {
+      font-family: var(--font-display-tall); color: var(--mtb-orange);
+      font-size: 16px; letter-spacing: 0.06em;
+    }
+    .mtb-bg .logo-group-head h3 {
+      font-family: var(--font-display-letterpress);
+      text-transform: uppercase;
+      font-size: clamp(28px, 3vw, 44px);
+      margin: 0; color: var(--mtb-green); line-height: 1;
+    }
+    .mtb-bg .logo-group-head .gblurb {
+      font-size: 14px; color: var(--mtb-gray-70);
+      margin-left: auto; max-width: 440px;
+    }
+
+    .mtb-bg .logo-grid {
+      display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px;
+    }
+    .mtb-bg .logo-card {
+      grid-column: span 6;
+      background: var(--mtb-white);
+      border-radius: 24px;
+      border: 1px solid var(--rule);
+      overflow: hidden; display: flex; flex-direction: column;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+    .mtb-bg .logo-card:hover {
+      transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+    }
+    .mtb-bg .logo-card[data-span="full"]  { grid-column: span 12; }
+    .mtb-bg .logo-card[data-span="half"]  { grid-column: span 6; }
+    .mtb-bg .logo-card[data-span="third"] { grid-column: span 4; }
+    @media (max-width: 920px) {
+      .mtb-bg .logo-card[data-span="full"],
+      .mtb-bg .logo-card[data-span="half"],
+      .mtb-bg .logo-card[data-span="third"] { grid-column: span 12; }
+    }
+
+    .mtb-bg .logo-stage {
+      position: relative; display: flex; align-items: center;
+      justify-content: center; padding: 72px 32px; min-height: 280px;
+      transition: background 200ms ease;
+    }
+    .mtb-bg .logo-card[data-span="full"] .logo-stage {
+      padding: 96px 48px; min-height: 380px;
+    }
+    .mtb-bg .logo-stage[data-bg="cream"] { background: var(--mtb-cream); }
+    .mtb-bg .logo-stage[data-bg="white"] { background: var(--mtb-white); }
+    .mtb-bg .logo-stage[data-bg="green"] { background: var(--mtb-green); }
+    .mtb-bg .logo-stage[data-bg="ink"]   { background: var(--mtb-ink); }
+    .mtb-bg .logo-stage img {
+      max-width: 100%; max-height: 220px; width: auto; height: auto;
+      object-fit: contain; display: block;
+    }
+    .mtb-bg .logo-card[data-span="full"] .logo-stage img { max-height: 260px; }
+
+    /* swatch dots — only rendered for multi-color logos */
+    .mtb-bg .swatch-dots {
+      position: absolute; top: 14px; right: 14px;
+      display: flex; gap: 8px; z-index: 2;
+    }
+    .mtb-bg .swatch-dot {
+      width: 22px; height: 22px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.85);
+      cursor: pointer; padding: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+      appearance: none; -webkit-appearance: none;
+    }
+    .mtb-bg .swatch-dot:hover { transform: scale(1.12); }
+    .mtb-bg .swatch-dot.active {
+      box-shadow: 0 0 0 2px var(--mtb-orange), 0 2px 6px rgba(0,0,0,0.18);
+    }
+    .mtb-bg .swatch-dot[data-color="white"]  { background: #ffffff; border-color: rgba(0,0,0,0.25); }
+    .mtb-bg .swatch-dot[data-color="green"]  { background: var(--mtb-green); }
+    .mtb-bg .swatch-dot[data-color="black"]  { background: var(--mtb-ink); }
+    .mtb-bg .swatch-dot[data-color="yellow"] { background: var(--mtb-yellow); }
+
+    .mtb-bg .logo-meta {
+      padding: 24px 28px 28px;
+      background: #ffffff;
+      display: flex; flex-direction: column; gap: 10px;
+      border-top: 1px solid var(--rule);
+    }
+    .mtb-bg .logo-meta .label {
+      font-weight: 700; font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--mtb-orange);
+    }
+    .mtb-bg .logo-meta h4 {
+      font-family: var(--font-display-letterpress);
+      font-size: 24px; line-height: 1; color: var(--mtb-green);
+      text-transform: uppercase; margin: 0; letter-spacing: 0.01em;
+    }
+    .mtb-bg .logo-meta p {
+      font-size: 14px; line-height: 1.5; color: var(--mtb-gray-70); margin: 0;
+    }
+
+    /* ----- Color section ----- */
+    .mtb-bg .color-section { background: var(--mtb-cream-warm); }
+    .mtb-bg .color-grid {
+      display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px;
+    }
+    .mtb-bg .color-card {
+      grid-column: span 4;
+      background: var(--mtb-white);
+      border-radius: 20px; overflow: hidden;
+      border: 1px solid var(--rule);
+      display: flex; flex-direction: column;
+    }
+    .mtb-bg .color-card[data-size="hero"] {
+      grid-column: span 12; flex-direction: row; min-height: 360px;
+    }
+    .mtb-bg .color-card[data-size="half"] { grid-column: span 6; }
+    @media (max-width: 920px) {
+      .mtb-bg .color-card,
+      .mtb-bg .color-card[data-size="half"] { grid-column: span 6; }
+      .mtb-bg .color-card[data-size="hero"] { grid-column: span 12; flex-direction: column; min-height: 0; }
+    }
+    @media (max-width: 560px) {
+      .mtb-bg .color-card,
+      .mtb-bg .color-card[data-size="half"],
+      .mtb-bg .color-card[data-size="hero"] { grid-column: span 12; flex-direction: column; }
+    }
+
+    /* The solid color block — clearly visible portion of every card */
+    .mtb-bg .color-swatch {
+      flex: 1;
+      min-height: 220px;
+      position: relative;
+      display: flex; align-items: flex-end;
+      padding: 28px;
+    }
+    .mtb-bg .color-card[data-size="hero"] .color-swatch {
+      flex: 1.4; min-height: 360px;
+    }
+    .mtb-bg .color-swatch::after {
+      content: attr(data-label);
+      font-family: var(--font-display-letterpress);
+      font-size: clamp(12px, 1.4vw, 26px);
+      text-transform: uppercase; letter-spacing: 0.01em;
+      color: inherit; opacity: 0.32; line-height: 0.9;
+    }
+
+    .mtb-bg .color-info {
+      padding: 24px 28px 28px; display: flex; flex-direction: column; gap: 14px;
+      background: var(--mtb-white);
+    }
+    .mtb-bg .color-card[data-size="hero"] .color-info {
+      flex: 1; padding: 36px 40px; justify-content: center;
+    }
+    .mtb-bg .color-info .name {
+      font-family: var(--font-display-letterpress);
+      font-weight: 500;
+      font-size: 26px; text-transform: uppercase; color: var(--mtb-green);
+      letter-spacing: 0.01em; line-height: 1;
+    }
+    .mtb-bg .color-card[data-size="hero"] .color-info .name { font-size: 48px; }
+    .mtb-bg .color-info .role {
+      font-weight: 500; font-size: 13px;
+      color: var(--mtb-gray-70); line-height: 1.5;
+    }
+    .mtb-bg .spec-row {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 12px; padding: 8px 0; border-top: 1px solid var(--rule);
+    }
+    .mtb-bg .spec-row:first-of-type { border-top: none; padding-top: 0; }
+    .mtb-bg .spec-row .key {
+      font-weight: 700; font-size: 10px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--mtb-orange);
+    }
+    .mtb-bg .copyable {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 13px; color: var(--mtb-green);
+      cursor: pointer; user-select: all;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 8px; border-radius: 6px;
+      background: transparent; border: none;
+      transition: background 120ms ease, color 120ms ease;
+    }
+    .mtb-bg .copyable:hover { background: rgba(0,0,0,0.05); }
+    .mtb-bg .copyable.copied { background: var(--mtb-emerald); color: #fff; }
+    .mtb-bg .copyable.copied .copyable-text { display: none; }
+    .mtb-bg .copyable.copied::after {
+      content: 'COPIED';
+      font-family: var(--font-body); font-weight: 700;
+      font-size: 10px; letter-spacing: 0.16em;
+    }
+    .mtb-bg .copy-icon { width: 12px; height: 12px; opacity: 0.45; flex-shrink: 0; }
+    .mtb-bg .copyable:hover .copy-icon { opacity: 1; }
+    .mtb-bg .copyable.copied .copy-icon { display: none; }
+
+    /* ----- Typography ----- */
+    .mtb-bg .type-stack { display: flex; flex-direction: column; gap: 56px; }
+    .mtb-bg .type-card {
+      border-top: 2px solid var(--mtb-green);
+      padding-top: 32px;
+      display: grid; grid-template-columns: 1fr 2fr; gap: 48px;
+    }
+    @media (max-width: 920px) {
+      .mtb-bg .type-card { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .mtb-bg .type-meta { display: flex; flex-direction: column; gap: 10px; }
+    .mtb-bg .type-meta .role {
+      font-weight: 700; font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--mtb-orange);
+    }
+    .mtb-bg .type-meta h3 {
+      font-family: var(--font-display-letterpress);
+      font-size: 48px; line-height: 0.9; text-transform: uppercase;
+      color: var(--mtb-green); margin: 0; letter-spacing: 0.01em;
+    }
+    .mtb-bg .type-meta .descr {
+      font-size: 15px; line-height: 1.55;
+      color: var(--mtb-gray-70); max-width: 320px;
+    }
+    .mtb-bg .type-sample { display: flex; flex-direction: column; gap: 16px; }
+    .mtb-bg .sample-line {
+      display: flex; flex-direction: column; gap: 4px;
+      padding-bottom: 18px; border-bottom: 1px dashed var(--rule);
+    }
+    .mtb-bg .sample-line:last-child { border-bottom: none; }
+    .mtb-bg .sample-line .meta {
+      font-weight: 500; font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--mtb-gray-50);
+    }
+    .mtb-bg .f-letterpress {
+      font-family: var(--font-display-letterpress);
+      font-weight: 500; font-size: clamp(48px, 7vw, 96px);
+      line-height: 0.9; text-transform: uppercase;
+      color: var(--mtb-green); letter-spacing: 0.01em;
+    }
+    .mtb-bg .f-script {
+      font-family: var(--font-display-script);
+      font-weight: 700; font-style: italic;
+      font-size: clamp(48px, 7vw, 96px);
+      line-height: 0.9; color: var(--mtb-orange);
+      transform: rotate(-2deg); display: inline-block;
+    }
+    .mtb-bg .f-tall {
+      font-family: var(--font-display-tall); font-weight: 500;
+      font-size: clamp(48px, 7vw, 110px); line-height: 0.9;
+      color: var(--mtb-green); text-transform: uppercase;
+    }
+    .mtb-bg .f-body {
+      font-family: var(--font-body); font-weight: 400;
+      font-size: 20px; line-height: 1.5; color: var(--mtb-green);
+    }
+    .mtb-bg .f-body strong { font-weight: 700; }
+
+    /* ----- Doodles ----- */
+    .mtb-bg .doodle-sub {
+      margin-top: 56px; padding-top: 32px;
+      border-top: 1px solid var(--rule);
+    }
+    .mtb-bg .doodle-sub:first-of-type { margin-top: 0; padding-top: 0; border-top: 0; }
+    .mtb-bg .doodle-sub-head {
+      display: grid; grid-template-columns: 100px 1fr 2fr;
+      gap: 24px; align-items: baseline; margin-bottom: 24px;
+    }
+    .mtb-bg .doodle-sub-num {
+      font-weight: 700; font-size: 11px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--mtb-orange-burn);
+    }
+    .mtb-bg .doodle-sub-title {
+      font-family: var(--font-display-letterpress);
+      font-size: clamp(28px, 3vw, 44px);
+      text-transform: uppercase; letter-spacing: 0.005em;
+      line-height: 0.95; color: var(--mtb-green); margin: 0;
+    }
+    .mtb-bg .doodle-sub-blurb {
+      font-size: 15px; line-height: 1.55;
+      color: var(--mtb-gray-70); max-width: 56ch; margin: 0;
+    }
+    @media (max-width: 760px) {
+      .mtb-bg .doodle-sub-head { grid-template-columns: 1fr; gap: 8px; }
+    }
+    .mtb-bg .doodle-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 20px; max-width: 840px;
+    }
+    .mtb-bg .doodle-tile {
+      background: var(--mtb-cream-warm);
+      border-radius: 16px;
+      aspect-ratio: 1 / 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      transition: transform 200ms ease;
+    }
+    .mtb-bg .doodle-tile:hover { transform: rotate(-3deg) scale(1.04); }
+    .mtb-bg .doodle-tile img {
+      max-width: 88%; max-height: 88%;
+      width: auto; height: auto; object-fit: contain; display: block;
+    }
+
+    /* ----- Downloads hub ----- */
+    .mtb-bg .dl-hub {
+      background: var(--mtb-green);
+      color: var(--mtb-cream);
+      border-radius: 32px;
+      padding: 64px 56px;
+      position: relative; overflow: hidden;
+    }
+    .mtb-bg .dl-hub::before {
+      content: ''; position: absolute;
+      top: -120px; right: -120px;
+      width: 360px; height: 360px;
+      background: var(--mtb-orange);
+      border-radius: 50%; opacity: 0.12;
+    }
+    .mtb-bg .dl-hub .dl-script {
+      font-family: var(--font-display-script);
+      font-style: italic; font-weight: 700;
+      color: var(--mtb-yellow-warm);
+      font-size: clamp(36px, 5vw, 72px);
+      display: block; transform: rotate(-2deg);
+      margin-bottom: 8px;
+    }
+    .mtb-bg .dl-hub h2 {
+      font-family: var(--font-display-letterpress);
+      font-size: clamp(48px, 6vw, 96px);
+      line-height: 0.9; text-transform: uppercase;
+      color: var(--mtb-cream);
+      margin: 0 0 12px;
+      position: relative;
+    }
+    .mtb-bg .dl-hub p.lede {
+      font-size: 18px; line-height: 1.5;
+      max-width: 580px; color: rgba(248,243,234,0.85);
+      margin: 0 0 36px; position: relative;
+    }
+    .mtb-bg .dl-bundles {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px; position: relative;
+    }
+    @media (max-width: 920px) { .mtb-bg .dl-bundles { grid-template-columns: 1fr; } }
+    .mtb-bg .dl-bundle {
+      background: rgba(248,243,234,0.05);
+      border: 1px solid rgba(248,243,234,0.15);
+      border-radius: 20px; padding: 28px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: all 200ms ease;
+      cursor: pointer;
+      color: inherit; text-decoration: none;
+    }
+    .mtb-bg .dl-bundle:hover {
+      background: rgba(248,243,234,0.10);
+      border-color: var(--mtb-yellow-warm);
+      transform: translateY(-3px);
+    }
+    .mtb-bg .dl-bundle .label {
+      font-weight: 700; font-size: 11px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--mtb-yellow-warm);
+    }
+    .mtb-bg .dl-bundle h4 {
+      font-family: var(--font-display-letterpress);
+      font-size: 24px; text-transform: uppercase;
+      color: var(--mtb-cream); margin: 0;
+    }
+    .mtb-bg .dl-bundle p {
+      font-size: 13px; line-height: 1.45;
+      color: rgba(248,243,234,0.7); flex: 1; margin: 0;
+    }
+    .mtb-bg .dl-bundle .dl-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-weight: 700; font-size: 11px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--mtb-orange); margin-top: 6px;
+    }
+    .mtb-bg .dl-bundle .dl-link svg { width: 12px; height: 12px; }
+
+    .mtb-bg .folder-callout {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; background: var(--mtb-yellow-warm);
+      color: var(--mtb-ink); border-radius: 24px;
+      padding: 28px 36px; margin-top: 40px;
+      flex-wrap: wrap; position: relative;
+    }
+    .mtb-bg .folder-callout .left {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .mtb-bg .folder-callout .label {
+      font-weight: 700; font-size: 11px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--mtb-orange-burn);
+    }
+    .mtb-bg .folder-callout h4 {
+      font-family: var(--font-display-letterpress);
+      font-size: 24px; text-transform: uppercase;
+      color: var(--mtb-ink); margin: 0;
+    }
+    .mtb-bg .folder-callout p {
+      font-size: 13px; color: var(--mtb-ink); opacity: 0.7; margin: 0;
+    }
+    .mtb-bg .folder-callout .btn {
+      font-weight: 700; font-size: 12px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      background: var(--mtb-ink); color: var(--mtb-yellow-warm);
+      padding: 14px 22px; border-radius: 999px;
+      border: none; display: inline-flex;
+      align-items: center; gap: 8px;
+      transition: transform 120ms ease;
+      cursor: pointer; text-decoration: none;
+    }
+    .mtb-bg .folder-callout .btn:hover { transform: translateY(-2px); }
+
+    /* ----- Footer ----- */
+    .mtb-bg footer {
+      padding: 64px 0 48px;
+      border-top: 2px solid var(--mtb-green);
+      margin-top: 96px;
+    }
+    .mtb-bg .footer-inner {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+    }
+    @media (max-width: 720px) { .mtb-bg .footer-inner { grid-template-columns: 1fr; gap: 32px; } }
+    .mtb-bg .footer-brand img { height: 56px; margin-bottom: 12px; }
+    .mtb-bg .footer-brand p {
+      font-size: 13px; line-height: 1.5;
+      color: var(--mtb-gray-70); max-width: 320px; margin: 0;
+    }
+    .mtb-bg .footer-col h5 {
+      font-weight: 700; font-size: 11px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--mtb-orange); margin: 0 0 14px;
+    }
+    .mtb-bg .footer-col a {
+      display: block; font-size: 13px;
+      color: var(--mtb-green); text-decoration: none;
+      padding: 4px 0;
+    }
+    .mtb-bg .footer-col a:hover { color: var(--mtb-orange); }
+    .mtb-bg .footer-bottom {
+      margin-top: 56px; padding-top: 24px;
+      border-top: 1px solid var(--rule);
+      display: flex; justify-content: space-between;
+      font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--mtb-gray-50);
+      flex-wrap: wrap; gap: 12px;
+    }
+
+    /* ----- Toast ----- */
+    .mtb-bg .mtb-toast {
+      position: fixed; bottom: 32px; left: 50%;
+      transform: translateX(-50%) translateY(160%);
+      background: var(--mtb-green); color: var(--mtb-cream);
+      padding: 14px 24px; border-radius: 999px;
+      font-family: var(--font-body); font-weight: 700;
+      font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+      z-index: 999; box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      transition: transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      pointer-events: none;
+    }
+    .mtb-bg .mtb-toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body class="mtb-bg">
+
+  {%- comment -%} ============== STICKY TOPNAV ============== {%- endcomment -%}
+  <header class="topnav">
+    <div class="topnav-inner">
+      <div class="topnav-brand">
+        <img src="{{ 'MTB_Badge.png' | file_url }}" alt="MTB">
+        <span>Brand Guide / 2026</span>
+      </div>
+      <nav class="topnav-links">
+        <a href="#logos">Logos</a>
+        <a href="#color">Color</a>
+        <a href="#type">Type</a>
+        <a href="#doodles">Doodles</a>
+        <a href="#downloads">Downloads</a>
+      </nav>
+      <a href="#downloads" class="topnav-cta">Get Assets ↓</a>
+    </div>
+  </header>
+
+  {%- comment -%} ============== HERO ============== {%- endcomment -%}
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-eyebrow">Mystery Tackle Box · Brand Identity Guide · v2026</div>
+      <h1>
+        <span class="script">Howdy Angler,</span>
+        Here&rsquo;s how<br>we should look.
+      </h1>
+      <p class="lede">
+        A bait-shop sign brought to life. This is the canonical reference for everyone designing for, printing for, or partnering with Mystery Tackle Box. Logos, color, type, and doodles &mdash; everything you need to make work that looks like us.
+      </p>
+    </div>
+  </section>
+
+  {%- comment -%} ============== LOGOS ============== {%- endcomment -%}
+  <section id="logos">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="num">/ 01 — Marks</div>
+          <h2>Logos &amp;<br>lockups</h2>
+        </div>
+        <div class="blurb">
+          Every mark in the system. Click a colored swatch in the corner of the primary and secondary marks to swap between white, green, and black on a contrasting background. Affiliated marks ship in a single colorway.
+        </div>
+      </div>
+
+      {%- comment -%}
+        --- PRIMARY (multi-color) ---
+        Row format: id|name|description|span|file_white|file_green|file_black
+        Rows separated by "||"
+      {%- endcomment -%}
+      {%- assign logos_primary = "primary-badge|Primary Badge|The full crest — arched wordmark, fisherman silhouette, MTB monogram. Use whenever maximum brand presence is needed.|full|MTB_Primary_Badge_Fill_White.png|MTB_Primary_Badge_Fill_Green.png|MTB_Primary_Badge_Fill_Black.png||horizontal-lockup|Horizontal Lockup|Badge plus full wordmark on a baseline. The default lockup for headers, navigation, and any wide aspect ratio.|full|MTB_Horizontal_Lockup_White.png|MTB_Horizontal_Lockup_Green.png|MTB_Horizontal_Lockup_Black.png" -%}
+
+      {%- comment -%} --- SECONDARY (multi-color) --- {%- endcomment -%}
+      {%- assign logos_secondary = "horizontal-small|Horizontal Lockup — Small Use|Compact horizontal lockup with mini badge for footers, in-line bylines, business cards. Do not use larger than ~280px wide.|half|MTB_Horizontal_Lockup_Small_White.png|MTB_Horizontal_Lockup_Small_Green.png|MTB_Horizontal_Lockup_Small_Black.png||badge-only|Badge Only|The shield mark stripped of wordmark — for tight square placements, app icons, embroidery, and merch where the lockup won't fit.|half|MTB_Badge_Only_Fill_White.png|MTB_Badge_Only_Fill_Green.png|MTB_Badge_Only_Fill_Black.png||badge-only-outlined|Badge Only — Outlined|Outline-only version of the shield mark. Use on busy backgrounds, photography, or any surface where a filled badge would be too heavy. Includes a yellow variant for use on green fields.|half|MTB_Badge_Only_Outline_White.png|MTB_Badge_Only_Outline_Green.png|MTB_Badge_Only_Outline_Black.png|MTB_Badge_Only_Outline_Yellow.png" -%}
+
+      {%- comment -%}
+        --- AFFILIATED (single colorway, no swatches) ---
+        Row format: id|name|description|span|file
+      {%- endcomment -%}
+      {%- assign logos_affiliated = "catchco|Catch Co.|Parent company wordmark. Use when explicitly referencing CatchCo as the parent organisation.|third|Catch_Co_Logo_Green.png||biospawn|BioSpawn|Genetically Engineered Baits. Sister brand wordmark.|third|Logo_BioSpawn.png||ten-thousand-fish|10,000 Fish|Sister brand. Signature wordmark.|third|Logo_10000_Fish.png||salt-native|Salt Native|Salt Native lockup.|third|Logo_Salt_Native.png" -%}
+
+      {%- comment -%} ----- Render multi-color groups ----- {%- endcomment -%}
+      {%- assign multi_titles = 'Primary Logos|Secondary Logos' | split: '|' -%}
+      {%- assign multi_blurbs = "The full crest is the heart of the system. Use it whenever the brand needs to introduce itself.|Lockup variants for context — wide formats, dark backgrounds, celebratory moments." | split: '|' -%}
+      {%- assign multi_chunks = logos_primary | append: '@@@' | append: logos_secondary | split: '@@@' -%}
+
+      {%- for chunk in multi_chunks -%}
+        {%- assign gi = forloop.index0 -%}
+        <div class="logo-group">
+          <div class="logo-group-head">
+            <span class="gnum">/ 0{{ forloop.index }}</span>
+            <h3>{{ multi_titles[gi] }}</h3>
+            <span class="gblurb">{{ multi_blurbs[gi] }}</span>
+          </div>
+          <div class="logo-grid">
+            {%- assign rows = chunk | split: '||' -%}
+            {%- for row in rows -%}
+              {%- assign row_clean = row | strip -%}
+              {%- if row_clean != '' -%}
+                {%- assign cols = row_clean | split: '|' -%}
+                {%- assign lname  = cols[1] -%}
+                {%- assign ldesc  = cols[2] -%}
+                {%- assign lspan  = cols[3] -%}
+                {%- assign fwhite = cols[4] | file_url -%}
+                {%- assign fgreen = cols[5] | file_url -%}
+                {%- assign fblack = cols[6] | file_url -%}
+                {%- assign fyellow = '' -%}
+                {%- if cols.size > 7 -%}
+                  {%- assign yfn = cols[7] | strip -%}
+                  {%- if yfn != '' -%}
+                    {%- assign fyellow = yfn | file_url -%}
+                  {%- endif -%}
+                {%- endif -%}
+                <div class="logo-card" data-span="{{ lspan }}">
+                  <div class="logo-stage" data-bg="green"
+                       data-file-white="{{ fwhite }}"
+                       data-file-green="{{ fgreen }}"
+                       data-file-black="{{ fblack }}"
+                       {% if fyellow != '' %}data-file-yellow="{{ fyellow }}"{% endif %}
+                       data-current="white">
+                    <div class="swatch-dots" role="group" aria-label="Color variants for {{ lname | escape }}">
+                      <button type="button" class="swatch-dot active" data-color="white" aria-label="White on dark background"></button>
+                      <button type="button" class="swatch-dot" data-color="green" aria-label="Green on cream background"></button>
+                      <button type="button" class="swatch-dot" data-color="black" aria-label="Black on cream background"></button>
+                      {%- if fyellow != '' -%}
+                      <button type="button" class="swatch-dot" data-color="yellow" aria-label="Yellow on green background"></button>
+                      {%- endif -%}
+                    </div>
+                    <img src="{{ fwhite }}" alt="{{ lname | escape }} — white" loading="lazy">
+                  </div>
+                  <div class="logo-meta">
+                    <span class="label">{{ multi_titles[gi] }}</span>
+                    <h4>{{ lname }}</h4>
+                    <p>{{ ldesc }}</p>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endfor -%}
+
+      {%- comment -%} ----- Render affiliated group (single colorway, no swatches) ----- {%- endcomment -%}
+      <div class="logo-group">
+        <div class="logo-group-head">
+          <span class="gnum">/ 03</span>
+          <h3>Affiliated Logos</h3>
+          <span class="gblurb">Marks for our sister brands and parent company. Use only when co-branding or referencing the family.</span>
+        </div>
+        <div class="logo-grid">
+          {%- assign aff_rows = logos_affiliated | split: '||' -%}
+          {%- for row in aff_rows -%}
+            {%- assign row_clean = row | strip -%}
+            {%- if row_clean != '' -%}
+              {%- assign cols = row_clean | split: '|' -%}
+              {%- assign aname = cols[1] -%}
+              {%- assign adesc = cols[2] -%}
+              {%- assign aspan = cols[3] -%}
+              {%- assign afile = cols[4] | file_url -%}
+              <div class="logo-card" data-span="{{ aspan }}">
+                <div class="logo-stage" data-bg="cream">
+                  <img src="{{ afile }}" alt="{{ aname | escape }}" loading="lazy">
+                </div>
+                <div class="logo-meta">
+                  <span class="label">Affiliated Logos</span>
+                  <h4>{{ aname }}</h4>
+                  <p>{{ adesc }}</p>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ============== COLOR ============== {%- endcomment -%}
+  <section id="color" class="color-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="num">/ 02 — Pigments</div>
+          <h2>Color<br>palette</h2>
+        </div>
+        <div class="blurb">
+          Click any value to copy. HEX for digital, CMYK for print, Pantone Coated for spot color.
+        </div>
+      </div>
+
+      {%- comment -%}
+        Color rows: name | hex | cmyk | pantone | role | size (hero/half/third) | label color
+        Rows separated by "||"
+      {%- endcomment -%}
+      {%- assign color_rows = "Sandy Flats|#F8F3EA|2 / 3 / 7 / 0|7491 9C|Primary background. Warm, papery — the canvas the brand lives on.|hero|#33534B||MTB Green|#33534B|100 / 20 / 60 / 50|568 C|Primary brand green. Lockups, type, large field colour.|hero|#F8F3EA||Hat Guy Orange|#D14424|10 / 86 / 95 / 1|1655 C|Primary CTA. Buttons, highlights, accents — never a background field on its own.|half|#FFFFFF||Weedline|#37B777|73 / 0 / 73 / 0|3405 C|Sparingly — perks, alerts, system success states.|half|#FFFFFF||Chum|#FFCB12|0 / 20 / 98 / 0|116 C|Highlight only. Badges, sale flags, secondary CTA on green.|third|#101820||Squid Ink|#101820|82 / 71 / 59 / 75|Black 6 C|Type on light surfaces, deep-shadow ink.|third|#F8F3EA||Kelp|#00594F|90 / 33 / 67 / 25|3302 C|Email modules, alternate dark surface.|third|#F8F3EA||Bait Shop|#142648|100 / 89 / 39 / 50|289 C|Deep navy accent. Use on data-rich layouts.|third|#F8F3EA||Warm Yellow|#FBAD18|0 / 35 / 95 / 0|1375 C|Email banners, slabs, callout backgrounds.|third|#142648||Flag Red|#B53035|20 / 92 / 85 / 12|1797 C|Retail Elite line. Use only inside that product family.|third|#FFFFFF" | split: '||' -%}
+
+      <div class="color-grid">
+        {%- for color_row in color_rows -%}
+          {%- assign c = color_row | split: '|' -%}
+          {%- assign cname    = c[0] -%}
+          {%- assign chex     = c[1] -%}
+          {%- assign ccmyk    = c[2] -%}
+          {%- assign cpantone = c[3] -%}
+          {%- assign crole    = c[4] -%}
+          {%- assign csize    = c[5] -%}
+          {%- assign cfg      = c[6] -%}
+          <div class="color-card" data-size="{{ csize }}">
+            <div class="color-swatch" data-label="{{ cname }}" style="background-color: {{ chex }}; color: {{ cfg }};"></div>
+            <div class="color-info">
+              <div class="name">{{ cname }}</div>
+              <div class="role">{{ crole }}</div>
+              <div class="spec-row">
+                <span class="key">HEX</span>
+                <button type="button" class="copyable" data-copy="{{ chex }}" title="Click to copy">
+                  <span class="copyable-text">{{ chex }}</span>
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                </button>
+              </div>
+              <div class="spec-row">
+                <span class="key">CMYK</span>
+                <button type="button" class="copyable" data-copy="{{ ccmyk }}" title="Click to copy">
+                  <span class="copyable-text">{{ ccmyk }}</span>
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                </button>
+              </div>
+              <div class="spec-row">
+                <span class="key">Pantone C</span>
+                <button type="button" class="copyable" data-copy="{{ cpantone }}" title="Click to copy">
+                  <span class="copyable-text">{{ cpantone }}</span>
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ============== TYPOGRAPHY ============== {%- endcomment -%}
+  <section id="type">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="num">/ 03 — Voice</div>
+          <h2>Typography</h2>
+        </div>
+        <div class="blurb">
+          A multi-voice system. We mix three or more faces in one composition for the messy, hand-crafted feel. The point isn&rsquo;t tidiness &mdash; it&rsquo;s energy.
+        </div>
+      </div>
+
+      <div class="type-stack">
+        <div class="type-card">
+          <div class="type-meta">
+            <span class="role">Display · Letterpress</span>
+            <h3>Brandon<br>Printed</h3>
+            <p class="descr">The signature face. Loud, hand-printed feel. Always large. Always in caps. The headline of every story we tell.</p>
+          </div>
+          <div class="type-sample">
+            <div class="sample-line">
+              <span class="meta">Headline · 96px</span>
+              <span class="f-letterpress">Hook into this kit</span>
+            </div>
+            <div class="sample-line">
+              <span class="meta">Headline · 72px</span>
+              <span class="f-letterpress" style="font-size: clamp(40px,6vw,72px);">Catch more bass.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="type-card">
+          <div class="type-meta">
+            <span class="role">Accent · Sign-painted</span>
+            <h3>Zing Script<br>Rust</h3>
+            <p class="descr">Distressed italic script for sign-painted accents. Use sparingly above or beside letterpress headlines.</p>
+          </div>
+          <div class="type-sample">
+            <div class="sample-line">
+              <span class="meta">Accent · 96px</span>
+              <span class="f-script">Sweet catches,</span>
+            </div>
+            <div class="sample-line">
+              <span class="meta">Accent · 72px</span>
+              <span class="f-script" style="font-size: clamp(40px,6vw,72px);">check this out</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="type-card">
+          <div class="type-meta">
+            <span class="role">Display · Tall</span>
+            <h3>Cervo Neue</h3>
+            <p class="descr">Tall, condensed display. Big numbers, button labels, anywhere height beats width.</p>
+          </div>
+          <div class="type-sample">
+            <div class="sample-line">
+              <span class="meta">BigNum · 80px</span>
+              <span class="f-tall" style="font-size: 80px;">Maximize Your Catch Rate</span>
+            </div>
+            <div class="sample-line">
+              <span class="meta">Display · 46px</span>
+              <span class="f-tall" style="font-size: 46px;">10-Day Forecast</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="type-card">
+          <div class="type-meta">
+            <span class="role">Body · Workhorse</span>
+            <h3>Gotham SSm</h3>
+            <p class="descr">Body copy, button labels, eyebrows. Bold + all-caps + tight tracking on CTAs. Book + sentence case for paragraphs.</p>
+          </div>
+          <div class="type-sample">
+            <div class="sample-line">
+              <span class="meta">Body · 20px</span>
+              <span class="f-body">Take the guesswork out of the equation. Mystery Tackle Box ships curated tackle to your door &mdash; <strong>so you spend less time picking lures and more time catching fish.</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ============== DOODLES ============== {%- endcomment -%}
+  <section id="doodles">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="num">/ 04 — Doodles</div>
+          <h2>Iconography<br>&amp; doodles</h2>
+        </div>
+        <div class="blurb">
+          We don&rsquo;t use icon fonts. We use hand-drawn marks &mdash; arrows, scribbles, stars, baits. Sprinkled to add personality.
+        </div>
+      </div>
+
+      {%- comment -%}
+        Each doodle sub-group: title|num|blurb|file1|file2|file3|file4
+      {%- endcomment -%}
+      {%- assign doodle_groups = "Baits|01|Hand-drawn lures from the kit. Use sparingly as accents — next to product names, in margins, on packaging.|Doodle_Bait_1.png|Doodle_Bait_2.png|Doodle_Bait_3.png|Doodle_Bait_4.png&&Characters|02|The cast. Karl-style portraits of the anglers, captains, and crew that show up in editorial and merch.|Doodle_Character_1.png|Doodle_Character_2.png|Doodle_Character_3.png|Doodle_Character_4.png&&Fish|03|Species illustrations. Use as headline anchors, kit-cover art, and species selectors. One fish per moment.|Doodle_Fish_1.png|Doodle_Fish_2.png|Doodle_Fish_3.png|Doodle_Fish_4.png&&Other|04|Miscellaneous marks — hands, hooks, gear, gestures. The supporting cast that adds personality without stealing focus.|Doodle_Other_1.png|Doodle_Other_2.png|Doodle_Other_3.png|Doodle_Other_4.png" | split: '&&' -%}
+
+      {%- for grp in doodle_groups -%}
+        {%- assign g = grp | split: '|' -%}
+        {%- assign gtitle = g[0] -%}
+        {%- assign gnum   = g[1] -%}
+        {%- assign gblurb = g[2] -%}
+        <div class="doodle-sub">
+          <div class="doodle-sub-head">
+            <div class="doodle-sub-num">/ 04.{{ gnum }}</div>
+            <h3 class="doodle-sub-title">{{ gtitle }}</h3>
+            <p class="doodle-sub-blurb">{{ gblurb }}</p>
+          </div>
+          <div class="doodle-row">
+            <div class="doodle-tile"><img src="{{ g[3] | file_url }}" alt="{{ gtitle | escape }} 1" loading="lazy"></div>
+            <div class="doodle-tile"><img src="{{ g[4] | file_url }}" alt="{{ gtitle | escape }} 2" loading="lazy"></div>
+            <div class="doodle-tile"><img src="{{ g[5] | file_url }}" alt="{{ gtitle | escape }} 3" loading="lazy"></div>
+            <div class="doodle-tile"><img src="{{ g[6] | file_url }}" alt="{{ gtitle | escape }} 4" loading="lazy"></div>
+          </div>
+        </div>
+      {%- endfor -%}
+
+      <p style="margin-top: 48px; font-size: 14px; color: var(--mtb-gray-70); font-style: italic; text-align: center;">
+        ↑ A starter set. The full library &mdash; ~80 hand-vectored baits, the Karl Doodles cast, and the species set &mdash; lives in the shared folder. Request access from the downloads section below.
+      </p>
+    </div>
+  </section>
+
+  {%- comment -%} ============== DOWNLOADS ============== {%- endcomment -%}
+  <section id="downloads">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="num">/ 05 — Take it</div>
+          <h2>Downloads</h2>
+        </div>
+        <div class="blurb">
+          Grab any individual asset above, or pull a bundle below. Need something missing? Check the shared folder or shoot us an email.
+        </div>
+      </div>
+
+      <div class="dl-hub">
+        <span class="dl-script">Pack it up,</span>
+        <h2>Take what<br>you need.</h2>
+        <p class="lede">
+          Bundles below ship as ZIPs containing transparent PNG and print-ready EPS for every variant in that group. The full library &mdash; including AI source files, Karl Doodles, and the bait illustration set &mdash; lives in the shared folder.
+        </p>
+
+        <div class="dl-bundles">
+          <a class="dl-bundle" href="{{ 'MTB_Logos.zip' | file_url }}" download="MTB_Logos.zip">
+            <span class="label">14 marks · 28 files</span>
+            <h4>All Logos</h4>
+            <p>Every primary, secondary, wordmark and monogram variant. PNG &amp; EPS for each.</p>
+            <span class="dl-link">Download .zip
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+            </span>
+          </a>
+          <a class="dl-bundle" href="{{ 'MTB_Fonts.zip' | file_url }}" download="MTB_Fonts.zip">
+            <span class="label">5 families · .otf &amp; .woff</span>
+            <h4>Brand Fonts</h4>
+            <p>Brandon, Brandon Printed, Cervo Neue, Zing Script Rust, Gotham SSm. License terms in the README.</p>
+            <span class="dl-link">Download .zip
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+            </span>
+          </a>
+          <a class="dl-bundle" href="{{ 'MTB_Color_Swatches.zip' | file_url }}" download="MTB_Color_Swatches.zip">
+            <span class="label">12 colors · .ase &amp; .aco</span>
+            <h4>Color Swatches</h4>
+            <p>Adobe Swatch Exchange + Photoshop swatches. HEX, CMYK, and Pantone tokens pre-named.</p>
+            <span class="dl-link">Download .zip
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+            </span>
+          </a>
+        </div>
+
+        <div class="folder-callout">
+          <div class="left">
+            <div class="label">Full asset library</div>
+            <h4>Everything else lives here.</h4>
+            <p>AI sources, Karl Doodles, bait illustrations, photography library, sample emails &amp; ads.</p>
+          </div>
+          <a class="btn" href="https://drive.google.com/drive/folders/1mMvp0LgNR5DSNLQk4HTeDrjcHukcqBAG?usp=sharing" target="_blank" rel="noopener noreferrer">
+            Open shared folder
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="14" height="14"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ============== FOOTER ============== {%- endcomment -%}
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="{{ 'MTB_Horizontal_Lockup_Green.png' | file_url }}" alt="MTB">
+          <p>Mystery Tackle Box is a CatchCo brand. This guide is the canonical reference for partners, contractors, and printers. v2026.01 &mdash; April 2026.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Get in touch</h5>
+          <a href="mailto:support@mysterytacklebox.com">support@mysterytacklebox.com</a>
+          <a href="https://mysterytacklebox.com" target="_blank" rel="noreferrer">mysterytacklebox.com</a>
+        </div>
+        <div class="footer-col">
+          <h5>Legal</h5>
+          <a href="#">Trademark usage</a>
+          <a href="#">Brand request form</a>
+          <a href="#">Press kit</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 CatchCo · All marks property of CatchCo</span>
+        <span>Brand Identity Guide v2026.01</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="mtb-toast" id="mtb-toast" role="status" aria-live="polite"></div>
+
+  <script>
+  (function () {
+    var root = document.querySelector('.mtb-bg');
+    if (!root) return;
+
+    // Background that contrasts with the chosen logo color.
+    var BG_FOR_COLOR = {
+      white: 'green',
+      green: 'cream',
+      black: 'cream',
+      yellow: 'green'
+    };
+
+    // ---------- Logo swatch toggle (multi-color cards only) ----------
+    root.querySelectorAll('.logo-stage').forEach(function (stage) {
+      var dots = stage.querySelectorAll('.swatch-dot');
+      if (dots.length === 0) return;
+      var img = stage.querySelector('img');
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          var color = dot.getAttribute('data-color');
+          var src = stage.getAttribute('data-file-' + color);
+          if (src) {
+            img.src = src;
+            var alt = (img.getAttribute('alt') || '').split(' — ')[0];
+            img.alt = alt + ' — ' + color;
+          }
+          stage.setAttribute('data-bg', BG_FOR_COLOR[color] || 'cream');
+          stage.setAttribute('data-current', color);
+          dots.forEach(function (d) { d.classList.toggle('active', d === dot); });
+        });
+      });
+    });
+
+    // ---------- Active section in topnav ----------
+    var sectionIds = ['logos', 'color', 'type', 'doodles', 'downloads'];
+    var navLinks = root.querySelectorAll('.topnav-links a');
+    function setActive() {
+      var current = sectionIds[0];
+      sectionIds.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top < 200) current = id;
+      });
+      navLinks.forEach(function (a) {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }
+    window.addEventListener('scroll', setActive, { passive: true });
+    setActive();
+
+    // ---------- Copy-to-clipboard ----------
+    var toast = document.getElementById('mtb-toast');
+    var toastTimer;
+    function showToast(msg) {
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1600);
+    }
+    function fallbackCopy(text) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) { /* noop */ }
+      document.body.removeChild(ta);
+    }
+    root.querySelectorAll('.copyable').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var value = btn.getAttribute('data-copy') || '';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(value).catch(function () { fallbackCopy(value); });
+        } else {
+          fallbackCopy(value);
+        }
+        btn.classList.add('copied');
+        showToast('Copied ' + value);
+        setTimeout(function () { btn.classList.remove('copied'); }, 1200);
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>

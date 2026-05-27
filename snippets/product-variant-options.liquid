@@ -1,0 +1,219 @@
+{% comment %}
+  Renders product variant options
+
+  Accepts:
+  - product: {Object} product object.
+  - option: {Object} current product_option object.
+  - block: {Object} block object.
+  - picker_type: {String} type of picker to dispay
+
+
+  Usage:
+  {% render 'product-variant-options',
+    product: product,
+    option: option,
+    block: block
+    picker_type: picker_type
+  %}
+{% endcomment %}
+{%- liquid
+  assign product_form_id = 'product-form-' | append: section.id
+  assign swatch_shape = block.settings.swatch_shape
+  assign variant_img_size_string = block.settings.variant_img_size | append: ""
+  assign variant_img_wrapper_size = block.settings.variant_img_size | plus: 20
+  assign variant_img_text_size = block.settings.variant_img_size | plus: 20
+-%}
+
+ {%- if swatch_shape == 'custom' -%}
+        <style>
+          .variant-image {
+            height: {{ variant_img_size_string }}px;
+          }
+
+          .label_img_wrapper_custom {
+            height: {{ variant_img_size_string }}px;
+            width: {{ variant_img_size_string }}px;
+          }
+
+          .label_img_wrapper {
+            height: {{ variant_img_wrapper_size }}px;
+            width: {{ variant_img_wrapper_size }}px;
+          }
+
+          .label_with_image {
+          }
+
+          .label_with_image__text {
+            min-width: {{ variant_img_text_size }}px;
+            max-width: {{ variant_img_text_size }}px;
+          }
+
+          .product-form__input--pill input[type=radio]:checked+label {
+            background-color: inherit;
+            color: inherit;
+          }
+
+          .product-form__input--pill input[type=radio]+label {
+            border: none;
+            background-color: inherit;
+            padding: 0;
+            margin-left: 4px;
+          }
+        </style>
+  {% endif %}
+
+<div class="d-flex">
+  {%- for value in option.values -%}
+    {%- liquid
+      assign swatch_focal_point = null
+      if value.swatch.image
+        assign image_url = value.swatch.image | image_url: width: 50
+        assign swatch_value = 'url(' | append: image_url | append: ')'
+        assign swatch_focal_point = value.swatch.image.presentation.focal_point
+      elsif value.swatch.color
+        assign swatch_value = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+      else
+        assign swatch_value = null
+      endif
+
+      assign option_disabled = true
+      if value.available
+        assign option_disabled = false
+      endif
+    -%}
+
+    {%- capture input_id -%}
+    {{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}
+  {%- endcapture -%}
+
+    {%- capture input_name -%}
+    {{ option.name }}-{{ option.position }}
+  {%- endcapture -%}
+
+    {%- capture input_dataset -%}
+    data-product-url="{{ value.product_url }}"
+    data-option-value-id="{{ value.id }}"
+  {%- endcapture -%}
+
+    {%- capture label_unavailable -%}
+    <span class="visually-hidden label-unavailable">
+      {{- 'products.product.variant_sold_out_or_unavailable' | t -}}
+    </span>
+  {%- endcapture -%}
+
+    {%- if picker_type == 'swatch' -%}
+      {%- capture help_text -%}
+      <span class="visually-hidden">{{ value | escape }}</span>
+      {{ label_unavailable }}
+    {%- endcapture -%}
+      {%
+        render 'swatch-input',
+        id: input_id,
+        name: input_name,
+        value: value | escape,
+        swatch: value.swatch,
+        product_form_id: product_form_id,
+        checked: value.selected,
+        visually_disabled: option_disabled,
+        shape: block.settings.swatch_shape,
+        help_text: help_text,
+        additional_props: input_dataset
+      %}
+    {%- elsif picker_type == 'button' -%}
+      <input
+        type="radio"
+        id="{{ input_id }}"
+        name="{{ input_name | escape }}"
+        value="{{ value | escape }}"
+        form="{{ product_form_id }}"
+        {% if value.selected %}
+          checked
+        {% endif %}
+        {% if option_disabled %}
+          class="disabled"
+        {% endif %}
+        {{ input_dataset }}
+      >
+      {%- if swatch_shape == 'custom' -%}
+        {% assign matched_image = "" %}
+        
+        {% for variant in product.variants %}
+          {% if variant.title == value %}
+            {% assign matched_image = variant.featured_image.src %}
+          {% endif %}
+        {% endfor %}
+
+        {% if matched_image == blank or block.settings.use_custom_variants == true %}
+          {% assign downcase_value = value | downcase %}
+          {% case downcase_value %}
+            {% when 'bass' %}
+              {% assign matched_image = block.settings.image_bass %}
+            {% when 'ice fishing' %}
+              {% assign matched_image = block.settings.image_ice %}
+            {% when 'inshore saltwater' %}
+              {% assign matched_image = block.settings.image_inshore %}
+            {% when 'multi-species' %}
+              {% assign matched_image = block.settings.image_multi %}
+            {% when 'panfish & trout' %}
+              {% assign matched_image = block.settings.image_panfish %}
+            {% when 'walleye' %}
+              {% assign matched_image = block.settings.image_walleye %}
+            {% when 'regular' %}
+              {% assign matched_image = block.settings.image_regular %}
+            {% when 'pro' %}
+              {% assign matched_image = block.settings.image_pro %}
+            {% when 'elite' %}
+              {% assign matched_image = block.settings.image_elite %}
+            {% when '3 month' %}
+              {% assign matched_image = block.settings.image_3month %}
+            {% when '6 month' %}
+              {% assign matched_image = block.settings.image_6month %}
+            {% when '12 month' %}
+              {% assign matched_image = block.settings.image_12month %}
+          {% endcase %}
+        {% endif %}
+
+        
+        
+        <label for="{{ input_id }}" class="label_with_image header_font">
+          {% if matched_image != blank %}
+            
+            <div class="{% if block.settings.use_custom_variants %}label_img_wrapper_custom{% else %}label_img_wrapper{% endif %}">
+              {{ matched_image | image_url: width: variant_img_size_string | image_tag: loading: 'lazy', widths: variant_img_size_string, class: 'variant-img lazyload' }}
+            </div>
+          {% endif %}
+          <span class="label_with_image__text">{{ value -}}</span>
+          {{ label_unavailable }}
+        </label>
+
+      {%- else -%}
+        <label for="{{ input_id }}">
+          {{ value -}}
+          {{ label_unavailable }}
+        </label>
+      {%- endif -%}
+
+    {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
+      <option
+        id="{{ input_id }}"
+        value="{{ value | escape }}"
+        {% if value.selected %}
+          selected="selected"
+        {% endif %}
+        {% if swatch_value and picker_type == 'swatch_dropdown' %}
+          data-option-swatch-value="{{ swatch_value }}"
+          {% if swatch_focal_point %}
+            data-option-swatch-focal-point="{{ swatch_focal_point }}"
+          {% endif %}
+        {% endif %}
+        {{ input_dataset }}
+      >
+        {% if option_disabled -%}
+          {{- 'products.product.value_unavailable' | t: option_value: value -}}
+        {%- else -%}
+          {{- value -}}
+        {%- endif %}
+      </option>
+    {%- endif -%}
+  {%- endfor -%}
+</div>

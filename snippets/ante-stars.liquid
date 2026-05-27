@@ -1,0 +1,43 @@
+{% assign full = rating | floor %}
+{% assign half = rating | minus: full %}
+{% assign stars = rating | ceil %}
+{% assign none = 5 | minus: full %}
+{% if half >= 0.5 %}
+  {% assign none = none | minus: 1 %}
+{% endif %}
+
+{% case stars %}
+  {% when 5 %}
+    {% assign colour = "#00BA7B" %}
+  {% when 4 %}
+    {% assign colour = "#7ACA28" %}
+  {% when 3 %}
+    {% assign colour = "#FDD100" %}
+  {% when 2 %}
+    {% assign colour = "#FD871E" %}
+  {% when 1 %}
+    {% assign colour = "#FE3724" %}
+{% endcase %}
+
+{% if link %}
+  <a class="review-stars stars-{{ stars }}{% if half >= 0.5 %} half{% endif %}" href="{{ link }}"{% if hidden %} hidden{% endif %}>
+{% else %}
+  <div class="review-stars stars-{{ stars }}{% if half >= 0.5 %} half{% endif %}"{% if hidden %} hidden{% endif %}>
+{% endif %}
+  {% for i in (1..full) %}
+    {% render "ante-svg", icon: "star", colour: colour %}
+  {% endfor %}
+  {% if half >= 0.5 %}
+    {% render "ante-svg", icon: "star-half", colour: colour %}
+  {% endif %}
+  {% for i in (1..none) %}
+    {% render "ante-svg", icon: "star-empty", colour: colour %}
+  {% endfor %}
+  {% if text %}
+    <span class="review-text body-caption alt{% unless bold == false %} bold{% endunless %}{% unless muted == false %} muted{% endunless %}">{{ text }}</span>
+  {% endif %}
+{% if link %}
+  </a>
+{% else %}
+</div>
+{% endif %}

@@ -1,0 +1,101 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "uppercase": true,
+            "bold": true
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "custom",
+            "variant_img_size": 50,
+            "use_custom_variants": true,
+            "image_bass": "shopify://shop_images/selector-bass_b618bf51-b8ef-4b79-9ac6-0b26a6ddf7b6.png",
+            "image_multi": "shopify://shop_images/selector-multi-species_5f996b13-9ad0-4bb9-b736-142471b67a29.png",
+            "image_panfish": "shopify://shop_images/selector-panfish-trout_8110d796-16a8-4fa7-9f3a-3b57f9281360.png",
+            "image_inshore": "shopify://shop_images/selector-salt_d4ac62b1-5e12-4572-9034-adcc4cc7c07f.png",
+            "image_walleye": "shopify://shop_images/selector-walleye_8d90356e-ba90-49d4-b2d1-fe5a51dd5018.png",
+            "image_ice": "shopify://shop_images/selector-ice_ab663ebc-b292-4287-ad24-27d06c413bc0.png",
+            "image_regular": "shopify://shop_images/replacement-box-reg_13d505e3-04ff-428b-b4c2-f47561fabb80.jpg",
+            "image_pro": "shopify://shop_images/replacement-box-pro.jpg",
+            "image_elite": "shopify://shop_images/replacement-box-elite.jpg"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "variant_picker",
+        "description"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "disable_atc": true,
+        "color_scheme": "scheme-1",
+        "images_limit": 20,
+        "show_suggestions_only": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "mobile_thumbnails": "hide",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "thumbnails_display": "show_all",
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Explore other options",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products"
+  ]
+}

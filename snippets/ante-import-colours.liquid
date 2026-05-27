@@ -1,0 +1,373 @@
+<style>
+  /* Base theme */
+  :root {
+    --base-color-background: #F9F7EF;
+    --base-color-background-alt-100: #E5E2D8;
+    --base-color-background-alt: #D0CDC1;
+    --base-color-background-alt-900: #CBC7B9;
+    --base-color-surface-100: #FFFFFF;
+    --base-color-surface: #F7F7F7;
+    --base-color-surface-900: #EEEEEE;
+    --base-color-surface-alt-100: #ECFFF5;
+    --base-color-surface-alt: #EFF9F4;
+    --base-color-surface-alt-900: #D9F1E4;
+    --base-color-border: #D4D1CD;
+    --base-color-border-alt: #33534B;
+    --base-color-text-default: #2B3336;
+    --base-color-text-muted: #2B3336;
+    --base-color-text-faint: #7E8280;
+    --base-color-text-alt: #D14424;
+    --base-color-text-link: #9F450D;
+    --base-color-button: #D14424;
+    --base-color-button-hover: #D14424;
+    --base-color-button-text: #F9F7EF;
+    --base-color-button-border: transparent;
+    --base-color-button-alt: #FFFFFF;
+    --base-color-button-alt-hover: #FFFFFF;
+    --base-color-button-alt-text: #2B3336;
+    --base-color-button-alt-border: #2B3336;
+    --base-color-tab: #FCFCFC;
+    --base-color-tab-text: #2B3336;
+    --base-color-tab-border: #D4D1CD;
+    --base-color-tab-active: #9A652A;
+    --base-color-tab-active-text: #F9F7EF;
+    --base-color-tab-active-border: #9A652A;
+    --base-color-info: #A8E46C;
+    --base-color-info-text: #2B3336;
+    --base-color-info-text-alt: #2B3336;
+    --base-color-info-border: transparent;
+    --base-color-info-alt: #000000;
+    --base-color-info-alt-text: #FFFFFF;
+    --base-color-info-alt-text-alt: #A8E46C;
+    --base-color-info-alt-border: #D4D1CD;
+    --base-color-sale: #FCD160;
+    --base-color-sale-text: #2B3336;
+    --base-color-sale-text-alt: #D14424;
+    --base-color-sale-border: transparent;
+    --base-color-sale-alt: #D14424;
+    --base-color-sale-alt-text: #FFFFFF;
+    --base-color-sale-alt-text-alt: #FFFFFF;
+    --base-color-sale-alt-border: transparent;
+    --base-color-accent-background: #33534B;
+    --base-color-accent-text: #F9F7EF;
+    --base-color-accent-alt-background: #33534B;
+    --base-color-accent-alt-text: #F9F7EF;
+    --base-color-input-background: #FFFFFF;
+    --base-color-input-text: #000000;
+    --base-color-elevated-shadow: #2B3336;
+    --inverse-color-background: #33534B;
+    --inverse-color-background-alt-100: #D14424;
+    --inverse-color-background-alt: #D14424;
+    --inverse-color-background-alt-900: #D14424;
+    --inverse-color-surface-100: #589183;
+    --inverse-color-surface: #4C7E72;
+    --inverse-color-surface-900: #3E695F;
+    --inverse-color-surface-alt-100: #589183;
+    --inverse-color-surface-alt: #4C7E72;
+    --inverse-color-surface-alt-900: #3E695F;
+    --inverse-color-border: #D4D1CD;
+    --inverse-color-border-alt: #7193B0;
+    --inverse-color-text-default: #F9F7EF;
+    --inverse-color-text-muted: #F9F7EF;
+    --inverse-color-text-faint: #F9F7EF;
+    --inverse-color-text-alt: #FFC982;
+    --inverse-color-text-link: #A8E46C;
+    --inverse-color-button: #D14424;
+    --inverse-color-button-hover: #D14424;
+    --inverse-color-button-text: #F9F7EF;
+    --inverse-color-button-border: transparent;
+    --inverse-color-button-alt: #FFFFFF;
+    --inverse-color-button-alt-hover: #FFFFFF;
+    --inverse-color-button-alt-text: #2B3336;
+    --inverse-color-button-alt-border: #2B3336;
+    --inverse-color-tab: #FCFCFC;
+    --inverse-color-tab-text: #2B3336;
+    --inverse-color-tab-border: #D4D1CD;
+    --inverse-color-tab-active: #9A652A;
+    --inverse-color-tab-active-text: #F9F7EF;
+    --inverse-color-tab-active-border: #9A652A;
+    --inverse-color-info: #A8E46C;
+    --inverse-color-info-text: #2B3336;
+    --inverse-color-info-text-alt: #2B3336;
+    --inverse-color-info-border: transparent;
+    --inverse-color-info-alt: #000000;
+    --inverse-color-info-alt-text: #FFFFFF;
+    --inverse-color-info-alt-text-alt: #A8E46C;
+    --inverse-color-info-alt-border: #D4D1CD;
+    --inverse-color-sale: #FCD160;
+    --inverse-color-sale-text: #2B3336;
+    --inverse-color-sale-text-alt: #D14424;
+    --inverse-color-sale-border: transparent;
+    --inverse-color-sale-alt: #D14424;
+    --inverse-color-sale-alt-text: #FFFFFF;
+    --inverse-color-sale-alt-text-alt: #FFFFFF;
+    --inverse-color-sale-alt-border: transparent;
+    --inverse-color-accent-background: #F9F7EF;
+    --inverse-color-accent-text: #2B3336;
+    --inverse-color-accent-alt-background: #F9F7EF;
+    --inverse-color-accent-alt-text: #2B3336;
+    --inverse-color-input-background: #FFFFFF;
+    --inverse-color-input-text: #000000;
+    --inverse-color-elevated-shadow: #2B3336;
+    --color-background: var(--base-color-background);
+    --color-background-alt-100: var(--base-color-background-alt-100);
+    --color-background-alt: var(--base-color-background-alt);
+    --color-background-alt-900: var(--base-color-background-alt-900);
+    --color-surface-100: var(--base-color-surface-100);
+    --color-surface: var(--base-color-surface);
+    --color-surface-900: var(--base-color-surface-900);
+    --color-surface-alt-100: var(--base-color-surface-alt-100);
+    --color-surface-alt: var(--base-color-surface-alt);
+    --color-surface-alt-900: var(--base-color-surface-alt-900);
+    --color-border: var(--base-color-border);
+    --color-border-alt: var(--base-color-border-alt);
+    --color-text-default: var(--base-color-text-default);
+    --color-text-muted: var(--base-color-text-muted);
+    --color-text-faint: var(--base-color-text-faint);
+    --color-text-alt: var(--base-color-text-alt);
+    --color-text-link: var(--base-color-text-link);
+    --color-button: var(--base-color-button);
+    --color-button-hover: var(--base-color-button-hover);
+    --color-button-text: var(--base-color-button-text);
+    --color-button-border: var(--base-color-button-border);
+    --color-button-alt: var(--base-color-button-alt);
+    --color-button-alt-hover: var(--base-color-button-alt-hover);
+    --color-button-alt-text: var(--base-color-button-alt-text);
+    --color-button-alt-border: var(--base-color-button-alt-border);
+    --color-tab: var(--base-color-tab);
+    --color-tab-text: var(--base-color-tab-text);
+    --color-tab-border: var(--base-color-tab-border);
+    --color-tab-active: var(--base-color-tab-active);
+    --color-tab-active-text: var(--base-color-tab-active-text);
+    --color-tab-active-border: var(--base-color-tab-active-border);
+    --color-info: var(--base-color-info);
+    --color-info-text: var(--base-color-info-text);
+    --color-info-text-alt: var(--base-color-info-text-alt);
+    --color-info-border: var(--base-color-info-border);
+    --color-info-alt: var(--base-color-info-alt);
+    --color-info-alt-text: var(--base-color-info-alt-text);
+    --color-info-alt-text-alt: var(--base-color-info-alt-text-alt);
+    --color-info-alt-border: var(--base-color-info-alt-border);
+    --color-sale: var(--base-color-sale);
+    --color-sale-text: var(--base-color-sale-text);
+    --color-sale-text-alt: var(--base-color-sale-text-alt);
+    --color-sale-border: var(--base-color-sale-border);
+    --color-sale-alt: var(--base-color-sale-alt);
+    --color-sale-alt-text: var(--base-color-sale-alt-text);
+    --color-sale-alt-text-alt: var(--base-color-sale-alt-text-alt);
+    --color-sale-alt-border: var(--base-color-sale-alt-border);
+    --color-accent-background: var(--base-color-accent-background);
+    --color-accent-text: var(--base-color-accent-text);
+    --color-accent-alt-background: var(--base-color-accent-alt-background);
+    --color-accent-alt-text: var(--base-color-accent-alt-text);
+    --color-input-background: var(--base-color-input-background);
+    --color-input-text: var(--base-color-input-text);
+    --color-elevated-shadow: var(--base-color-elevated-shadow);
+  }
+
+  .ante-inverse {
+    --color-background: var(--inverse-color-background);
+    --color-background-alt-100: var(--inverse-color-background-alt-100);
+    --color-background-alt: var(--inverse-color-background-alt);
+    --color-background-alt-900: var(--inverse-color-background-alt-900);
+    --color-surface-100: var(--inverse-color-surface-100);
+    --color-surface: var(--inverse-color-surface);
+    --color-surface-900: var(--inverse-color-surface-900);
+    --color-surface-alt-100: var(--inverse-color-surface-alt-100);
+    --color-surface-alt: var(--inverse-color-surface-alt);
+    --color-surface-alt-900: var(--inverse-color-surface-alt-900);
+    --color-border: var(--inverse-color-border);
+    --color-border-alt: var(--inverse-color-border-alt);
+    --color-text-default: var(--inverse-color-text-default);
+    --color-text-muted: var(--inverse-color-text-muted);
+    --color-text-faint: var(--inverse-color-text-faint);
+    --color-text-alt: var(--inverse-color-text-alt);
+    --color-text-link: var(--inverse-color-text-link);
+    --color-button: var(--inverse-color-button);
+    --color-button-hover: var(--inverse-color-button-hover);
+    --color-button-text: var(--inverse-color-button-text);
+    --color-button-border: var(--inverse-color-button-border);
+    --color-button-alt: var(--inverse-color-button-alt);
+    --color-button-alt-hover: var(--inverse-color-button-alt-hover);
+    --color-button-alt-text: var(--inverse-color-button-alt-text);
+    --color-button-alt-border: var(--inverse-color-button-alt-border);
+    --color-tab: var(--inverse-color-tab);
+    --color-tab-text: var(--inverse-color-tab-text);
+    --color-tab-border: var(--inverse-color-tab-border);
+    --color-tab-active: var(--inverse-color-tab-active);
+    --color-tab-active-text: var(--inverse-color-tab-active-text);
+    --color-tab-active-border: var(--inverse-color-tab-active-border);
+    --color-info: var(--inverse-color-info);
+    --color-info-text: var(--inverse-color-info-text);
+    --color-info-text-alt: var(--inverse-color-info-text-alt);
+    --color-info-border: var(--inverse-color-info-border);
+    --color-info-alt: var(--inverse-color-info-alt);
+    --color-info-alt-text: var(--inverse-color-info-alt-text);
+    --color-info-alt-text-alt: var(--inverse-color-info-alt-text-alt);
+    --color-info-alt-border: var(--inverse-color-info-alt-border);
+    --color-sale: var(--inverse-color-sale);
+    --color-sale-text: var(--inverse-color-sale-text);
+    --color-sale-text-alt: var(--inverse-color-sale-text-alt);
+    --color-sale-border: var(--inverse-color-sale-border);
+    --color-sale-alt: var(--inverse-color-sale-alt);
+    --color-sale-alt-text: var(--inverse-color-sale-alt-text);
+    --color-sale-alt-text-alt: var(--inverse-color-sale-alt-text-alt);
+    --color-sale-alt-border: var(--inverse-color-sale-alt-border);
+    --color-accent-background: var(--inverse-color-accent-background);
+    --color-accent-text: var(--inverse-color-accent-text);
+    --color-accent-alt-background: var(--inverse-color-accent-alt-background);
+    --color-accent-alt-text: var(--inverse-color-accent-alt-text);
+    --color-input-background: var(--inverse-color-input-background);
+    --color-input-text: var(--inverse-color-input-text);
+    --color-elevated-shadow: var(--inverse-color-elevated-shadow);
+  }
+
+  .ante-inverse .ante-inverse {
+    --color-background: var(--base-color-background);
+    --color-background-alt-100: var(--base-color-background-alt-100);
+    --color-background-alt: var(--base-color-background-alt);
+    --color-background-alt-900: var(--base-color-background-alt-900);
+    --color-surface-100: var(--base-color-surface-100);
+    --color-surface: var(--base-color-surface);
+    --color-surface-900: var(--base-color-surface-900);
+    --color-surface-alt-100: var(--base-color-surface-alt-100);
+    --color-surface-alt: var(--base-color-surface-alt);
+    --color-surface-alt-900: var(--base-color-surface-alt-900);
+    --color-border: var(--base-color-border);
+    --color-border-alt: var(--base-color-border-alt);
+    --color-text-default: var(--base-color-text-default);
+    --color-text-muted: var(--base-color-text-muted);
+    --color-text-faint: var(--base-color-text-faint);
+    --color-text-alt: var(--base-color-text-alt);
+    --color-text-link: var(--base-color-text-link);
+    --color-button: var(--base-color-button);
+    --color-button-hover: var(--base-color-button-hover);
+    --color-button-text: var(--base-color-button-text);
+    --color-button-border: var(--base-color-button-border);
+    --color-button-alt: var(--base-color-button-alt);
+    --color-button-alt-hover: var(--base-color-button-alt-hover);
+    --color-button-alt-text: var(--base-color-button-alt-text);
+    --color-button-alt-border: var(--base-color-button-alt-border);
+    --color-tab: var(--base-color-tab);
+    --color-tab-text: var(--base-color-tab-text);
+    --color-tab-border: var(--base-color-tab-border);
+    --color-tab-active: var(--base-color-tab-active);
+    --color-tab-active-text: var(--base-color-tab-active-text);
+    --color-tab-active-border: var(--base-color-tab-active-border);
+    --color-info: var(--base-color-info);
+    --color-info-text: var(--base-color-info-text);
+    --color-info-text-alt: var(--base-color-info-text-alt);
+    --color-info-border: var(--base-color-info-border);
+    --color-info-alt: var(--base-color-info-alt);
+    --color-info-alt-text: var(--base-color-info-alt-text);
+    --color-info-alt-text-alt: var(--base-color-info-alt-text-alt);
+    --color-info-alt-border: var(--base-color-info-alt-border);
+    --color-sale: var(--base-color-sale);
+    --color-sale-text: var(--base-color-sale-text);
+    --color-sale-text-alt: var(--base-color-sale-text-alt);
+    --color-sale-border: var(--base-color-sale-border);
+    --color-sale-alt: var(--base-color-sale-alt);
+    --color-sale-alt-text: var(--base-color-sale-alt-text);
+    --color-sale-alt-text-alt: var(--base-color-sale-alt-text-alt);
+    --color-sale-alt-border: var(--base-color-sale-alt-border);
+    --color-accent-background: var(--base-color-accent-background);
+    --color-accent-text: var(--base-color-accent-text);
+    --color-accent-alt-background: var(--base-color-accent-alt-background);
+    --color-accent-alt-text: var(--base-color-accent-alt-text);
+    --color-input-background: var(--base-color-input-background);
+    --color-input-text: var(--base-color-input-text);
+    --color-elevated-shadow: var(--base-color-elevated-shadow);
+  }
+
+  /* Section background mappings */
+  .ante-section {
+    --section-bg: var(--color-background);
+  }
+  .shopify-section:has(.ante-section.section-background-colour-normal),
+  .ante-section.section-background-colour-normal {
+    --section-bg: var(--color-background);
+  }
+  .shopify-section:has(.ante-section.section-background-colour-alt-100),
+  .ante-section.section-background-colour-alt-100 {
+    --section-bg: var(--color-background-alt-100);
+  }
+  .shopify-section:has(.ante-section.section-background-colour-alt),
+  .ante-section.section-background-colour-alt {
+    --section-bg: var(--color-background-alt);
+  }
+  .shopify-section:has(.ante-section.section-background-colour-alt-900),
+  .ante-section.section-background-colour-alt-900 {
+    --section-bg: var(--color-background-alt-900);
+  }
+  .shopify-section:has(.ante-section.section-background-colour-surface-100),
+  .ante-section.section-background-colour-surface-100 {
+    --section-bg: var(--color-surface-100);
+  }
+  .shopify-section:has(.ante-section.section-background-colour-surface),
+  .ante-section.section-background-colour-surface {
+    --section-bg: var(--color-surface);
+  }
+  .shopify-section:has(.ante-section.section-background-colour-surface-900),
+  .ante-section.section-background-colour-surface-900 {
+    --section-bg: var(--color-surface-900);
+  }
+  .shopify-section:has(.ante-section.section-background-colour-surface-alt-100),
+  .ante-section.section-background-colour-surface-alt-100 {
+    --section-bg: var(--color-surface-alt-100);
+  }
+  .shopify-section:has(.ante-section.section-background-colour-surface-alt),
+  .ante-section.section-background-colour-surface-alt {
+    --section-bg: var(--color-surface-alt);
+  }
+  .shopify-section:has(.ante-section.section-background-colour-surface-alt-900),
+  .ante-section.section-background-colour-surface-alt-900 {
+    --section-bg: var(--color-surface-alt-900);
+  }
+  .shopify-section:has(.ante-section.ante-inverse.section-background-colour-normal),
+  .ante-section.ante-inverse.section-background-colour-normal {
+    --section-bg: var(--inverse-color-background);
+  }
+  .shopify-section:has(.ante-section.ante-inverse.section-background-colour-alt-100),
+  .ante-section.ante-inverse.section-background-colour-alt-100 {
+    --section-bg: var(--inverse-color-background-alt-100);
+  }
+  .shopify-section:has(.ante-section.ante-inverse.section-background-colour-alt),
+  .ante-section.ante-inverse.section-background-colour-alt {
+    --section-bg: var(--inverse-color-background-alt);
+  }
+  .shopify-section:has(.ante-section.ante-inverse.section-background-colour-alt-900),
+  .ante-section.ante-inverse.section-background-colour-alt-900 {
+    --section-bg: var(--inverse-color-background-alt-900);
+  }
+  .shopify-section:has(.ante-section.ante-inverse.section-background-colour-surface-100),
+  .ante-section.ante-inverse.section-background-colour-surface-100 {
+    --section-bg: var(--inverse-color-surface-100);
+  }
+  .shopify-section:has(.ante-section.ante-inverse.section-background-colour-surface),
+  .ante-section.ante-inverse.section-background-colour-surface {
+    --section-bg: var(--inverse-color-surface);
+  }
+  .shopify-section:has(.ante-section.ante-inverse.section-background-colour-surface-900),
+  .ante-section.ante-inverse.section-background-colour-surface-900 {
+    --section-bg: var(--inverse-color-surface-900);
+  }
+  .shopify-section:has(.ante-section.ante-inverse.section-background-colour-surface-alt-100),
+  .ante-section.ante-inverse.section-background-colour-surface-alt-100 {
+    --section-bg: var(--inverse-color-surface-alt-100);
+  }
+  .shopify-section:has(.ante-section.ante-inverse.section-background-colour-surface-alt),
+  .ante-section.ante-inverse.section-background-colour-surface-alt {
+    --section-bg: var(--inverse-color-surface-alt);
+  }
+  .shopify-section:has(.ante-section.ante-inverse.section-background-colour-surface-alt-900),
+  .ante-section.ante-inverse.section-background-colour-surface-alt-900 {
+    --section-bg: var(--inverse-color-surface-alt-900);
+  }
+  .shopify-section:has(.ante-section:not(.section-background-style-floating)),
+  .ante-section:not(.section-background-style-floating) {
+    background: var(--section-bg);
+  }
+  .ante-section.section-background-style-floating > .ante-container {
+    background: var(--section-bg);
+  }
+</style>

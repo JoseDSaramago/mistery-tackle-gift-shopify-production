@@ -1,0 +1,350 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "custom_css": [
+        "h1 {color: #856245; font-weight: 700; text-transform: uppercase; text-align: center; font-size: 4.5rem;}",
+        "h4 {font-weight: 700; text-transform: uppercase; margin: 12px 0 8px;}"
+      ],
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "mtb_article_hWqkLD": {
+      "type": "MTB-article",
+      "blocks": {
+        "section_ALEkLw": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>TERMS AND CONDITIONS</strong>",
+            "text": "",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_ALEkLw"
+      ],
+      "settings": {
+        "text_align": "text-align-center",
+        "title_size": "h1",
+        "header_color": "#856245",
+        "header_uppercase": true,
+        "text_color": "",
+        "text_link_hover_color": "#172421",
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 20,
+        "component_tablet_pt": 30,
+        "component_tablet_pb": 20,
+        "component_desktop_pt": 40,
+        "component_desktop_pb": 20
+      }
+    },
+    "mtb_article_r9zLqJ": {
+      "type": "MTB-article",
+      "blocks": {
+        "section_3Apfrz": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Effective Date: May 1, 2026</strong>",
+            "text": "",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_zrFxRM": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>1. ACCEPTANCE AND MODIFICATIONS</strong>",
+            "text": "<p>Welcome to Mystery Tackle Box. Mystery Tackle Box (“Mystery Tackle Box,” “we,” “us,” and “our”) provides the website maintained at https://mysterytacklebox.com and its subpages (the “Site”) and the fishing products and related services available through the Site (the “Services”) to you subject to these Terms of Service (the “Terms”). These Terms establish the terms, conditions, rights and responsibilities applicable to your use of the Site and Services. Unless explicitly stated otherwise, any new features that augment or enhance the current Site and Services shall be subject to these Terms. If you choose to use other features of the Site and Service, additional terms governing your use of those features (“Additional Terms”) may apply in addition to these Terms. Your breach of any of these Terms or any Additional Terms causes an automatic termination of the rights and licenses granted to you under these Terms.<br/>PLEASE READ THESE TERMS CAREFULLY BEFORE USING THE SITE AND SERVICES. BY USING THE SITE AND SERVICES, YOU ARE AGREEING TO COMPLY WITH THESE TERMS. IF YOU DO NOT AGREE TO BE BOUND BY THESE TERMS, DO NOT USE THE SITE OR SERVICES.<br/>We may change these Terms from time to time for any reason. We will notify you of changes prior to those changes taking effect. If you do not agree with the new version, you must stop using the Site and Services and terminate your Account, if you have one.<br/></p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_QgKUkw": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>2. AGE REQUIREMENTS</strong>",
+            "text": "<p>No one under the age of 18 may use the Site or Services. By using or attempting to use the Site and Services, you represent that you meet the age requirements and that you are able to enter into legally binding contracts, including these Terms.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_eaJ4GA": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>3. OUR PROPRIETARY RIGHTS</strong>",
+            "text": "<p>We or our licensors own all intellectual property and proprietary rights, title and interest in and to the Site and the Services, including without limitation the MYSTERY TACKLE BOX trademarks and the Site copyrights. Except for the limited use rights granted to you in these Terms, you agree that you do not have and will not acquire any right, title, or interest in any of our intellectual property or other proprietary rights. Any rights not expressly granted in these Terms are expressly reserved. Without limiting the foregoing, you agree that you will not use or display the MYSTERY TACKLE BOX trademarks in any manner without our prior written permission.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_68naaw": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>4. USE OF THE SITE AND SERVICES</strong>",
+            "text": "<p>We grant you a limited, revocable, non-transferable, non-sublicenseable and non-exclusive license to access and use the Site and Services for their intended purposes (namely, for fishing product purchases and related services) in accordance with these Terms and any Additional Terms. These limited rights and licenses may be revoked at any time according to Section 11 (Termination of Access) below.<br/>When using the Site and/or Services, you agree to comply with all applicable federal, state, and local laws including but not limited to, copyright law. Except as expressly permitted in these Terms, you may not use, reproduce, distribute, create derivative works based upon, publicly display, publicly perform, publish, transmit, or otherwise exploit the Site content for any purpose whatsoever without obtaining prior written consent from us or, in the case of third-party content, its respective owner.<br/>You may not cause any harm to or otherwise interfere with the Site and/or Services, by (but not limited to):<br/>•\tRemoving, altering, covering, or distorting any copyright, trademark, or other proprietary rights notice on the Site or Site content;<br/>•\tCircumventing, disabling or otherwise interfering with security-related features of the Site or Services including, without limitation, any features that prevent or restrict use or copying of any content or enforce limitations on the use of the Site or Services;<br/>•\tUsing an automatic device (such as a robot or spider) or manual process to monitor the activity on, copy or “scrape” the Site, the Services or their content for any purpose without our express written permission, except for search engines, traffic counters, or similar basic performance monitoring technology;<br/>•\tTransmitting, using, distributing or uploading programs or material that contain malicious code, such as viruses, timebombs, cancelbots, worms, trojan horses, spyware, or other potentially harmful programs or other material or information;<br/>•\tForging any TCP/IP packet header or part of the header information in any email or newsgroup posting for any reason;<br/>•\tCreating an undue burden on the Site or Services;<br/>•\tCollecting or harvesting any personal information from the Site or Services, including but not limited to user names, passwords, or email addresses;<br/>•\tSoliciting other users to join or become members of any commercial online service or other organization without our prior written approval;<br/>•\tAttempting to or interfering with the proper working of the Site or Services or impair, overburden, or disable the same;<br/>•\tModifying, creating derivative works from, decompiling, reverse engineering, or disassembling any portion of the Site or Services;<br/>•\tUsing network-monitoring software to determine the architecture of or extract usage data from the Site;<br/>•\tEngaging in any conduct, or encourage or assist any third party in any conduct, that violates any local, state or federal law, either civil or criminal;<br/>•\tEngaging in any activity, or encourage or assist any third party in any activity, that violates these Terms;<br/>•\tImpersonating another user, person, or entity;<br/>•\tInterfering with or disrupting the access of any user, host or network via any means including without limitation by overloading, flooding, spamming, or linking to coupon sites;<br/>•\tViolating U.S. export laws, including, without limitation, violations of the Export Administration Act and the Export Administration Regulations administered by the Department of Commerce; or<br/>•\tEngaging in any conduct that restricts or inhibits any other user from using or enjoying the Site or Services.<br/>You will cooperate with us to investigate any suspected or actual activity that we suspect may be in breach of these Terms.<br/></p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_WqtyiU": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>5. ACCOUNTS</strong>",
+            "text": "<p>You may need an account (“Account”) to use certain features or functionalities of the Site or Services. To set up an Account, you will be asked to provide your name, mailing address, email address, and payment information. You also will be asked to create an Account password. You must provide accurate information when setting up an Account and must keep all Account information current.<br/>You are responsible for maintaining the confidentiality of your password and Account. You are fully responsible for all uses of your password and Account, including any unauthorized use. You agree to: (a) keep your password confidential and not share it with anyone else, and (b) immediately notify us of any unauthorized use of your password or Account.<br/>You acknowledge and agree that we are authorized to act on instructions received through use of your password and Account, and that we may, but are not obligated to, deny access or block any transaction made through use of your password or Account without prior notice if we believe your password and Account are being used by someone other than you, or for any other reason.<br/></p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_MfEG7D": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>6. YOUR COMMENTS</strong>",
+            "text": "<p>By submitting any comments, suggestions, ideas, questions, postings, web forms, contest entries, and other information and content to us (“Comments”), you grant to us the worldwide, perpetual, non-exclusive, transferable, sublicensable right and license to freely use your Comments to market and improve the Site and Services and for other promotional purposes through all sales channels and in all media, whether now known or later created, as we deem necessary. You are solely responsible for all of your Comments, and you waive any claim arising from or relating to use of your Comments.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_6FC7YW": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>7. ACCEPTABLE USE POLICY</strong>",
+            "text": "<p>Your use of the Site and Services constitutes your agreement that all Comments that you upload, store, submit and/or use comply with the following guidelines for your use of the Site and Services (“Acceptable Use Policy”). We do not review Comments before they are uploaded or stored to the Website. You are solely responsible for evaluating all of your Comments against the Acceptable Use Policy. By uploading Comments to the Site and Services, you accept sole liability and responsibility for any of your Comments that do not comply with the Acceptable Use Policy.<br/>We have the right, but do not assume the obligation, to monitor Comments, and to determine whether they comply with these Terms, including without limitation the Acceptable Use Policy. We have the right in our sole discretion and for any reason whatsoever to edit, refuse to post, refuse to store, remove, or disable access to any Comments.<br/>a. General Categories of Prohibited Comments<br/>Your Comments violate this Acceptable Use Policy and are prohibited from the Site and Services if they:<br/>•\tContain hateful or racist terms or images or symbols, or glamorize the actions of individuals or groups advocating ethnic cleansing, genocide, or similar activities;<br/>•\tAre harassing, threatening, abusive, libelous, defamatory, or invasive of privacy or publicity rights;<br/>•\tImpersonate another;<br/>•\tDepict or promote violence or suicide;<br/>•\tInclude the likeness of a minor;<br/>•\tInclude or reveal the personal information of another person;<br/>•\tContain a formula, instruction, or advice that could cause harm or injury;<br/>•\tAre vulgar, obscene, profane, pornographic, or otherwise objectionable or in bad taste, as determined by Mystery Tackle Box; or<br/>•\tConstitute or encourage conduct that would constitute fraud, a criminal offense, give rise to civil liability, or otherwise violate any applicable law or regulation.<br/>b. Comments Prohibited Under Intellectual Property Laws<br/>Your Comments also violate this Acceptable Use Policy and are prohibited from the Site and Services if they may violate or infringe in any way upon the rights of others, including, but not limited to, any copyright, trademark, patent, trade secret, moral right, or other intellectual property or proprietary right of any person or entity. Some examples of Comments that should not be uploaded or submitted to the Site and Services include:<br/>•\tThe names, logos, pictures or other intellectual property of musical groups or musical artists, sports teams, colleges or universities, clubs, organizations, associations;<br/>•\tPhotos, logos, caricatures or other artwork depicting actors, actresses, musical artists, or other celebrities;<br/>•\tThe trademarks, logos, or names of companies; or<br/>•\tPictures or photographs of products (including but not limited to toys).<br/>The above list only provides examples of submissions that may violate the intellectual property and other proprietary rights of third parties, and is not exhaustive. If you have questions about whether content or materials you would like to upload to the Site may violate the intellectual property or other proprietary rights of another person, you should speak with an attorney.<br/></p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_Na6Pdy": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>8. PRODUCT SALES</strong>",
+            "text": "<p><strong><br/>a. Products</strong><br/><br/>Through the Site and Services, you can place orders for fishing products (“Products”) in a la carte purchases (“Standalone Purchases”) or through a subscription (“Subscription”). You are responsible for knowing the local laws and ordinances that govern fishing activities wherever you may be fishing. Mystery Tackle Box will not be liable for your use of any Product ordered through the Services that are not legal to use wherever you may be fishing. Please note, all prices listed on the site are in U.S. currency.<br/><br/><strong>b. Standalone Purchases</strong><br/><br/>You may make Standalone Purchases by selecting Products and adding them to your cart and then completing the purchase transaction process, as directed on the Site. By making a purchase through the Site, you are authorizing Mystery Tackle Box to charge the payment method (e.g., credit card) chosen for the amount indicated on the purchase confirmation page. Returns for Standalone Purchases are subject to Mystery Tackle Box’s Shipping Policy and Return Policy. The Shipping and Return Policy is subject to change in our sole discretion without notice. Once you have made a Standalone Purchase, you may cancel your order so long as your order has not yet been sent to the warehouse for processing. If you wish to cancel any Standalone Purchase, please contact Customer Service at support@mysterytacklebox.com. You must include your order number in your cancellation request.<br/><br/><strong>c. Subscriptions</strong><br/><br/>By registering an Account and enrolling in a Subscription (“Enrollment”), you will choose which of our periodic shipments you wish to receive, and also provide other information that will assist us to fulfill your orders and your expectations. We will use such information to fulfill your periodic orders and we may use such information in order to present you with opportunities for additional products that we feel may be of interest to you. You will also register a payment method (e.g., a credit card) and such registration of your payment method constitutes your authorization to charge such amounts to that payment method and otherwise constitutes your promise to pay for items purchased from the Site.<br/>Upon Enrollment, you will choose which one or more of our Product plans you wish to order. We will send shipments to you at the frequency and value that you choose. You acknowledge and agree that it is impossible for the value of our shipments to exactly equal the approximate value you have chosen, and your order from Mystery Tackle Box signifies your acknowledgment that the value of each shipment will be within one U.S. Dollar of the value that you have chosen. You may change the desired approximate value of your periodic shipment, or cancel your Subscription at any time. To prevent the next renewal of your Subscription from being billed, you must cancel before 11:59 PM Central Time on the day before your next scheduled billing date; the cutoff applies to billing, not shipment. For multi-month plans (such as 4-, 6-, or 12-month renewing terms), billing for the full renewal period occurs on the renewal date, and cancellations submitted after that billing event will prevent further automatic renewals but will not generate a refund of amounts already charged. Any change or cancellation of Subscription will be effective immediately as to all Products not yet billed to your account as of the date and time of the change or cancellation. Products already billed but not sent as of the date and time of the change or cancellation will be sent as previously scheduled and cannot be refunded. You may change or cancel your Subscription by accessing your Account through the Site or by contacting Customer Service at support@mysterytacklebox.com.<br/>Your use of the Site is your acknowledgement that you have enrolled to receive fishing-related products that are unknown to you at the time of ordering and receipt by you. You acknowledge that the specific items, brands, manufacturers, value, quantity, and overall composition of any Subscription shipment are selected by Mystery Tackle Box in its sole discretion and are intended to be a surprise; they may vary from any descriptions, marketing imagery, or examples shown on the Site, and Mystery Tackle Box reserves the right to modify, substitute, add, remove, or discontinue any item, brand, or category of item included in any Subscription at any time without notice. Mystery Tackle Box offers no refunds or credits for returned Subscription Products except in our sole discretion. If you did not receive your Subscription shipment during any month, you must contact us within 30 days of that month’s shipment date in order to receive a replacement.<br/><br/><strong>d. Product Descriptions</strong><br/><br/>All Product features, content, specifications, and prices described or depicted on the Site and Services are subject to change at any time without notice. Certain measures, attributes, and similar descriptions are approximate and are provided for convenience purposes only. We make reasonable efforts to accurately display the attributes of the Products, including (if applicable) the colors, fonts, and design sizes; however, the actual colors, fonts and designs you see on the device you use to access the Site and Services will depend on your device and its systems, and we cannot guarantee that your device will accurately display such Product attributes. The inclusion of any Products on the Site at a particular time does not imply or warrant that these Products will be available at any time. We attempt to ensure that information on the Site is complete, accurate, and current. Despite our efforts, the information on the Site may occasionally be inaccurate, incomplete, or outdated. We make no representation as to the accuracy, completeness, or currency of any information on the Site. For example, Products included on the Site may be unavailable, may have different attributes than those listed or depicted or may actually carry a different price than that stated on the Site. In addition, we may make changes in information about price and availability without notice.<br/><br/><strong>e. Product Orders and Sales</strong><br/><br/>By placing an order using the Site and Services, a customer makes a binding offer for a contract of sale. We will send an order confirmation email to the customer. The order confirmation is not an acceptance of the order, but only an acknowledgement that the order was received. The offer is accepted when we confirm in a second email to the customer that we have either begun to process or shipped the order. We do not guarantee the continued availability of any Product found on the Site or Services. We reserve the right, without prior notice, to limit the order quantity on any Product and/or to refuse service to any customer. We also may require verification of information prior to the acceptance and/or shipment of any Product order.<br/><strong><br/>f. Delivery, Shipment and Title</strong><br/><br/>We will make delivery of accepted Product orders in accordance with our Shipping Policy and Return Policy.<br/><br/><strong>g. Payments</strong><br/><br/>Customers may choose to pay by credit card or PayPal. We reserve the right to limit the method of payment chosen by the customer depending on order value, shipment destination, or other criteria. In addition, we may offer one-time promotional codes from time to time. One-time promotional codes may only be used once per household and we reserve the right to cancel orders made by customers abusing this policy. Additional terms may apply when you submit the promotional code on the Site.<br/><br/><strong>h. Purchased Goods</strong><br/><br/>Mystery Tackle Box assumes no responsibility and shall not be liable for any loss or damage caused by, or resulting from, misapplication of any product sold from the mysterytacklebox.com website. Our products are sold with the express understanding that the purchaser and/or users are thoroughly familiar with the correct application and proper care.<br/>It is the purchasers’ and users’ responsibility to determine the suitability of a product for any particular use. Check all applicable industry, trade association, federal, state and local regulations. Read and understand all cautions and warnings before ordering from this web site.<br/><br/><strong>i. Return-to-Sender Policy<br/></strong><br/>If a Product is returned to Mystery Tackle Box by the carrier due to an incorrect or undeliverable shipping address, failed delivery attempts, or refusal by the recipient, the order will be classified as a Return-to-Sender order. We will attempt to contact you using the email address and/or telephone number associated with your Account. You will have thirty (30) calendar days from the date of our first outreach to respond and provide a valid, updated shipping address. Once we receive a corrected address, we will ship a replacement order at no additional cost. If you do not respond within thirty (30) calendar days, the order will be considered abandoned, no refund will be issued, and we will have no further obligation with respect to that order. We reserve the right to modify or refuse a replacement in cases of suspected fraud or abuse of this policy.<br/></p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_iA43p6": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>9. LINKS</strong>",
+            "text": "<p><br/><strong>a. Third Party Links</strong><br/><br/>The Site and Services may provide links to third-party websites, advertisements, or resources. Because we have no control over such sites, advertisements, or resources, we are not responsible for the availability of such external websites or resources, and we do not endorse and are not responsible or liable for any content, advertising, products, or other materials on or available from such third-party sites or resources. We are not responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with your use of or reliance on any such content, goods, or services available on or through any such third-party website or resource.<br/><br/><strong>b. Linking to the Site</strong><br/><br/>By linking to the Site, you will not misrepresent your relationship with us or present false or misleading impressions about us. No hyperlinks to the Site may be used in a manner that implies or suggests that we approve or endorse you, your website, on your social media accounts, or your goods and services. We will have no responsibility or liability for any content appearing on your website or social media accounts. No link may appear on any page on your website, on your social media accounts, or within any context containing content or materials that may be interpreted as libelous, obscene, or criminal, or which infringes, otherwise violates, or advocates the infringement or other violation of, any third party rights. Images of the Mystery Tackle Box logo may not be used to link to the Site without our prior, express written permission. We reserve the right, at any time and in our sole discretion, to request that you remove from your website and/or social media accounts all links to the Site or any of its contents. Upon our request, you agree to immediately remove all links to the Site. Thereafter, your posting of any future links to the Site will require our express written permission.<br/></p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_AMC9dB": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>10. MODIFICATIONS TO THE SITE AND SERVICES</strong>",
+            "text": "<p>We reserve the right at any time in our sole discretion to modify, discontinue, or remove, temporarily or permanently, the Site and/or Services (or any part thereof) with or without notice. We will not be liable to you or to any third party for any such modification, suspension, removal, or discontinuance. We do not guarantee that any of your Comments or any other Site content will be available on the Site, our servers and/or directories at any time, or for any period of time.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_pgzVD3": {
+          "type": "section",
+          "settings": {
+            "section_id": "section-11",
+            "header": "<strong>11. TERMINATION OF ACCESS</strong>",
+            "text": "<p>We may, in our sole and absolute discretion and without notice or liability to you or any third party, immediately suspend, limit your access to and/or terminate your access to the Site, Services and/or your Account for any reason or for no reason, including without limitation: (a) if we believe in our sole discretion that you have violated these Terms, any Additional Terms, or any applicable laws or regulations; (b) at the request of law enforcement, government agencies or courts; (c) if you ask us to close your Account; (d) if we discontinue or materially modify the Site or Services (or any part thereof); (e) if unexpected technical or security issues or problems arise; (f) if we believe in our sole discretion that your use or access to the Site, Services or your Account may create risk (including but not limited to legal risk) for us, our affiliates, contractual partners, or users; and/or (g) following extended periods of inactivity on your Account. Termination of your access to the Site, Services and/or your Account may include in our sole discretion, but is not limited to: (x) removal of access to some or all offerings on the Site and Services; (y) the deletion of some or all of your Comments, Account information and/or other content associated with your use of the Site, Services and/or your Account (or any part thereof) from the Site, our servers and/or directories; and/or (z) banning you from using the Site and Services by any available means, including without limitation by blocking your IP address(es).<br/>Any suspension or termination shall not affect your obligations to us under these Terms. The provisions of these Terms which by their nature should survive the suspension or termination of your access to or use of the Site, Services and/or your Account, shall survive including, but not limited to, the rights and licenses that you have granted hereunder, indemnities, releases, disclaimers, limitations on liability, provisions related to choice of law, arbitration and dispute resolution, no class action, no trial by jury, and all of the miscellaneous provisions set forth below.<br/></p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_QPJP7n": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>12. INDEMNITY</strong>",
+            "text": "<p>You agree to indemnify, defend, and hold Mystery Tackle Box and its parents, subsidiaries, related companies, and controlled affiliates, and its and their respective members, officers, directors, employees, agents, partners, licensors, service providers, strategic partners, and distribution partners (collectively, the “Indemnified Parties”), harmless in connection with any third-party claims, liabilities, losses, damages, obligations, costs, and expenses (including but not limited to reasonable attorneys’ fees and costs) (“Claims”) arising out of or relating to your use of the Site or Services, your Comments, your breach of these Terms (including but not limited to the Shipping and Return Policy, SMS and MMS Policy, and any other Additional Terms incorporated by reference herein), or your acts and omissions relating to any of the foregoing. We have the right to control the defense, settlement and/or other resolution of any Claims, at your sole cost and expense. You may not settle or otherwise resolve any Claim without our express written permission.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_xBtXPj": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>13. DISCLAIMER OF WARRANTIES</strong>",
+            "text": "<p>YOU EXPRESSLY UNDERSTAND AND AGREE THAT YOUR USE OF THE SITE AND SERVICES IS AT YOUR SOLE RISK. THE SITE, SERVICES, THE SITE CONTENT, AND ALL PRODUCTS AND SERVICES PROVIDED ON OR THROUGH THE SITE AND SERVICES ARE PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS WITH ALL FAULTS. WITHOUT LIMITING THE FOREGOING AND TO THE FULLEST EXTENT OF THE LAW, THE INDEMNIFIED PARTIES EXPRESSLY DISCLAIM ALL WARRANTIES OF ANY KIND, INCLUDING ANY: (A) WARRANTIES THAT THE SITE, SERVICES, SITE CONTENT, AND/OR ANY PRODUCTS OR SERVICES PURCHASED ON OR THROUGH THE SITE OR SERVICES WILL MEET YOUR REQUIREMENTS; (B) WARRANTIES CONCERNING THE AVAILABILITY, ACCURACY, SECURITY, USEFULNESS, TIMELINESS, OR INFORMATIONAL CONTENT OF THE SITE, SERVICES, SITE CONTENT, AND/OR ANY PRODUCTS OR SERVICES PURCHASED ON OR THROUGH THE SITE OR SERVICES; (C) WARRANTIES OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE; (D) WARRANTIES FOR SERVICES OR GOODS RECEIVED THROUGH OR ADVERTISED ON THE SITE AND/OR SERVICES OR ACCESSED THROUGH THE SITE AND/OR SERVICES; (E) WARRANTIES CONCERNING THE CAPACITY, COMPLETENESS, ACCURACY, OR RELIABILITY OF THE INFORMATION OR RESULTS THAT MAY BE OBTAINED FROM THE USE OF THE SITE AND/OR SERVICE; (F) WARRANTIES THAT YOUR USE OF THE SITE WILL BE SECURE OR UNINTERRUPTED; AND (G) WARRANTIES THAT THE SITE, SERVICES AND/OR SITE CONTENT WILL BE ERROR-FREE OR THAT ERRORS IN THE SITE, SERVICES AND/OR SITE CONTENT WILL BE CORRECTED. WE ASSUME NO RESPONSIBILITY FOR THE TIMELINESS, DELETION, MIS-DELIVERY OR FAILURE TO PROVIDE ANY CONTENT OR TO STORE ANY PERSONALIZATION SETTINGS OR CONTENT. ANY CONTENT DOWNLOADED OR OTHERWISE OBTAINED THROUGH THE SITE OR SERVICES IS DOWNLOADED AND USED AT YOUR SOLE DISCRETION AND RISK AND YOU WILL BE SOLELY RESPONSIBLE FOR ANY DAMAGE TO YOUR COMPUTER SYSTEM OR LOSS OF DATA THAT RESULTS FROM THE DOWNLOAD OR USE OF ANY SUCH CONTENT. NO ADVICE OR INFORMATION, WHETHER ORAL OR WRITTEN, OBTAINED BY YOU FROM US OR THROUGH OR FROM THE SITE OR SERVICES SHALL CREATE ANY WARRANTY NOT EXPRESSLY STATED IN THESE TERMS.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_RhJN6L": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>14. LIMITATION OF LIABILITY</strong>",
+            "text": "<p>WE MAY USE THIRD PARTIES TO PROVIDE CERTAIN SERVICES ACCESSIBLE THROUGH THE SITE. WE WILL NOT BE LIABLE TO YOU FOR THEIR ACTS OR OMISSIONS.<br/>TO THE FULLEST EXTENT PERMITTED UNDER APPLICABLE LAW, UNDER NO CIRCUMSTANCES, INCLUDING, WITHOUT LIMITATION, THE NEGLIGENCE OF ANY PARTY, WILL THE INDEMNIFIED PARTIES BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES, INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF PROFITS, LOSS OF USE, DATA LOSS, OR OTHER INTANGIBLE LOSSES (EVEN IF THE INDEMNIFIED PARTIES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES), RESULTING FROM, ARISING OUT OF, RELATING TO, OR IN ANY WAY CONNECTED WITH YOUR USE OF, OR YOUR INABILITY TO USE, THE SITE OR SERVICES, UNDER ANY THEORY OF LIABILITY. YOUR SOLE REMEDY, AND OUR AGGREGATE LIABILITY IN CONNECTION WITH THESE TERMS OR YOUR USE OF THE SITE OR SERVICES SHALL IN ALL EVENTS BE LIMITED TO THE GREATER OF FIFTY U.S. DOLLARS ($50.00) OR THE INVOICED AMOUNT PAID TO US FOR THE PRODUCTS GIVING RISE TO SUCH LIABILITY. SOME JURISDICTIONS DO NOT ALLOW THE LIMITATION OR EXCLUSION OF LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO SOME OF THE ABOVE PROVISIONS MAY NOT APPLY TO YOU. IN SUCH JURISDICTIONS, OUR LIABILITY IS LIMITED TO THE FULLEST EXTENT OF THE LAW.<br/>YOU SPECIFICALLY ACKNOWLEDGE AND AGREE THAT WE WILL NOT BE LIABLE FOR THE ILLEGAL, OFFENSIVE OR DEFAMATORY CONDUCT OF OTHERS, INCLUDING BUT NOT LIMITED TO ANY SUCH CONDUCT BY YOU, AND THAT YOU BEAR ALL RISK AND LIABILITY ASSOCIATED WITH YOUR CONDUCT AND CONTENT.<br/></p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_pPTR78": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>15. RELEASE</strong>",
+            "text": "<p>YOU HEREBY RELEASE MYSTERY TACKLE BOX AND ITS PARENTS, SUBSIDIARIES AND AFFILIATES AND THEIR RESPECTIVE OWNERS, OFFICERS, DIRECTORS, MANAGERS, REPRESENTATIVES, AFFILIATES, SUCCESSORS, ASSIGNS, AGENTS, SHAREHOLDERS, EMPLOYEES AND BUSINESS PARTNERS FROM ANY AND ALL CLAIMS, DEMANDS AND DAMAGES OF EVERY KIND AND NATURE, KNOWN AND UNKNOWN, ARISING OUT OF, RELATING TO OR IN ANY WAY CONNECTED WITH YOUR USE OF THE SITE AND/OR SERVICES. IF YOU ARE A RESIDENT OF CALIFORNIA, YOU WAIVE CALIFORNIA CIVIL CODE § 1542 WHICH STATES “A GENERAL RELEASE DOES NOT EXTEND TO CLAIMS WHICH THE CREDITOR DOES NOT KNOW OR SUSPECT TO EXIST IN HIS FAVOR AT THE TIME OF EXECUTING THE RELEASE, WHICH IS KNOWN BY HIM MUST HAVE MATERIALLY AFFECTED HIS SETTLEMENT WITH THE DEBTOR.”</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_WCpMWx": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>16. DATA PRIVACY</strong>",
+            "text": "<p>We and our service providers and other partners collect information from and/or about you when you use the Site and Services, and process that information in accordance with our Privacy Policy.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_qiYFGk": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>17. DISPUTE RESOLUTION</strong>",
+            "text": "<p><strong>a. Federal Arbitration Act.</strong> The Federal Arbitration Act governs the interpretation and enforcement of this Section 17. This Section 17 evidences a transaction involving interstate commerce.<br/><strong>b. Informal Dispute Resolution;</strong> Pre-Arbitration Notice. The parties shall attempt in good faith to resolve any dispute arising out of or relating to these Terms by informal negotiation. As a condition precedent to commencing arbitration or any formal proceeding (other than an action permitted under Section 17(g)), you must first send a written description of your dispute to Mystery Tackle Box, Attn: Legal, 422 S Main St, Unit 2102, Lombard, IL 60148 (a “Notice of Dispute”). The Notice of Dispute must include your name, address, telephone number, email address, sufficient information to identify any transaction at issue, a detailed description of the dispute, and the nature and basis of your claims and the relief sought. The parties agree to negotiate in good faith, including through an informal and individualized telephone conference if requested by either party. If the dispute is not resolved within sixty (60) days after Mystery Tackle Box’s receipt of the Notice of Dispute, either party may proceed under the further dispute resolution provisions below. Any applicable limitations period and filing fee or other deadline will be tolled during this informal process.<br/><strong>c. Binding Arbitration</strong>; AAA Consumer Rules; Mass Arbitration Rules. Subject to Section 17(b), all claims and disputes in connection with these Terms or your use of any product or service provided by Mystery Tackle Box that cannot be resolved informally or in small claims court shall be resolved by binding arbitration on an individual basis. Arbitration shall be administered by the American Arbitration Association (“AAA”) in accordance with its Consumer Arbitration Rules and, if applicable, the AAA’s Mass Arbitration Supplementary Rules, except to the extent such rules conflict with this Section 17. The AAA’s rules are available at www.adr.org. The arbitration will be conducted by a single, neutral arbitrator. The award of the arbitrator will be accompanied by a reasoned opinion. Judgment on the award rendered by the arbitrator may be entered in any court of competent jurisdiction.<br/><strong>d. Non-Appearance Arbitration for Claims Under $10,000.</strong> For claims or disputes where the total amount of the award sought is less than Ten Thousand U.S. Dollars (US $10,000), the party seeking relief may elect non-appearance-based arbitration. If non-appearance arbitration is elected, the arbitration shall be conducted by telephone, online, and/or based solely on written submissions; the specific manner shall be chosen by the party initiating the arbitration. The arbitration shall not involve any personal appearance by the parties or witnesses unless mutually agreed.<br/><strong>e. Hearing Location</strong>. For any in-person hearing, the hearing will be held within one hundred (100) miles of your residence, unless you reside outside the United States (in which case the hearing will be held in the capital of your country), and unless the parties agree otherwise in writing.<br/><strong>f. Class Action and Representative Action Waiver;</strong> Jury Trial Waiver. You and Mystery Tackle Box each waive the right to a trial by jury and the right to participate as a plaintiff or class member in any purported class action, consolidated action, representative action, private attorney general action, or any other representative proceeding. We each agree that any dispute resolution proceedings will be conducted only on an individual basis and not in a class, consolidated or representative action. The arbitrator may not consolidate more than one person’s claims and may not otherwise preside over any form of class or representative proceeding. If this waiver is found to be unenforceable as to any particular dispute, then that dispute shall be resolved in court rather than in arbitration; this waiver shall otherwise remain in full force and effect.<br/><strong>g. Small Claims Court. </strong>Notwithstanding any other provision of this Section 17, either you or Mystery Tackle Box may bring an individual action in small claims court for any claim that qualifies for that court.<br/><strong>h. Equitable and Injunctive Relief. </strong>Notwithstanding the foregoing, either party may seek equitable or injunctive relief in any court of competent jurisdiction to enjoin a breach or threatened breach of any obligation under these Terms (including without limitation the misuse or infringement of intellectual property rights), without any requirement to post bond.<br/><strong>i. Confidentiality. The arbitration </strong>proceedings, including any evidence discovered or submitted at any hearing, shall be confidential and may not be disclosed except by written agreement of the parties, pursuant to court order, or as required by law. This subsection shall not prevent a party from submitting to a court information necessary to enforce this Section 17, to enforce an arbitration award, or to seek equitable or injunctive relief.<br/><strong>j. Opt-Out Right. </strong>You have the right to opt out of the arbitration provisions of this Section 17 (other than Section 17(f), which is non-severable) by sending written notice of your decision to opt out, postmarked within thirty (30) calendar days of your first acceptance of these Terms, to: Mystery Tackle Box, Attn: Legal, 422 S Main St, Unit 2102, Lombard, IL 60148. Your notice must include (i) your name and residence address, (ii) the email address and/or telephone number associated with your Account, and (iii) a clear statement that you want to opt out of the arbitration provisions of these Terms. If you opt out as set forth above, the remaining provisions of these Terms will continue to apply to you.<br/><strong>k. Severability and Survival.</strong> If any portion of this Section 17 is found to be invalid or unenforceable, that portion shall be severed and the remainder of this Section 17 shall remain in full force and effect, except as set forth in Section 17(f). This Section 17 will survive any termination of these Terms or your relationship with Mystery Tackle Box.<br/></p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_fiJ9eD": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>18. MISCELLANEOUS</strong>",
+            "text": "<p><strong>a. Governing Law</strong><br/>These Terms and the relationship between you and us shall be governed by the laws of the State of Illinois without regard to its conflict of law provisions.<br/><strong>b. Waiver and Severability of Terms</strong><br/>The failure of Mystery Tackle Box to exercise or enforce any right or provision of these Terms shall not constitute a waiver of such right or provision. If any provision of these Terms is found by a court of competent jurisdiction to be invalid or unenforceable, the parties nevertheless agree that the court should endeavor to give effect to the parties’ intentions as reflected in the invalid or unenforceable provision, and all other provisions of these Terms shall remain in full force and effect.<br/><strong>c. No Contest</strong><br/>Our electronically or otherwise properly stored copy of these Terms will be deemed to be the true, complete, valid, authentic, and enforceable copy, and you agree that you will not contest the admissibility or enforceability of our copy of these Terms in connection with any action or proceeding arising out of or relating to these Terms.<br/><strong>d. Assignment</strong><br/>We may assign our rights and duties under these Terms at any time to any third party without notice. You may not assign these Terms without our prior written consent.<br/><strong>e. No Third Party Beneficiaries</strong><br/>You agree that, except as otherwise expressly provided in the Terms, there shall be no third party beneficiaries to these Terms.<br/><strong>f. Statute of Limitations</strong><br/>You agree that regardless of any statute or law to the contrary, any claim or cause of action arising out of or related to the use of the Site, Services or these Terms must be filed within one (1) year after such claim or cause of action arose or be forever barred.<br/><strong>g. Section Titles</strong><br/>The section titles in these Terms are for convenience only and have no legal or contractual effect.<br/><strong>h. Entire Agreement</strong><br/>These Terms (together with the Shipping Policy and Return Policy, SMS and MMS Policy, and any other Additional Terms incorporated by reference herein) constitute the entire agreement between you and us with respect to your access to and use of the Site and Services, and any and all other written or oral agreements or understandings previously existing between you and us with respect to the subject matter hereof are hereby superseded and cancelled.<br/><strong>i. Force Majeure</strong><br/>Failure by either party to perform any obligation hereunder shall be excused if and for so long as such breach or failure to perform is caused by a force majeure event, and prompt notice thereof has been given to the other party. If either party fails to perform any duty or obligation hereunder as a result of a force majeure event, such party shall be required to fulfill its obligations hereunder within a reasonable time frame after the force majeure event ceases to exist.<br/><strong>j. Questions</strong><br/>Please contact us with any questions regarding the Site, Services or these Terms at support@mysterytacklebox.com, or through the “Help” section of the Site. Any feedback or questions that you provide shall be deemed to be non-confidential, and we shall be free to use such information in accordance with our Privacy Policy.<br/></p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_UjdNyT": {
+          "type": "section",
+          "disabled": true,
+          "settings": {
+            "section_id": "",
+            "header": "<strong>19 LOST LURE STORIES GIVEAWAY</strong>",
+            "text": "<p>NO PURCHASE NECESSARY TO ENTER OR WIN. A PURCHASE DOES NOT IMPROVE YOUR CHANCES OF WINNING.</p><p>This Lost Lure Stories Giveaway is governed exclusively by the laws of the United States. You are not authorized to participate in the Lost Lure Stories Giveaway if you are not located within the fifty (50) United States, the District of Columbia or in Puerto Rico or Canada (excluding Quebec). </p><p>1. DATES OF Lost Lure Stories Giveaway LOST LURE STORIES Giveaway begins at 12:00:01am Central Time (“CT”) on 10/12/2021 and ends at 11:59:59pm CT on 10/18/2022 (the “LOST LURE STORIES Giveaway Period”). </p><p>2. ELIGIBILITY LOST LURE STORIES Giveaway is open only to legal residents of the fifty (50) United States, the District of Columbia or Puerto Rico and Canada (excluding Quebec), who are eighteen (18) years of age or older as of the date of entry (the “Entrant”). Void outside of the fifty (50) United States, the District of Columbia or Puerto Rico and Canada (excluding Quebec), and where prohibited, taxed or restricted by law. Officers, directors, managers, and employees of Karl’s Bait & Tackle (the “Sponsor”), and each of its respective parents, subsidiaries, affiliates and related companies and their respective advertising and promotion agencies, consultants and agents, as well as immediate family members and/or those living in the same household of each such person, and any others engaged in the development, production, execution or distribution of this Lost Lure Stories Giveaway, including contractors, are not eligible to participate. “Immediate family member” shall be deemed to mean husband, wife, children, mother, father, sister, sister in-law, brother or brother in-law. Lost Lure Stories Giveaway may only be entered in or from the fifty (50) United States, the District of Columbia or Puerto Rico and Canada (excluding Quebec), and entries originating from any other jurisdiction are not eligible for entry and are void. All federal, state and local laws and regulations apply.</p><p>3. HOW TO ENTER. There is one (1) way to enter To enter, entrant must visit <a href=\"https://shopkarls.com\" target=\"_blank\" title=\"https://shopkarls.com\">https://shopkarls.com</a> and submit on the giveaway web form a story about entrant losing a fishing lure (“Submission”). The submission must be at least 10 and no more than 500 characters in length. No purchase is necessary to enter. To submit a post, Entrants must have and be logged into a shopkarls.com account. By entering the Lost Lure Stories Giveaway and providing your contact information, Entrant agrees to the Karl’s Bait & Tackle <a href=\"/pages/terms-and-conditions\" title=\"Terms and Conditions\">Terms</a> & <a href=\"/pages/privacy\" title=\"Privacy Policy\">Privacy Policy</a>.</p><p>All entries must be completed by 11:59:59pm CT on 10/18/2022.<br/><br/>After 10/18/2022, no further registration will be permitted</p><p>Regardless of the entry method used to enter the LOST LURE STORIES Giveaway, there is a limit of one (1) entry per customer for the entire LOST LURE STORIES Giveaway Period. No mechanical reproductions will be accepted. Any attempt by an Entrant to obtain more than the stated number of entries by using multiple/different identities, and/or any other methods will void that Entrant’s entry and that Entrant may be disqualified from the LOST LURE STORIES Giveaway. Entries submitted by anyone other than the Entrant are void. In case of dispute as to the identity of any Entrant, entry will be declared made by the registered name and address on such entry. </p><p>Neither Sponsor nor any LOST LURE STORIES Giveaway Entity is responsible for any entry that is lost, late, illegible, stolen, mutilated, incomplete, invalid, unintelligible, postage-due, misdirected or undeliverable, whether due to system errors, omissions, interruption, deletions, defects, delay in operations or transmissions, theft or destruction or failures, faulty transmissions or other telecommunications malfunctions, human error, entries not received resulting from any hardware or software failures of any kind, lost or unavailable network connections, failed, incomplete or garbled computer or telephone transmissions, typographical or system errors and failures, faulty transmissions, technical malfunctions, or otherwise. Only fully completed entries are eligible. Proof of submission will not be deemed to be proof of receipt by Sponsor or LOST LURE STORIES Giveaway Entity. </p><p>4. DRAWING/ODDS Odds of winning depend on the number of eligible entries received for the LOST LURE STORIES Giveaway. By entering the LOST LURE STORIES Giveaway, Entrants fully and unconditionally agree to be bound by these Official Rules and the decisions of the Sponsor and LOST LURE STORIES Giveaway Entities, which will be final and binding in all matters relating to the LOST LURE STORIES Giveaway. </p><p>Total number of LOST LURE STORIES Giveaway Prizes: The Sponsor will award five (5) Prizes.</p><p>The Prizes will each consist of:A tackle bundle valued at $108.82 and comprised of a Club Member Exclusive Offer Bundle, and a Mystery Tackle Box Motherlode Box.</p><p>The risk of loss, theft, damage, or destruction of the Prize shall be borne by each Prize winner after the Notification (defined below). </p><p>To be eligible to receive a Prize, all Entrants must have an address or email address on file with the Sponsor or have provided an address or email address when prompted at the time of entry. In the event that an Entrant has an incomplete address or email address, or is otherwise deemed ineligible by the Sponsor in its sole discretion, the Entrant will be disqualified and an alternate Lost Lure Stories Giveaway winner will be selected in a random drawing.</p><p>Each potential Prize winner will be notified by the Sponsor by phone, email, courier service or the mail service no later than 10/31/2021 (the “Notification”).  If the potential winner cannot be contacted within ten (10) days after the date of the first attempt to contact him/her, the Sponsor may select an alternate potential Prize winner in his/her place at random from the remaining non-winning, eligible entries. Each Prize winner may be required to sign and return affidavits, releases, tax forms or other documentation in the sole discretion of Sponsor. Failure to comply may result in disqualification at the sole discretion of Sponsor.</p><p>5. ESTRICTIONS All prizes are non-transferable and may not be assigned or substituted or redeemed for cash; except at Sponsor’s sole discretion or as otherwise provided herein. Sponsor will not replace any lost or stolen products. All Karl’s Bait & Tackle terms and conditions apply to the use of the prize, and are incorporated herein by reference. The LOST LURE STORIES Giveaway winner is solely responsible for all applicable federal, state and local taxes, including taxes imposed on his/her income, in connection with the Prize and the fair market value thereof. No more than the stated number of LOST LURE STORIES Giveaway Prizes set forth in these Official Rules will be awarded.<br/><br/>PRIZES ARE AWARDED \"AS IS\" WITH NO GUARANTEE.  ALL WARRANTIES, WHETHER EXPRESS OR IMPLIED, INCLUDING THE WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE, ARE HEREBY DISCLAIMED BY THE SPONSOR AND RELATED LOST LURE STORIES GIVEAWAY ENTITIES. ALL PRIZE DETAILS ARE AT SPONSOR'S SOLE DISCRETION.  ANY COSTS AND EXPENSES ASSOCIATED WITH PRIZE ACCEPTANCE AND USE NOT SPECIFIED HEREIN AS BEING PROVIDED ARE WINNER'S SOLE RESPONSIBILITY.</p><p>6. CONDITIONS This LOST LURE STORIES Giveaway is conducted in English. In the event of any discrepancy or inconsistency between the terms and conditions of these English Official Rules and the English Abbreviation rules or other statements contained in any LOST LURE STORIES Giveaway-related materials, including, but not limited to: any entry form, survey, any Spanish version of these Official Rules and the Abbreviated Rules, and/or point of sale, television, print or online advertising; the terms and conditions of these English Official Rules shall prevail, govern and control. By participating in this LOST LURE STORIES Giveaway, Entrants and Prize winners agree to be bound by these Official Rules and the decisions of the Sponsor and LOST LURE STORIES Giveaway Entities, which are final in all respects and not subject to appeal. Sponsor reserves the right to verify the eligibility of Entrants and to disqualify permanently from this LOST LURE STORIES Giveaway any Entrant it believes has violated these Official Rules. Neither Sponsor nor anyone acting on its behalf will enter into any communications with any Entrant regarding this LOST LURE STORIES Giveaway, except as expressly set forth in these Official Rules. By participating in this LOST LURE STORIES Giveaway, Entrants, and prize winners release the Sponsor and each and all of the LOST LURE STORIES Giveaway Entities, from any and all liability, damages or causes of action (however named or described) with respect to or arising out of participation in the LOST LURE STORIES Giveaway, and/or the receipt or use/misuse of any prize awarded, including, without limitation, liability for personal injury, death or property damage. Failure to comply with these Official Rules may result in disqualification from the LOST LURE STORIES Giveaway. All LOST LURE STORIES Giveaway materials are subject to verification and are void if (a) not obtained in accordance with these Official Rules and through legitimate channels, (b) any part is counterfeited, altered, defective, damaged, illegible, reproduced, tampered with, mutilated or irregular in any way, (c) are obtained where prohibited, or (d) they contain printing, typographical, mechanical, or other errors. Entrants assume all risk of loss, damage, destruction, delay or misdirection of LOST LURE STORIES Giveaway materials submitted to Sponsor. In the event any portion of this LOST LURE STORIES Giveaway is compromised by activities beyond the control of the Sponsor which, in the sole opinion of the Sponsor, corrupt or impair the administration, security, fairness or proper play of the LOST LURE STORIES Giveaway or this LOST LURE STORIES Giveaway, Sponsor reserves the right at its sole discretion to modify, suspend or terminate the LOST LURE STORIES Giveaway. Entering the Lost Lure Stories Giveaway constitutes permission for Sponsor and its agencies to use Entrants' names, addresses (city & state), voices, likenesses and/or Submissions for purposes of advertising, promotion and publicity in any form or medium, for this LOST LURE STORIES Giveaway, the Tackle Insurance program, Karl’s Bait & Tackle, and/or ShopKarls.com, without further compensation <a href=\"https://cdn.shopify.com/s/files/1/0672/1794/8724/files/assets_6f04b2fd148b431f930c28ad27c9b489_6f9cbce7cd3344b89ae0421693e75e6e.webp?v=1732911191\" title=\"https://cdn.shopify.com/s/files/1/0672/1794/8724/files/assets_6f04b2fd148b431f930c28ad27c9b489_6f9cbce7cd3344b89ae0421693e75e6e.webp?v=1732911191\">[1]</a> <a href=\"https://cdn.shopify.com/s/files/1/0672/1794/8724/files/assets_6f04b2fd148b431f930c28ad27c9b489_6f9cbce7cd3344b89ae0421693e75e6e.webp?v=1732911191\" title=\"https://cdn.shopify.com/s/files/1/0672/1794/8724/files/assets_6f04b2fd148b431f930c28ad27c9b489_6f9cbce7cd3344b89ae0421693e75e6e.webp?v=1732911191\">[2]</a>, unless prohibited by law. Sponsor may prohibit an Entrant from participating in the LOST LURE STORIES Giveaway or winning a prize, in its sole discretion, if it determines that said Entrant is attempting to undermine the legitimate operation of the LOST LURE STORIES Giveaway by cheating, deception, or other unfair playing practices (including the use of automated quick entry programs) or intending to annoy, abuse, threaten or harass any other Entrants, Sponsor, or LOST LURE STORIES Giveaway Entities. If for any reason this LOST LURE STORIES Giveaway is not able to be conducted as planned, including, but not limited to, by reason of infection by computer virus, bugs, tampering, unauthorized intervention, fraud or any other causes beyond the reasonable control of Sponsor which corrupt or affect the administration, security, fairness, integrity or proper conduct of the LOST LURE STORIES Giveaway, then Sponsor reserves the right at its sole discretion to cancel, terminate, modify or suspend the LOST LURE STORIES Giveaway and randomly draw from those entries received up to the cancellation/suspension date to award prize. CAUTION: ANY ATTEMPT BY A PERSON TO DELIBERATELY DAMAGE OR UNDERMINE THE LEGITIMATE OPERATION OF THE SWEEPSTAKES MAY BE IN VIOLATION OF CRIMINAL AND CIVIL LAWS AND SHOULD SUCH AN ATTEMPT BE MADE, SPONSOR RESERVES THE RIGHT TO SEEK REMEDIES AND DAMAGES (INCLUDING ATTORNEY’S FEES) FROM ANY SUCH PERSON TO THE FULLEST EXTENT OF THE LAW, INCLUDING CRIMINAL PROSECUTION. SPONSOR’S FAILURE TO ENFORCE ANY TERM OF THESE OFFICIAL RULES SHALL NOT CONSTITUTE A WAIVER OF THESE PROVISIONS. </p><p>7. NO LIABILITY By participating, Entrants and Prize winners agree to release, discharge, indemnify and hold harmless the Sponsor, the LOST LURE STORIES Giveaway Entities, and each of their respective officers, directors, employees, representatives and agents (collectively, the “Released Parties”) from and against any claims made by any Entrant, Prize winner, or any other third parties, related in any way to the operation of this LOST LURE STORIES Giveaway as well as any other claims, damages or liability due to any injuries, damages or losses to any person (including death) or property of any kind resulting in whole or in part, directly or indirectly, from receipt, acceptance, possession, misuse or use of a prize or participation in any promotion related activity or participation in this LOST LURE STORIES Giveaway.</p><p>8. USE OF DATA </p><p>Sponsor will be collecting personal data about Entrants online, in accordance with its <a href=\"/pages/privacy\" title=\"Privacy Policy\">Privacy Policy</a>. By participating in the LOST LURE STORIES Giveaway, Entrants hereby agree to Sponsor’s collection and usage of their personal information and acknowledge that they have read and accepted Sponsor’s <a href=\"/pages/privacy\" title=\"Privacy Policy\">Privacy Policy</a>.</p><p>9. SPONSOR </p><p>Karl’s Bait & Tackle, P.O. Box 6410, Chicago, IL 60606</p><p>This LOST LURE STORIES Giveaway shall not be published without the written permission of the Sponsor.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_rYbU8W": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>19. COMMON PROMOTIONAL QUESTIONS</strong>",
+            "text": "<p>•\tFree gift with purchases are non-returnable and cannot be exchanged.<br/>•\tDiscount codes cannot be combined with a free gift offer.<br/>•\tIf there is a threshold mentioned for a particular offer, your subtotal must meet or exceed that specified amount in order to qualify for the offer.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_Peiwp3": {
+          "type": "section",
+          "disabled": true,
+          "settings": {
+            "section_id": "",
+            "header": "<strong>21. RESALE</strong>",
+            "text": "<p>For <a href=\"http://shopkarls.com/\" target=\"_blank\">Shopkarls.com</a> specifically, the license to access <a href=\"http://shopkarls.com/\" target=\"_blank\">shopkarls.com</a> is solely for the purpose of shopping for items for personal use sold on <a href=\"http://shopkarls.com/\" target=\"_blank\">shopkarls.com</a> and not for any commercial use or use on behalf of any third party, except as explicitly permitted by us in advance and in our sole discretion.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_3Apfrz",
+        "section_zrFxRM",
+        "section_QgKUkw",
+        "section_eaJ4GA",
+        "section_68naaw",
+        "section_WqtyiU",
+        "section_MfEG7D",
+        "section_6FC7YW",
+        "section_Na6Pdy",
+        "section_iA43p6",
+        "section_AMC9dB",
+        "section_pgzVD3",
+        "section_QPJP7n",
+        "section_xBtXPj",
+        "section_RhJN6L",
+        "section_pPTR78",
+        "section_WCpMWx",
+        "section_qiYFGk",
+        "section_fiJ9eD",
+        "section_UjdNyT",
+        "section_rYbU8W",
+        "section_Peiwp3"
+      ],
+      "settings": {
+        "text_align": "text-align-left",
+        "title_size": "h4",
+        "header_color": "",
+        "header_uppercase": true,
+        "text_color": "#34534b",
+        "text_link_hover_color": "#172421",
+        "component_mobile_pt": 0,
+        "component_mobile_pb": 20,
+        "component_tablet_pt": 0,
+        "component_tablet_pb": 30,
+        "component_desktop_pt": 0,
+        "component_desktop_pb": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "mtb_article_hWqkLD",
+    "mtb_article_r9zLqJ"
+  ]
+}

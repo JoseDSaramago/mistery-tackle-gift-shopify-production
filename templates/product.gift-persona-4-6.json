@@ -1,0 +1,197 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "fa9d8ce3d93a41ac965c31595f12b495_builder_io_BrMyYy": {
+      "type": "fa9d8ce3d93a41ac965c31595f12b495-builder-io",
+      "name": "Gifting persona 4 6",
+      "settings": {
+        "builder_content_entry_preview": "d643863dab6a4d72a903c9c3bc6c5cb5"
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "uppercase": false,
+            "bold": true
+          }
+        },
+        "judge_me_reviews_preview_badge_zVTT3j": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "custom_liquid_8TgxU8": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% assign original_price = product.selected_or_first_available_variant.price %}\n{% assign discounted_price = original_price | times: 0.9 | ceil %}\n\n<div class=\"product-price-wrapper\">\n  <s class=\"original-price\">{{ original_price | money }}</s>\n  <span class=\"sale-price\">{{ discounted_price | money }}</span>\n</div>\n\n<style>\n  .product-price-wrapper {\n    display: flex;\n    align-items: center;\n    gap: 12px;\n    margin: 1rem 0;\n  }\n  \n  .original-price {\n    color: #6b7280;\n    font-size: 1.7rem;\n    text-decoration: line-through;\n  }\n  \n  .sale-price {\n    color: #ff6b35;\n    font-size: 1.90rem;\n    font-weight: 900;\n  }\n</style>"
+          }
+        },
+        "price": {
+          "type": "price",
+          "disabled": true,
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle",
+            "variant_img_size": 80,
+            "use_custom_variants": true
+          }
+        },
+        "recharge_subscriptions_gifting_widget_GEgTzz": {
+          "type": "shopify://apps/recharge-subscriptions/blocks/gifting-widget/371eed76-0b44-4869-9813-730372ea378e",
+          "settings": {
+            "rc_show_sender_name": true,
+            "rc_show_send_date": true,
+            "rc_gift_months_max": 24,
+            "rc_disable_add_to_cart": true,
+            "rc_gift_recipient_block_title": "Recipient information",
+            "rc_gift_sender_name_text_input": "Sender name",
+            "rc_gift_recipient_firstname_text_input": "First name",
+            "rc_gift_recipient_lastname_text_input": "Last name",
+            "rc_gift_recipient_email_text_input": "Email",
+            "rc_gift_message_text_input": "Message",
+            "rc_gift_send_date_text_input": "When should we tell the recipient about their gift?",
+            "rc_gift_name_wrapper": "{property_name}",
+            "rc_gift_form_wrapper": false
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "judge_me_reviews_preview_badge_zVTT3j",
+        "custom_liquid_8TgxU8",
+        "price",
+        "variant_picker",
+        "recharge_subscriptions_gifting_widget_GEgTzz",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "disable_atc": false,
+        "color_scheme": "scheme-1",
+        "images_limit": 20,
+        "show_suggestions_only": false,
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "mobile_thumbnails": "hide",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "thumbnails_display": "show_all",
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "42d2204427cf4b11b7a878faf2338db6_builder_io_CUGFcT": {
+      "type": "42d2204427cf4b11b7a878faf2338db6-builder-io",
+      "name": "Gifting persona 4 6 botto",
+      "settings": {
+        "builder_content_entry_preview": "d232d33c00f94e2aa21cb837405fed39"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "174542935609580c1d": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_NTxBXf": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_NTxBXf"
+      ],
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "1763052435f3f43eb9": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "fa9d8ce3d93a41ac965c31595f12b495_builder_io_BrMyYy",
+    "main",
+    "42d2204427cf4b11b7a878faf2338db6_builder_io_CUGFcT",
+    "related-products",
+    "174542935609580c1d",
+    "1763052435f3f43eb9"
+  ]
+}

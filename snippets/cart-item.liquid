@@ -1,0 +1,135 @@
+{% comment %}
+  Renders small box MTB-box-details-component
+
+  Usage:
+  {% render 'cart-item', item, regular, pro, elite %}
+{% endcomment %}
+
+{{ 'cart-item.css' | asset_url | stylesheet_tag }}
+
+{% assign plan = item.title | split: '|' | first | strip %}
+{% assign plan_downcase = plan | downcase %}
+{% assign selling_plan = item.selling_plan_allocation.selling_plan.options | first %}
+{% assign selling_plan_value = selling_plan.value %}
+
+{%- case selling_plan_value -%}
+  {%- when 'Monthly Plan' -%}
+    {% assign month_count = 1 %}
+  {%- when '3 Month Subscription' -%}
+    {% assign month_count = 3 %}
+  {%- when '3 Month' -%}
+    {% assign month_count = 3 %}
+  {%- when '4 Month Subscription' -%}
+    {% assign month_count = 4 %}
+  {%- when '4 Month' -%}
+    {% assign month_count = 4 %}
+  {%- when '6 Month Subscription' -%}
+    {% assign month_count = 6 %}
+  {%- when '6 Month' -%}
+    {% assign month_count = 6 %}
+  {%- when '12 Month Subscription' -%}
+    {% assign month_count = 12 %}
+  {%- when '12 Month' -%}
+    {% assign month_count = 12 %}
+{%- endcase -%}
+
+
+{% assign today = 'now' | date: '%Y-%m-%d' %}
+{% assign months_to_add = month_count | plus: 0 %}
+
+{% assign end_of_current_month = today | date: '%Y-%m-01' | date: '%s' | plus: 2592000 | date: '%Y-%m-%d' %}
+
+{% if today == end_of_current_month %}
+  {% assign months_to_add = months_to_add | plus: 1 %}
+{% endif %}
+
+{% assign seconds_to_add = months_to_add | times: 2629743 %}
+{% assign end_date = today | date: '%Y-%m-%d' | date: '%s' | plus: seconds_to_add | date: '%Y-%m-01' %}
+
+
+
+{%- if item != blank -%}
+  <div class="cart-item__component">
+    <h5 class="cart-item__title">{{ item.vendor }} {{ plan }}</h5>
+    <p class="cart-item__variant">{{ item.title | split: '-' | last }}</p>
+
+    <div class="cart-item__image-wrap">
+
+      <div class="cart-item__image-variant-wrap">
+      {{
+            item.image
+            | image_url: width: '64'
+            | image_tag: loading: 'lazy', widths: '64', class: 'lazyload cart-item__img'
+          }}
+      </div>
+      
+    {%- case plan_downcase  -%}
+      {%- when 'regular' -%}
+        {{
+            regular
+            | image_url: width: '300'
+            | image_tag: loading: 'lazy', widths: '300', class: 'lazyload cart-item__img'
+          }}
+      {%- when 'pro' -%}
+        {{
+            pro
+            | image_url: width: '300'
+            | image_tag: loading: 'lazy', widths: '300', class: 'lazyload cart-item__img'
+          }}
+      {%- when 'elite' -%}
+        {{
+            elite
+            | image_url: width: '300'
+            | image_tag: loading: 'lazy', widths: '300', class: 'lazyload cart-item__img'
+          }}
+    {%- endcase -%}
+    </div>
+
+    <div class="cart-item__description header_font">
+      <p>This {{ month_count }} month subscription will renew on</p>
+      <p>{{ end_date | date: '%B %d, %Y' }} for {{ item.selling_plan_allocation.price | money }} (plus applicable shipping & tax).</p>
+      <p>Pause/cancel anytime.</p>
+      <a href="/pages/plans">Change my box</a>
+    </div>
+
+    <div class="cart-item__props">
+      <div class="cart-item__props-row">
+        <div class="cart-item__props-col">
+          <p>{{ item.vendor }} {{ plan }}, {{ item.title | split: '-' | last }}, {{ item.quantity }}</p>
+          <p>Mo. Plan</p>
+        </div>
+        <div class="cart-item__props-col">
+          <p>{{ item.price | money }}</p>
+        </div>
+      </div>
+      <div class="cart-item__front-line"></div>
+      <div class="cart-item__props-row">
+        <div class="cart-item__props-col">
+          <p><b>Subtotal</b></p>
+        </div>
+        <div class="cart-item__props-col">
+          <p>{{ item.line_price | money }}</p>
+        </div>
+      </div>
+      <div class="cart-item__props-row">
+        <div class="cart-item__props-col">
+          <p>Shipping</p>
+        </div>
+        <div class="cart-item__props-col">
+          <p>Calculated at checkout</p>
+        </div>
+      </div>
+      <div class="cart-item__props-row">
+        <div class="cart-item__props-col">
+          <p>Discount({{ item.discounts | first }})</p>
+        </div>
+        <div class="cart-item__props-col">
+          <p>{{ item.discounted_price | money }}</p>
+        </div>
+      </div>
+      <div class="cart-item__front-line"></div>
+    </div>
+        
+    
+  </div>
+{%- endif -%}

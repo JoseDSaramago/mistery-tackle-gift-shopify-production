@@ -1,0 +1,30 @@
+.article-component {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.article-component__header,
+.article-component__text {
+  margin: 0;
+}
+
+.article-component__text ul {
+  margin: 0.2rem 0;
+}
+
+.article-component__text a {
+  display: inline;
+}
+
+.article-component__block-wrap,
+.article-component__text p {
+  margin-top: 0.8rem;
+}
+
+.article-component__btn-wrap {
+  margin-top: 1.6rem;
+}
+
+.article-component__note {
+  font-size: 1.3rem;
+}

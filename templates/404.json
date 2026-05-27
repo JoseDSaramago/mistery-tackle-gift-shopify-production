@@ -1,0 +1,135 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "disabled": true,
+      "settings": {}
+    },
+    "mtb_article_wQcmeB": {
+      "type": "MTB-article",
+      "blocks": {
+        "section_neAL3P": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "",
+            "text": "",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_ED3wLp": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>THIS PAGE HAS GONE FISHIN' 🎣</strong>",
+            "text": "",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_neAL3P",
+        "section_ED3wLp"
+      ],
+      "settings": {
+        "text_align": "text-align-center",
+        "title_size": "h3",
+        "header_color": "#202124",
+        "header_uppercase": true,
+        "text_color": "#202124",
+        "text_link_hover_color": "#902f19",
+        "component_mobile_pt": 48,
+        "component_mobile_pb": 0,
+        "component_tablet_pt": 128,
+        "component_tablet_pb": 0,
+        "component_desktop_pt": 128,
+        "component_desktop_pb": 0
+      }
+    },
+    "mtb_article_p9tCxF": {
+      "type": "MTB-article",
+      "blocks": {
+        "section_tkEh3e": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "",
+            "text": "<p>Hit the button below to land a box-o-tackle, or head back to our <a href=\"/\" title=\"/\">homepage</a>.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_tkEh3e"
+      ],
+      "settings": {
+        "text_align": "text-align-center",
+        "title_size": "h3",
+        "header_color": "#202124",
+        "header_uppercase": true,
+        "text_color": "#202124",
+        "text_link_hover_color": "#902f19",
+        "component_mobile_pt": 32,
+        "component_mobile_pb": 0,
+        "component_tablet_pt": 32,
+        "component_tablet_pb": 0,
+        "component_desktop_pt": 32,
+        "component_desktop_pb": 0
+      }
+    },
+    "mtb_article_kwLWjh": {
+      "type": "MTB-article",
+      "blocks": {
+        "section_KE4Bez": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "",
+            "text": "",
+            "button_text": "SHOP PRODUCTS",
+            "button_url": "shopify://pages/plans",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_KE4Bez"
+      ],
+      "settings": {
+        "text_align": "text-align-center",
+        "title_size": "h3",
+        "header_color": "#202124",
+        "header_uppercase": true,
+        "text_color": "#202124",
+        "text_link_hover_color": "#902f19",
+        "component_mobile_pt": 32,
+        "component_mobile_pb": 48,
+        "component_tablet_pt": 32,
+        "component_tablet_pb": 128,
+        "component_desktop_pt": 32,
+        "component_desktop_pb": 128
+      }
+    }
+  },
+  "order": [
+    "main",
+    "mtb_article_wQcmeB",
+    "mtb_article_p9tCxF",
+    "mtb_article_kwLWjh"
+  ]
+}

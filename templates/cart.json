@@ -1,0 +1,127 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "cart-items": {
+      "type": "main-cart-items",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "img_view": "sku",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "regular": "shopify://shop_images/regular.webp",
+        "pro": "shopify://shop_images/pro.webp",
+        "elite": "shopify://shop_images/elite.webp",
+        "header": "<strong>REVIEW YOUR ORDER</strong>",
+        "empty_header": "<strong>YOUR CART IS EMPTY.</strong>",
+        "empty_text": "Fill it with an MTB plan and get ready for the best mail day each month!",
+        "first_button_text": "<strong>PICK A PLAN</strong>",
+        "first_button_url": "shopify://pages/plans",
+        "first_button_style": "primary-button",
+        "second_button_text": "<strong>SEND A GIFT</strong>",
+        "second_button_url": "shopify://pages/gift-plans",
+        "second_button_style": "secondary-button",
+        "image": "shopify://shop_images/next_static_media_karl_crying.4c6d26e0.png"
+      }
+    },
+    "cart-footer": {
+      "type": "main-cart-footer",
+      "blocks": {
+        "subtotal": {
+          "type": "subtotal",
+          "settings": {}
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "subtotal",
+        "buttons"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top": 20,
+        "padding_bottom": 40
+      }
+    },
+    "17431876272ba50b5a": {
+      "type": "apps",
+      "blocks": {
+        "rebuy_personalization_engine_rebuy_widget_4XrJPY": {
+          "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "settings": {
+            "enabled": true,
+            "id": "245421",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
+        },
+        "rebuy_personalization_engine_rebuy_widget_jNLTwd": {
+          "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "settings": {
+            "enabled": true,
+            "id": "231943",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
+        }
+      },
+      "block_order": [
+        "rebuy_personalization_engine_rebuy_widget_4XrJPY",
+        "rebuy_personalization_engine_rebuy_widget_jNLTwd"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "1754664145722177fb": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "175630916701faa089": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "1756309934a9c8a317": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "1756310289dfe5815a": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "1756396072a9dbdc81": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "cart-items",
+    "cart-footer",
+    "17431876272ba50b5a",
+    "1754664145722177fb",
+    "175630916701faa089",
+    "1756309934a9c8a317",
+    "1756310289dfe5815a",
+    "1756396072a9dbdc81"
+  ]
+}

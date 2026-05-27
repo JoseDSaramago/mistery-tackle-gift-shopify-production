@@ -1,0 +1,129 @@
+{% comment %}
+  Renders cart plroduct image
+
+  Usage:
+  {% render 'main-cart-details', item %}
+{% endcomment %}
+
+{% assign plan = item.title | split: '-' | first | strip %}
+{% assign product_title = item.product_title %}
+{% assign selling_plan_value = item.selling_plan_allocation.selling_plan.name %}
+
+{%- case selling_plan_value -%}
+  {%- when 'Monthly Plan' -%}
+    {% assign month_count = 1 %}
+  {%- when '3 Month Subscription' -%}
+    {% assign month_count = 3 %}
+  {%- when '3 Month' -%}
+    {% assign month_count = 3 %}
+  {%- when '4 Month Subscription' -%}
+    {% assign month_count = 4 %}
+  {%- when '4 Month' -%}
+    {% assign month_count = 4 %}
+  {%- when '6 Month Subscription' -%}
+    {% assign month_count = 6 %}
+  {%- when '6 Month' -%}
+    {% assign month_count = 6 %}
+  {%- when '12 Month Subscription' -%}
+    {% assign month_count = 12 %}
+  {%- when '12 Month' -%}
+    {% assign month_count = 12 %}
+{%- endcase -%}
+
+{% assign today = 'now' | date: '%Y-%m-%d' %}
+{% assign current_day = 'now' | date: '%d' | plus: 0 %}
+{% assign months_to_add = month_count | plus: 0 %}
+
+{% if current_day >= 25 %}
+  {% assign months_to_add = months_to_add | plus: 1 %}
+{% endif %}
+
+{% assign seconds_to_add = months_to_add | times: 2629743 %}
+{% assign end_date = today | date: '%Y-%m-%d' | date: '%s' | plus: seconds_to_add | date: '%Y-%m-01' %}
+
+{%- if settings.show_vendor -%}
+  <p class="caption-with-letter-spacing">{{ item.product.vendor }}</p>
+{%- endif -%}
+
+<h5 class="cart-item__title">
+  <b>
+    {{ plan }}
+  </b>
+</h5>
+{%- if item.original_price != item.final_price -%}
+  <div class="cart-item__discounted-prices">
+    <span class="visually-hidden">
+      {{ 'products.product.price.regular_price' | t }}
+    </span>
+    <s class="cart-item__old-price product-option">
+      {{- item.original_price | money -}}
+    </s>
+    <span class="visually-hidden">
+      {{ 'products.product.price.sale_price' | t }}
+    </span>
+    <strong class="cart-item__final-price product-option">
+      {{ item.final_price | money }}
+    </strong>
+  </div>
+{%- else -%}
+  <div class="product-option">
+    {{ item.original_price | money }}
+  </div>
+{%- endif -%}
+
+{%- if item.product.has_only_default_variant == false
+  or item.properties.size != 0
+  or item.selling_plan_allocation != null
+-%}
+  <dl>
+    {%- if item.product.has_only_default_variant == false -%}
+      {%- for option in item.options_with_values -%}
+        <div class="product-option">
+          <dt>{{ option.name }}:</dt>
+          <dd>{{ option.value }}</dd>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- for property in item.properties -%}
+      {%- assign property_first_char = property.first | slice: 0 -%}
+      {%- if property.last != blank and property_first_char != '_' -%}
+        <div class="product-option">
+          <dt>{{ property.first }}:</dt>
+          <dd>
+            {%- if property.last contains '/uploads/' -%}
+              <a href="{{ property.last }}" class="link" target="_blank">
+                {{ property.last | split: '/' | last }}
+              </a>
+            {%- else -%}
+              {{ property.last }}
+            {%- endif -%}
+          </dd>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </dl>
+
+  <p class="product-option">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+
+  {%- if month_count != blank and end_date != blank -%}
+    <div class="product-option cart-item__description header_font">
+
+      <p>This {{ month_count }} month subscription will renew on</p>
+      <p>
+        {{ end_date | date: '%B %d, %Y' }} for {{ item.selling_plan_allocation.price | money }} (plus applicable
+        shipping & tax).
+      </p>
+      <p>Pause/cancel anytime.</p>
+    </div>
+  {%- endif -%}
+{%- endif -%}
+
+<ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+  {%- for discount in item.line_level_discount_allocations -%}
+    <li class="discounts__discount">
+      {{- 'icon-discount.svg' | inline_asset_content -}}
+      {{ discount.discount_application.title | escape }}
+    </li>
+  {%- endfor -%}
+</ul>

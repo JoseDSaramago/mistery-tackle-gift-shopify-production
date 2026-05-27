@@ -1,0 +1,204 @@
+{% assign id = section.settings.custom_id | default: section.id %}
+
+<style>
+  {% if section.settings.image or section.settings.video %}
+    #{{ id }} .ante-section-content {
+      {% if section.settings.media_position == "right" %}
+        flex-direction: row;
+      {% else %}
+        flex-direction: row-reverse;
+      {% endif %}
+      gap: 80px;
+    }
+
+    #{{ id }} .ante-section-content > div {
+      flex: 1 1 0px;
+    }
+
+    #{{ id }} .media-container {
+      align-self: center;
+      max-width: min(40%, 550px);
+    }
+
+    @media (max-width: 1024px) {
+      #{{ id }} .ante-section-content {
+        {% if section.settings.media_position_mobile == "below" %}
+          flex-direction: column;
+        {% else %}
+          flex-direction: column-reverse;
+        {% endif %}
+        gap: 32px;
+      }
+
+      #{{ id }} .media-container {
+        align-self: center;
+        max-width: 550px;
+      }
+    }
+  {% else %}
+    #{{ id }} .faqs {
+      width: 100%;
+    }
+  {% endif %}
+
+  #{{ id }} .faqs {
+    max-width: var(--width-7);
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1919px) {
+    #{{ id }} .faqs {
+      max-width: var(--width-8);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    #{{ id }} .faqs {
+      max-width: var(--width-6);
+    }
+  }
+
+  @media (max-width: 600px) {
+    #{{ id }} .faqs {
+      max-width: 100%;
+    }
+  }
+</style>
+
+{% render "ante-section-structure", section: section %}
+  <div class="faqs">
+    {% assign categories = section.blocks | where: "type", "faq" | map: "settings" | map: "category" | uniq %}        
+    {% if categories.size > 1 %}
+      <div class="tab-bar">
+        {% for category in categories %}
+          <button class="tab-bar-button{% if forloop.first %} active{% endif %}">{{ category }}</button>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <div class="tab-contents">
+      {% for category in categories %}
+        <div class="tab-content{% if forloop.first %} active{% endif %}" data-tab="{{ category }}">
+          {% render "ante-drops", blocks: section.blocks, type: "faq", condition: "category", matches: category, big: true, indexes: section.settings.show_indexes %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if section.settings.image or section.settings.video %}
+    <div class="media-container">
+      {% if section.settings.image %}
+        {% render 'ante-image',
+          image: section.settings.image,
+          video: section.settings.video_url,
+          video_caption: section.settings.video_caption
+        %}
+      {% endif %}
+    </div>
+  {% endif %}
+{% render "ante-section-structure", end: true %}
+
+{% schema %}
+  {
+    "name": "FAQ [UTA]",
+    "presets": [
+      {
+        "name": "FAQ [UTA]"
+      }
+    ],
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_indexes",
+        "label": "Show FAQ Indexes",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Media Settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image",
+        "info": "Display a static image"
+      },
+      {
+        "type": "url",
+        "id": "video_url",
+        "label": "Video URL"
+      },
+      {
+        "type": "text",
+        "id": "video_caption",
+        "label": "Video Caption",
+        "default": "Video"
+      },
+      {
+        "type": "select",
+        "id": "media_position",
+        "label": "Media Position",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "right"
+      },
+      {
+        "type": "select",
+        "id": "media_position_mobile",
+        "label": "Media Position (Mobile)",
+        "options": [
+          {
+            "value": "above",
+            "label": "Above"
+          },
+          {
+            "value": "below",
+            "label": "Below"
+          }
+        ],
+        "default": "below"
+      },
+      {"type":"header","content":"Section Heading"},{"type":"richtext","id":"heading","label":"Heading"},{"type":"select","id":"heading_alignment","label":"Heading Alignment","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"},{"value":"row","label":"Row"}],"default":"center"},{"type":"select","id":"heading_alignment_mobile","label":"Heading Alignment (Mobile)","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"center"},{"type":"checkbox","id":"limit_heading_width","label":"Limit Heading Width","default": true},{"type":"header","content":"Section Settings"},{"type":"checkbox","id":"section_inverse","label":"Inverted Section","default":false},{"type":"select","id":"section_background_style","label":"Section Background Style","options":[{"value":"section-background-style-normal","label":"Normal"},{"value":"section-background-style-floating","label":"Floating"}],"default":"section-background-style-normal"},{"type":"select","id":"section_background_colour","label":"Section Background Colour","options":[{"value":"section-background-colour-normal","label":"Normal"},{"value":"section-background-colour-alt-100","label":"Alt (100)"},{"value":"section-background-colour-alt","label":"Alt"},{"value":"section-background-colour-alt-900","label":"Alt (900)"},{"value":"section-background-colour-surface-100","label":"Surface (100)"},{"value":"section-background-colour-surface","label":"Surface"},{"value":"section-background-colour-surface-900","label":"Surface (900)"}],"default":"section-background-colour-normal"},{"type":"select","id":"section_spacing","label":"Section Spacing","options":[{"value":"section-spacing-top-bottom","label":"Top & Bottom"},{"value":"section-spacing-top","label":"Top"},{"value":"section-spacing-bottom","label":"Bottom"},{"value":"section-spacing-none","label":"None"}],"default":"section-spacing-bottom"},{"type":"text","id":"custom_id","label":"Custom ID","placeholder":"id","info":"Assign a custom ID to this section, allowing you to easily reference it"},{"type": "checkbox","id": "section_visible","label":"Section Visible","default":true,"info": "Turning this off hides the section but doesn't remove it from the page."}
+    ],
+    "blocks": [
+      {
+        "type": "faq",
+        "name": "FAQ Item",
+        "settings": [
+          {
+            "type": "text",
+            "id": "category",
+            "label": "Category",
+            "placeholder": "Category",
+            "default": "General"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Question",
+            "placeholder": "Question",
+            "default": "Question"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Answer",
+            "default": "<p>Answer</p>"
+          }
+        ]
+      },
+      {
+        "type": "sticker",
+        "name": "Sticker",
+        "settings": [{"type":"image_picker","id":"image","label":"Image","info":"Main sticker image that will be displayed"},{"type":"select","id":"layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below","info":"Choose if the sticker should appear above or below the content"},{"type":"number","id":"width","label":"Width","default":128,"info":"Width of the sticker in pixels"},{"type":"number","id":"rotation","label":"Rotation","default":0,"info":"Rotate the sticker in degrees"},{"type":"header","content":"Position Settings"},{"type":"select","id":"horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left","info":"Choose horizontal position of the sticker"},{"type":"select","id":"vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content","info":"Choose vertical position of the sticker"},{"type":"number","id":"offset_x","label":"Horizontal Offset","default":0,"info":"Shift in pixels left or right from chosen horizontal position"},{"type":"number","id":"offset_y","label":"Vertical Offset","default":0,"info":"Shift in pixels up or down from chosen vertical position"},{"type":"header","content":"Override 1"},{"type":"select","id":"override_1_visibility","label":"Override Visibility","options":[{"value":"disabled","label":"Disabled"},{"value":"enabled","label":"Enabled"},{"value":"hidden","label":"Hidden"}],"default":"disabled","info":"Override settings are applied at the selected width and below"},{"type":"number","id":"override_1_page_width","label":"Page Width","default":1920,"info":"Screen width when this override will activate (and below)"},{"type":"image_picker","id":"override_1_image","label":"Image","info":"Override image for this screen size"},{"type":"select","id":"override_1_layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below"},{"type":"number","id":"override_1_width","label":"Width","default":128},{"type":"number","id":"override_1_rotation","label":"Rotation","default":0},{"type":"select","id":"override_1_horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"override_1_vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content"},{"type":"number","id":"override_1_offset_x","label":"Horizontal Offset","default":0},{"type":"number","id":"override_1_offset_y","label":"Vertical Offset","default":0},{"type":"header","content":"Override 2"},{"type":"select","id":"override_2_visibility","label":"Override Visibility","options":[{"value":"disabled","label":"Disabled"},{"value":"enabled","label":"Enabled"},{"value":"hidden","label":"Hidden"}],"default":"disabled","info":"Override settings are applied at the selected width and below"},{"type":"number","id":"override_2_page_width","label":"Page Width","default":1024,"info":"Screen width when this override will activate (and below)"},{"type":"image_picker","id":"override_2_image","label":"Image","info":"Override image for this screen size"},{"type":"select","id":"override_2_layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below"},{"type":"number","id":"override_2_width","label":"Width","default":128},{"type":"number","id":"override_2_rotation","label":"Rotation","default":0},{"type":"select","id":"override_2_horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"override_2_vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content"},{"type":"number","id":"override_2_offset_x","label":"Horizontal Offset","default":0},{"type":"number","id":"override_2_offset_y","label":"Vertical Offset","default":0},{"type":"header","content":"Override 3"},{"type":"select","id":"override_3_visibility","label":"Override Visibility","options":[{"value":"disabled","label":"Disabled"},{"value":"enabled","label":"Enabled"},{"value":"hidden","label":"Hidden"}],"default":"disabled","info":"Override settings are applied at the selected width and below"},{"type":"number","id":"override_3_page_width","label":"Page Width","default":600,"info":"Screen width when this override will activate (and below)"},{"type":"image_picker","id":"override_3_image","label":"Image","info":"Override image for this screen size"},{"type":"select","id":"override_3_layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below"},{"type":"number","id":"override_3_width","label":"Width","default":128},{"type":"number","id":"override_3_rotation","label":"Rotation","default":0},{"type":"select","id":"override_3_horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"override_3_vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content"},{"type":"number","id":"override_3_offset_x","label":"Horizontal Offset","default":0},{"type":"number","id":"override_3_offset_y","label":"Vertical Offset","default":0}]
+      }
+    ]
+  }
+{% endschema %}

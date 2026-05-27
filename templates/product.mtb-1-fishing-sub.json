@@ -1,0 +1,265 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "1d2c110911764569a9adcfa643dd4491_builder_io_FjnFV7": {
+      "type": "1d2c110911764569a9adcfa643dd4491-builder-io",
+      "name": "Lp intro",
+      "settings": {
+        "builder_content_entry_preview": "a0efdd7a6fd34632bb5c209fd67fd5b9"
+      }
+    },
+    "29d29873d5764a358293f24eb14bc13a_builder_io_99wmze": {
+      "type": "29d29873d5764a358293f24eb14bc13a-builder-io",
+      "name": "Lp features premium tackl",
+      "settings": {
+        "builder_content_entry_preview": "50c13cb32e93468fb7b2dc3f5d2e72ce"
+      }
+    },
+    "3c157c0c7cdc48bd963ed54c600c870e_builder_io_yQWV74": {
+      "type": "3c157c0c7cdc48bd963ed54c600c870e-builder-io",
+      "name": "Lp how it works",
+      "settings": {
+        "builder_content_entry_preview": "7d9e93a1be9848218f1ed0711c1649bb"
+      }
+    },
+    "780c4ef5d0b04f339883acd60c9d58b0_builder_io_VCXAQi": {
+      "type": "780c4ef5d0b04f339883acd60c9d58b0-builder-io",
+      "name": "Lp scroll to section",
+      "settings": {
+        "builder_content_entry_preview": "0ea28bb7a806429488ba5da47bc72b50"
+      }
+    },
+    "rich_text_J4Yq9x": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_LUrzg9": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>JOIN TODAY & SAVE $10</strong>",
+            "heading_size": "h1"
+          }
+        },
+        "text_6QxpKN": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Discount applied in cart • Limited time offer ends soon</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_LUrzg9",
+        "text_6QxpKN"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 32,
+        "padding_bottom": 12
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "uppercase": false,
+            "bold": true
+          }
+        },
+        "judge_me_reviews_preview_badge_zVTT3j": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "text_P4pECg": {
+          "type": "text",
+          "settings": {
+            "text": "SAVE $10 ON YOUR FIRST BOX",
+            "text_style": "body"
+          }
+        },
+        "price": {
+          "type": "price",
+          "disabled": true,
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "dropdown",
+            "swatch_shape": "custom",
+            "variant_img_size": 80,
+            "use_custom_variants": true,
+            "image_bass": "shopify://shop_images/selector-bass_95f5410e-2936-46e2-a48e-42141b394fac.png",
+            "image_multi": "shopify://shop_images/selector-multi-species_5f996b13-9ad0-4bb9-b736-142471b67a29.png",
+            "image_panfish": "shopify://shop_images/selector-panfish-trout_d315f9d2-3c97-487d-906e-c811195f9a2d.png",
+            "image_inshore": "shopify://shop_images/selector-salt_d4ac62b1-5e12-4572-9034-adcc4cc7c07f.png",
+            "image_walleye": "shopify://shop_images/selector-walleye_8d90356e-ba90-49d4-b2d1-fe5a51dd5018.png",
+            "image_ice": "shopify://shop_images/selector-ice_ab663ebc-b292-4287-ad24-27d06c413bc0.png",
+            "image_regular": "shopify://shop_images/regular-thumb.png",
+            "image_pro": "shopify://shop_images/replacement-box-pro.jpg"
+          }
+        },
+        "recharge_subscriptions_subscription_widget_v2_KyAH7U": {
+          "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "disabled": true,
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "judge_me_reviews_preview_badge_zVTT3j",
+        "text_P4pECg",
+        "price",
+        "variant_picker",
+        "recharge_subscriptions_subscription_widget_v2_KyAH7U",
+        "buy_buttons",
+        "description",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "disable_atc": false,
+        "color_scheme": "scheme-1",
+        "images_limit": 20,
+        "show_suggestions_only": false,
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "mobile_thumbnails": "hide",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "thumbnails_display": "show_all",
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "05ff3ea4b03149ac92a31900e741c791_builder_io_aP4R94": {
+      "type": "05ff3ea4b03149ac92a31900e741c791-builder-io",
+      "name": "Lp reviews anglers have s",
+      "settings": {
+        "builder_content_entry_preview": "9d0dd4b009b5464e9447d34c3b0c72c4"
+      }
+    },
+    "9612ea8ab4a74c6d81ba6020d52c6b28_builder_io_Xt4VXW": {
+      "type": "9612ea8ab4a74c6d81ba6020d52c6b28-builder-io",
+      "name": "Lp happiness in a box",
+      "settings": {
+        "builder_content_entry_preview": "3939f5ef1bea4292863291ab4e422398"
+      }
+    },
+    "577b480f398746e098ab411f3d70b3f5_builder_io_rNfhKW": {
+      "type": "577b480f398746e098ab411f3d70b3f5-builder-io",
+      "name": "Lp fa qs",
+      "settings": {
+        "builder_content_entry_preview": "b731f43919cc4df09f0a14683ffa0d7b"
+      }
+    },
+    "09d54519c2d543b5912e90035937cb70_builder_io_wr3YGf": {
+      "type": "09d54519c2d543b5912e90035937cb70-builder-io",
+      "name": "Lp comparison the differe",
+      "settings": {
+        "builder_content_entry_preview": "bbb9b15b6b834be1b40e095ea0ddf6f2"
+      }
+    },
+    "2a9a6f7c5cf8412f85c601f1ebddf9d8_builder_io_hyyAyK": {
+      "type": "2a9a6f7c5cf8412f85c601f1ebddf9d8-builder-io",
+      "name": "Lp testimonial grid",
+      "settings": {
+        "builder_content_entry_preview": "432bed4bf6274c968af0fa15e06b6f78"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "174542935609580c1d": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_NTxBXf": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_NTxBXf"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "1d2c110911764569a9adcfa643dd4491_builder_io_FjnFV7",
+    "29d29873d5764a358293f24eb14bc13a_builder_io_99wmze",
+    "3c157c0c7cdc48bd963ed54c600c870e_builder_io_yQWV74",
+    "780c4ef5d0b04f339883acd60c9d58b0_builder_io_VCXAQi",
+    "rich_text_J4Yq9x",
+    "main",
+    "05ff3ea4b03149ac92a31900e741c791_builder_io_aP4R94",
+    "9612ea8ab4a74c6d81ba6020d52c6b28_builder_io_Xt4VXW",
+    "577b480f398746e098ab411f3d70b3f5_builder_io_rNfhKW",
+    "09d54519c2d543b5912e90035937cb70_builder_io_wr3YGf",
+    "2a9a6f7c5cf8412f85c601f1ebddf9d8_builder_io_hyyAyK",
+    "related-products",
+    "174542935609580c1d"
+  ]
+}

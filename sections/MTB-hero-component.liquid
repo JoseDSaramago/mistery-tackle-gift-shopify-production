@@ -1,0 +1,684 @@
+{{ 'section-MTB-hero.css' | asset_url | stylesheet_tag }}
+
+<section class="hero-component header_font">
+  <style>
+    .hero-component__img-wrap-{{ section.id }} {
+      min-height: {{ section.settings.image_mobile_height }}px;
+      height: {{ section.settings.image_mobile_height }}px;
+      margin-bottom: {{ section.settings.component_mobile_mb }}px;
+      margin-top: {{ section.settings.component_mobile_mt }}px;
+    }
+
+    @media screen and (min-width: 641px)  and (max-width: 989px) {
+       .hero-component__img-wrap-{{ section.id }} {
+         min-height: {{ section.settings.component_desktop_mb }}px;
+         margin-bottom: {{ section.settings.component_tablet_mb }}px;
+         margin-top: {{ section.settings.component_tablet_mt }}px;
+       }
+     }
+
+     @media screen and (min-width: 989px) {
+       .hero-component__img-wrap-{{ section.id }} {
+         margin-bottom: {{ section.settings.component_desktop_mb }}px;
+         margin-top: {{ section.settings.component_desktop_mt }}px;
+       }
+     }
+  </style>
+  <div
+    class="hero-component__img-wrap hero-component__img-wrap-{{ section.id }}"
+    style="background-color:{{ section.settings.img-bg-color }}"
+  >
+    {%- if section.settings.img_mw != blank -%}
+      {{
+        section.settings.img_mw
+        | image_url: width: '2000'
+        | image_tag:
+          loading: 'lazy',
+          widths: '2000',
+          height: section.settings.image_mobile_height,
+          class: 'lazyload mobile hero-component__img'
+      }}
+    {%- endif -%}
+    {%- if section.settings.img != blank -%}
+      {{
+        section.settings.img
+        | image_url: width: '2000'
+        | image_tag:
+          loading: 'lazy',
+          widths: '2000',
+          height: section.settings.image_desktop_height,
+          class: 'lazyload tablet-desktop hero-component__img'
+      }}
+    {%- endif -%}
+
+    <div class="hero-content page-width" style="color: {{ section.settings.text-color }}">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            {% render block %}
+          {%- when 'banner' -%}
+            <style>
+              .hero-component__banner {
+                background-color: {{ block.settings.banner_bg_color }};
+                color: {{ block.settings.banner_color }};
+              }
+
+              .banner_img {
+                width: {{ block.settings.banner_img_mobile_width }}px;
+                height: auto;
+              }
+
+              .hero-component__banner-text a {
+                color: {{ block.settings.banner_color }};
+              }
+
+              .hero-component__banner-text {
+                padding-left: {{ block.settings.banner_img_mobile_width }}px;
+
+              }
+
+              @media screen and (min-width: 641px) {
+                .hero-component__banner {
+                  width: {{ block.settings.banner_width }}px;
+                }
+
+                .banner_img {
+                  width: {{ block.settings.banner_img_width }}px;
+                  height: auto;
+                }
+
+                .hero-component__banner-text {
+                  padding-left: 0;
+                  padding-right: {{ block.settings.banner_img_width }}px;
+                }
+              }
+            </style>
+            <div class="hero-component__banner">
+              {%- if block.settings.banner_img != blank -%}
+                {{
+                  block.settings.banner_img
+                  | image_url: width: '200'
+                  | image_tag: loading: 'lazy', widths: '200', class: 'lazyload banner_img'
+                }}
+              {%- endif -%}
+              <div class="hero-component__banner-text">
+                {{ block.settings.banner_text }}
+              </div>
+            </div>
+          {%- when 'text' -%}
+            <style>
+              .text-block-wrap-{{ block.id }} {
+                padding-top: {{ block.settings.text_mobile_pt }}px;
+              }
+            </style>
+
+            <div class="text-block-wrap-{{ block.id }} text-block-wrap">
+              {% if block.settings.subtitle != blank %}
+                <div class="hero_subtitle">
+                  <h3>{{ block.settings.subtitle }}</h3>
+                </div>
+              {% endif %}
+              {% if block.settings.title != blank %}
+                <div class="hero_title {{ block.settings.title_size }}">
+                  <h1>{{ block.settings.title }}</h1>
+                </div>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <div class="hero_text_wrap">
+                  {{ block.settings.text }}
+                </div>
+              {% endif %}
+              {% if block.settings.button_text != blank %}
+                <div class="hero_btn_wrap">
+                  <a class="mtb-button primary-button big_btn header_font" href="{{ block.settings.button_url }}">
+                    {% if block.settings.button_mobile_text != blank %}
+                      <span class="mobile">{{ block.settings.button_mobile_text }}</span>
+                    {% endif %}
+                    {% if block.settings.button_text != blank %}
+                      <span class="tablet-desktop">{{ block.settings.button_text }}</span>
+                    {% endif %}
+                  </a>
+                </div>
+              {% endif %}
+              {% if block.settings.link_text != blank %}
+                <div class="hero_link_wrap">
+                  <a class="hero_link" href="{{ block.settings.link_url }}">{{ block.settings.link_text }} →</a>
+                </div>
+              {% endif %}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'bottom-image' -%}
+          <style>
+            .img-btm_container-{{ block.id }} {
+              bottom: {{ block.settings.img_btm_mobile_position_direction }}{{ block.settings.img_btm_mobile_position }}px;
+            }
+
+            .img-btm_container-{{ block.id }} .slide-up,
+            .img-btm_container-{{ block.id }} .slide-left,
+            .img-btm_container-{{ block.id }} .slide-right {
+                animation-delay: {{ block.settings.img_btm_animation_delay }}ms;
+              }
+
+            .img-btm_container-{{ block.id }} .hero-component__btm_img {
+              width: {{ block.settings.img_btm_mobile_width }}px;
+            }
+
+            @media screen and (min-width: 641px)  and (max-width: 989px) {
+              .img-btm_container-{{ block.id }} {
+                bottom: {{ block.settings.img_btm_tablet_position_direction }}{{ block.settings.img_btm_tablet_position }}px;
+              }
+
+              .img-btm_container-{{ block.id }} .hero-component__btm_img {
+                width: {{ block.settings.img_tablet_width }}px;
+              }
+            }
+
+            @media screen and (min-width: 989px) {
+              .img-btm_container-{{ block.id }}.img-btm_container {
+                bottom: {{ block.settings.img_btm_tablet_desktop_direction }}{{ block.settings.img_btm_desktop_position }}px;
+
+                {% if block.settings.img_animation == 'slide-left' %}
+                  left: auto;
+                  transform: none;
+                  right: {{ block.settings.img_btm_desktop_left_right_indent }}%;
+                {% endif %}
+
+                {% if block.settings.img_animation == 'slide-right' %}
+                  left: {{ block.settings.img_btm_desktop_left_right_indent }}%;
+                  transform: none;
+                {% endif %}
+
+              }
+
+              .img-btm_container-{{ block.id }} .img-btm-wrap {
+
+              }
+
+              .img-btm_container-{{ block.id }} .hero-component__btm_img {
+                width: {{ block.settings.img_desktop_width }}px;
+
+                {% if block.settings.img_animation == 'slide-left' %}
+                  /* margin-right: calc({{ block.settings.img_desktop_width }}px + 190px); */
+                {% endif %}
+
+
+              }
+            }
+          </style>
+
+          {% if block.settings.bottom_img != blank %}
+            <div class="img-btm_container img-btm_container-{{ block.id }} page-width">
+              <div
+                class="
+                  img-btm-wrap {{ block.settings.img_animation }}
+                  {% if block.settings.show_on_mobile %} d-mobile{% endif %}
+                  {% if block.settings.show_on_tablet %} d-tablet{% endif %}
+                "
+              >
+                {{
+                  block.settings.bottom_img
+                  | image_url: width: '600'
+                  | image_tag: loading: 'lazy', widths: '600', height: 'auto', class: 'lazyload hero-component__btm_img'
+                }}
+              </div>
+            </div>
+          {% endif %}
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MTB Hero",
+  "settings": [
+    {
+      "type": "color",
+      "id": "text-color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "img-bg-color",
+      "label": "Image background color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_mw",
+      "label": "Image mobile"
+    },
+    {
+      "type": "range",
+      "id": "image_mobile_height",
+      "label": "Image mobile height",
+      "min": 300,
+      "max": 700,
+      "step": 5,
+      "unit": "px",
+      "default": 630
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_mt",
+      "label": "Component mobile margin top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_mb",
+      "label": "Component mobile margin bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Tablet Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_mt",
+      "label": "Component tablet margin top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_mb",
+      "label": "Component tablet margin bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "img",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_desktop_height",
+      "label": "Image desktop height",
+      "min": 300,
+      "max": 700,
+      "step": 5,
+      "unit": "px",
+      "default": 550
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_mt",
+      "label": "Component desktop margin top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_mb",
+      "label": "Component desktop margin bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "banner",
+      "name": "Banner",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "banner_text",
+          "label": "Banner text"
+        },
+        {
+          "type": "color",
+          "id": "banner_color",
+          "label": "Banner text color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "banner_bg_color",
+          "label": "Banner background color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "banner_width",
+          "label": "Banner desktop width",
+          "min": 400,
+          "max": 600,
+          "step": 2,
+          "unit": "px",
+          "default": 400
+        },
+        {
+          "type": "image_picker",
+          "id": "banner_img",
+          "label": "Banner Image"
+        },
+        {
+          "type": "range",
+          "id": "banner_img_width",
+          "label": "Banner Image width",
+          "min": 80,
+          "max": 200,
+          "step": 2,
+          "unit": "px",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "banner_img_mobile_width",
+          "label": "Banner Image Mobile width",
+          "min": 60,
+          "max": 160,
+          "step": 2,
+          "unit": "px",
+          "default": 100
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "subtitle",
+          "label": "Section subtitle"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Section title"
+        },
+        {
+          "type": "select",
+          "id": "title_size",
+          "label": "Section title font size",
+          "options": [
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ],
+          "default": "large"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Section text"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "SHOP NOW"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "button_mobile_text",
+          "label": "Button Mobile text",
+          "default": "SHOP BOXES"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button url"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "link_text",
+          "label": "Link text",
+          "default": "Send a Gift"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link url"
+        },
+        {
+          "type": "range",
+          "id": "text_mobile_pt",
+          "label": "Mobile padding top",
+          "min": 0,
+          "max": 200,
+          "step": 2,
+          "unit": "px",
+          "default": 50
+        }
+      ]
+    },
+    {
+      "type": "bottom-image",
+      "name": "Bottom Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "bottom_img",
+          "label": "Image"
+        },
+        {
+          "type": "header",
+          "content": "Mobile Image Settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on mobile",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "img_btm_mobile_width",
+          "label": "Image mobile width",
+          "min": 300,
+          "max": 700,
+          "step": 5,
+          "unit": "px",
+          "default": 550
+        },
+        {
+          "type": "range",
+          "id": "img_btm_mobile_position",
+          "label": "Image bottom mobile position",
+          "min": 0,
+          "max": 200,
+          "step": 2,
+          "unit": "px",
+          "default": 50
+        },
+        {
+          "type": "select",
+          "id": "img_btm_mobile_position_direction",
+          "label": "Image Mobile Position Direction",
+          "options": [
+            {
+              "value": "",
+              "label": "Up"
+            },
+            {
+              "value": "-",
+              "label": "Down"
+            }
+          ],
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Tablet Image Settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_tablet",
+          "label": "Show on tablet",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "img_tablet_width",
+          "label": "Image tablet width",
+          "min": 300,
+          "max": 700,
+          "step": 5,
+          "unit": "px",
+          "default": 550
+        },
+        {
+          "type": "range",
+          "id": "img_btm_tablet_position",
+          "label": "Image bottom tablet position",
+          "min": 0,
+          "max": 200,
+          "step": 2,
+          "unit": "px",
+          "default": 50
+        },
+        {
+          "type": "select",
+          "id": "img_btm_tablet_position_direction",
+          "label": "Image Tablet Position Direction",
+          "options": [
+            {
+              "value": "",
+              "label": "Up"
+            },
+            {
+              "value": "-",
+              "label": "Down"
+            }
+          ],
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Desktop Image Settings"
+        },
+        {
+          "type": "range",
+          "id": "img_desktop_width",
+          "label": "Image desktop width",
+          "min": 200,
+          "max": 600,
+          "step": 5,
+          "unit": "px",
+          "default": 550
+        },
+        {
+          "type": "range",
+          "id": "img_btm_desktop_position",
+          "label": "Image bottom desktop position",
+          "min": 0,
+          "max": 200,
+          "step": 2,
+          "unit": "px",
+          "default": 50
+        },
+        {
+          "type": "select",
+          "id": "img_btm_tablet_desktop_direction",
+          "label": "Image Desktop Position Direction",
+          "options": [
+            {
+              "value": "",
+              "label": "Up"
+            },
+            {
+              "value": "-",
+              "label": "Down"
+            }
+          ],
+          "default": ""
+        },
+        {
+          "type": "select",
+          "id": "img_animation",
+          "label": "Image Animation Direction",
+          "options": [
+            {
+              "value": "slide-left",
+              "label": "Left"
+            },
+            {
+              "value": "slide-up",
+              "label": "Up"
+            },
+            {
+              "value": "slide-right",
+              "label": "Right"
+            }
+          ],
+          "default": "slide-up"
+        },
+        {
+          "type": "range",
+          "id": "img_btm_desktop_left_right_indent",
+          "label": "Image bottom desktop Left/Right indent",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "img_btm_animation_delay",
+          "label": "Image animation delay",
+          "min": 250,
+          "max": 1500,
+          "step": 250,
+          "unit": "ms",
+          "default": 250
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTB Hero"
+    }
+  ]
+}
+{% endschema %}

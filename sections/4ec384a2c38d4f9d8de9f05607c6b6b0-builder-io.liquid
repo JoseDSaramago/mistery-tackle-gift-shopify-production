@@ -1,0 +1,42 @@
+{% if request.design_mode and section.settings.builder_content_entry_preview == '983ca74646be4722b75f8f2610f7fa9c' %}
+{% include 'content.983ca74646be4722b75f8f2610f7fa9c.builder' %}
+  {% else %}
+    {% include 'model.hp-hero.builder' %}
+  {% endif %}
+  
+  {% schema %}
+   {
+  "name": "HP | Hero Section",
+  "tag": "section",
+  "settings":[
+    {
+      "type": "header",
+      "content": "Custom Builder.io Section"
+    },
+    {
+      "type": "paragraph",
+      "content": "To edit and customize this section, visit the [model in Builder](https://builder.io/content?model=4ec384a2c38d4f9d8de9f05607c6b6b0). To learn more about how sections in Builder work with Shopify, [visit the docs](https://www.builder.io/c/docs/shopify/sections-everywhere)."
+    },
+    {
+      "type": "select",
+      "id": "builder_content_entry_preview",
+      "label": "Content Entry Preview",
+      "info": "Targeting is not used while previewing sections in the Shopify theme editor, meaning this preview will not change based on the targeting you have set. If you are using targeting, you need to manually select an entry to preview it. This setting only affects the preview, not what displays on your live site.",
+      "options": [
+        { "value": "983ca74646be4722b75f8f2610f7fa9c", "label": "HP | Hero - MTB Field Kit GWP"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Builder entries used"
+    },
+    {
+    "type": "paragraph",
+    "content": "Name: HP | Hero - MTB Field Kit GWP. Targeting: no targeting. Visit the [entry in Builder](https://builder.io/content/983ca74646be4722b75f8f2610f7fa9c)"
+  }
+  ],
+  "presets":[{
+    "name": "HP | Hero Section"
+  }]
+}
+  {% endschema %}

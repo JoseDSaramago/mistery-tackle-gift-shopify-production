@@ -1,0 +1,568 @@
+{% assign id = section.settings.custom_id | default: section.id %}
+
+{% assign product = all_products[section.settings.product] %}
+
+<style>
+  #{{ id }} .ante-section-content {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-small);
+    align-items: flex-start;
+    max-width: var(--width-10);
+  }
+
+  #{{ id }} .section-left {
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - var(--spacing-small) / 2);
+    position: sticky;
+    top: var(--sticky-top);
+    transition: top .25s;
+    gap: var(--spacing-x-small);
+  }
+
+  @media (max-height: 1100px) {
+    #{{ id }} .section-left {
+      max-width: 720px;
+    }
+  }
+
+  @media (max-height: 930px) {
+    #{{ id }} .section-left {
+      max-width: 600px;
+    }
+  }
+
+  #{{ id }} .section-right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: var(--spacing-medium);
+  }
+
+  #{{ id }} .section-right-top {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-x-small);
+  }
+
+  #{{ id }} .section-right-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--micropad-x-large);
+  }
+
+  #{{ id }} .facts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--micropad-medium);
+    margin-top: calc(var(--spacing-medium) * -1);
+    padding-top: var(--spacing-x-small);
+  }
+
+  #{{ id }} .fact {
+    display: flex;
+    gap: var(--micropad-x-small);
+    align-items: center;
+  }
+
+  #{{ id }} .fact .ante-image {
+    min-width: 54px;
+  }
+
+  @media (max-width: 1919px) {
+    #{{ id }} .ante-section-content {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    #{{ id }} .ante-section-content {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--spacing-medium);
+    }
+
+    #{{ id }} .ante-section-content > div {
+      display: contents !important;
+    }
+
+    #{{ id }} .ante-section-content > div > * {
+      order: 10;
+    }
+
+    #{{ id }} .section-right-top {
+      order: 0 !important;
+    }
+
+    #{{ id }} .section-right > *:not(.section-right-top) {
+      max-width: 100%;
+      width: var(--width-6);
+      margin: 0 auto;
+    }
+
+    #{{ id }} h2 {
+      text-align: center;
+    }
+
+    #{{ id }} .review-stars {
+      justify-content: center;
+    }
+
+    #{{ id }} .facts {
+      align-self: center;
+      margin-top: 0;
+      padding-top: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    #{{ id }} .section-right > * {
+      width: 100% !important;
+    }
+  }
+</style>
+
+<style>
+  #{{ id }} .buy-box {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-small);
+  }
+
+  #{{ id }} .buy-box-quantities {
+    display: flex;
+    gap: var(--spacing-x-small);
+  }
+
+  #{{ id }} .buy-box-quantities input {
+    display: none;
+  }
+
+  #{{ id }} .buy-box-quantities label {
+    flex: 1 1 auto;
+    background-color: var(--color-surface-100);
+    border: 1px solid var(--color-border);
+    outline: 3px solid transparent;
+    transition: border .15s, outline .15s;
+    cursor: pointer;
+    border-radius: var(--radius-large);
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    overflow: hidden;
+  }
+
+  #{{ id }} .buy-box-quantities label:hover {
+    outline: 3px solid var(--color-border);
+  }
+
+  #{{ id }} .buy-box-quantities input:checked + label {
+    border: 1px solid var(--color-border-alt);
+    outline: 3px solid var(--color-border-alt);
+  }
+
+  #{{ id }} .buy-box-quantities .label {
+    text-align: center;
+    padding: var(--micropad-small) var(--spacing-x-small);
+    color: var(--inverse-color-text-default);
+    background-color: var(--color-sale);
+  }
+
+  #{{ id }} .quantity-content {
+    padding: var(--padding-small) var(--spacing-x-small);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    flex: 1;
+  }
+
+  #{{ id }} .price-row {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  #{{ id }} .price-row .body-caption {
+    margin-right: var(--micropad-x-small);
+  }
+
+  #{{ id }} .price-row .callout-price {
+    color: var(--color-border-alt);
+  }
+
+  #{{ id }} .price-row .callout-price:not(:last-child) {
+    margin-right: var(--spacing-x-small);
+  }
+
+  #{{ id }} .sold {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--micropad-medium);
+    margin-top: calc(var(--spacing-small) * -1);
+    padding-top: var(--spacing-x-small);
+  }
+
+  #{{ id }} .sold-count {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-family: var(--font-heading);
+    font-size: 17.462px;
+    font-weight: 900;
+  }
+
+  #{{ id }} .sold-count > div {
+    border: 1px solid var(--color-text-default);
+    height: 20px;
+    width: 15px;
+    border-radius: 3.629px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-surface-100);
+  }
+
+  @media (max-width: 600px) {
+    #{{ id }} .sold {
+      flex-direction: column;
+      gap: var(--micropad-x-small);
+    }
+  }
+</style>
+
+{% render "ante-section-structure", section: section %}
+  <div class="section-left">
+    {% assign final_urls = "" %}
+
+    {% for block in section.blocks %}
+      {% if block.type == "image" and block.settings.position == "before" %}
+        {% assign url = block.settings.image | image_url: width: 1024 %}
+        {% assign final_urls = final_urls | append: url | append: "|||" %}
+      {% endif %}
+    {% endfor %}
+
+    {% if section.settings.show_product_images_in_carousel %}
+      {% for image in product.images %}
+        {% assign url = image | image_url: width: 1024 %}
+        {% assign final_urls = final_urls | append: url | append: "|||" %}
+      {% endfor %}
+    {% endif %}
+
+    {% for block in section.blocks %}
+      {% if block.type == "image" and block.settings.position == "after" %}
+        {% assign url = block.settings.image | image_url: width: 1024 %}
+        {% assign final_urls = final_urls | append: url | append: "|||" %}
+      {% endif %}
+    {% endfor %}
+
+    {% assign final_urls = final_urls | split: "|||" | compact %}
+    
+    {% render "ante-image-carousel", images: final_urls, id: id %}
+  </div>
+  <div class="section-right">
+    <div class="section-right-top">
+      <div class="section-right-header">
+        {% render "ante-stars", rating: section.settings.star_rating, text: section.settings.star_review_text, link: section.settings.star_link %}
+        <h2>{{ section.settings.custom_heading }}</h2>
+      </div>
+    </div>
+    {% for block in section.blocks %}
+      {% if block.type == "fact" %}
+        {% assign has_facts = true %}
+      {% endif %}
+    {% endfor %}
+    {% if has_facts %}
+      <div class="facts">
+        {% for block in section.blocks %}
+          {% if block.type == "fact" %}
+            <div class="fact">
+              {% render "ante-image", image: block.settings.icon, width: 54 %}
+              <span>{{ block.settings.fact }}</span>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+    <div class="buy-box">
+      <div class="buy-box-quantities">
+        {% for block in section.blocks %}
+          {% if block.type == "quantity" %}
+            <input type="radio" name="quantity" id="{{ block.id }}" value="{{ block.settings.quantity }}"{% if block.settings.preselected %} checked{% endif %}>
+            <label for="{{ block.id }}">
+              {% if block.settings.label != blank %}
+                <div class="label body-caption alt">{{ block.settings.label }}</div>
+              {% endif %}
+              <div class="quantity-content">
+                <h6 class="quantity-name">{{ block.settings.quantity }} {{ block.settings.name }}</h6>
+                <div class="quantity-price body-caption alt">{{ block.settings.price_text }}</div>
+              </div>
+            </label>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="buy-box-prices">
+        {% for block in section.blocks %}
+          {% if block.type == "quantity" %}
+            <div class="price-row" id="price-{{ block.id }}" {% unless block.settings.preselected %} hidden{% endunless %}>
+              {% if block.settings.compare_price != blank %}
+                <div class="body-caption alt muted">Total Value:</div>
+                <div class="callout-price large strikethrough">{{ block.settings.compare_price }}</div>
+              {% endif %}
+              <div class="body-caption alt muted">Price:</div>
+              <div class="callout-price large">{{ block.settings.price }}</div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% render "ante-buy-button" %}
+      <div class="sold">
+        <div class="sold-count">
+          {% assign chars = section.settings.sold_count | split: "" %}
+          {% for c in chars %}
+            {% if c >= "0" and c <= "9" %}
+              <div>{{ c }}</div>
+            {% else %}
+              {{ c }}
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="body-caption alt">{{ section.settings.sold_text }}</div>
+      </div>
+    </div>
+    {% render "ante-drops", blocks: section.blocks, type: "drop" %}
+  </div>
+{% render "ante-section-structure", end: true %}
+
+<script type="module">
+  document.querySelectorAll("#{{ id }} input[name='quantity']").forEach(input => {
+    input.addEventListener("change", evt => {
+      document.querySelectorAll("#{{ id }} .buy-box-prices .price-row").forEach(e => e.hidden = true)
+      document.querySelector("#{{ id }} #price-" + evt.target.id).hidden = false
+    })
+  })
+
+  document.querySelectorAll("buy-button").forEach((button, i) => button.addEventListener("click", async e => {
+    if (!button.closest("#{{ id }}")) {
+      smoothScroll(document.querySelector("#{{ id }} .buy-box"))
+      return
+    }
+
+    const quantityInput = document.querySelector("#{{ id }} input[name='quantity']:checked")
+    const quantity = quantityInput ? parseInt(quantityInput.value, 10) : 1
+
+    button.loading = true
+    await fetch("/cart/clear")
+
+    const r = await fetch("/cart/add.js", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id: {{ product.selected_or_first_available_variant.id }},
+        quantity
+      })
+    })
+
+    if (!r.ok) {
+      button.loading = false
+      throw `Failed to add to cart: ${await r.text()}`
+    }
+
+    button.loading = false
+    location = "/checkout"
+  }))
+</script>
+
+{% schema %}
+  {
+    "name": "Advent Buybox [L]",
+    "presets": [
+      {
+        "name": "Advent Buybox [L]"
+      }
+    ],
+    "settings": [
+      {
+        "type": "product",
+        "id": "product",
+        "label": "Product"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_product_images_in_carousel",
+        "label": "Show Product Images In Carousel",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "star_rating",
+        "label": "Star Rating",
+        "min": 0,
+        "max": 5,
+        "step": 0.5,
+        "default": 4.5
+      },
+      {
+        "type": "text",
+        "id": "star_review_text",
+        "label": "Star Review Text",
+        "default": "(1,000)"
+      },
+      {
+        "type": "url",
+        "id": "star_link",
+        "label": "Star Link"
+      },
+      {
+        "type": "text",
+        "id": "custom_heading",
+        "label": "Custom Heading",
+        "default": "Custom Heading",
+        "placeholder": "Custom Heading"
+      },
+      {
+        "type": "text",
+        "id": "sold_count",
+        "label": "Sold Count",
+        "default": "1,000",
+        "placeholder": "1,000"
+      },
+      {
+        "type": "text",
+        "id": "sold_text",
+        "label": "Sold Text",
+        "default": "items sold",
+        "placeholder": "items sold"
+      },
+      {"type":"header","content":"Section Heading"},{"type":"richtext","id":"heading","label":"Heading"},{"type":"select","id":"heading_alignment","label":"Heading Alignment","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"},{"value":"row","label":"Row"}],"default":"center"},{"type":"select","id":"heading_alignment_mobile","label":"Heading Alignment (Mobile)","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"center"},{"type":"checkbox","id":"limit_heading_width","label":"Limit Heading Width","default": true},{"type":"header","content":"Section Settings"},{"type":"checkbox","id":"section_inverse","label":"Inverted Section","default":false},{"type":"select","id":"section_background_style","label":"Section Background Style","options":[{"value":"section-background-style-normal","label":"Normal"},{"value":"section-background-style-floating","label":"Floating"}],"default":"section-background-style-normal"},{"type":"select","id":"section_background_colour","label":"Section Background Colour","options":[{"value":"section-background-colour-normal","label":"Normal"},{"value":"section-background-colour-alt-100","label":"Alt (100)"},{"value":"section-background-colour-alt","label":"Alt"},{"value":"section-background-colour-alt-900","label":"Alt (900)"},{"value":"section-background-colour-surface-100","label":"Surface (100)"},{"value":"section-background-colour-surface","label":"Surface"},{"value":"section-background-colour-surface-900","label":"Surface (900)"}],"default":"section-background-colour-normal"},{"type":"select","id":"section_spacing","label":"Section Spacing","options":[{"value":"section-spacing-top-bottom","label":"Top & Bottom"},{"value":"section-spacing-top","label":"Top"},{"value":"section-spacing-bottom","label":"Bottom"},{"value":"section-spacing-none","label":"None"}],"default":"section-spacing-bottom"},{"type":"text","id":"custom_id","label":"Custom ID","placeholder":"id","info":"Assign a custom ID to this section, allowing you to easily reference it"},{"type": "checkbox","id": "section_visible","label":"Section Visible","default":true,"info": "Turning this off hides the section but doesn't remove it from the page."}
+    ],
+    "blocks": [
+      {
+        "name": "Carousel Image",
+        "type": "image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "select",
+            "id": "position",
+            "label": "Position",
+            "options": [
+              {
+                "value": "before",
+                "label": "Before"
+              },
+              {
+                "value": "after",
+                "label": "After"
+              }
+            ],
+            "default": "after",
+            "info": "Should the image appear before or after the product images"
+          }
+        ]
+      },
+      {
+        "name": "Fact",
+        "type": "fact",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Icon"
+          },
+          {
+            "type": "text",
+            "id": "fact",
+            "label": "Fact",
+            "default": "Fact",
+            "placeholder": "Fact"
+          }
+        ]
+      },
+      {
+        "name": "Quantity Option",
+        "type": "quantity",
+        "settings": [
+          {
+            "type": "number",
+            "id": "quantity",
+            "label": "Quantity",
+            "default": 1
+          },
+          {
+            "type": "text",
+            "id": "label",
+            "label": "Label",
+            "placeholder": "Label"
+          },
+          {
+            "type": "text",
+            "id": "name",
+            "label": "Name",
+            "default": "Name",
+            "placeholder": "Name"
+          },
+          {
+            "type": "text",
+            "id": "price_text",
+            "label": "Price Text",
+            "default": "Price Text",
+            "placeholder": "Price Text"
+          },
+          {
+            "type": "text",
+            "id": "price",
+            "label": "Price",
+            "default": "Price",
+            "placeholder": "Price"
+          },
+          {
+            "type": "text",
+            "id": "compare_price",
+            "label": "Compare Price",
+            "default": "Compare Price",
+            "placeholder": "Compare Price"
+          },
+          {
+            "type": "checkbox",
+            "id": "preselected",
+            "label": "Preselected",
+            "default": false
+          }
+        ]
+      },
+      {
+        "name": "Drop",
+        "type": "drop",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Title",
+            "placeholder": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content",
+            "default": "<p>Content</p>"
+          }
+        ]
+      },
+      {
+        "type": "sticker",
+        "name": "Sticker",
+        "settings": [{"type":"image_picker","id":"image","label":"Image","info":"Main sticker image that will be displayed"},{"type":"select","id":"layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below","info":"Choose if the sticker should appear above or below the content"},{"type":"number","id":"width","label":"Width","default":128,"info":"Width of the sticker in pixels"},{"type":"number","id":"rotation","label":"Rotation","default":0,"info":"Rotate the sticker in degrees"},{"type":"header","content":"Position Settings"},{"type":"select","id":"horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left","info":"Choose horizontal position of the sticker"},{"type":"select","id":"vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content","info":"Choose vertical position of the sticker"},{"type":"number","id":"offset_x","label":"Horizontal Offset","default":0,"info":"Shift in pixels left or right from chosen horizontal position"},{"type":"number","id":"offset_y","label":"Vertical Offset","default":0,"info":"Shift in pixels up or down from chosen vertical position"},{"type":"header","content":"Override 1"},{"type":"select","id":"override_1_visibility","label":"Override Visibility","options":[{"value":"disabled","label":"Disabled"},{"value":"enabled","label":"Enabled"},{"value":"hidden","label":"Hidden"}],"default":"disabled","info":"Override settings are applied at the selected width and below"},{"type":"number","id":"override_1_page_width","label":"Page Width","default":1920,"info":"Screen width when this override will activate (and below)"},{"type":"image_picker","id":"override_1_image","label":"Image","info":"Override image for this screen size"},{"type":"select","id":"override_1_layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below"},{"type":"number","id":"override_1_width","label":"Width","default":128},{"type":"number","id":"override_1_rotation","label":"Rotation","default":0},{"type":"select","id":"override_1_horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"override_1_vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content"},{"type":"number","id":"override_1_offset_x","label":"Horizontal Offset","default":0},{"type":"number","id":"override_1_offset_y","label":"Vertical Offset","default":0},{"type":"header","content":"Override 2"},{"type":"select","id":"override_2_visibility","label":"Override Visibility","options":[{"value":"disabled","label":"Disabled"},{"value":"enabled","label":"Enabled"},{"value":"hidden","label":"Hidden"}],"default":"disabled","info":"Override settings are applied at the selected width and below"},{"type":"number","id":"override_2_page_width","label":"Page Width","default":1024,"info":"Screen width when this override will activate (and below)"},{"type":"image_picker","id":"override_2_image","label":"Image","info":"Override image for this screen size"},{"type":"select","id":"override_2_layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below"},{"type":"number","id":"override_2_width","label":"Width","default":128},{"type":"number","id":"override_2_rotation","label":"Rotation","default":0},{"type":"select","id":"override_2_horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"override_2_vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content"},{"type":"number","id":"override_2_offset_x","label":"Horizontal Offset","default":0},{"type":"number","id":"override_2_offset_y","label":"Vertical Offset","default":0},{"type":"header","content":"Override 3"},{"type":"select","id":"override_3_visibility","label":"Override Visibility","options":[{"value":"disabled","label":"Disabled"},{"value":"enabled","label":"Enabled"},{"value":"hidden","label":"Hidden"}],"default":"disabled","info":"Override settings are applied at the selected width and below"},{"type":"number","id":"override_3_page_width","label":"Page Width","default":600,"info":"Screen width when this override will activate (and below)"},{"type":"image_picker","id":"override_3_image","label":"Image","info":"Override image for this screen size"},{"type":"select","id":"override_3_layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below"},{"type":"number","id":"override_3_width","label":"Width","default":128},{"type":"number","id":"override_3_rotation","label":"Rotation","default":0},{"type":"select","id":"override_3_horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"override_3_vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content"},{"type":"number","id":"override_3_offset_x","label":"Horizontal Offset","default":0},{"type":"number","id":"override_3_offset_y","label":"Vertical Offset","default":0}]
+      }
+    ]
+  }
+{% endschema %}

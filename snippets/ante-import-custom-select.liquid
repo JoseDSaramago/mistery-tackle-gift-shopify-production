@@ -1,0 +1,242 @@
+<style>
+  custom-select {
+    --color-custom-select-background: var(--color-surface-alt-100);
+    --color-custom-select-background-active: var(--color-surface-alt-900);
+    --color-custom-select-text: var(--color-text-default);
+    --color-custom-select-text-active: var(--color-text-alt);
+    position: relative;
+  }
+
+  custom-select .select-button,
+  custom-select .select-drop > div {
+    display: flex;
+    padding: var(--micropad-large) var(--micropad-x-large);
+    background-color: var(--color-custom-select-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-large);
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    gap: var(--micropad-x-large);
+    color: var(--color-custom-select-text);
+    transition: color .15s, background-color .15s, border .15s;
+  }
+
+  custom-select .select-button .spacer,
+  custom-select .select-drop > div .spacer {
+    margin-left: calc(var(--spacing-small) * -1);
+  }
+
+  custom-select .select-button > svg {
+    fill: var(--color-custom-select-text);
+    min-width: 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+  custom-select .select-button:hover,
+  custom-select .select-button:hover *,
+  custom-select .select-drop > div:hover,
+  custom-select .select-drop > div:hover * {
+    color: var(--color-custom-select-text-active);
+  }
+
+  custom-select .select-drop > div:hover {
+    background-color: var(--color-custom-select-background-active);
+  }
+
+  custom-select .select-button.active > svg {
+    rotate: 180deg;
+  }
+
+  custom-select .select-drop {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(calc(100% + 5px));
+    left: 0;
+    right: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+    z-index: 99;
+    overflow: hidden;
+    box-shadow: 0 4px 16px #0002;
+  }
+
+  custom-select .select-drop > div {
+    border: none;
+    border-radius: 0;
+    border-top: 1px solid var(--color-border);
+    padding-right: calc(var(--micropad-x-large) * 2 + 32px);
+  }
+
+  custom-select .select-drop > div:first-child {
+    border: none;
+  }
+
+  custom-select .select-label {
+    display: grid;
+    width: 100%;
+  }
+
+  custom-select .select-label span {
+    grid-area: 1 / 1;
+    visibility: hidden;
+    display: flex;
+    gap: var(--micropad-x-large);
+    align-items: center;
+  }
+
+  custom-select .select-label span.active {
+    visibility: visible;
+  }
+
+  @media (max-width: 600px) {
+    custom-select .select-button > svg {
+      fill: var(--color-custom-select-text);
+      min-width: 22px;
+      width: 22px;
+      height: 22px;
+    }
+    
+    custom-select .select-drop > div {
+      padding-right: calc(var(--micropad-x-large) * 2 + 22px);
+    }
+  }
+</style>
+<script>
+  class CustomSelect extends HTMLElement {
+    connectedCallback() {
+      requestAnimationFrame(() => {
+        this.tabIndex = 0
+        this.options = Array.from(this.querySelectorAll("option")).map(o => ({
+          value: o.value,
+          content: o.innerHTML
+        }))
+        this.value = this.getAttribute("value") ?? this.options[0]?.value
+
+        const current = this.options.find(o => o.value === this.value)
+
+        this.button = document.createElement("div")
+        this.button.className = "select-button"
+        this.button.innerHTML = `
+          <div class="select-label">
+            ${this.options.map(o => `<span${o.value === this.value ? ' class="active"' : ""}>${o.content}</span>`).join("")}
+          </div>
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/>
+          </svg>
+        `
+        this.innerHTML = ""
+        this.append(this.button)
+
+        this.button.addEventListener("click", e => {
+          e.stopPropagation()
+          if (CustomSelect.active === this) this.close()
+          else this.open()
+        })
+
+        this.addEventListener("keydown", e => {
+          if (!CustomSelect.active) {
+            if (e.key === " " || e.key === "Enter") {
+              e.preventDefault()
+              this.open()
+            }
+          } else if (CustomSelect.active === this) {
+            if (["Tab", "ArrowDown", "ArrowUp", "Enter", "Escape"].includes(e.key)) {
+              e.preventDefault()
+              this.handleNavigation(e)
+            }
+          }
+        })
+      })
+    }
+
+    open() {
+      this.closeAll()
+      this.button.classList.add("active")
+      this.drop = document.createElement("div")
+      this.drop.className = "select-drop"
+      this.drop.innerHTML = this.options.map(o => `<div tabindex="-1" data-value="${o.value}">${o.content}</div>`).join("")
+      this.append(this.drop)
+      this.items = Array.from(this.drop.children)
+      this.items.forEach(div =>
+        div.addEventListener("click", e => this.selectValue(e.currentTarget.dataset.value))
+      )
+      this.hasFocused = false
+      setTimeout(() => CustomSelect.active = this)
+    }
+
+    handleNavigation(e) {
+      const i = this.items.indexOf(document.activeElement)
+
+      if (!this.hasFocused && ["Tab", "ArrowDown", "ArrowUp"].includes(e.key)) {
+        this.hasFocused = true
+        const currentIndex = this.options.findIndex(o => o.value === this.value)
+        if (currentIndex !== -1) this.items[currentIndex].focus()
+        return
+      }
+
+      if (e.key === "ArrowDown" || (e.key === "Tab" && !e.shiftKey)) {
+        const next = i === -1 ? 0 : (i + 1) % this.items.length
+        this.items[next].focus()
+      } else if (e.key === "ArrowUp" || (e.key === "Tab" && e.shiftKey)) {
+        const prev = i === -1 ? this.items.length - 1 : (i - 1 + this.items.length) % this.items.length
+        this.items[prev].focus()
+      } else if (e.key === "Enter") {
+        const el = this.items.find(e => e === document.activeElement)
+        if (el) this.selectValue(el.dataset.value)
+        else this.close()
+      } else if (e.key === "Escape") {
+        this.close()
+      }
+    }
+
+    selectValue(value) {
+      this.value = value
+      const label = this.button.querySelector(".select-label")
+      label.querySelectorAll("span").forEach(span =>
+        span.classList.toggle("active", span.innerHTML === this.options.find(o => o.value === value).content)
+      )
+      this.dispatchEvent(new Event("input", { bubbles: true }))
+      this.dispatchEvent(new Event("change", { bubbles: true }))
+      this.close()
+    }
+
+    close() {
+      if (this.drop) this.drop.remove()
+      this.button.classList.remove("active")
+      CustomSelect.active = undefined
+    }
+
+    closeAll() {
+      if (CustomSelect.active) CustomSelect.active.close()
+    }
+
+    get value() {
+      return this._value
+    }
+
+    set value(v) {
+      this._value = v
+      this.setAttribute("value", v)
+
+      if (this.button) {
+        const label = this.button.querySelector(".select-label")
+        if (label) {
+          const opt = this.options.find(o => o.value === v)
+          label.querySelectorAll("span").forEach(span =>
+            span.classList.toggle("active", span.innerHTML === opt.content)
+          )
+        }
+      }
+    }
+  }
+
+  document.addEventListener("click", e => {
+    if (CustomSelect.active && !CustomSelect.active.contains(e.target)) {
+      CustomSelect.active.close()
+    }
+  })
+
+  customElements.define("custom-select", CustomSelect)
+</script>

@@ -1,0 +1,94 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "custom_css": [
+        "h1 {color: #856245; font-weight: 700; text-transform: uppercase; text-align: center; font-size: 4.5rem;}"
+      ],
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "mtb_article_8jJfyy": {
+      "type": "MTB-article",
+      "blocks": {
+        "section_ARGaCx": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>DO NOT SELL OR SHARE MY PERSONAL INFORMATION</strong>",
+            "text": "",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_ARGaCx"
+      ],
+      "disabled": true,
+      "settings": {
+        "text_align": "text-align-center",
+        "title_size": "h1",
+        "header_color": "#856245",
+        "text_color": "#33534b",
+        "text_link_hover_color": "#172421",
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 8,
+        "component_tablet_pt": 30,
+        "component_tablet_pb": 8,
+        "component_desktop_pt": 40,
+        "component_desktop_pb": 8
+      }
+    },
+    "mtb_article_nGdJhU": {
+      "type": "MTB-article",
+      "blocks": {
+        "section_NjWJ8E": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "",
+            "text": "<p>As described in our Privacy Policy, we collect personal information from your interactions with us and our website, including through cookies and similar technologies. We may also share this personal information with third parties, including advertising partners. We do this in order to show you ads on other websites that are more relevant to your interests and for other reasons outlined in our privacy policy.</p><p>Sharing of personal information for targeted advertising based on your interaction on different websites may be considered \"sales\", \"sharing\", or \"targeted advertising\" under certain U.S. state privacy laws. Depending on where you live, you may have the right to opt out of these activities. If you would like to exercise this opt-out right, please follow the instructions below.</p><p>If you visit our website with the Global Privacy Control opt-out preference signal enabled, depending on where you are, we will treat this as a request to opt-out of activity that may be considered a “sale” or “sharing” of personal information or other uses that may be considered targeted advertising for the device and browser you used to visit our website.</p><p><strong>To opt out of the \"sale\" or \"sharing\" of your personal information collected using cookies and other device-based identifiers as described above, you must be browsing from one of the applicable US states referred to above.</strong></p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_NjWJ8E"
+      ],
+      "disabled": true,
+      "settings": {
+        "text_align": "text-align-left",
+        "title_size": "h2",
+        "header_color": "",
+        "text_color": "#33534b",
+        "text_link_hover_color": "#172421",
+        "component_mobile_pt": 0,
+        "component_mobile_pb": 20,
+        "component_tablet_pt": 0,
+        "component_tablet_pb": 30,
+        "component_desktop_pt": 0,
+        "component_desktop_pb": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "mtb_article_8jJfyy",
+    "mtb_article_nGdJhU"
+  ]
+}

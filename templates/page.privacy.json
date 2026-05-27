@@ -1,0 +1,296 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "mtb_article_9afJHw": {
+      "type": "MTB-article",
+      "blocks": {
+        "section_FAR6rb": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>PRIVACY POLICY</strong>",
+            "text": "",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_FAR6rb"
+      ],
+      "settings": {
+        "text_align": "text-align-center",
+        "title_size": "h1",
+        "header_color": "#856245",
+        "header_uppercase": true,
+        "text_color": "#33534b",
+        "text_link_hover_color": "#172421",
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 20,
+        "component_tablet_pt": 30,
+        "component_tablet_pb": 30,
+        "component_desktop_pt": 40,
+        "component_desktop_pb": 40
+      }
+    },
+    "mtb_article_ANWQCq": {
+      "type": "MTB-article",
+      "blocks": {
+        "section_rHzqbE": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Effective Date: January 1st, 2025</strong>",
+            "text": "<p>Mystery Tackle Box (\"we,\" \"our,\" or \"us\") is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and share your information when you use our services, as well as your rights and choices regarding your information.</p><p>By using our services, you agree to the terms of this Privacy Policy.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_TAjQYL": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>1. Information We Collect</strong>",
+            "text": "<p>Categories of Data We Collect</p><p>We collect the following categories of personal information:</p><ul><li><strong>Identifiers</strong>: Name, email address, mailing address, phone number, IP address, and unique device identifiers.</li><li><strong>Customer Records</strong>: Billing and shipping information, payment details, and purchase history.</li><li><strong>Internet Activity</strong>: Browsing history, search history, and interactions with our website, ads, and emails.</li><li><strong>Geolocation Data</strong>: Approximate location information derived from IP addresses or device settings.</li><li><strong>Inferences</strong>: Preferences, interests, and behavioral insights inferred from your interactions.</li><li><strong>Sensitive Information</strong>: Account log-in credentials or payment card data (encrypted during processing).</li><li>We collect this information directly from you, through automated technologies (e.g., cookies), and from third-party sources.</li></ul>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_PkFDMA": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "",
+            "text": "<p><strong>Purpose of Collection<br/><br/></strong>We use your personal information for:</p><ul><li>Fulfilling orders and delivering products or services.</li><li>Managing your account and providing customer support.</li><li>Sending marketing communications (with your consent, where required).</li><li>Improving our website and customizing your experience.</li><li>Detecting and preventing fraudulent or unauthorized activities.</li><li>Complying with legal and regulatory obligations.</li></ul>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_RqiRz7": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>2. Cookies and Tracking Technologies</strong>",
+            "text": "<p>We use cookies, pixels, and similar technologies to:</p><ul><li>Improve functionality and performance.</li><li>Personalize your experience.</li><li>Analyze traffic and usage trends.</li><li>Serve targeted advertisements.</li><li>You can manage cookie preferences via your browser settings or by using our Cookie Preferences Tool.</li></ul>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_kMew9c": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>3. Your Rights and Choices</strong>",
+            "text": "<p>Your Rights Under Applicable Laws</p><p>Depending on your jurisdiction, you may have the following rights:</p><ul><li><strong>Access</strong>: Request details about the personal information we collect.</li><li><strong>Correction</strong>: Update or correct inaccurate personal information.</li><li><strong>Deletion</strong>: Request deletion of personal information, subject to legal exceptions.</li><li><strong>Opt-Out</strong>: Decline the sale or sharing of your personal information.</li><li><strong>Limit Use</strong>: Restrict the use of sensitive data for specific purposes.</li><li><strong>Data Portability</strong>: Receive your information in a portable format.</li></ul><p>To exercise these rights, submit a request via our <a href=\"https://catchco.com/data-subject-access-request\" target=\"_blank\"><span style=\"text-decoration:underline\">Data Subject Access Request Form</span></a>. Verification of identity may be required.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_FakyrH": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "",
+            "text": "<p><strong>Do Not Track (DNT) Signals</strong></p><p>We currently do not respond to “Do Not Track” browser signals. You can manage tracking preferences via your browser or device settings.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_hLqYaf": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>4. Data Retention and Deletion</strong>",
+            "text": "<p>We retain personal information as long as needed for:</p><ul><li>Business purposes, such as fulfilling orders and maintaining accounts.</li><li>Legal and regulatory requirements.</li><li>User consent for ongoing marketing or service provision.</li><li>When no longer necessary, personal information is securely deleted or anonymized.</li></ul>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_GpiXMN": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>5. Sharing and Disclosure of Information</strong>",
+            "text": "<p>We may share your personal information with:</p><ul><li>Service Providers: Partners who assist with operations such as payment processing, logistics, and marketing.</li><li>Legal Authorities: When required to comply with laws or legal processes.</li><li>Third Parties: For advertising purposes, as permitted by law and with your consent, where required.</li><li>We do not sell sensitive information (e.g., payment details) to third parties.</li></ul>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_bbnNgQ": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>6. Cross-Border Data Transfers</strong>",
+            "text": "<p>Your personal information may be transferred to and processed in the United States or other countries with different data protection standards. We comply with international regulations by using Standard Contractual Clauses (SCCs) or similar mechanisms to safeguard your data.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_WCgCFR": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>7. Children’s Privacy</strong>",
+            "text": "<p>Our services are not directed to children under 16, and we do not knowingly collect information from them. If we discover such information has been collected, it will be deleted promptly.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_dmtKYa": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>8. Security Measures</strong>",
+            "text": "<p>We implement industry-standard safeguards to protect your personal information, including encryption, firewalls, and secure servers. However, no security measure is foolproof, and we cannot guarantee absolute protection.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_ae3Lwg": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>9. Updates to This Policy</strong>",
+            "text": "<p>We may update this Privacy Policy from time to time. Significant changes will be communicated via email or other direct channels, as required by law. The effective date at the top of this page indicates the most recent update.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_DTnmFE": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>10. Contact Us</strong>",
+            "text": "<p>If you have questions or concerns about this Privacy Policy or our data practices, contact us at:</p><p>Mystery Tackle Box</p><p>Mystery Tackle Box, 6 Liberty Square, PMB 6206, Boston, MA 02109</p><p><a href=\"mailto:@mysterytacklebox.com\" target=\"_blank\" title=\"mailto:@mysterytacklebox.com\">Support@mysterytacklebox.com</a></p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_twebtA": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>State-Specific Privacy Rights</strong>",
+            "text": "",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_badr6p": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>California Residents</strong>",
+            "text": "<p></p><p>Under the California Consumer Privacy Act (CCPA) and the California Privacy Rights Act (CPRA), California residents are entitled to specific rights regarding their personal information. These include:</p><p>Right to Know: Request details about the categories and specific pieces of personal information we collect, use, disclose, and sell.</p><p>Right to Delete: Request deletion of your personal information, subject to legal exceptions.</p><p>Right to Opt-Out: Decline the sale or sharing of your personal information.</p><p>Right to Correct: Request corrections of inaccurate personal information.</p><p>Right to Limit Use: Limit the use of sensitive personal information for non-essential purposes.</p><p>To exercise any of these rights, please submit a request via our <a href=\"https://catchco.com/data-subject-access-request\" target=\"_blank\"><span style=\"text-decoration:underline\">Data Request Form</span></a>. We will verify your identity and respond to your request in accordance with applicable laws.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_CEaY7t": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Virginia, Colorado, Connecticut, and Utah Residents</strong>",
+            "text": "<p></p><p>Residents of Virginia, Colorado, Connecticut, and Utah have privacy rights under their respective state privacy laws. These rights include:</p><p>Access and Portability: Request access to your personal information and obtain it in a portable and readily usable format.</p><p>Correction: Request updates or corrections to inaccurate personal information.</p><p>Deletion: Request the deletion of your personal information, subject to exceptions.</p><p>Opt-Out: Decline the processing of your personal information for:</p><p>Targeted advertising</p><p>Sale of personal data</p><p>Profiling in furtherance of decisions that produce legal or similarly significant effects</p><p>To exercise these rights, submit a request via our <a href=\"https://catchco.com/data-subject-access-request\"><span style=\"text-decoration:underline\">Data Request Form</span></a> or email us at support@mysterytacklebox.com. We will verify your identity as required by law before processing your request.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_exaeMn": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Non-Discrimination</strong>",
+            "text": "<p></p><p>We will not discriminate against you for exercising any of your privacy rights.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_dE4Xiw": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>How to Exercise Your Rights</strong>",
+            "text": "<p>To exercise any of the rights described above, you may:</p><p>Fill out our <a href=\"https://catchco.com/data-subject-access-request\" target=\"_blank\"><span style=\"text-decoration:underline\">Data Request Form</span></a>.</p><p>Email us at <a href=\"mailto:support@mysterytacklebox.com\" title=\"mailto:support@mysterytacklebox.com\">support@mysterytacklebox.com</a></p><p>Please note that we may require additional information to verify your identity before processing your request.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_rHzqbE",
+        "section_TAjQYL",
+        "section_PkFDMA",
+        "section_RqiRz7",
+        "section_kMew9c",
+        "section_FakyrH",
+        "section_hLqYaf",
+        "section_GpiXMN",
+        "section_bbnNgQ",
+        "section_WCgCFR",
+        "section_dmtKYa",
+        "section_ae3Lwg",
+        "section_DTnmFE",
+        "section_twebtA",
+        "section_badr6p",
+        "section_CEaY7t",
+        "section_exaeMn",
+        "section_dE4Xiw"
+      ],
+      "settings": {
+        "text_align": "text-align-left",
+        "title_size": "h4",
+        "header_color": "",
+        "header_uppercase": true,
+        "text_color": "#33534b",
+        "text_link_hover_color": "#172421",
+        "component_mobile_pt": 0,
+        "component_mobile_pb": 20,
+        "component_tablet_pt": 0,
+        "component_tablet_pb": 30,
+        "component_desktop_pt": 0,
+        "component_desktop_pb": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "mtb_article_9afJHw",
+    "mtb_article_ANWQCq"
+  ]
+}

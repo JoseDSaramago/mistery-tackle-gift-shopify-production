@@ -1,0 +1,310 @@
+{% doc %}
+  @prompt
+    Create a custom full-width promotional banner section for the customer account portal page (Recharge portal context).
+    
+    Design requirements:
+    
+    * Clean, premium layout aligned with Mystery Tackle Box brand
+    * Background: light beige/off-white (#F5EFE6 or similar)
+    * Typography: bold, uppercase headings with strong hierarchy
+    * Primary colors: deep green (#2F5D57) and brown (#8B6B4A)
+    * Maintain high contrast and readability
+    
+    Section structure:
+    
+    * Full-width container (no boxed layout)
+    * Left side: promotional image (uploaded asset: MTB Rev Ups banner)
+    * Right side: content block
+    
+    Content:
+    
+    * Headline: “REV UPS”
+    * Subheadline: “Free access to the best fishing apps just for being a subscriber”
+    * CTA button: “Learn More”
+    * CTA style: rounded button, orange or brand accent color, strong visibility
+    
+    Behavior:
+    
+    * Fully responsive (stack image on top for mobile)
+    * Maintain spacing consistency with portal UI
+    * Do not override or break existing Recharge portal components
+    
+    Technical:
+    
+    * Section must be compatible with Shopify theme editor
+    * No external dependencies
+    * Optimize image for fast loading
+    * Allow easy content editing (text + image + CTA link)
+    
+    Goal:
+    Enhance engagement inside the customer portal and highlight subscriber perks without disrupting the existing UX.
+    , I don't want any tet in the section i want to be adjusted only for the iamge , Create a custom promotional banner section for the customer account portal (Recharge portal).
+    
+    Design goal:
+    Match the exact layout shown in the reference: a clean, full-width promotional banner with no boxed container, aligned with Mystery Tackle Box brand.
+    
+    Layout:
+    
+    * Full-width section (edge-to-edge, no max-width container)
+    * No shadows, no cards, no borders
+    * Tight vertical spacing (compact like portal UI)
+    
+    Images:
+    
+    * Support TWO separate images:
+    
+      1. Desktop image (wide banner)
+      2. Mobile image (optimized vertical/stacked version)
+    * Desktop: show only desktop image
+    * Mobile: show only mobile image
+    * Use CSS media queries (not JS) to switch visibility
+    * Ensure images are responsive and not distorted
+    
+    Content behavior:
+    
+    * Entire banner should be clickable (CTA link)
+    * Optional overlay support (but default = image-only like reference)
+    * No text duplication if image already contains text
+    
+    Brand styling:
+    
+    * Colors: deep green (#2F5D57), brown (#8B6B4A), light beige background
+    * Clean, premium, minimal design
+    * No extra padding that breaks alignment with portal sections
+    
+    Technical requirements:
+    
+    * Section must be Shopify theme editor compatible
+    * Allow separate upload fields:
+    
+      * Desktop image picker
+      * Mobile image picker
+      * CTA link
+    * Use lazy loading for images
+    * Maintain fast performance
+    
+    Responsiveness:
+    
+    * Desktop: full-width horizontal banner
+    * Mobile: stacked/optimized image, full width
+    * Maintain aspect ratio per device
+    
+    Constraints:
+    
+    * Do NOT use a single image for all devices
+    * Do NOT center inside a container
+    * Do NOT add extra text blocks unless specified
+    * Do NOT override Recharge portal styles
+    
+    Goal:
+    Deliver a high-converting promotional banner inside the customer portal with full control over desktop vs mobile experience.
+    
+{% enddoc %}
+
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-portal-banner-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.vertical_spacing_mobile }}px 0;
+  }
+
+  .ai-portal-banner-link-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .ai-portal-banner-link-{{ ai_gen_id }}:not([href]) {
+    cursor: default;
+  }
+
+  .ai-portal-banner-image-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    position: relative;
+  }
+
+  .ai-portal-banner-desktop-{{ ai_gen_id }} {
+    display: none;
+    width: 100%;
+    height: auto;
+  }
+
+  .ai-portal-banner-mobile-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .ai-portal-banner-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #F5EFE6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-portal-banner-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.2;
+  }
+
+  .ai-portal-banner-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    font-size: 14px;
+    color: #8B6B4A;
+    text-align: center;
+    pointer-events: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-portal-banner-{{ ai_gen_id }} {
+      padding: {{ block.settings.vertical_spacing_desktop }}px 0;
+    }
+
+    .ai-portal-banner-desktop-{{ ai_gen_id }} {
+      display: block;
+    }
+
+    .ai-portal-banner-mobile-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .ai-portal-banner-placeholder-{{ ai_gen_id }} {
+      aspect-ratio: 21 / 9;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-portal-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.cta_link != blank %}
+    <a href="{{ block.settings.cta_link }}" class="ai-portal-banner-link-{{ ai_gen_id }}">
+  {% else %}
+    <div class="ai-portal-banner-link-{{ ai_gen_id }}">
+  {% endif %}
+    
+    <div class="ai-portal-banner-image-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.desktop_image or block.settings.mobile_image %}
+        {% if block.settings.desktop_image %}
+          <img
+            src="{{ block.settings.desktop_image | image_url: width: 2400 }}"
+            alt="{{ block.settings.desktop_image.alt | escape }}"
+            loading="lazy"
+            width="{{ block.settings.desktop_image.width }}"
+            height="{{ block.settings.desktop_image.height }}"
+            class="ai-portal-banner-desktop-{{ ai_gen_id }}"
+          >
+        {% endif %}
+        
+        {% if block.settings.mobile_image %}
+          <img
+            src="{{ block.settings.mobile_image | image_url: width: 1200 }}"
+            alt="{{ block.settings.mobile_image.alt | escape }}"
+            loading="lazy"
+            width="{{ block.settings.mobile_image.width }}"
+            height="{{ block.settings.mobile_image.height }}"
+            class="ai-portal-banner-mobile-{{ ai_gen_id }}"
+          >
+        {% endif %}
+      {% else %}
+        <div class="ai-portal-banner-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-portal-banner-empty-state-{{ ai_gen_id }}">
+            Add desktop and mobile banner images
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  
+  {% if block.settings.cta_link != blank %}
+    </a>
+  {% else %}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Portal promo banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop banner image",
+      "info": "Recommended: 2400x900px or wider horizontal format"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile banner image",
+      "info": "Recommended: 800x1000px or optimized vertical format"
+    },
+    {
+      "type": "header",
+      "content": "Link"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Banner link",
+      "info": "Makes entire banner clickable"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "vertical_spacing_mobile",
+      "label": "Mobile vertical spacing",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "vertical_spacing_desktop",
+      "label": "Desktop vertical spacing",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F5EFE6"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Portal promo banner"
+    }
+  ]
+}
+{% endschema %}

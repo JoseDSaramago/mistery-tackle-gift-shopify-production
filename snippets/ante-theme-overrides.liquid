@@ -1,0 +1,117 @@
+<style>
+  {% if override == "christmas" %}
+    :root {
+      --inverse-color-background: #B53035;
+      --color-background-alt: #B53035;
+      --color-text-default: #0C3C1A;
+      --color-text-muted: #3B6145;
+      --color-text-alt: #B53035;
+      --color-border-alt: #3C4507;
+      --color-elevated-shadow: #4A0406;
+      --inverse-color-elevated-shadow: #4A0406;
+      --color-sale: #7A853A;
+      --base-color-info-alt: #B53035;
+      --base-color-info-alt-text-alt: #FFFFFF;
+      --base-color-info-alt-border: none;
+      --inverse-color-info-alt: #B53035;
+      --inverse-color-info-alt-text-alt: #FFFFFF;
+      --inverse-color-info-alt-border: none;
+      --inverse-color-surface-100: #6E7C28;
+      --inverse-color-surface: #7B8A35;
+      --inverse-color-surface-900: #879245;
+      --inverse-color-text-alt: #fff;
+      --base-color-surface-alt-900: #DBE5D1;
+      --base-color-surface-alt: #EDF2E7;
+      --base-color-surface-alt-100: #EDF2E7;
+      --base-color-sale: #4C929B;
+      --base-color-sale-text-alt: #FFFFFF;
+      --base-color-sale-text: #FFFFFF;
+      --inverse-color-sale: #4C929B;
+      --inverse-color-sale-text: #FFFFFF;
+      --inverse-color-sale-text-alt: #FFFFFF;
+    }
+
+    .ante-button {
+      background-color: var(--color-background-alt);
+    }
+
+    body h1 {
+      text-shadow: 3px 3px 0 #353D08 !important;
+    }
+
+    body h2 {
+      text-shadow: 2px 2px 0 #353D08 !important;
+    }
+
+    body :is(h1, h2, h3, h4, h5) {
+      color: #7A853A !important;
+    }
+
+    .ante-inverse :is(h1, h2, h3, h4, h5) {
+      color: #FFF !important;
+    }
+
+    .ante-inverse h1 {
+      text-shadow: 3px 3px 0 var(--color-shadow-border) !important;
+    }
+
+    .ante-inverse h2 {
+      text-shadow: 2px 2px 0 var(--color-shadow-border) !important;
+    }
+
+    [id*="ante_lander_hero"] .ante-inverse h1 {
+      text-shadow: 3px 3px 0 var(--color-background-alt) !important;
+    }
+
+    [id*="ante_lander_hero"] .ante-inverse h2 {
+      text-shadow: 2px 2px 0 var(--color-background-alt) !important;
+    }
+
+    @media (max-width: 600px) {
+      body h1 {
+        text-shadow: 2px 2px 0 #57640B !important;
+      }
+
+      body h2 {
+        text-shadow: 1px 1px 0 #57640B !important;
+      }
+
+      .ante-inverse h1 {
+        text-shadow: 2px 2px 0 var(--color-shadow-border) !important;
+      }
+
+      .ante-inverse h2 {
+        text-shadow: 1px 1px 0 var(--color-shadow-border) !important;
+      }
+
+      [id*="ante_lander_hero"] .ante-inverse h1 {
+        text-shadow: 2px 2px 0 var(--color-background-alt) !important;
+      }
+
+      [id*="ante_lander_hero"] .ante-inverse h2 {
+        text-shadow: 1px 1px 0 var(--color-background-alt) !important;
+      }
+    }
+
+    .ante-section.section-background-colour-normal::before,
+    .ante-section.section-background-style-floating .ante-container::before {
+      background-image: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/background.webp?v=1759251004") !important;
+      opacity: 1 !important;
+      background-size: 1440px !important;
+    }
+
+    .ante-button::before {
+      opacity: 1;
+      background-image: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/background.webp?v=1759251004");
+      background-size: 1440px;
+    }
+
+    .ante-lander-nav .ante-button::before {
+      background-image: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/green_background.webp?v=1759251890");
+    }
+
+    .drop-button {
+      background-color: var(--color-surface-100);
+    }
+  {% endif %}
+</style>

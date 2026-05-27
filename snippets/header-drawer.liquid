@@ -1,0 +1,1130 @@
+{% comment %}
+  Renders a header drawer menu for mobile and desktop.
+
+  Usage:
+  {% render 'header-drawer' %}
+{% endcomment %}
+
+{% assign burger_menu_name = section.settings.burger_menu %}
+{% assign uppercase = section.settings.menu_uppercase %}
+{% assign bold = section.settings.menu_bold %}
+
+{% if burger_menu_name == blank %}
+  {% assign burger_menu_name = section.settings.menu %}
+{% endif %}
+{% assign burger_menu = linklists[burger_menu_name] %}
+
+<style>
+  .menu-drawer {
+    width: {{section.settings.mobile_burger_width}}vw;
+  }
+
+  .header__icon--summary .icon-close {
+    left: calc({{section.settings.mobile_burger_width}}vw - 40px);
+  }
+
+  @media screen and (min-width: 640px) {
+    .menu-drawer {
+      width: {{section.settings.tablet_burger_width}}vw;
+    }
+
+    .header__icon--summary .icon-close {
+      left: calc({{section.settings.tablet_burger_width}}vw - 40px);
+    }
+  }
+</style>
+
+<header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
+  <details id="Details-menu-drawer-container" class="menu-drawer-container">
+    <summary
+      class="header__icon header__icon--menu header__icon--summary link focus-inset"
+      aria-label="{{ 'sections.header.menu' | t }}"
+    >
+      <span>
+        {% if section.settings.custom_hamburger_icon != blank %}
+          {{
+            section.settings.custom_hamburger_icon
+            | image_url: width: '20, 30, 40'
+            | image_tag: sizes: 'min-width: 10px', class: 'custom_img icon-hamburger', alt: 'Hamburger Icon'
+          }}
+        {% elsif cart == empty %}
+          {{- 'icon-hamburger.svg' | inline_asset_content -}}
+        {% endif %}
+
+        {% if section.settings.custom_close_icon != blank %}
+          {{
+            section.settings.custom_close_icon
+            | image_url: width: '20, 30, 40'
+            | image_tag: sizes: 'min-width: 10px', class: 'custom_img icon-close', alt: 'Close Icon'
+          }}
+
+        {% elsif cart == empty %}
+          {{- 'icon-close.svg' | inline_asset_content -}}
+        {% endif %}
+      </span>
+    </summary>
+    <div
+      id="menu-drawer"
+      class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}{% if section.settings.mobile_menu_type == 'nested' and section.settings.nested_menu_style == 'question' %} menu-drawer--question-style{% endif %}"
+    >
+      <div class="menu-drawer__inner-container">
+        <div class="menu-drawer__navigation-container">
+          <nav class="menu-drawer__navigation">
+            <ul class="menu-drawer__menu has-submenu list-menu" role="list">
+              {%- if section.settings.mobile_menu_type == 'nested' -%}
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'mobile_link_list' and block.settings.heading != blank -%}
+                    <li>
+                      {%- if block.settings.menu != blank -%}
+                        <details id="Details-menu-drawer-mobile-block-{{ block.id }}">
+                          <summary
+                            id="HeaderDrawer-Mobile-{{ block.id }}"
+                            class="menu-drawer__menu-item list-menu__item link link--text focus-inset header_font {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}"
+                          >
+                            {% assign target_title = block.settings.heading | strip_html | strip | downcase %}
+                            {% for nav_block in section.blocks %}
+                              {% if nav_block.type == 'nav_img' %}
+                                {% assign block_name = nav_block.settings.nav_name | downcase %}
+                                {% if target_title == block_name and nav_block.settings.nav_image != blank %}
+                                  {{
+                                    nav_block.settings.nav_image
+                                    | image_url: width: '60'
+                                    | image_tag: loading: 'lazy', widths: '60', class: 'lazyload burger__img'
+                                  }}
+                                {% endif %}
+                              {% endif %}
+                            {% endfor %}
+                            {{ block.settings.heading | strip_html | strip | escape }}
+                            {%- if section.settings.mobile_menu_type == 'nested'
+                              and section.settings.nested_menu_style == 'question'
+                            -%}
+                              <span class="icon-caret-wrapper">
+                                <span class="icon-caret icon-arrow-down">
+                                  {{- 'icon-arrow-down.svg' | inline_asset_content -}}
+                                </span>
+                                <span class="icon-caret icon-arrow-up">
+                                  {{- 'icon-arrow-up.svg' | inline_asset_content -}}
+                                </span>
+                              </span>
+                            {%- else -%}
+                              <span class="svg-wrapper icon-arrow-down-wrapper">
+                                {{- 'icon-arrow-down.svg' | inline_asset_content -}}
+                              </span>
+                              <span class="svg-wrapper">
+                                {{- 'icon-caret.svg' | inline_asset_content -}}
+                              </span>
+                            {%- endif -%}
+                          </summary>
+                          <div
+                            id="mobile-block-{{ block.id | escape }}"
+                            class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                            tabindex="-1"
+                          >
+                            <div class="menu-drawer__inner-submenu">
+                              <button
+                                class="menu-drawer__close-button list-menu__item link link--text focus-inset header_font {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}"
+                                aria-expanded="true"
+                              >
+                                <span class="svg-wrapper">
+                                  {{- 'icon-arrow-down.svg' | inline_asset_content -}}
+                                </span>
+                                <span>
+                                  {{- block.settings.heading | strip_html | strip | escape -}}
+                                </span>
+                              </button>
+                              {%- liquid
+                                assign has_column_1 = false
+                                if block.settings.menu != blank or block.settings.column_1_image != blank or block.settings.column_1_title != blank or block.settings.column_1_subtitle != blank or block.settings.column_1_promo_text != blank
+                                  assign has_column_1 = true
+                                endif
+                                assign has_column_2 = false
+                                if block.settings.column_2_menu != blank or block.settings.column_2_image != blank or block.settings.column_2_title != blank or block.settings.column_2_subtitle != blank or block.settings.column_2_promo_text != blank
+                                  assign has_column_2 = true
+                                endif
+                                assign has_column_3 = false
+                                if block.settings.column_3_menu != blank or block.settings.column_3_image != blank or block.settings.column_3_title != blank or block.settings.column_3_subtitle != blank or block.settings.column_3_promo_text != blank
+                                  assign has_column_3 = true
+                                endif
+                                assign has_column_4 = false
+                                if block.settings.column_4_menu != blank or block.settings.column_4_image != blank or block.settings.column_4_title != blank or block.settings.column_4_subtitle != blank or block.settings.column_4_promo_text != blank
+                                  assign has_column_4 = true
+                                endif
+                              -%}
+                              {%- if has_column_1 or has_column_2 or has_column_3 or has_column_4 -%}
+                                <div class="menu-drawer__columns">
+                                  {%- if has_column_1 -%}
+                                    {% render 'header-dropdown-column',
+                                      column_link: block.settings.column_1_link,
+                                      column_image: block.settings.column_1_image,
+                                      column_title: block.settings.column_1_title,
+                                      column_subtitle: block.settings.column_1_subtitle,
+                                      column_promo_text: block.settings.column_1_promo_text,
+                                      column_menu: block.settings.menu,
+                                      column_text_align: block.settings.column_text_align,
+                                      column_promo_text_color: block.settings.column_promo_text_color,
+                                      nav_names_padding: block.settings.nav_names_padding,
+                                      submenu_uppercase: uppercase,
+                                      submenu_bold: bold,
+                                      show_active: true,
+                                      is_mobile: true,
+                                      section: section,
+                                      column_flag_text: block.settings.column_1_flag_text,
+                                      column_flag_text_color: block.settings.column_1_flag_text_color,
+                                      column_flag_bg_color: block.settings.column_1_flag_bg_color
+                                    %}
+                                  {%- endif -%}
+                                  {%- if has_column_2 -%}
+                                    {% render 'header-dropdown-column',
+                                      column_link: block.settings.column_2_link,
+                                      column_image: block.settings.column_2_image,
+                                      column_title: block.settings.column_2_title,
+                                      column_subtitle: block.settings.column_2_subtitle,
+                                      column_promo_text: block.settings.column_2_promo_text,
+                                      column_menu: block.settings.column_2_menu,
+                                      column_text_align: block.settings.column_text_align,
+                                      column_promo_text_color: block.settings.column_promo_text_color,
+                                      nav_names_padding: block.settings.nav_names_padding,
+                                      submenu_uppercase: uppercase,
+                                      submenu_bold: bold,
+                                      show_active: true,
+                                      is_mobile: true,
+                                      section: section,
+                                      column_flag_text: block.settings.column_2_flag_text,
+                                      column_flag_text_color: block.settings.column_2_flag_text_color,
+                                      column_flag_bg_color: block.settings.column_2_flag_bg_color
+                                    %}
+                                  {%- endif -%}
+                                  {%- if has_column_3 -%}
+                                    {% render 'header-dropdown-column',
+                                      column_link: block.settings.column_3_link,
+                                      column_image: block.settings.column_3_image,
+                                      column_title: block.settings.column_3_title,
+                                      column_subtitle: block.settings.column_3_subtitle,
+                                      column_promo_text: block.settings.column_3_promo_text,
+                                      column_menu: block.settings.column_3_menu,
+                                      column_text_align: block.settings.column_text_align,
+                                      column_promo_text_color: block.settings.column_promo_text_color,
+                                      nav_names_padding: block.settings.nav_names_padding,
+                                      submenu_uppercase: uppercase,
+                                      submenu_bold: bold,
+                                      show_active: true,
+                                      is_mobile: true,
+                                      section: section,
+                                      column_flag_text: block.settings.column_3_flag_text,
+                                      column_flag_text_color: block.settings.column_3_flag_text_color,
+                                      column_flag_bg_color: block.settings.column_3_flag_bg_color
+                                    %}
+                                  {%- endif -%}
+                                  {%- if has_column_4 -%}
+                                    {% render 'header-dropdown-column',
+                                      column_link: block.settings.column_4_link,
+                                      column_image: block.settings.column_4_image,
+                                      column_title: block.settings.column_4_title,
+                                      column_subtitle: block.settings.column_4_subtitle,
+                                      column_promo_text: block.settings.column_4_promo_text,
+                                      column_menu: block.settings.column_4_menu,
+                                      column_text_align: block.settings.column_text_align,
+                                      column_promo_text_color: block.settings.column_promo_text_color,
+                                      nav_names_padding: block.settings.nav_names_padding,
+                                      submenu_uppercase: uppercase,
+                                      submenu_bold: bold,
+                                      show_active: true,
+                                      is_mobile: true,
+                                      section: section,
+                                      column_flag_text: block.settings.column_4_flag_text,
+                                      column_flag_text_color: block.settings.column_4_flag_text_color,
+                                      column_flag_bg_color: block.settings.column_4_flag_bg_color
+                                    %}
+                                  {%- endif -%}
+                                </div>
+                                {%- liquid
+                                  assign has_column_content = false
+                                  if block.settings.column_1_link != blank or block.settings.column_1_image != blank or block.settings.column_1_title != blank or block.settings.column_1_subtitle != blank or block.settings.column_1_promo_text != blank
+                                    assign has_column_content = true
+                                  endif
+                                  if block.settings.column_2_link != blank or block.settings.column_2_image != blank or block.settings.column_2_title != blank or block.settings.column_2_subtitle != blank or block.settings.column_2_promo_text != blank
+                                    assign has_column_content = true
+                                  endif
+                                  if block.settings.column_3_link != blank or block.settings.column_3_image != blank or block.settings.column_3_title != blank or block.settings.column_3_subtitle != blank or block.settings.column_3_promo_text != blank
+                                    assign has_column_content = true
+                                  endif
+                                  if block.settings.column_4_link != blank or block.settings.column_4_image != blank or block.settings.column_4_title != blank or block.settings.column_4_subtitle != blank or block.settings.column_4_promo_text != blank
+                                    assign has_column_content = true
+                                  endif
+                                -%}
+                                {%- if has_column_content -%}
+                                  <div class="menu-drawer__column-content-scrollable">
+                                    <div class="menu-drawer__column-content-wrapper">
+                                      {%- if has_column_1 -%}
+                                        {%- if block.settings.column_1_link != blank
+                                          or block.settings.column_1_image != blank
+                                          or block.settings.column_1_title != blank
+                                          or block.settings.column_1_subtitle != blank
+                                          or block.settings.column_1_promo_text != blank
+                                        -%}
+                                          {%- liquid
+                                            assign item_width = block.settings.item_max_width | default: 150
+                                            assign width_style = 'min-width: ' | append: item_width | append: 'px; max-width: ' | append: item_width | append: 'px;'
+                                            assign text_align = block.settings.column_text_align | default: 'left'
+                                            if text_align == 'center'
+                                              assign justify_style = 'justify-content: center;'
+                                            elsif text_align == 'right'
+                                              assign justify_style = 'justify-content: flex-end;'
+                                            else
+                                              assign justify_style = 'justify-content: flex-start;'
+                                            endif
+                                            assign text_align_style = 'text-align: ' | append: text_align | append: ';'
+                                            assign align_style = justify_style | append: ' ' | append: text_align_style
+                                          -%}
+                                          <div
+                                            class="menu-drawer__column-content-item"
+                                            style="{{ width_style }}"
+                                          >
+                                            {%- if block.settings.column_1_link != blank -%}
+                                              <a
+                                                href="{{ block.settings.column_1_link }}"
+                                                class="menu-drawer__column-content-link"
+                                                style="display: block; text-decoration: none;"
+                                              >
+                                            {%- else -%}
+                                              <div class="menu-drawer__column-content-link">
+                                            {%- endif -%}
+                                            {%- if block.settings.column_1_image != blank -%}
+                                              <div class="menu-drawer__column-content-image" style="{{ align_style }}">
+                                                {%- if block.settings.column_1_flag_text != blank -%}
+                                                  <div
+                                                    class="menu-drawer__column-content-flag"
+                                                    style="color: {{ block.settings.column_1_flag_text_color | default: '#ffffff' }}; background-color: {{ block.settings.column_1_flag_bg_color | default: '#d14424' }};"
+                                                  >
+                                                    {{ block.settings.column_1_flag_text }}
+                                                  </div>
+                                                {%- endif -%}
+                                                {{
+                                                  block.settings.column_1_image
+                                                  | image_url: width: 300
+                                                  | image_tag:
+                                                    loading: 'lazy',
+                                                    widths: '300',
+                                                    class: 'menu-drawer__column-content-img'
+                                                }}
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_1_title != blank -%}
+                                              <div class="menu-drawer__column-content-title" style="{{ align_style }}">
+                                                <span class="header_font header_link{%- if uppercase %} uppercase{% endif %}{%- if bold %} bold{% endif %}">
+                                                  {{ block.settings.column_1_title | strip_html | strip | escape }}
+                                                </span>
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_1_subtitle != blank -%}
+                                              <div
+                                                class="menu-drawer__column-content-subtitle"
+                                                style="{{ align_style }}"
+                                              >
+                                                {{ block.settings.column_1_subtitle }}
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_1_promo_text != blank -%}
+                                              <div
+                                                class="menu-drawer__column-content-promo"
+                                                style="color: {{ block.settings.column_promo_text_color | default: '#d14424' }}; {{ align_style }}"
+                                              >
+                                                {{ block.settings.column_1_promo_text }}
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_1_link != blank -%}
+                                              </a>
+                                            {%- else -%}
+                                              </div>
+                                            {%- endif -%}
+                                          </div>
+                                        {%- endif -%}
+                                      {%- endif -%}
+                                      {%- if has_column_2 -%}
+                                        {%- if block.settings.column_2_link != blank
+                                          or block.settings.column_2_image != blank
+                                          or block.settings.column_2_title != blank
+                                          or block.settings.column_2_subtitle != blank
+                                          or block.settings.column_2_promo_text != blank
+                                        -%}
+                                          {%- liquid
+                                            assign item_width = block.settings.item_max_width | default: 150
+                                            assign width_style = 'min-width: ' | append: item_width | append: 'px; max-width: ' | append: item_width | append: 'px;'
+                                            assign text_align = block.settings.column_text_align | default: 'left'
+                                            if text_align == 'center'
+                                              assign justify_style = 'justify-content: center;'
+                                            elsif text_align == 'right'
+                                              assign justify_style = 'justify-content: flex-end;'
+                                            else
+                                              assign justify_style = 'justify-content: flex-start;'
+                                            endif
+                                            assign text_align_style = 'text-align: ' | append: text_align | append: ';'
+                                            assign align_style = justify_style | append: ' ' | append: text_align_style
+                                          -%}
+                                          <div
+                                            class="menu-drawer__column-content-item"
+                                            style="{{ width_style }}"
+                                          >
+                                            {%- if block.settings.column_2_link != blank -%}
+                                              <a
+                                                href="{{ block.settings.column_2_link }}"
+                                                class="menu-drawer__column-content-link"
+                                                style="display: block; text-decoration: none;"
+                                              >
+                                            {%- else -%}
+                                              <div class="menu-drawer__column-content-link">
+                                            {%- endif -%}
+                                            {%- if block.settings.column_2_image != blank -%}
+                                              <div class="menu-drawer__column-content-image" style="{{ align_style }}">
+                                                {%- if block.settings.column_2_flag_text != blank -%}
+                                                  <div
+                                                    class="menu-drawer__column-content-flag"
+                                                    style="color: {{ block.settings.column_2_flag_text_color | default: '#ffffff' }}; background-color: {{ block.settings.column_2_flag_bg_color | default: '#d14424' }};"
+                                                  >
+                                                    {{ block.settings.column_2_flag_text }}
+                                                  </div>
+                                                {%- endif -%}
+                                                {{
+                                                  block.settings.column_2_image
+                                                  | image_url: width: 300
+                                                  | image_tag:
+                                                    loading: 'lazy',
+                                                    widths: '300',
+                                                    class: 'menu-drawer__column-content-img'
+                                                }}
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_2_title != blank -%}
+                                              <div class="menu-drawer__column-content-title" style="{{ align_style }}">
+                                                <span class="header_font header_link{%- if uppercase %} uppercase{% endif %}{%- if bold %} bold{% endif %}">
+                                                  {{ block.settings.column_2_title | strip_html | strip | escape }}
+                                                </span>
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_2_subtitle != blank -%}
+                                              <div
+                                                class="menu-drawer__column-content-subtitle"
+                                                style="{{ align_style }}"
+                                              >
+                                                {{ block.settings.column_2_subtitle }}
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_2_promo_text != blank -%}
+                                              <div
+                                                class="menu-drawer__column-content-promo"
+                                                style="color: {{ block.settings.column_promo_text_color | default: '#d14424' }}; {{ align_style }}"
+                                              >
+                                                {{ block.settings.column_2_promo_text }}
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_2_link != blank -%}
+                                              </a>
+                                            {%- else -%}
+                                              </div>
+                                            {%- endif -%}
+                                          </div>
+                                        {%- endif -%}
+                                      {%- endif -%}
+                                      {%- if has_column_3 -%}
+                                        {%- if block.settings.column_3_link != blank
+                                          or block.settings.column_3_image != blank
+                                          or block.settings.column_3_title != blank
+                                          or block.settings.column_3_subtitle != blank
+                                          or block.settings.column_3_promo_text != blank
+                                        -%}
+                                          {%- liquid
+                                            assign item_width = block.settings.item_max_width | default: 150
+                                            assign width_style = 'min-width: ' | append: item_width | append: 'px; max-width: ' | append: item_width | append: 'px;'
+                                            assign text_align = block.settings.column_text_align | default: 'left'
+                                            if text_align == 'center'
+                                              assign justify_style = 'justify-content: center;'
+                                            elsif text_align == 'right'
+                                              assign justify_style = 'justify-content: flex-end;'
+                                            else
+                                              assign justify_style = 'justify-content: flex-start;'
+                                            endif
+                                            assign text_align_style = 'text-align: ' | append: text_align | append: ';'
+                                            assign align_style = justify_style | append: ' ' | append: text_align_style
+                                          -%}
+                                          <div
+                                            class="menu-drawer__column-content-item"
+                                            style="{{ width_style }}"
+                                          >
+                                            {%- if block.settings.column_3_link != blank -%}
+                                              <a
+                                                href="{{ block.settings.column_3_link }}"
+                                                class="menu-drawer__column-content-link"
+                                                style="display: block; text-decoration: none;"
+                                              >
+                                            {%- else -%}
+                                              <div class="menu-drawer__column-content-link">
+                                            {%- endif -%}
+                                            {%- if block.settings.column_3_image != blank -%}
+                                              <div class="menu-drawer__column-content-image" style="{{ align_style }}">
+                                                {%- if block.settings.column_3_flag_text != blank -%}
+                                                  <div
+                                                    class="menu-drawer__column-content-flag"
+                                                    style="color: {{ block.settings.column_3_flag_text_color | default: '#ffffff' }}; background-color: {{ block.settings.column_3_flag_bg_color | default: '#d14424' }};"
+                                                  >
+                                                    {{ block.settings.column_3_flag_text }}
+                                                  </div>
+                                                {%- endif -%}
+                                                {{
+                                                  block.settings.column_3_image
+                                                  | image_url: width: 300
+                                                  | image_tag:
+                                                    loading: 'lazy',
+                                                    widths: '300',
+                                                    class: 'menu-drawer__column-content-img'
+                                                }}
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_3_title != blank -%}
+                                              <div class="menu-drawer__column-content-title" style="{{ align_style }}">
+                                                <span class="header_font header_link{%- if uppercase %} uppercase{% endif %}{%- if bold %} bold{% endif %}">
+                                                  {{ block.settings.column_3_title | strip_html | strip | escape }}
+                                                </span>
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_3_subtitle != blank -%}
+                                              <div
+                                                class="menu-drawer__column-content-subtitle"
+                                                style="{{ align_style }}"
+                                              >
+                                                {{ block.settings.column_3_subtitle }}
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_3_promo_text != blank -%}
+                                              <div
+                                                class="menu-drawer__column-content-promo"
+                                                style="color: {{ block.settings.column_promo_text_color | default: '#d14424' }}; {{ align_style }}"
+                                              >
+                                                {{ block.settings.column_3_promo_text }}
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_3_link != blank -%}
+                                              </a>
+                                            {%- else -%}
+                                              </div>
+                                            {%- endif -%}
+                                          </div>
+                                        {%- endif -%}
+                                      {%- endif -%}
+                                      {%- if has_column_4 -%}
+                                        {%- if block.settings.column_4_link != blank
+                                          or block.settings.column_4_image != blank
+                                          or block.settings.column_4_title != blank
+                                          or block.settings.column_4_subtitle != blank
+                                          or block.settings.column_4_promo_text != blank
+                                        -%}
+                                          {%- liquid
+                                            assign item_width = block.settings.item_max_width | default: 150
+                                            assign width_style = 'min-width: ' | append: item_width | append: 'px; max-width: ' | append: item_width | append: 'px;'
+                                            assign text_align = block.settings.column_text_align | default: 'left'
+                                            if text_align == 'center'
+                                              assign justify_style = 'justify-content: center;'
+                                            elsif text_align == 'right'
+                                              assign justify_style = 'justify-content: flex-end;'
+                                            else
+                                              assign justify_style = 'justify-content: flex-start;'
+                                            endif
+                                            assign text_align_style = 'text-align: ' | append: text_align | append: ';'
+                                            assign align_style = justify_style | append: ' ' | append: text_align_style
+                                          -%}
+                                          <div
+                                            class="menu-drawer__column-content-item"
+                                            style="{{ width_style }}"
+                                          >
+                                            {%- if block.settings.column_4_link != blank -%}
+                                              <a
+                                                href="{{ block.settings.column_4_link }}"
+                                                class="menu-drawer__column-content-link"
+                                                style="display: block; text-decoration: none;"
+                                              >
+                                            {%- else -%}
+                                              <div class="menu-drawer__column-content-link">
+                                            {%- endif -%}
+                                            {%- if block.settings.column_4_image != blank -%}
+                                              <div class="menu-drawer__column-content-image" style="{{ align_style }}">
+                                                {%- if block.settings.column_4_flag_text != blank -%}
+                                                  <div
+                                                    class="menu-drawer__column-content-flag"
+                                                    style="color: {{ block.settings.column_4_flag_text_color | default: '#ffffff' }}; background-color: {{ block.settings.column_4_flag_bg_color | default: '#d14424' }};"
+                                                  >
+                                                    {{ block.settings.column_4_flag_text }}
+                                                  </div>
+                                                {%- endif -%}
+                                                {{
+                                                  block.settings.column_4_image
+                                                  | image_url: width: 300
+                                                  | image_tag:
+                                                    loading: 'lazy',
+                                                    widths: '300',
+                                                    class: 'menu-drawer__column-content-img'
+                                                }}
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_4_title != blank -%}
+                                              <div class="menu-drawer__column-content-title" style="{{ align_style }}">
+                                                <span class="header_font header_link{%- if uppercase %} uppercase{% endif %}{%- if bold %} bold{% endif %}">
+                                                  {{ block.settings.column_4_title | strip_html | strip | escape }}
+                                                </span>
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_4_subtitle != blank -%}
+                                              <div
+                                                class="menu-drawer__column-content-subtitle"
+                                                style="{{ align_style }}"
+                                              >
+                                                {{ block.settings.column_4_subtitle }}
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_4_promo_text != blank -%}
+                                              <div
+                                                class="menu-drawer__column-content-promo"
+                                                style="color: {{ block.settings.column_promo_text_color | default: '#d14424' }}; {{ align_style }}"
+                                              >
+                                                {{ block.settings.column_4_promo_text }}
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.column_4_link != blank -%}
+                                              </a>
+                                            {%- else -%}
+                                              </div>
+                                            {%- endif -%}
+                                          </div>
+                                        {%- endif -%}
+                                      {%- endif -%}
+                                    </div>
+                                  </div>
+                                {%- endif -%}
+                              {%- else -%}
+                                <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                                  {%- for submenu_link in block.settings.menu.links -%}
+                                    <li>
+                                      {%- if submenu_link.links == blank -%}
+                                        <a
+                                          id="HeaderDrawer-Mobile-{{ block.id }}-{{ submenu_link.handle }}"
+                                          href="{{ submenu_link.url }}"
+                                          class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if submenu_link.current %} menu-drawer__menu-item--active{% endif %} header_font {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}"
+                                          {% if submenu_link.current %}
+                                            aria-current="page"
+                                          {% endif %}
+                                        >
+                                          {% assign target_title = submenu_link.title | downcase %}
+                                          {% for nav_block in section.blocks %}
+                                            {% if nav_block.type == 'nav_img' %}
+                                              {% assign block_name = nav_block.settings.nav_name | downcase %}
+                                              {% if target_title == block_name
+                                                and nav_block.settings.nav_image != blank
+                                              %}
+                                                {{
+                                                  nav_block.settings.nav_image
+                                                  | image_url: width: '60'
+                                                  | image_tag:
+                                                    loading: 'lazy',
+                                                    widths: '60',
+                                                    class: 'lazyload burger__img'
+                                                }}
+                                              {% endif %}
+                                            {% endif %}
+                                          {% endfor %}
+                                          {{ submenu_link.title | escape }}
+                                        </a>
+                                      {%- else -%}
+                                        <details id="Details-menu-drawer-mobile-{{ block.id }}-{{ submenu_link.handle }}">
+                                          <summary
+                                            id="HeaderDrawer-Mobile-{{ block.id }}-{{ submenu_link.handle }}"
+                                            class="menu-drawer__menu-item link link--text list-menu__item focus-inset header_font {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}"
+                                          >
+                                            {% assign target_title = submenu_link.title | downcase %}
+                                            {% for nav_block in section.blocks %}
+                                              {% if nav_block.type == 'nav_img' %}
+                                                {% assign block_name = nav_block.settings.nav_name | downcase %}
+                                                {% if target_title == block_name
+                                                  and nav_block.settings.nav_image != blank
+                                                %}
+                                                  {{
+                                                    nav_block.settings.nav_image
+                                                    | image_url: width: '60'
+                                                    | image_tag:
+                                                      loading: 'lazy',
+                                                      widths: '60',
+                                                      class: 'lazyload burger__img'
+                                                  }}
+                                                {% endif %}
+                                              {% endif %}
+                                            {% endfor %}
+                                            {{ submenu_link.title | escape }}
+                                            {%- if section.settings.mobile_menu_type == 'nested'
+                                              and section.settings.nested_menu_style == 'question'
+                                            -%}
+                                              <span class="icon-caret-wrapper">
+                                                <span class="icon-caret icon-arrow-down">
+                                                  {{- 'icon-arrow-down.svg' | inline_asset_content -}}
+                                                </span>
+                                                <span class="icon-caret icon-arrow-up">
+                                                  {{- 'icon-arrow-up.svg' | inline_asset_content -}}
+                                                </span>
+                                              </span>
+                                            {%- else -%}
+                                              <span class="svg-wrapper icon-arrow-down-wrapper">
+                                                {{- 'icon-arrow-down.svg' | inline_asset_content -}}
+                                              </span>
+                                              <span class="svg-wrapper">
+                                                {{- 'icon-caret.svg' | inline_asset_content -}}
+                                              </span>
+                                            {%- endif -%}
+                                          </summary>
+                                          <div
+                                            id="mobile-submenu-{{ submenu_link.handle | escape }}"
+                                            class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                                          >
+                                            <button
+                                              class="menu-drawer__close-button list-menu__item link link--text focus-inset header_font {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}"
+                                              aria-expanded="true"
+                                            >
+                                              <span class="svg-wrapper">
+                                                {{- 'icon-arrow.svg' | inline_asset_content -}}
+                                              </span>
+                                              <span class="header_font">{{ submenu_link.title | escape }}</span>
+                                            </button>
+                                            <ul
+                                              class="menu-drawer__menu list-menu"
+                                              role="list"
+                                              tabindex="-1"
+                                            >
+                                              {%- for grandchildlink in submenu_link.links -%}
+                                                <li>
+                                                  <a
+                                                    id="HeaderDrawer-Mobile-{{ block.id }}-{{ submenu_link.handle }}-{{ grandchildlink.handle }}"
+                                                    href="{{ grandchildlink.url }}"
+                                                    class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %} header_font {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}"
+                                                    {% if grandchildlink.current %}
+                                                      aria-current="page"
+                                                    {% endif %}
+                                                  >
+                                                    {% assign target_title = grandchildlink.title | downcase %}
+                                                    {% for nav_block in section.blocks %}
+                                                      {% if nav_block.type == 'nav_img' %}
+                                                        {% assign block_name = nav_block.settings.nav_name | downcase %}
+                                                        {% if target_title == block_name
+                                                          and nav_block.settings.nav_image != blank
+                                                        %}
+                                                          {{
+                                                            nav_block.settings.nav_image
+                                                            | image_url: width: '60'
+                                                            | image_tag:
+                                                              loading: 'lazy',
+                                                              widths: '60',
+                                                              class: 'lazyload burger__img'
+                                                          }}
+                                                        {% endif %}
+                                                      {% endif %}
+                                                    {% endfor %}
+                                                    {{ grandchildlink.title | escape }}
+                                                  </a>
+                                                </li>
+                                              {%- endfor -%}
+                                            </ul>
+                                          </div>
+                                        </details>
+                                      {%- endif -%}
+                                    </li>
+                                  {%- endfor -%}
+                                </ul>
+                              {%- endif -%}
+                            </div>
+                          </div>
+                        </details>
+                      {%- else -%}
+                        {%- if block.settings.title_link != blank -%}
+                          <a
+                            id="HeaderDrawer-Mobile-{{ block.id }}"
+                            href="{{ block.settings.title_link }}"
+                            class="menu-drawer__menu-item list-menu__item link link--text focus-inset header_font {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}"
+                          >
+                            {% assign target_title = block.settings.heading | strip_html | strip | downcase %}
+                            {% for nav_block in section.blocks %}
+                              {% if nav_block.type == 'nav_img' %}
+                                {% assign block_name = nav_block.settings.nav_name | downcase %}
+                                {% if target_title == block_name and nav_block.settings.nav_image != blank %}
+                                  {{
+                                    nav_block.settings.nav_image
+                                    | image_url: width: '60'
+                                    | image_tag: loading: 'lazy', widths: '60', class: 'lazyload burger__img'
+                                  }}
+                                {% endif %}
+                              {% endif %}
+                            {% endfor %}
+                            {{ block.settings.heading | strip_html | strip | escape }}
+                          </a>
+                        {%- else -%}
+                          <span
+                            id="HeaderDrawer-Mobile-{{ block.id }}"
+                            class="menu-drawer__menu-item list-menu__item header_font {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}"
+                          >
+                            {% assign target_title = block.settings.heading | strip_html | strip | downcase %}
+                            {% for nav_block in section.blocks %}
+                              {% if nav_block.type == 'nav_img' %}
+                                {% assign block_name = nav_block.settings.nav_name | downcase %}
+                                {% if target_title == block_name and nav_block.settings.nav_image != blank %}
+                                  {{
+                                    nav_block.settings.nav_image
+                                    | image_url: width: '60'
+                                    | image_tag: loading: 'lazy', widths: '60', class: 'lazyload burger__img'
+                                  }}
+                                {% endif %}
+                              {% endif %}
+                            {% endfor %}
+                            {{ block.settings.heading | strip_html | strip | escape }}
+                          </span>
+                        {%- endif -%}
+                      {%- endif -%}
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- else -%}
+                {%- for link in burger_menu.links -%}
+                  <li class="{%- if link.url == '/pages/plans' -%}mb-2{% endif %}">
+                    {%- if link.links != blank -%}
+                      <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
+                        <summary
+                          id="HeaderDrawer-{{ link.handle }}"
+                          class="menu-drawer__menu-item list-menu__item link link--text focus-inset header_font {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
+                        >
+                          {{ link.title | escape }}
+                          <span class="svg-wrapper">
+                            {{- 'icon-arrow.svg' | inline_asset_content -}}
+                          </span>
+                          <span class="svg-wrapper">
+                            {{- 'icon-caret.svg' | inline_asset_content -}}
+                          </span>
+                        </summary>
+                        <div
+                          id="link-{{ link.handle | escape }}"
+                          class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                          tabindex="-1"
+                        >
+                          <div class="menu-drawer__inner-submenu">
+                            <button
+                              class="menu-drawer__close-button list-menu__item link link--text focus-inset header_font {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}"
+                              aria-expanded="true"
+                            >
+                              <span class="svg-wrapper">
+                                {{- 'icon-arrow.svg' | inline_asset_content -}}
+                              </span>
+                              <span class="header_font">{{ link.title | escape }}</span>
+                            </button>
+                            <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                              {%- for childlink in link.links -%}
+                                <li>
+                                  {%- if childlink.links == blank -%}
+                                    <a
+                                      id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
+                                      href="{{ childlink.url }}"
+                                      class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active {% endif %} header_font {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}"
+                                      {% if childlink.current %}
+                                        aria-current="page"
+                                      {% endif %}
+                                    >
+                                      {{ childlink.title | escape }}
+                                    </a>
+                                  {%- else -%}
+                                    <details id="Details-menu-drawer-{{ link.handle }}-{{ childlink.handle }}">
+                                      <summary
+                                        id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
+                                        class="menu-drawer__menu-item link link--text list-menu__item focus-inset header_font {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}"
+                                      >
+                                        {{ childlink.title | escape }}
+                                        <span class="svg-wrapper">
+                                          {{- 'icon-arrow.svg' | inline_asset_content -}}
+                                        </span>
+                                        <span class="svg-wrapper">
+                                          {{- 'icon-caret.svg' | inline_asset_content -}}
+                                        </span>
+                                      </summary>
+                                      <div
+                                        id="childlink-{{ childlink.handle | escape }}"
+                                        class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                                      >
+                                        <button
+                                          class="menu-drawer__close-button list-menu__item link link--text focus-inset header_font {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}"
+                                          aria-expanded="true"
+                                        >
+                                          <span class="svg-wrapper">
+                                            {{- 'icon-arrow.svg' | inline_asset_content -}}
+                                          </span>
+                                          <span class="header_font">{{ childlink.title | escape }}</span>
+                                        </button>
+                                        <ul
+                                          class="menu-drawer__menu list-menu"
+                                          role="list"
+                                          tabindex="-1"
+                                        >
+                                          {%- for grandchildlink in childlink.links -%}
+                                            <li>
+                                              <a
+                                                id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                                href="{{ grandchildlink.url }}"
+                                                class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %} header_font {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}"
+                                                {% if grandchildlink.current %}
+                                                  aria-current="page"
+                                                {% endif %}
+                                              >
+                                                {{ grandchildlink.title | escape }}
+                                              </a>
+                                            </li>
+                                          {%- endfor -%}
+                                        </ul>
+                                      </div>
+                                    </details>
+                                  {%- endif -%}
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          </div>
+                        </div>
+                      </details>
+                    {%- else -%}
+                      <a
+                        id="HeaderDrawer-{{ link.handle }}"
+                        href="{{ link.url }}"
+                        class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %} header_font {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}"
+                        {% if link.current %}
+                          aria-current="page"
+                        {% endif %}
+                      >
+                        {% assign target_title = link.title | downcase %}
+
+                        {% for block in section.blocks %}
+                          {% assign block_name = block.settings.nav_name | downcase %}
+                          {% if target_title == block_name and block.settings.nav_image != blank %}
+                            {{
+                              block.settings.nav_image
+                              | image_url: width: '60'
+                              | image_tag: loading: 'lazy', widths: '60', class: 'lazyload burger__img'
+                            }}
+                          {% endif %}
+                        {% endfor %}
+
+                        {{ link.title | escape }}
+                      </a>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              {%- endif -%}
+            </ul>
+          </nav>
+          {%- if section.settings.burger_menu_social -%}
+            <div class="menu-drawer__utility-links">
+              {%- if localization.available_countries or localization.available_languages -%}
+                <div class="menu-drawer__localization header-localization">
+                  {%- if localization.available_countries and localization.available_countries.size > 1 -%}
+                    <localization-form>
+                      {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
+                        <div>
+                          <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
+                            {{ 'localization.country_label' | t }}
+                          </h2>
+                          {%- render 'country-localization', localPosition: 'HeaderCountryMobile' -%}
+                        </div>
+                      {%- endform -%}
+                    </localization-form>
+                  {% endif %}
+
+                  {%- if localization.available_languages and localization.available_languages.size > 1 -%}
+                    <localization-form>
+                      {%- form 'localization', id: 'HeaderLanguageMobileForm', class: 'localization-form' -%}
+                        <div>
+                          <h2 class="visually-hidden" id="HeaderLanguageMobileLabel">
+                            {{ 'localization.language_label' | t }}
+                          </h2>
+                          {%- render 'language-localization', localPosition: 'HeaderLanguageMobile' -%}
+                        </div>
+                      {%- endform -%}
+                    </localization-form>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+              <ul class="list list-social list-unstyled" role="list">
+                {%- if settings.social_twitter_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_twitter_link }}" class="list-social__link link">
+                      <span class="svg-wrapper">
+                        {{- 'icon-twitter.svg' | inline_asset_content -}}
+                      </span>
+                      <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if settings.social_facebook_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_facebook_link }}" class="list-social__link link">
+                      <span class="svg-wrapper">
+                        {{- 'icon-facebook.svg' | inline_asset_content -}}
+                      </span>
+                      <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if settings.social_pinterest_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_pinterest_link }}" class="list-social__link link">
+                      <span class="svg-wrapper">
+                        {{- 'icon-pinterest.svg' | inline_asset_content -}}
+                      </span>
+                      <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if settings.social_instagram_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_instagram_link }}" class="list-social__link link">
+                      <span class="svg-wrapper">
+                        {{- 'icon-instagram.svg' | inline_asset_content -}}
+                      </span>
+                      <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if settings.social_tiktok_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_tiktok_link }}" class="list-social__link link">
+                      <span class="svg-wrapper">
+                        {{- 'icon-tiktok.svg' | inline_asset_content -}}
+                      </span>
+                      <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if settings.social_tumblr_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_tumblr_link }}" class="list-social__link link">
+                      <span class="svg-wrapper">
+                        {{- 'icon-tumblr.svg' | inline_asset_content -}}
+                      </span>
+                      <span class="visually-hidden">{{ 'general.social.links.tumblr' | t }}</span>
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if settings.social_snapchat_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_snapchat_link }}" class="list-social__link link">
+                      <span class="svg-wrapper">
+                        {{- 'icon-snapchat.svg' | inline_asset_content -}}
+                      </span>
+                      <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if settings.social_youtube_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_youtube_link }}" class="list-social__link link">
+                      <span class="svg-wrapper">
+                        {{- 'icon-youtube.svg' | inline_asset_content -}}
+                      </span>
+                      <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if settings.social_vimeo_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_vimeo_link }}" class="list-social__link link">
+                      <span class="svg-wrapper">
+                        {{- 'icon-vimeo.svg' | inline_asset_content -}}
+                      </span>
+                      <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
+                    </a>
+                  </li>
+                {%- endif -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <div class="burger-bottom-menu">
+            {%- if customer -%}
+            {%- else -%}
+              <a
+                href="{%- if section.settings.customer_log_in_btn_link != blank-%}{{ section.settings.customer_log_in_btn_link }}{%- elsif customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+                class="header_font primary-button mtb-button small_btn button--full-width {%- if uppercase %} uppercase{% endif %} {%- if bold %} bold{% endif %}"
+              >
+                {{- section.settings.customer_log_in_btn -}}
+              </a>
+            {%- endif -%}
+
+            <div class="burger-bottom-menu__wrapper header_font">
+              <a href="/pages/faq" class="menu-drawer__account link focus-inset h5 large-up-hide">
+                {% if section.settings.custom_help_icon != blank %}
+                  {{
+                    section.settings.custom_help_icon
+                    | image_url: width: '20, 30, 40'
+                    | image_tag: sizes: 'min-width: 10px', class: 'custom_img', alt: 'Help Icon'
+                  }}
+                {% else %}
+                  <span class="svg-wrapper">
+                    {{- 'icon-chat-bubble.svg' | inline_asset_content -}}
+                  </span>
+                {%- endif -%}
+                <span class="icon__text">
+                  {%- liquid
+                    echo 'sections.header.help' | t
+                  -%}
+                </span>
+              </a>
+
+              {%- if shop.customer_accounts_enabled -%}
+                <a
+                  href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+                  class="menu-drawer__account link focus-inset h5 large-up-hide"
+                  rel="nofollow"
+                >
+                  {%- if section.settings.enable_customer_avatar -%}
+                    <account-icon>
+                      {%- if customer and customer.has_avatar? -%}
+                        {{ customer | avatar }}
+                      {%- else -%}
+                        {% if section.settings.custom_account_icon != blank %}
+                          {{
+                            section.settings.custom_account_icon
+                            | image_url: width: '20, 30, 40'
+                            | image_tag: sizes: 'min-width: 10px', class: 'custom_img', alt: 'Account Icon'
+                          }}
+                        {%- else -%}
+                          <span class="svg-wrapper">
+                            {{- 'icon-account.svg' | inline_asset_content -}}
+                          </span>
+                        {%- endif -%}
+                      {%- endif -%}
+                    </account-icon>
+                  {%- else -%}
+                    {% if section.settings.custom_account_icon != blank %}
+                      {{
+                        section.settings.custom_account_icon
+                        | image_url: width: '20, 30, 40'
+                        | image_tag: sizes: 'min-width: 10px', class: 'custom_img', alt: 'Account Icon'
+                      }}
+                    {%- else -%}
+                      <span class="svg-wrapper">
+                        {{- 'icon-account.svg' | inline_asset_content -}}
+                      </span>
+                    {%- endif -%}
+                  {%- endif -%}
+                  <span class="icon__text">
+                    {%- liquid
+                      if customer
+                        echo 'customer.account_fallback' | t
+                      else
+                        echo 'customer.account.title' | t
+                      endif
+                    -%}
+                  </span>
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+</header-drawer>

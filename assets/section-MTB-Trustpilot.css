@@ -1,0 +1,32 @@
+.trustpilot-component__header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.trustpilot-component__header-logo,
+.trustpilot-component__header-img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.trustpilot-component__header-copy {
+  margin: 0;
+}
+
+.trustpilot-component__btn-wrap {
+  text-align: center;
+}
+
+@media screen and (min-width: 641px) {
+  .trustpilot-component__header-images {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+  }
+
+  .trustpilot-component__header-logo-wrap {
+    margin-left: 1rem;
+    order: 2;
+  }
+}

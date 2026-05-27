@@ -1,0 +1,150 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "mtb_article_8jJfyy": {
+      "type": "MTB-article",
+      "blocks": {
+        "section_ARGaCx": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>SMS & MMS MESSAGING TERMS & CONDITIONS</strong>",
+            "text": "",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_ARGaCx"
+      ],
+      "settings": {
+        "text_align": "text-align-center",
+        "title_size": "h1",
+        "header_color": "#856245",
+        "text_color": "#33534b",
+        "text_link_hover_color": "#172421",
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 10,
+        "component_tablet_pt": 30,
+        "component_tablet_pb": 10,
+        "component_desktop_pt": 40,
+        "component_desktop_pb": 10
+      }
+    },
+    "mtb_article_nGdJhU": {
+      "type": "MTB-article",
+      "blocks": {
+        "section_mrEdra": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Effective Date: January 1, 2025</strong>",
+            "text": "<p></p><p>By subscribing to the Mystery Tackle Box SMS program, you consent to receive recurring marketing and/or transactional messages from Mystery Tackle Box at the phone number provided. These messages may include cart reminders, promotions, account updates, order alerts, and other service notifications. Message frequency varies depending on your interactions with the program. Message and data rates may apply. SMS consent is not a condition of purchase. Texts may be sent using an automatic telephone dialing system.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_NjWJ8E": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>How to Opt-In and Opt-Out</strong>",
+            "text": "<p>To subscribe, text JOIN to 888-970-4682.</p><p>For help, text HELP to 888-970-4682, email <a href=\"mailto:support@mysterytacklebox.com\" title=\"mailto:support@mysterytacklebox.com\">support@mysterytacklebox.com</a></p><p>To unsubscribe, text STOP to 888-970-4682. You will receive a confirmation message, and no further messages will be sent unless you opt back in.</p><p></p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_dpEg6z": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Privacy Policy</strong>",
+            "text": "<p>We respect your privacy and will use your information as outlined in our Privacy Policy, available at <a href=\"/pages/privacy\" title=\"Privacy Policy\">mysterytacklebox.com/pages/privacy</a>. We do not share or sell SMS opt-in data or consent status with nonaffiliated third parties for marketing purposes. Tracking mechanisms, such as cookies, may be used to monitor cart activity and send abandoned cart reminders. For more information, please review our Privacy Policy.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_dRzRPp": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Service Availability</strong>",
+            "text": "<p>This service is available to persons with text-capable phones subscribing to participating carriers, including, but not limited to, AT&T, Verizon Wireless, T-Mobile®, Sprint, Virgin Mobile USA, Cincinnati Bell, Centennial Wireless, Unicel, U.S. Cellular®, and Boost. Carriers are not liable for delayed or undelivered messages.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_tthP3x": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Disclaimer of Liability</strong>",
+            "text": "<p>Mystery Tackle Box is not responsible for any delays, failures, or unauthorized access arising from the use of this service. You agree to hold Mystery Tackle Box harmless from any claims related to your use of this program.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_pLW3cg": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Additional Notes</strong>",
+            "text": "<p>Message frequency varies based on your interaction with the program.</p><p>Supported carriers are not liable for delayed or undelivered messages.</p><p>This program may not be available in all areas, and service interruptions may occur.</p><p>Thank you for subscribing to the Mystery Tackle Box SMS program. For any additional questions, please contact us via the methods outlined above.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_mrEdra",
+        "section_NjWJ8E",
+        "section_dpEg6z",
+        "section_dRzRPp",
+        "section_tthP3x",
+        "section_pLW3cg"
+      ],
+      "settings": {
+        "text_align": "text-align-left",
+        "title_size": "h4",
+        "header_color": "",
+        "text_color": "#33534b",
+        "text_link_hover_color": "#172421",
+        "component_mobile_pt": 0,
+        "component_mobile_pb": 20,
+        "component_tablet_pt": 0,
+        "component_tablet_pb": 30,
+        "component_desktop_pt": 0,
+        "component_desktop_pb": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "mtb_article_8jJfyy",
+    "mtb_article_nGdJhU"
+  ]
+}

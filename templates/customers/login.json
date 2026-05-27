@@ -1,0 +1,78 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "mtb_article_TM6cW3": {
+      "type": "MTB-article",
+      "blocks": {
+        "section_8DN84R": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>WELCOME BACK</strong>",
+            "text": "",
+            "button_text": "JOIN TODAY!",
+            "button_url": "/account/register",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_8DN84R"
+      ],
+      "settings": {
+        "text_align": "text-align-center",
+        "title_size": "h2",
+        "header_color": "#856245",
+        "text_color": "#33534b",
+        "text_link_hover_color": "#172421",
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 20,
+        "component_tablet_pt": 30,
+        "component_tablet_pb": 30,
+        "component_desktop_pt": 40,
+        "component_desktop_pb": 40
+      }
+    },
+    "main": {
+      "type": "main-login",
+      "settings": {
+        "enable_shop_login_button": false,
+        "bg_color": "#ffffff",
+        "border_top_color": "#abb98d",
+        "header": "<strong>SIGN IN WITH EMAIL</strong>",
+        "header_color": "#34534b",
+        "labels_color": "#3b3a3e",
+        "input_bg": "#ffffff",
+        "input_border": "#eee9ce",
+        "email_label": "Email Address",
+        "password_label": "Password",
+        "sign_in_text": "SIGN IN",
+        "google_client_id": "",
+        "social_sign_in_header": "<strong>SIGN IN WITH...</strong>",
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 20,
+        "component_tablet_pt": 20,
+        "component_tablet_pb": 20,
+        "component_desktop_pt": 20,
+        "component_desktop_pb": 40
+      }
+    },
+    "recharge_login_redirect": {
+      "type": "recharge_login_redirect",
+      "settings": {}
+    }
+  },
+  "order": [
+    "recharge_login_redirect",
+    "mtb_article_TM6cW3",
+    "main"
+  ]
+}

@@ -1,0 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "0afd06b852d944b291f3e468e59d807a_builder_io_VErrhA": {
+      "type": "0afd06b852d944b291f3e468e59d807a-builder-io",
+      "name": "Dibble | Header",
+      "settings": {
+        "builder_content_entry_preview": "70d18ce01b3a481f82cb2ed9e4ab16a4"
+      }
+    },
+    "blog": {
+      "type": "main-bloggle-blog",
+      "settings": {}
+    }
+  },
+  "order": [
+    "0afd06b852d944b291f3e468e59d807a_builder_io_VErrhA",
+    "blog"
+  ]
+}

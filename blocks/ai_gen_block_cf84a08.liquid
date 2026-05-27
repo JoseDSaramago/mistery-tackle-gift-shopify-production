@@ -1,0 +1,519 @@
+{% doc %}
+  @prompt
+    Create a clean legal terms and conditions page layout.
+    
+    Requirements:
+    - Large centered heading at the top (Terms and Conditions)
+    - Subheading below for Effective Date
+    - Multiple sections with:
+      - Numbered section titles (e.g. 1. Acceptance and Modifications)
+      - Paragraph text under each section
+    - Use a clean, minimal layout with good spacing
+    - Left-align all body text
+    - Make section titles bold and slightly larger than body text
+    - Keep the design simple and readable (legal style)
+    
+    Style:
+    - Professional, minimal, no decorative elements
+    - Focus on readability and hierarchy
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-legal-terms-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: {{ block.settings.section_spacing }}px 20px;
+    background-color: {{ block.settings.background_color }};
+    color: {{ block.settings.text_color }};
+    font-family: {{ block.settings.body_font.family }}, sans-serif;
+    line-height: 1.6;
+  }
+
+  .ai-legal-terms__header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: {{ block.settings.section_spacing }}px;
+    padding-bottom: {{ block.settings.section_spacing | divided_by: 2 }}px;
+    border-bottom: 1px solid {{ block.settings.divider_color }};
+  }
+
+  .ai-legal-terms__title-{{ ai_gen_id }} {
+    font-family: {{ block.settings.heading_font.family }}, sans-serif;
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 700;
+    margin: 0 0 {{ block.settings.section_spacing | divided_by: 2 }}px 0;
+    color: {{ block.settings.heading_color }};
+    line-height: 1.2;
+  }
+
+  .ai-legal-terms__effective-date-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_size }}px;
+    color: {{ block.settings.subheading_color }};
+    margin: 0;
+    font-style: italic;
+  }
+
+  .ai-legal-terms__content-{{ ai_gen_id }} {
+    max-width: {{ block.settings.content_max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-legal-terms__section-{{ ai_gen_id }} {
+    margin-bottom: {{ block.settings.section_spacing }}px;
+  }
+
+  .ai-legal-terms__section-title-{{ ai_gen_id }} {
+    font-family: {{ block.settings.heading_font.family }}, sans-serif;
+    font-size: {{ block.settings.section_title_size }}px;
+    font-weight: 700;
+    margin: 0 0 {{ block.settings.paragraph_spacing }}px 0;
+    color: {{ block.settings.heading_color }};
+    line-height: 1.3;
+  }
+
+  .ai-legal-terms__section-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.body_size }}px;
+    margin: 0 0 {{ block.settings.paragraph_spacing }}px 0;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-legal-terms__section-text-{{ ai_gen_id }}:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-legal-terms-{{ ai_gen_id }} {
+      width: 100%;
+      padding: {{ block.settings.section_spacing | times: 0.7 }}px 16px;
+    }
+
+    .ai-legal-terms__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.7 }}px;
+    }
+
+    .ai-legal-terms__effective-date-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_size | times: 0.85 }}px;
+    }
+
+    .ai-legal-terms__section-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.section_title_size | times: 0.85 }}px;
+    }
+
+    .ai-legal-terms__body-{{ ai_gen_id }} {
+      font-size: {{ block.settings.body_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-legal-terms-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-legal-terms__header-{{ ai_gen_id }}">
+    {% if block.settings.page_title != blank %}
+      <h1 class="ai-legal-terms__title-{{ ai_gen_id }}">{{ block.settings.page_title }}</h1>
+    {% endif %}
+    {% if block.settings.effective_date != blank %}
+      <p class="ai-legal-terms__effective-date-{{ ai_gen_id }}">{{ block.settings.effective_date }}</p>
+    {% endif %}
+  </div>
+
+  <div class="ai-legal-terms__content-{{ ai_gen_id }}">
+    {% for i in (1..10) %}
+      {% liquid
+        assign section_enabled_key = 'section_' | append: i | append: '_enabled'
+        assign section_title_key = 'section_' | append: i | append: '_title'
+        assign section_text_key = 'section_' | append: i | append: '_text'
+
+        assign section_enabled = block.settings[section_enabled_key]
+        assign section_title = block.settings[section_title_key]
+        assign section_text = block.settings[section_text_key]
+      %}
+
+      {% if section_enabled and section_title != blank %}
+        <div class="ai-legal-terms__section-{{ ai_gen_id }}">
+          <h2 class="ai-legal-terms__section-title-{{ ai_gen_id }}">{{ section_title }}</h2>
+          {% if section_text != blank %}
+            <div class="ai-legal-terms__section-text-{{ ai_gen_id }}">{{ section_text }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Legal terms layout",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Page header"
+    },
+    {
+      "type": "text",
+      "id": "page_title",
+      "label": "Page title",
+      "default": "Terms and Conditions"
+    },
+    {
+      "type": "text",
+      "id": "effective_date",
+      "label": "Effective date",
+      "default": "Effective Date: May 1, 2026"
+    },
+    {
+      "type": "header",
+      "content": "Section 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_1_enabled",
+      "label": "Enable section 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "section_1_title",
+      "label": "Title",
+      "default": "1. Acceptance and Modifications"
+    },
+    {
+      "type": "richtext",
+      "id": "section_1_text",
+      "label": "Text",
+      "default": "<p>By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement. We reserve the right to modify these terms at any time without prior notice.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Section 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_2_enabled",
+      "label": "Enable section 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "section_2_title",
+      "label": "Title",
+      "default": "2. Use License"
+    },
+    {
+      "type": "richtext",
+      "id": "section_2_text",
+      "label": "Text",
+      "default": "<p>Permission is granted to temporarily download one copy of the materials on our website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Section 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_3_enabled",
+      "label": "Enable section 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "section_3_title",
+      "label": "Title",
+      "default": "3. Disclaimer"
+    },
+    {
+      "type": "richtext",
+      "id": "section_3_text",
+      "label": "Text",
+      "default": "<p>The materials on our website are provided on an 'as is' basis. We make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Section 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_4_enabled",
+      "label": "Enable section 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "section_4_title",
+      "label": "Title",
+      "default": "4. Limitations"
+    },
+    {
+      "type": "richtext",
+      "id": "section_4_text",
+      "label": "Text",
+      "default": "<p>In no event shall our company or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on our website.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Section 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_5_enabled",
+      "label": "Enable section 5",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "section_5_title",
+      "label": "Title",
+      "default": "5. Accuracy of Materials"
+    },
+    {
+      "type": "richtext",
+      "id": "section_5_text",
+      "label": "Text",
+      "default": "<p>The materials appearing on our website could include technical, typographical, or photographic errors. We do not warrant that any of the materials on our website are accurate, complete, or current.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Section 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_6_enabled",
+      "label": "Enable section 6",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "section_6_title",
+      "label": "Title",
+      "default": "6. Links"
+    },
+    {
+      "type": "richtext",
+      "id": "section_6_text",
+      "label": "Text",
+      "default": "<p>We have not reviewed all of the sites linked to our website and are not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by us of the site.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Section 7"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_7_enabled",
+      "label": "Enable section 7",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "section_7_title",
+      "label": "Title",
+      "default": "7. Governing Law"
+    },
+    {
+      "type": "richtext",
+      "id": "section_7_text",
+      "label": "Text",
+      "default": "<p>These terms and conditions are governed by and construed in accordance with the laws of the jurisdiction in which our company operates, and you irrevocably submit to the exclusive jurisdiction of the courts in that location.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Section 8"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_8_enabled",
+      "label": "Enable section 8",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "section_8_title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "section_8_text",
+      "label": "Text"
+    },
+    {
+      "type": "header",
+      "content": "Section 9"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_9_enabled",
+      "label": "Enable section 9",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "section_9_title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "section_9_text",
+      "label": "Text"
+    },
+    {
+      "type": "header",
+      "content": "Section 10"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_10_enabled",
+      "label": "Enable section 10",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "section_10_title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "section_10_text",
+      "label": "Text"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 600,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "default": 900
+    },
+    {
+      "type": "range",
+      "id": "section_spacing",
+      "label": "Section spacing",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "paragraph_spacing",
+      "label": "Paragraph spacing",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading font",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Body font",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Page title size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Effective date size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "section_title_size",
+      "label": "Section title size",
+      "min": 16,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Body text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Headings",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body text",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Effective date",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider",
+      "default": "#e0e0e0"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Legal terms layout"
+    }
+  ]
+}
+{% endschema %}

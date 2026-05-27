@@ -1,0 +1,34 @@
+{% comment %}
+  Renders a footer block by the type.
+
+  Usage:
+  {% render 'question', header, text, question_color, answer_color, link_hover_color  %}
+{% endcomment %}
+
+<style>
+ .question_header {
+    color: {{ question_color }};
+  }
+
+  .question_text,
+  .question_text a {
+    color: {{ answer_color }};
+  }
+
+  .question_text a:hover {
+    color: {{ link_hover_color }};
+  }
+
+  .question_button {
+    background-image: url('{{ "icon-arrow-down.svg" | asset_url }}');
+  }
+</style>
+
+<div class="question-container">
+  <div class="question_header-wrap">
+    <button class="question_button" type="button">
+      <h3 class="question_header">{{ header }}</h3>
+    </button>
+  </div>
+  <div class="question_text header_font">{{ text }}</div>
+</div>

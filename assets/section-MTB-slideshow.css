@@ -1,0 +1,80 @@
+.slideshow-container__buttons-wrap {
+  position: relative;
+}
+
+.slideshow-container_slider-img {
+  object-fit: cover;
+  height: auto;
+}
+
+.slideshow-container .slick-slide:not(:first-child) {
+  margin-left: 10px;
+}
+
+.slideshow-container .slick-dots li button:before {
+  font-size: 2rem;
+}
+
+.slideshow-container .slideshow-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.slideshow-container .slideshow-arrow .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.slideshow-container .slideshow-arrow.prev {
+  left: -5px;
+}
+
+.slideshow-container .slideshow-arrow.next {
+  right: -5px;
+}
+
+.slideshow-container .slideshow-arrow svg {
+  width: 100%;
+  height: 100%;
+  fill: #333;
+}
+
+.slideshow-container .slideshow-arrow:hover svg {
+  fill: #666;
+}
+
+.slideshow-container .dots {
+  position: relative;
+  height: 2.5rem;
+  margin-top: -1rem;
+}
+
+.slideshow-container .dots .slick-dots {
+  bottom: 0;
+}
+
+@media screen and (min-width: 641px) {
+  .slideshow-container .dots {
+    margin-top: 3rem;
+  }
+}
+
+@media screen and (min-width: 641px) and (max-width: 989px) {
+  .slideshow-container__buttons-wrap {
+    padding: 0 2rem;
+  }
+}
+
+@media screen and (min-width: 989px) {
+  .slideshow-container .slideshow-arrow.prev {
+    left: -30px;
+  }
+
+  .slideshow-container .slideshow-arrow.next {
+    right: -30px;
+  }
+}

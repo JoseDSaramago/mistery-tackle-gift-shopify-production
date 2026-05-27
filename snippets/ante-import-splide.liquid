@@ -1,0 +1,198 @@
+<style id="splide-preloaded">
+  .splide {
+    display: none !important;
+  }
+</style>
+<script>
+  let splideLoaded
+  function initSplide() {
+    if (splideLoaded) return splideLoaded
+    splideLoaded = import("https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js")
+      .then(() => {
+        document.getElementById("splide-preloaded").innerHTML = ".splide-preview { display: none !important }"
+        const link = document.createElement("link")
+        link.rel = "stylesheet"
+        link.href = "https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"
+        document.head.appendChild(link)
+      })
+    return splideLoaded
+  }
+</script>
+<style>
+  @keyframes pagination-fill {
+    from {
+      mask-position: 100% 0;
+    }
+    to {
+      mask-position: 0 0;
+    }
+  }
+
+  .splide.is-overflow:has(.splide__pagination) {
+    padding-bottom: calc(var(--spacing-medium) + 18px);
+  }
+
+  .splide__pagination {
+    margin: 0 auto !important;
+    bottom: 0 !important;
+    padding: 0 !important;
+    gap: var(--micropad-large);
+  }
+
+  .splide__pagination__page {
+    opacity: 1 !important;
+    transform: initial !important;
+    border: 1px solid var(--color-text-default);
+    min-width: 18px;
+    height: 18px;
+    margin: 0 !important;
+    background-color: transparent !important;
+    border-radius: 10px;
+    transition: min-width .15s;
+    overflow: hidden;
+  }
+
+  .splide__pagination__page.is-active {
+    min-width: 36px;
+    position: relative;
+  }
+
+  .splide__pagination__page::before,
+  .splide__pagination__page::after {
+    content: "";
+    position: absolute;
+    left: 2.37px;
+    right: 2.37px;
+    height: 11.3px;
+    background-color: var(--inverse-color-background);
+    border-radius: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: opacity .15s;
+    mask-image: linear-gradient(to right, black 50%, transparent 50%);
+    mask-repeat: no-repeat;
+    mask-size: 200% 100%;
+    mask-position: 100% 0;
+  }
+
+  .ante-inverse .splide__pagination__page::before,
+  .ante-inverse .splide__pagination__page::after {
+    background-color: var(--inverse-color-text-alt);
+  }
+
+  .splide__pagination__page::after {
+    mask-image: initial;
+    opacity: 0;
+  }
+
+  .splide__pagination__page.is-active::before {
+    opacity: 1;
+    animation: pagination-fill 5s linear forwards;
+  }
+
+  .splide.is-overflow:has(.splide__track[aria-live="polite"]) .splide__pagination__page.is-active::before {
+    animation-play-state: paused;
+  }
+
+  .splide.is-overflow:has(.splide__track[aria-live="polite"]) .splide__pagination__page.is-active::after {
+    opacity: 1;
+  }
+
+  .splide__pagination__page:not(.is-active):hover::after {
+    opacity: 0.5;
+  }
+
+  .splide__arrow {
+    --element-size: 44px;
+    opacity: 1 !important;
+    width: var(--element-size);
+    height: var(--element-size);
+    background: var(--color-background-accent);
+  }
+
+  .splide__arrow svg {
+    display: none;
+  }
+
+  {% capture arrow %}
+    {% render "ante-svg", icon: "arrow", colour: "#000" %}
+  {% endcapture %}
+
+  .splide__arrow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('data:image/svg+xml,{{ arrow | strip | strip_newlines | replace: "#", "%23" }}');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .splide__arrow.splide__arrow--prev::before {
+    transform: rotate(180deg);
+  }
+
+  .splide__arrow[disabled] {
+    opacity: 0.5 !important;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 1919px) {
+    .splide__arrow {
+      --element-size: 36px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .splide__arrow {
+      --element-size: 28px;
+    }
+  }
+
+  @media (max-width: 1919px) {
+    .splide__pagination {
+      gap: var(--micropad-medium);
+    }
+
+    .splide__pagination__page {
+      min-width: 16px;
+      height: 16px;
+    }
+
+    .splide__pagination__page::before,
+    .splide__pagination__page::after {
+      height: 10px;
+      left: 2px;
+      right: 2px;
+    }
+
+    .splide__pagination__page.is-active {
+      min-width: 32px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .splide.is-overflow:has(.splide__pagination) {
+      padding-bottom: calc(var(--spacing-medium) + 12px);
+    }
+
+    .splide__pagination {
+      gap: var(--micropad-small);
+    }
+
+    .splide__pagination__page {
+      min-width: 12px;
+      height: 12px;
+    }
+
+    .splide__pagination__page::before,
+    .splide__pagination__page::after {
+      height: 8px;
+      left: 1px;
+      right: 1px;
+    }
+
+    .splide__pagination__page.is-active {
+      min-width: 24px;
+    }
+  }
+</style>

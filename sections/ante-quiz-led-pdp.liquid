@@ -1,0 +1,1122 @@
+{%- comment -%}
+  ante-quiz-led-pdp.liquid
+  Quiz-led Paid-Social PDP — V2 from the design handoff.
+  Mirrors the block schema of ante-pdp-004-buybox so existing product/subscription_product
+  JSON can be lifted directly. Adds a `species` block + per-product recommendation mapping.
+{%- endcomment -%}
+
+{%- assign id = section.settings.custom_id | default: section.id -%}
+
+{%- comment -%} ── Build species + recommendation maps from blocks ── {%- endcomment -%}
+{%- assign species_blocks = section.blocks | where: "type", "species" -%}
+{%- assign product_blocks = section.blocks | where: "type", "product" -%}
+{%- assign sub_blocks = section.blocks | where: "type", "subscription_product" -%}
+{%- assign info_blocks = section.blocks | where: "type", "info" -%}
+
+{%- comment -%} Determine default tier (preselected product block) {%- endcomment -%}
+{%- assign default_tier_id = blank -%}
+{%- for b in product_blocks -%}
+  {%- if b.settings.preselected and default_tier_id == blank -%}
+    {%- assign default_tier_id = b.id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if default_tier_id == blank and product_blocks.size > 0 -%}
+  {%- assign default_tier_id = product_blocks[0].id -%}
+{%- endif -%}
+
+<section
+  id="{{ id }}"
+  class="ante-section quiz-led-pdp {% if section.settings.section_inverse %}ante-inverse {% endif %}{{ section.settings.section_background_style }} {{ section.settings.section_background_colour }} {{ section.settings.section_spacing }}{% if section.settings.section_visible == false %} ante-section-hidden{% endif %}"
+  data-quiz-id="quiz-{{ section.id }}"
+  data-default-tier="{{ default_tier_id }}"
+  data-default-plan="{{ section.settings.default_plan_key | default: '6' }}"
+  data-discount-code="{{ section.settings.discount_code }}"
+>
+  <div class="qz-wrap">
+
+    {%- comment -%} ── Section announcement bar (above the progress) ── {%- endcomment -%}
+    {%- if section.settings.announce_text != blank -%}
+      <div class="qz-announce qz-announce--{{ section.settings.announce_align | default: 'full' }}"
+           style="background: {{ section.settings.announce_background | default: '#FFCB12' }};">
+        {{ section.settings.announce_text }}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ── Progress bar ── {%- endcomment -%}
+    <div class="qz-progress" data-qz-progress>
+      <div class="qz-progress-row">
+        <span class="qz-step-label" data-qz-step-label>STEP 1 OF 3</span>
+        <span class="qz-takes">{{ section.settings.takes_label | default: 'Takes 20 seconds' }}</span>
+      </div>
+      <div class="qz-progress-track"><div class="qz-progress-fill" data-qz-progress-fill></div></div>
+      <button type="button" class="qz-back" data-qz-back hidden aria-label="Go back one step">← {{ section.settings.back_label | default: 'Back' }}</button>
+    </div>
+
+    {%- comment -%} ── Step 0 · Intro ── {%- endcomment -%}
+    <div class="qz-step" data-qz-step="0">
+      <div class="qz-kicker">— {{ section.settings.intro_kicker | default: 'Fishing Simplified' }} —</div>
+      <h1 class="qz-display qz-display-xl">{{ section.settings.intro_heading | default: '<p>Find the box <em>that fits</em> your fishing.</p>' }}</h1>
+      <div class="qz-lede">{{ section.settings.intro_lede | default: '<p>Two taps. We&rsquo;ll match you to the right box, plan and species. Your $10 off is already locked in.</p>' }}</div>
+      <div class="qz-rating">
+        {% render "ante-stars", rating: section.settings.star_rating | default: 4.5 %}
+        <span>{{ section.settings.star_review_text | default: '4.5 · 7,754 reviews' }}</span>
+      </div>
+      <button type="button" class="qz-cta" data-qz-go="1">{{ section.settings.intro_cta | default: 'Start · 20 seconds' }}</button>
+      <button type="button" class="qz-skip" data-qz-go="3">{{ section.settings.skip_cta | default: 'Skip the quiz, show me the boxes' }}</button>
+    </div>
+
+    {%- comment -%} ── Step 1 · Species ── {%- endcomment -%}
+    <div class="qz-step" data-qz-step="1" hidden>
+      <h2 class="qz-display qz-display-lg">{{ section.settings.step1_heading | default: 'What do you fish?' }}</h2>
+      <p class="qz-sub">{{ section.settings.step1_sub | default: "We&rsquo;ll pack your box with baits proven to catch it." }}</p>
+      <div class="qz-species-grid">
+        {%- for s in species_blocks -%}
+          <button type="button" class="qz-species-tile"
+            data-qz-species="{{ s.id }}"
+            data-qz-species-color="{{ s.settings.color | default: '#33534B' }}"
+            data-qz-species-name="{{ s.settings.name | escape }}"
+            {{ s.shopify_attributes }}>
+            <span class="qz-species-swatch" style="background:{{ s.settings.color | default: '#33534B' }}">
+              {%- if s.settings.image != blank -%}
+                <img src="{{ s.settings.image | image_url: width: 160 }}" alt="" loading="lazy">
+              {%- endif -%}
+            </span>
+            <span class="qz-species-name">{{ s.settings.name }}</span>
+            <span class="qz-species-arrow">›</span>
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- comment -%} ── Step 2 · Skill ── {%- endcomment -%}
+    <div class="qz-step" data-qz-step="2" hidden>
+      <h2 class="qz-display qz-display-lg">{{ section.settings.step2_heading | default: "What&rsquo;s your skill level?" }}</h2>
+      <p class="qz-sub">{{ section.settings.step2_sub | default: 'Helps us match the right tackle mix &mdash; beginner-friendly or pro-grade.' }}</p>
+      <div class="qz-skill-grid">
+        {%- assign skill_keys = "new,growing,expert" | split: "," -%}
+        {%- assign skill_setting_keys = "skill_new,skill_growing,skill_expert" | split: "," -%}
+        {%- assign skill_defaults_label = "New to fishing,Getting serious,Experienced angler" | split: "," -%}
+        {%- assign skill_defaults_sub = "Learning the ropes &middot; need the basics,Know what works&comma; building my arsenal,Chasing variety + premium gear" | split: "," -%}
+        {%- for sk in skill_keys -%}
+          {%- assign idx = forloop.index0 -%}
+          {%- assign label_key = skill_setting_keys[idx] | append: "_label" -%}
+          {%- assign sub_key = skill_setting_keys[idx] | append: "_sub" -%}
+          <button type="button" class="qz-skill-tile" data-qz-skill="{{ sk }}">
+            <span class="qz-skill-num">0{{ forloop.index }}</span>
+            <span class="qz-skill-label">{{ section.settings[label_key] | default: skill_defaults_label[idx] }}</span>
+            <span class="qz-skill-sub">{{ section.settings[sub_key] | default: skill_defaults_sub[idx] }}</span>
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- comment -%} ── Step 3 · Result / Buy ── {%- endcomment -%}
+    <div class="qz-step qz-result" data-qz-step="3" hidden>
+      <div class="qz-result-grid">
+
+        <div class="qz-result-image">
+          <div class="qz-gallery" data-qz-gallery>
+            <div class="qz-gallery-main" data-qz-gallery-main>
+              <img class="qz-gallery-img is-active" data-qz-gallery-slot="main" src="" alt="" loading="lazy">
+            </div>
+            <div class="qz-stamp">{{ section.settings.match_stamp | default: 'YOUR MATCH' }}</div>
+          </div>
+          <div class="qz-gallery-thumbs" data-qz-gallery-thumbs role="tablist" aria-label="Product gallery"></div>
+        </div>
+
+        <div class="qz-result-body">
+          <div class="qz-stamp qz-stamp-mobile">{{ section.settings.match_stamp | default: 'YOUR MATCH' }}</div>
+          <div class="qz-kicker">— {{ section.settings.result_kicker | default: 'We recommend' }} —</div>
+          <h2 class="qz-display qz-result-display">
+            <span data-qz-tier-headline>The {{ product_blocks[0].settings.custom_name | default: 'Pro Box' }}</span>
+          </h2>
+          <p class="qz-result-lede">
+            Paired with your <strong data-qz-species-strong>Bass</strong> picks on <span data-qz-plan-prefix>our recommended</span> <strong data-qz-plan-label>6-month</strong> plan.
+          </p>
+
+          {%- comment -%} Plan length selector {%- endcomment -%}
+          <div class="qz-kicker">— {{ section.settings.plan_kicker | default: 'Plan length' }} —</div>
+          <div class="qz-plan-grid" data-qz-plan-grid>
+            {%- assign plan_keys = "1,4,6,12" | split: "," -%}
+            {%- for pk in plan_keys -%}
+              <button type="button" class="qz-plan-btn" data-qz-plan="{{ pk }}">
+                <span class="qz-plan-short">{{ pk }} mo</span>
+                {%- if pk != "1" -%}
+                  <span class="qz-plan-badge qz-plan-badge-top">$10 OFF</span>
+                {%- endif -%}
+                {%- if pk == "6" -%}
+                  <span class="qz-plan-badge qz-plan-badge-bottom" data-qz-plan-bottom-badge>BEST</span>
+                {%- endif -%}
+              </button>
+            {%- endfor -%}
+          </div>
+
+          {%- comment -%} Recommendation card {%- endcomment -%}
+          <div class="qz-rec-card">
+            <div class="qz-rec-row">
+              <div class="qz-rec-icon" data-qz-rec-icon>
+                <span data-qz-rec-icon-letter>P</span>
+                <img class="qz-rec-icon-img" data-qz-rec-icon-img src="" alt="" hidden>
+              </div>
+              <div class="qz-rec-meta">
+                <div class="qz-rec-tier" data-qz-rec-tier>PRO BOX</div>
+                <div class="qz-rec-detail"><span data-qz-rec-items>6&ndash;8</span> pro-picked items &middot; <span data-qz-rec-planlabel>6-month</span></div>
+                <div class="qz-rec-prices">
+                  <span class="qz-rec-retail" data-qz-rec-retail>$240.00</span>
+                  <span class="qz-rec-total" data-qz-rec-total>$189.99</span>
+                  <span class="qz-rec-permo">&middot; <span data-qz-rec-permo>$31.66</span>/mo</span>
+                </div>
+              </div>
+            </div>
+            <div class="qz-ship qz-ship-free" data-qz-ship-free>
+              <strong>+ FREE SHIPPING</strong> included
+            </div>
+            <div class="qz-ship qz-ship-paid" data-qz-ship-paid hidden>
+              + shipping &middot; renews monthly. Upgrade to 4+ months for free shipping.
+            </div>
+            <div class="qz-savings" data-qz-savings>You save $<span data-qz-save-amount>60</span> vs retail</div>
+          </div>
+
+          {%- comment -%} Buy form ── posts variant id to /cart/add {%- endcomment -%}
+          <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="qz-buy-form" data-qz-buy-form>
+            <input type="hidden" name="id" value="" data-qz-variant-id>
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="selling_plan" value="" data-qz-selling-plan disabled>
+            {%- if section.settings.discount_code != blank -%}
+              <input type="hidden" name="attributes[Discount Code]" value="{{ section.settings.discount_code }}">
+            {%- endif -%}
+            <button type="submit" class="qz-cta">
+              <span data-qz-cta-label>Start my Pro &middot; $10 OFF</span>
+            </button>
+          </form>
+          <div class="qz-fineprint">{{ section.settings.fineprint | default: 'Cancel anytime &middot; First box ships within 24 hours' }}</div>
+
+          <div class="qz-restart">
+            <div class="qz-restart-label">Want a different match? Start over.</div>
+            <div class="qz-restart-btns">
+              <button type="button" class="qz-secondary" data-qz-go="1">↻ Change species</button>
+              <button type="button" class="qz-secondary" data-qz-go="1" data-qz-retake>↻ Retake quiz</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} ── Risk row ── {%- endcomment -%}
+    {%- if info_blocks.size > 0 -%}
+      <div class="qz-risk-row">
+        {%- for info in info_blocks -%}
+          <div class="qz-risk">
+            {%- if info.settings.image != blank -%}
+              <img src="{{ info.settings.image | image_url: width: 80 }}" alt="" loading="lazy">
+            {%- endif -%}
+            <div>
+              <div class="qz-risk-h">{{ info.settings.text }}</div>
+              <div class="qz-risk-s">{{ info.settings.description }}</div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+
+  {%- comment -%} ── Press marquee ── {%- endcomment -%}
+  {%- assign press_blocks = section.blocks | where: "type", "press_item" -%}
+  {%- if press_blocks.size > 0 -%}
+    <div class="qz-press">
+      <div class="qz-press-kicker">— {{ section.settings.press_kicker | default: 'As seen in' }} —</div>
+      <div class="qz-marquee">
+        {%- for it in press_blocks -%}
+          <div class="qz-press-item">
+            {%- if it.settings.logo != blank -%}
+              <img class="qz-press-logo" src="{{ it.settings.logo | image_url: width: 200 }}" alt="{{ it.settings.label | escape }}" loading="lazy">
+            {%- else -%}
+              <div class="qz-press-logo qz-press-logo-placeholder">{{ it.settings.label | default: 'LOGO' }}</div>
+            {%- endif -%}
+            <div class="qz-press-quote">{{ it.settings.quote }}</div>
+          </div>
+        {%- endfor -%}
+        {%- for it in press_blocks -%}
+          <div class="qz-press-item" aria-hidden="true">
+            {%- if it.settings.logo != blank -%}
+              <img class="qz-press-logo" src="{{ it.settings.logo | image_url: width: 200 }}" alt="" loading="lazy">
+            {%- else -%}
+              <div class="qz-press-logo qz-press-logo-placeholder">{{ it.settings.label | default: 'LOGO' }}</div>
+            {%- endif -%}
+            <div class="qz-press-quote">{{ it.settings.quote }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ── Reviews strip (mobile marquee, desktop 5-up grid) ── {%- endcomment -%}
+  {%- assign review_blocks = section.blocks | where: "type", "review" -%}
+  {%- if review_blocks.size > 0 -%}
+    <div class="qz-reviews">
+      <div class="qz-reviews-head">
+        <div class="qz-reviews-kicker">— {{ section.settings.reviews_kicker | default: '7,754 reviews · 4.5 stars' }} —</div>
+        <h2 class="qz-display qz-display-section">{{ section.settings.reviews_heading | default: '<p>Real members.<br><em>Real</em> catches.</p>' }}</h2>
+      </div>
+      <div class="qz-reviews-strip">
+        {%- for r in review_blocks -%}
+          <div class="qz-review-tile">
+            <span class="qz-review-stars">{% assign sr = r.settings.star_rating | default: 5 %}{% for i in (1..sr) %}★{% endfor %}</span>
+            <div class="qz-review-h">{{ r.settings.heading }}</div>
+            <p class="qz-review-q">{{ r.settings.review }}</p>
+            <div class="qz-review-name">{{ r.settings.name }}</div>
+            <div class="qz-review-loc">{{ r.settings.location | default: 'MTB Subscriber' }}</div>
+          </div>
+        {%- endfor -%}
+        {%- for r in review_blocks -%}
+          <div class="qz-review-tile qz-review-tile-clone" aria-hidden="true">
+            <span class="qz-review-stars">{% assign sr = r.settings.star_rating | default: 5 %}{% for i in (1..sr) %}★{% endfor %}</span>
+            <div class="qz-review-h">{{ r.settings.heading }}</div>
+            <p class="qz-review-q">{{ r.settings.review }}</p>
+            <div class="qz-review-name">{{ r.settings.name }}</div>
+            <div class="qz-review-loc">{{ r.settings.location | default: 'MTB Subscriber' }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ── What's inside ── {%- endcomment -%}
+  {%- assign inside_blocks = section.blocks | where: "type", "inside_tile" -%}
+  {%- if inside_blocks.size > 0 -%}
+    <div class="qz-inside">
+      <div class="qz-inside-inner">
+        <div class="qz-inside-head">
+          <div class="qz-reviews-kicker">— {{ section.settings.inside_kicker | default: "What's inside" }} —</div>
+          <h2 class="qz-display qz-display-section">{{ section.settings.inside_heading | default: '<p>Full-size lures. <em>No samples.</em></p>' }}</h2>
+        </div>
+        <div class="qz-inside-grid">
+          {%- for t in inside_blocks -%}
+            {%- assign tile_color = t.settings.color | default: '#33534B' -%}
+            {%- if t.settings.image != blank -%}
+              <div class="qz-inside-tile qz-inside-tile-img" style="background-color: {{ tile_color }}; background-image: url({{ t.settings.image | image_url: width: 800 }});">
+                <span class="qz-inside-label">{{ t.settings.label }}</span>
+              </div>
+            {%- else -%}
+              <div class="qz-inside-tile" style="background: {{ tile_color }}">
+                <span class="qz-inside-label">{{ t.settings.label }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ── Featured brands ── {%- endcomment -%}
+  {%- assign brand_blocks = section.blocks | where: "type", "brand_tile" -%}
+  {%- if brand_blocks.size > 0 -%}
+    <div class="qz-brands">
+      <div class="qz-brands-inner">
+        <h2 class="qz-display qz-display-section">{{ section.settings.brands_heading | default: 'Featured brands.' }}</h2>
+        {%- if section.settings.brands_tagline != blank -%}
+          <div class="qz-brands-tag">{{ section.settings.brands_tagline }}</div>
+        {%- endif -%}
+        <div class="qz-brands-grid">
+          {%- for b in brand_blocks -%}
+            <div class="qz-brand-tile">
+              {%- if b.settings.logo != blank -%}
+                <img src="{{ b.settings.logo | image_url: width: 240 }}" alt="{{ b.settings.name | escape }}" loading="lazy">
+              {%- else -%}
+                {{ b.settings.name | default: 'BRAND' }}
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{%- comment -%} ── Pricing / variant data emitted from Liquid for the JS controller ── {%- endcomment -%}
+<script type="application/json" data-quiz-data="quiz-{{ section.id }}">
+{
+  "tiers": {
+    {%- for b in product_blocks -%}
+      "{{ b.id }}": {
+        "name": {{ b.settings.custom_name | default: b.settings.product.title | json }},
+        "items": {{ b.settings.tag_text | strip_html | strip | json }},
+        "color": {{ b.settings.tier_color | default: "#33534B" | json }},
+        "skill": {{ b.settings.recommendation_skill | default: "growing" | json }},
+        "rec_plan": {{ b.settings.recommendation_plan | default: "6" | json }},
+        "icon": {%- if b.settings.icon_image != blank -%}{{ b.settings.icon_image | image_url: width: 160 | json }}{%- else -%}null{%- endif -%},
+        "images": [
+          {%- assign image_keys = "image,image_2,image_3,image_4,image_5" | split: "," -%}
+          {%- assign first = true -%}
+          {%- for key in image_keys -%}
+            {%- assign img = b.settings[key] -%}
+            {%- if img != blank -%}
+              {%- unless first %},{% endunless -%}{{ img | image_url: width: 1200 | json }}
+              {%- assign first = false -%}
+            {%- endif -%}
+          {%- endfor -%}
+        ],
+        "default_variant_id": {%- if b.settings.product != blank -%}{{ b.settings.product.first_available_variant.id | json }}{%- else -%}null{%- endif -%},
+        "plans": {
+          {%- comment -%} Plan 1 (monthly) — read off the parent tier product's first variant {%- endcomment -%}
+          {%- assign tier_var = b.settings.product.first_available_variant -%}
+          {%- assign tier_sp_id = null -%}
+          {%- if tier_var.selling_plan_allocations.size > 0 -%}
+            {%- assign tier_sp_id = tier_var.selling_plan_allocations.first.selling_plan.id -%}
+          {%- endif -%}
+          "1": {
+            "price": {{ b.settings.price | default: 0 }},
+            "compare_at": {{ b.settings.compare_at_price | default: 0 }},
+            "variant_id": {%- if b.settings.product != blank -%}{{ tier_var.id | json }}{%- else -%}null{%- endif -%},
+            "selling_plan_id": {{ tier_sp_id | json }}
+          }
+          {%- for sb in sub_blocks -%}
+            {%- if sb.settings.parent_product.id == b.settings.product.id -%}
+              {%- assign plan_key = sb.settings.plan_key | default: "" -%}
+              {%- if plan_key == "" -%}
+                {%- assign txt = sb.settings.subscription_option_text | downcase -%}
+                {%- if txt contains "12" -%}{%- assign plan_key = "12" -%}
+                {%- elsif txt contains "6" -%}{%- assign plan_key = "6" -%}
+                {%- elsif txt contains "4" -%}{%- assign plan_key = "4" -%}
+                {%- else -%}{%- assign plan_key = "1" -%}{%- endif -%}
+              {%- endif -%}
+              {%- assign sub_var = sb.settings.product.first_available_variant -%}
+              {%- assign sub_sp_id = null -%}
+              {%- if sub_var.selling_plan_allocations.size > 0 -%}
+                {%- assign sub_sp_id = sub_var.selling_plan_allocations.first.selling_plan.id -%}
+              {%- endif -%}
+              ,"{{ plan_key }}": {
+                "price": {{ sb.settings.price | default: 0 }},
+                "compare_at": {{ sb.settings.compare_at_price | default: 0 }},
+                "variant_id": {%- if sb.settings.product != blank -%}{{ sub_var.id | json }}{%- else -%}null{%- endif -%},
+                "selling_plan_id": {{ sub_sp_id | json }}
+              }
+            {%- endif -%}
+          {%- endfor -%}
+        }
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  },
+  "default_tier": {{ default_tier_id | json }},
+  "default_plan": {{ section.settings.default_plan_key | default: "6" | json }}
+}
+</script>
+
+<style>
+  /* ── Mystery Tackle Box brand fonts (Shopify CDN) ── */
+  @font-face { font-family: "Brandon Printed"; src: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/BrandonPrinted-One.woff?v=1777398451") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Cervo Neue"; src: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/CervoNeue-LightNeue.otf?v=1777398457") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Cervo Neue"; src: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/Typoforge_Studio_-_CervoNeue-RegularNeue.otf?v=1777398457") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Cervo Neue"; src: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/Typoforge_Studio_-_CervoNeue-BoldNeue.otf?v=1777398457") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Gotham SSm"; src: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/GothamSSm-Book.woff?v=1736887231") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Gotham SSm"; src: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/GothamSSm-Bold.woff?v=1736887231") format("woff"); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Zing Script Rust"; src: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/ZingScriptRustSB-BaseG.woff?v=1777398464") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
+
+  #{{ id }}.quiz-led-pdp {
+    /* Mystery Tackle Box brand palette (v2026.01) */
+    --mtb-sandy-flats:   #F8F3EA;
+    --mtb-green:         #33534B;
+    --mtb-deep-green:    #00594F;
+    --mtb-orange:        #D14424;  /* Hat Guy Orange — CTAs only */
+    --mtb-weedline:      #37B777;
+    --mtb-chum:          #FFCB12;
+    --mtb-warm-yellow:   #FBAD18;
+    --mtb-squid-ink:     #101820;
+    --mtb-bait-shop:     #142648;
+    --mtb-hot-sky:       #35ADE2;
+    --mtb-flag-red:      #B53035;
+
+    /* Brand typography roles */
+    --font-display:   "Brandon Printed", "Archivo Black", sans-serif;
+    --font-condensed: "Cervo Neue", "Oswald", "Bebas Neue", sans-serif;
+    --font-body:      "Gotham SSm", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-script:    "Zing Script Rust", "Caveat Brush", cursive;
+
+    /* Role aliases (theme-editor-overridable defaults map to brand palette) */
+    --qz-green:      {{ section.settings.brand_green  | default: '#33534B' }};
+    --qz-green-dark: #1f3a33;
+    --qz-gold:       {{ section.settings.brand_gold   | default: '#FBAD18' }};
+    --qz-orange:     {{ section.settings.brand_orange | default: '#D14424' }};
+    --qz-cream:      {{ section.settings.brand_cream  | default: '#F8F3EA' }};
+    --qz-cream-alt:  #F1EAD2;
+    --qz-ink:        {{ section.settings.brand_ink    | default: '#101820' }};
+    --qz-yellow:     #FFCB12;
+    background: var(--qz-cream);
+    color: var(--qz-ink);
+    font-family: var(--font-body);
+  }
+  #{{ id }} .qz-wrap { max-width: 1200px; margin: 0 auto; padding: 18px 18px 0; }
+  #{{ id }} .qz-display { font-family: var(--font-display); line-height: .95; letter-spacing: .005em; color: var(--qz-green); text-transform: uppercase; font-weight: 400; }
+  #{{ id }} .qz-display-xl { font-size: clamp(40px, 6vw, 96px); margin: 0 0 14px; }
+  #{{ id }} .qz-display-lg { font-size: clamp(30px, 5vw, 72px); margin: 0 0 6px; }
+  #{{ id }} .qz-display em { font-family: var(--font-script); font-style: normal; text-transform: none; letter-spacing: 0; font-weight: 400; }
+
+  /* Section announcement bar */
+  #{{ id }} .qz-announce { color: var(--qz-ink); padding: 8px 14px; margin-bottom: 14px; font-family: var(--font-body); font-weight: 700; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; border-radius: 100px; }
+  #{{ id }} .qz-announce--full { display: block; text-align: center; }
+  #{{ id }} .qz-announce--left { display: inline-block; text-align: left; }
+
+  #{{ id }} .qz-progress { margin-bottom: 18px; }
+  #{{ id }} .qz-progress-row { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 6px; }
+  #{{ id }} .qz-step-label { font-family: var(--font-body); font-weight: 700; letter-spacing: .14em; color: var(--qz-orange); text-transform: uppercase; }
+  #{{ id }} .qz-takes { color: rgba(16,24,32,.55); }
+  #{{ id }} .qz-progress-track { height: 4px; background: rgba(16,24,32,.12); position: relative; border-radius: 100px; overflow: hidden; }
+  #{{ id }} .qz-progress-fill { position: absolute; inset: 0; right: auto; width: 33%; background: var(--qz-orange); transition: width .3s; border-radius: 100px; }
+  #{{ id }} .qz-back { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; padding: 6px 14px; background: transparent; border: 1px solid rgba(16,24,32,.18); border-radius: 100px; font-family: var(--font-body); font-weight: 700; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(16,24,32,.65); cursor: pointer; }
+  #{{ id }} .qz-back:hover { color: var(--qz-ink); border-color: rgba(16,24,32,.4); }
+  #{{ id }} .qz-back[hidden] { display: none; }
+
+  #{{ id }} .qz-step { padding: 24px 0 10px; }
+  #{{ id }} .qz-step[hidden] { display: none; }
+  #{{ id }} .qz-kicker { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: .18em; color: var(--qz-orange); margin-bottom: 10px; text-transform: uppercase; }
+  #{{ id }} .qz-lede { font-size: clamp(15px, 1.4vw, 18px); color: rgba(16,24,32,.75); margin-bottom: 18px; max-width: 640px; }
+  #{{ id }} .qz-sub { font-size: 14px; color: rgba(16,24,32,.65); margin-bottom: 18px; max-width: 640px; }
+  #{{ id }} .qz-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; font-size: 13px; font-weight: 600; }
+
+  #{{ id }} .qz-cta { display: block; width: 100%; max-width: 520px; padding: 18px 22px; background: var(--qz-orange); color: #fff; font-family: var(--font-body); font-weight: 700; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; border: 0; border-radius: 100px; cursor: pointer; transition: transform .1s, opacity .1s; }
+  #{{ id }} .qz-cta:hover { transform: translateY(-1px); }
+  #{{ id }} .qz-cta:active { transform: translateY(1px); opacity: .92; }
+  #{{ id }} .qz-skip { display: block; width: 100%; max-width: 520px; padding: 12px; margin-top: 10px; font-family: var(--font-body); font-weight: 700; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: rgba(16,24,32,.6); text-decoration: underline; background: transparent; border: 0; border-radius: 100px; cursor: pointer; }
+
+  /* Species */
+  #{{ id }} .qz-species-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 720px) { #{{ id }} .qz-species-grid { grid-template-columns: repeat(5, 1fr); gap: 12px; } }
+  #{{ id }} .qz-species-tile { display: flex; align-items: center; gap: 12px; padding: 14px; background: #fff; border: 2px solid rgba(16,24,32,.1); cursor: pointer; text-align: left; font: inherit; color: inherit; }
+  #{{ id }} .qz-species-tile.is-active { color: var(--qz-cream); }
+  @media (min-width: 720px) {
+    #{{ id }} .qz-species-tile { flex-direction: column; padding: 28px 14px; gap: 14px; align-items: center; text-align: center; }
+    #{{ id }} .qz-species-arrow { display: none; }
+  }
+  #{{ id }} .qz-species-swatch { width: 34px; height: 34px; border-radius: 50%; flex: 0 0 auto; overflow: hidden; }
+  @media (min-width: 720px) { #{{ id }} .qz-species-swatch { width: 64px; height: 64px; } }
+  #{{ id }} .qz-species-swatch img { width: 100%; height: 100%; object-fit: cover; }
+  #{{ id }} .qz-species-name { font-family: var(--font-display); font-weight: 400; font-size: 16px; letter-spacing: .02em; flex: 1; line-height: 1.2; text-transform: uppercase; }
+  #{{ id }} .qz-species-arrow { font-size: 20px; opacity: .5; }
+
+  /* Skill */
+  #{{ id }} .qz-skill-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 720px) { #{{ id }} .qz-skill-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; } }
+  #{{ id }} .qz-skill-tile { padding: 18px 16px; background: #fff; border: 2px solid rgba(16,24,32,.1); display: flex; flex-direction: column; gap: 4px; text-align: left; cursor: pointer; font: inherit; color: inherit; }
+  @media (min-width: 720px) { #{{ id }} .qz-skill-tile { padding: 40px 20px; text-align: center; align-items: center; } }
+  #{{ id }} .qz-skill-tile.is-active { background: var(--qz-green); color: var(--qz-cream); border-color: var(--qz-green); }
+  #{{ id }} .qz-skill-num { font-family: var(--font-condensed); font-weight: 700; font-style: normal; font-size: 36px; color: var(--qz-orange); line-height: 1; margin-bottom: 6px; display: none; }
+  @media (min-width: 720px) { #{{ id }} .qz-skill-num { display: block; font-size: 56px; margin-bottom: 14px; } }
+  #{{ id }} .qz-skill-tile.is-active .qz-skill-num { color: var(--qz-yellow); }
+  #{{ id }} .qz-skill-label { font-family: var(--font-display); font-weight: 400; font-size: 16px; letter-spacing: .02em; text-transform: uppercase; }
+  @media (min-width: 720px) { #{{ id }} .qz-skill-label { font-size: 18px; margin-bottom: 6px; } }
+  #{{ id }} .qz-skill-sub { font-size: 12px; opacity: .7; }
+  @media (min-width: 720px) { #{{ id }} .qz-skill-sub { font-size: 13px; } }
+
+  /* Result */
+  #{{ id }} .qz-result-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 900px) { #{{ id }} .qz-result-grid { grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; } }
+  #{{ id }} .qz-result-image { display: block; }
+  #{{ id }} .qz-result-display { font-size: clamp(28px, 7vw, 40px); line-height: 1; }
+  @media (min-width: 900px) { #{{ id }} .qz-result-display { font-size: clamp(32px, 3.4vw, 42px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } }
+  /* Gallery */
+  #{{ id }} .qz-gallery { position: relative; aspect-ratio: 1 / 1; background: var(--qz-green); overflow: hidden; border-radius: 16px; }
+  #{{ id }} .qz-gallery-main { position: absolute; inset: 0; }
+  #{{ id }} .qz-gallery-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #{{ id }} .qz-gallery-img:not([src]), #{{ id }} .qz-gallery-img[src=""] { display: none; }
+  #{{ id }} .qz-gallery-thumbs { display: flex; gap: 8px; padding: 12px 0 0; overflow-x: auto; scrollbar-width: none; }
+  #{{ id }} .qz-gallery-thumbs::-webkit-scrollbar { display: none; }
+  #{{ id }} .qz-gallery-thumbs:empty { display: none; }
+  #{{ id }} .qz-gallery-thumb { flex: 0 0 64px; width: 64px; height: 64px; padding: 0; background: var(--qz-cream); border: 2px solid transparent; border-radius: 12px; cursor: pointer; overflow: hidden; transition: border-color .15s; }
+  #{{ id }} .qz-gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #{{ id }} .qz-gallery-thumb.is-active { border-color: var(--qz-orange); }
+  @media (min-width: 900px) { #{{ id }} .qz-gallery-thumb { flex: 0 0 76px; width: 76px; height: 76px; } }
+  #{{ id }} .qz-stamp { position: absolute; top: 16px; left: 16px; background: var(--qz-yellow); color: var(--qz-ink); padding: 6px 12px; font-family: var(--font-condensed); font-size: 12px; font-weight: 700; letter-spacing: .12em; transform: rotate(-2deg); text-transform: uppercase; border-radius: 100px; z-index: 1; }
+  #{{ id }} .qz-stamp.qz-stamp-mobile { position: static; top: auto; left: auto; display: inline-block; margin-bottom: 10px; }
+  @media (min-width: 900px) { #{{ id }} .qz-stamp.qz-stamp-mobile { display: none; } }
+  #{{ id }} .qz-result-lede { font-size: clamp(14px, 1.2vw, 17px); color: rgba(16,24,32,.7); margin-bottom: 22px; line-height: 1.5; }
+
+  /* Plan grid */
+  #{{ id }} .qz-plan-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px; }
+  #{{ id }} .qz-plan-btn { padding: 14px 4px 12px; position: relative; background: #fff; color: var(--qz-ink); border: 1.5px solid rgba(16,24,32,.15); border-radius: 100px; font-family: var(--font-body); font-weight: 700; font-size: 12px; letter-spacing: 2px; cursor: pointer; text-transform: uppercase; }
+  #{{ id }} .qz-plan-btn.is-active { background: var(--qz-green); color: var(--qz-cream); border-color: var(--qz-green); }
+  #{{ id }} .qz-plan-badge { position: absolute; left: 50%; transform: translateX(-50%); padding: 2px 6px; font-size: 9px; font-weight: 900; letter-spacing: .05em; white-space: nowrap; }
+  #{{ id }} .qz-plan-badge-top { top: -8px; background: var(--qz-orange); color: #fff; }
+  #{{ id }} .qz-plan-badge-bottom { bottom: -8px; background: var(--qz-yellow); color: var(--qz-ink); }
+
+  /* Rec card */
+  #{{ id }} .qz-rec-card { background: var(--qz-green); color: var(--qz-cream); padding: 20px; margin-bottom: 16px; }
+  #{{ id }} .qz-rec-row { display: flex; align-items: flex-start; gap: 14px; }
+  #{{ id }} .qz-rec-icon { position: relative; width: 64px; height: 64px; background: var(--qz-orange); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-condensed); font-size: 36px; font-weight: 700; flex: 0 0 auto; line-height: 1; border-radius: 16px; overflow: hidden; }
+  #{{ id }} .qz-rec-icon-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 6px; box-sizing: border-box; }
+  #{{ id }} .qz-rec-icon-img[hidden] { display: none; }
+  #{{ id }} .qz-rec-tier { font-family: var(--font-display); font-weight: 400; font-size: 18px; letter-spacing: .02em; text-transform: uppercase; }
+  #{{ id }} .qz-rec-detail { font-size: 12px; opacity: .75; margin-bottom: 6px; }
+  #{{ id }} .qz-rec-prices { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+  #{{ id }} .qz-rec-retail { font-size: 13px; text-decoration: line-through; opacity: .55; }
+  #{{ id }} .qz-rec-total { font-family: var(--font-condensed); font-weight: 700; font-size: 32px; line-height: 1; }
+  #{{ id }} .qz-rec-permo { font-size: 11px; opacity: .7; }
+  #{{ id }} .qz-ship { padding: 8px 10px; margin-top: 14px; font-size: 12px; }
+  #{{ id }} .qz-ship-free { background: rgba(251,173,24,.18); border: 1px dashed var(--qz-gold); }
+  #{{ id }} .qz-ship-free strong { color: var(--qz-gold); font-weight: 700; }
+  #{{ id }} .qz-ship-paid { color: rgba(248,243,234,.7); }
+  #{{ id }} .qz-savings { font-size: 11px; color: var(--qz-gold); margin-top: 8px; font-weight: 700; }
+
+  #{{ id }} .qz-buy-form { margin: 0; }
+  #{{ id }} .qz-fineprint { font-size: 11px; color: rgba(16,24,32,.55); text-align: center; margin-top: 8px; }
+  #{{ id }} .qz-restart { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(16,24,32,.12); }
+  #{{ id }} .qz-restart-label { font-size: 12px; margin-bottom: 10px; color: rgba(16,24,32,.7); }
+  #{{ id }} .qz-restart-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  #{{ id }} .qz-secondary { flex: 1; padding: 12px 14px; font-size: 12px; font-family: var(--font-body); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border: 1.5px solid var(--qz-orange); border-radius: 100px; color: var(--qz-orange); background: transparent; cursor: pointer; }
+
+  /* Risk row */
+  #{{ id }} .qz-risk-row { display: grid; grid-template-columns: 1fr; gap: 14px; padding: 18px 0 28px; border-top: 1px solid rgba(0,0,0,.08); margin-top: 24px; }
+  @media (min-width: 720px) { #{{ id }} .qz-risk-row { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+  #{{ id }} .qz-risk { display: flex; align-items: center; gap: 16px; }
+  #{{ id }} .qz-risk img { width: 64px; height: 64px; flex: 0 0 auto; object-fit: contain; }
+  #{{ id }} .qz-risk-h { font-family: var(--font-body); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  #{{ id }} .qz-risk-h p { display: inline; margin: 0; }
+  #{{ id }} .qz-risk-s { font-size: 12px; color: rgba(16,24,32,.65); }
+
+  /* ── Press marquee ── */
+  #{{ id }} .qz-display-section { font-size: clamp(22px, 6.5vw, 30px); color: var(--qz-green); line-height: 1; word-wrap: break-word; }
+  @media (min-width: 900px) { #{{ id }} .qz-display-section { font-size: clamp(40px, 5vw, 64px); } }
+  #{{ id }} .qz-press { background: var(--qz-green); color: var(--qz-cream); padding: 30px 0; overflow: hidden; }
+  @media (min-width: 900px) { #{{ id }} .qz-press { padding: 48px 0; } }
+  #{{ id }} .qz-press-kicker { text-align: center; font-family: var(--font-body); font-weight: 700; font-size: 10px; letter-spacing: .18em; color: var(--qz-yellow); margin-bottom: 14px; text-transform: uppercase; }
+  @media (min-width: 900px) { #{{ id }} .qz-press-kicker { font-size: 11px; letter-spacing: .2em; margin-bottom: 24px; } }
+  #{{ id }} .qz-marquee { display: flex; width: max-content; gap: 56px; padding: 0 28px; animation: qz-marquee 60s linear infinite; }
+  #{{ id }} .qz-press-item { display: flex; align-items: center; gap: 16px; min-width: 360px; }
+  #{{ id }} .qz-press-logo { width: 90px; height: 36px; flex: 0 0 auto; object-fit: contain; }
+  #{{ id }} .qz-press-logo-placeholder { border: 1px dashed rgba(255,255,255,.3); display: flex; align-items: center; justify-content: center; font-family: var(--font-body); font-weight: 700; font-size: 9px; letter-spacing: .14em; color: rgba(248,243,234,.7); padding: 0 8px; text-align: center; line-height: 1.1; text-transform: uppercase; }
+  #{{ id }} .qz-press-quote { font-family: var(--font-script); font-size: 22px; line-height: 1.2; }
+  @media (min-width: 900px) { #{{ id }} .qz-press-quote { font-size: 20px; } }
+  @keyframes qz-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── Reviews strip ── */
+  #{{ id }} .qz-reviews { background: var(--qz-cream); padding: 30px 0; }
+  @media (min-width: 900px) { #{{ id }} .qz-reviews { padding: 72px 48px; } }
+  #{{ id }} .qz-reviews-head { padding: 0 18px 22px; text-align: center; }
+  @media (min-width: 900px) { #{{ id }} .qz-reviews-head { padding-bottom: 40px; } }
+  #{{ id }} .qz-reviews-kicker { font-family: var(--font-body); font-weight: 700; font-size: 10px; letter-spacing: .18em; color: var(--qz-orange); margin-bottom: 8px; text-transform: uppercase; }
+  @media (min-width: 900px) { #{{ id }} .qz-reviews-kicker { font-size: 11px; letter-spacing: .2em; margin-bottom: 14px; } }
+  /* Mobile: horizontal swipe-scroll. Desktop: 5-up grid. */
+  #{{ id }} .qz-reviews-strip { display: flex; gap: 14px; padding: 0 18px 8px; overflow-x: auto; overflow-y: visible; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  #{{ id }} .qz-reviews-strip::-webkit-scrollbar { display: none; }
+  @media (min-width: 900px) { #{{ id }} .qz-reviews-strip { display: grid; grid-template-columns: repeat(5, 1fr); max-width: 1300px; margin: 0 auto; gap: 18px; padding: 0; overflow: visible; } }
+  #{{ id }} .qz-review-tile { background: #F0EAD5; padding: 18px; border-radius: 16px; flex: 0 0 230px; display: flex; flex-direction: column; gap: 10px; scroll-snap-align: start; }
+  @media (min-width: 900px) { #{{ id }} .qz-review-tile { flex: initial; padding: 22px; } #{{ id }} .qz-review-tile.qz-review-tile-clone { display: none; } }
+  #{{ id }} .qz-review-stars { background: #00BA7B; color: #fff; padding: 5px 10px; font-size: 12px; letter-spacing: 2px; align-self: flex-start; }
+  #{{ id }} .qz-review-h { font-family: var(--font-display); font-size: 14px; letter-spacing: .02em; text-transform: uppercase; }
+  @media (min-width: 900px) { #{{ id }} .qz-review-h { font-size: 16px; } }
+  #{{ id }} .qz-review-q { font-size: 12px; color: rgba(16,24,32,.7); line-height: 1.45; }
+  @media (min-width: 900px) { #{{ id }} .qz-review-q { font-size: 13px; } }
+  #{{ id }} .qz-review-name { font-family: var(--font-body); font-weight: 700; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; margin-top: auto; }
+  #{{ id }} .qz-review-loc { font-family: var(--font-script); font-size: 16px; color: rgba(16,24,32,.7); line-height: 1; }
+
+  /* ── What's inside ── */
+  #{{ id }} .qz-inside { background: var(--qz-cream); padding: 32px 18px; }
+  @media (min-width: 900px) { #{{ id }} .qz-inside { padding: 72px 48px; } }
+  #{{ id }} .qz-inside-inner { max-width: 1200px; margin: 0 auto; }
+  #{{ id }} .qz-inside-head { text-align: center; margin-bottom: 22px; }
+  @media (min-width: 900px) { #{{ id }} .qz-inside-head { margin-bottom: 40px; } }
+  #{{ id }} .qz-inside-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media (min-width: 900px) { #{{ id }} .qz-inside-grid { grid-template-columns: repeat(6, 1fr); gap: 12px; } }
+  #{{ id }} .qz-inside-tile { position: relative; overflow: hidden; padding: 18px 12px; color: var(--qz-cream); font-family: var(--font-display); font-size: 14px; letter-spacing: .02em; text-transform: uppercase; min-height: 92px; display: flex; align-items: flex-end; line-height: 1; border-radius: 16px; background-size: cover; background-position: center; }
+  @media (min-width: 900px) { #{{ id }} .qz-inside-tile { padding: 32px 16px; min-height: 150px; font-size: 18px; } }
+  #{{ id }} .qz-inside-tile-img::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(16,24,32,0) 40%, rgba(16,24,32,.7) 100%); pointer-events: none; }
+  #{{ id }} .qz-inside-label { position: relative; z-index: 1; }
+
+  /* ── Featured brands ── */
+  #{{ id }} .qz-brands { background: var(--qz-cream-alt); padding: 26px 18px 32px; }
+  @media (min-width: 900px) { #{{ id }} .qz-brands { padding: 72px 48px; } }
+  #{{ id }} .qz-brands-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
+  #{{ id }} .qz-brands-tag { font-family: var(--font-script); font-size: 18px; color: rgba(16,24,32,.7); margin-top: 4px; line-height: 1; }
+  @media (min-width: 900px) { #{{ id }} .qz-brands-tag { font-size: 26px; margin-top: 6px; } }
+  #{{ id }} .qz-brands-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+  @media (min-width: 900px) { #{{ id }} .qz-brands-grid { grid-template-columns: repeat(6, 1fr); gap: 16px; margin-top: 28px; } }
+  #{{ id }} .qz-brand-tile { aspect-ratio: 16/9; background: #fff; border: 1px dashed rgba(16,24,32,.25); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-family: var(--font-body); font-weight: 700; font-size: 9px; letter-spacing: .14em; color: rgba(16,24,32,.55); text-align: center; padding: 6px; line-height: 1.2; overflow: hidden; }
+  @media (min-width: 900px) { #{{ id }} .qz-brand-tile { font-size: 10px; } }
+  #{{ id }} .qz-brand-tile img { max-height: 80%; max-width: 80%; object-fit: contain; }
+</style>
+
+<script>
+(function(){
+  var sectionEl = document.getElementById({{ id | json }});
+  if (!sectionEl) return;
+  var dataEl = document.querySelector('[data-quiz-data="quiz-{{ section.id }}"]');
+  if (!dataEl) return;
+  var DATA;
+  try { DATA = JSON.parse(dataEl.textContent); } catch (e) { console.error('Quiz data parse error', e); return; }
+
+  var state = {
+    step: 0,
+    species: null,
+    speciesName: 'Bass',
+    speciesColor: '#33534B',
+    skill: null,
+    tier: DATA.default_tier,
+    plan: null,
+    planUserPicked: false
+  };
+
+  var tierBySkill = {};
+  Object.keys(DATA.tiers).forEach(function(tid){
+    var t = DATA.tiers[tid];
+    if (t.skill) tierBySkill[t.skill] = tid;
+  });
+
+  function $$(sel, root){ return Array.prototype.slice.call((root||sectionEl).querySelectorAll(sel)); }
+  function $(sel, root){ return (root||sectionEl).querySelector(sel); }
+
+  function setStep(n){
+    state.step = n;
+    if (n === 3) computeRecommendation();
+    $$('[data-qz-step]').forEach(function(el){
+      el.hidden = parseInt(el.getAttribute('data-qz-step'), 10) !== n;
+    });
+    var pct = Math.min(n, 3) / 3 * 100;
+    var fill = $('[data-qz-progress-fill]'); if (fill) fill.style.width = pct + '%';
+    var lbl = $('[data-qz-step-label]'); if (lbl) lbl.textContent = 'STEP ' + Math.min(n+1, 3) + ' OF 3';
+    var back = $('[data-qz-back]'); if (back) back.hidden = n <= 0;
+    if (n === 3) renderResult();
+  }
+
+  function computeRecommendation(){
+    var recTier = state.skill && tierBySkill[state.skill] ? tierBySkill[state.skill] : DATA.default_tier;
+    state.tier = recTier;
+    if (!state.planUserPicked) state.plan = DATA.default_plan;
+  }
+
+  function planLabel(p){
+    return p === '1' ? '1-month' : p + '-month';
+  }
+
+  function renderResult(){
+    var t = DATA.tiers[state.tier];
+    if (!t) return;
+    var p = state.plan || DATA.default_plan;
+    var planObj = t.plans[p] || t.plans[DATA.default_plan] || t.plans['1'];
+    var months = parseInt(p, 10) || 1;
+
+    // Gallery — render main + thumbnails for the active tier
+    renderGallery(t);
+
+    // Headline / labels
+    var hl = $('[data-qz-tier-headline]');
+    if (hl) hl.textContent = 'The ' + t.name;
+    var sps = $('[data-qz-species-strong]');
+    if (sps) { sps.textContent = state.speciesName; sps.style.color = state.speciesColor; }
+    var pp = $('[data-qz-plan-prefix]');
+    if (pp) pp.textContent = state.planUserPicked ? 'the' : 'our recommended';
+    var pl = $('[data-qz-plan-label]');
+    if (pl) pl.textContent = planLabel(p);
+
+    // Rec card icon — image when set, otherwise first-letter fallback
+    var iconWrap = $('[data-qz-rec-icon]');
+    if (iconWrap) iconWrap.style.background = t.color || 'var(--qz-orange)';
+    var iconLetter = $('[data-qz-rec-icon-letter]');
+    var iconImg = $('[data-qz-rec-icon-img]');
+    if (t.icon && iconImg) {
+      iconImg.src = t.icon;
+      iconImg.alt = t.name || '';
+      iconImg.hidden = false;
+      if (iconLetter) iconLetter.hidden = true;
+    } else {
+      if (iconImg) { iconImg.hidden = true; iconImg.src = ''; }
+      if (iconLetter) {
+        iconLetter.hidden = false;
+        iconLetter.textContent = (t.name || '?').charAt(0);
+      }
+    }
+    var rt = $('[data-qz-rec-tier]'); if (rt) rt.textContent = (t.name || '').toUpperCase();
+    var ri = $('[data-qz-rec-items]'); if (ri) ri.textContent = t.items || '';
+    var rp = $('[data-qz-rec-planlabel]'); if (rp) rp.textContent = planLabel(p);
+
+    var price = (planObj.price || 0) / 100;
+    var compareAt = (planObj.compare_at || 0) / 100;
+    var save = Math.max(0, compareAt - price);
+    var perMo = months > 0 ? (price / months) : price;
+
+    var retailEl = $('[data-qz-rec-retail]'); if (retailEl) retailEl.textContent = compareAt > 0 ? '$' + compareAt.toFixed(2) : '';
+    if (retailEl) retailEl.style.display = compareAt > 0 ? '' : 'none';
+    var totalEl = $('[data-qz-rec-total]'); if (totalEl) totalEl.textContent = '$' + price.toFixed(2);
+    var perMoEl = $('[data-qz-rec-permo]'); if (perMoEl) perMoEl.textContent = '$' + perMo.toFixed(2);
+    var sa = $('[data-qz-save-amount]'); if (sa) sa.textContent = save.toFixed(0);
+    var sav = $('[data-qz-savings]'); if (sav) sav.style.display = save > 0 ? '' : 'none';
+
+    // Free shipping toggle (4+ months)
+    var freeShip = months >= 4;
+    var fs = $('[data-qz-ship-free]'); if (fs) fs.hidden = !freeShip;
+    var ps = $('[data-qz-ship-paid]'); if (ps) ps.hidden = freeShip;
+
+    // Plan button states + dynamic bottom badge
+    $$('.qz-plan-btn').forEach(function(btn){
+      var key = btn.getAttribute('data-qz-plan');
+      btn.classList.toggle('is-active', key === p);
+    });
+    var bb = $('[data-qz-plan-bottom-badge]');
+    if (bb) {
+      // PICKED FOR YOU before any plan override, BEST after.
+      bb.textContent = !state.planUserPicked ? 'PICKED FOR YOU' : 'BEST';
+    }
+
+    // Variant id + selling plan + CTA
+    var vidEl = $('[data-qz-variant-id]');
+    if (vidEl) vidEl.value = planObj.variant_id || t.default_variant_id || '';
+    var spEl = $('[data-qz-selling-plan]');
+    if (spEl) {
+      if (planObj.selling_plan_id) {
+        spEl.value = planObj.selling_plan_id;
+        spEl.disabled = false;
+      } else {
+        spEl.value = '';
+        spEl.disabled = true;
+      }
+    }
+    var ctaLabel = $('[data-qz-cta-label]');
+    if (ctaLabel) {
+      ctaLabel.textContent = 'Start my plan' + (months > 1 ? ' · $10 OFF' : '');
+    }
+  }
+
+  // Gallery — paints the main image and thumbnail rail from t.images
+  function renderGallery(t){
+    var thumbsEl = $('[data-qz-gallery-thumbs]');
+    var mainImgEl = $('[data-qz-gallery-slot="main"]');
+    if (!thumbsEl || !mainImgEl) return;
+
+    var images = (t && t.images) ? t.images.filter(Boolean) : [];
+    if (images.length === 0) {
+      mainImgEl.removeAttribute('src');
+      mainImgEl.alt = '';
+      thumbsEl.innerHTML = '';
+      return;
+    }
+    var name = (t && t.name) ? t.name : '';
+    mainImgEl.src = images[0];
+    mainImgEl.alt = name;
+    thumbsEl.innerHTML = '';
+    if (images.length < 2) return;
+    images.forEach(function(src, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'qz-gallery-thumb' + (i === 0 ? ' is-active' : '');
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', name + ' image ' + (i + 1));
+      b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      var img = document.createElement('img');
+      img.src = src;
+      img.alt = '';
+      img.loading = 'lazy';
+      b.appendChild(img);
+      b.addEventListener('click', function(){
+        mainImgEl.src = src;
+        mainImgEl.alt = name;
+        $$('.qz-gallery-thumb', thumbsEl).forEach(function(other){
+          var on = other === b;
+          other.classList.toggle('is-active', on);
+          other.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+      });
+      thumbsEl.appendChild(b);
+    });
+  }
+
+  // Bind step navigation
+  $$('[data-qz-go]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      // Retake-quiz button resets all answers before re-entering step 1
+      if (btn.hasAttribute('data-qz-retake')) {
+        state.species = null;
+        state.speciesName = 'Bass';
+        state.speciesColor = '#33534B';
+        state.skill = null;
+        state.plan = null;
+        state.planUserPicked = false;
+        $$('.qz-species-tile').forEach(function(t){
+          t.classList.remove('is-active');
+          t.style.background = '';
+          t.style.borderColor = '';
+          t.style.color = '';
+        });
+        $$('.qz-skill-tile').forEach(function(t){ t.classList.remove('is-active'); });
+      }
+      setStep(parseInt(btn.getAttribute('data-qz-go'),10) || 0);
+    });
+  });
+
+  // Back button — step the user one step backwards
+  var backBtn = $('[data-qz-back]');
+  if (backBtn) backBtn.addEventListener('click', function(){
+    setStep(Math.max(0, state.step - 1));
+  });
+
+  // Species
+  $$('[data-qz-species]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      state.species = btn.getAttribute('data-qz-species');
+      state.speciesName = btn.getAttribute('data-qz-species-name') || 'Bass';
+      state.speciesColor = btn.getAttribute('data-qz-species-color') || '#33534B';
+      $$('.qz-species-tile').forEach(function(t){ t.classList.toggle('is-active', t === btn); });
+      btn.style.background = state.speciesColor;
+      btn.style.borderColor = state.speciesColor;
+      btn.style.color = '#F8F3EA';
+      setTimeout(function(){ setStep(2); }, 220);
+    });
+  });
+
+  // Skill
+  $$('[data-qz-skill]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      state.skill = btn.getAttribute('data-qz-skill');
+      $$('.qz-skill-tile').forEach(function(t){ t.classList.toggle('is-active', t === btn); });
+      setTimeout(function(){ setStep(3); }, 250);
+    });
+  });
+
+  // Plan
+  $$('[data-qz-plan]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      state.plan = btn.getAttribute('data-qz-plan');
+      state.planUserPicked = true;
+      renderResult();
+    });
+  });
+
+  // Apply discount code on submit (Shopify accepts ?discount= on /cart redirect)
+  var form = $('[data-qz-buy-form]');
+  if (form) {
+    form.addEventListener('submit', function(e){
+      var disc = sectionEl.getAttribute('data-discount-code');
+      var vid = $('[data-qz-variant-id]').value;
+      if (!vid) { e.preventDefault(); console.warn('Quiz: missing variant id'); return; }
+      if (disc) {
+        // After /cart/add, redirect to /checkout with the discount code applied.
+        var action = form.getAttribute('action') || '/cart/add';
+        var sep = action.indexOf('?') === -1 ? '?' : '&';
+        var returnTo = '/checkout?discount=' + encodeURIComponent(disc);
+        form.setAttribute('action', action + sep + 'return_to=' + encodeURIComponent(returnTo));
+      }
+    });
+  }
+
+  setStep(0);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Quiz-Led PDP [V2]",
+  "presets": [{ "name": "Quiz-Led PDP [V2]" }],
+  "settings": [
+    { "type": "header", "content": "Brand colours (optional override)" },
+    { "type": "color", "id": "brand_green",  "label": "MTB Green (primary)",     "default": "#33534B" },
+    { "type": "color", "id": "brand_gold",   "label": "Warm Yellow (accent)",    "default": "#FBAD18" },
+    { "type": "color", "id": "brand_orange", "label": "Hat Guy Orange (CTA)",    "default": "#D14424" },
+    { "type": "color", "id": "brand_cream",  "label": "Sandy Flats (background)","default": "#F8F3EA" },
+    { "type": "color", "id": "brand_ink",    "label": "Squid Ink (text)",        "default": "#101820" },
+
+    { "type": "header", "content": "Section announcement bar" },
+    { "type": "text",   "id": "announce_text",       "label": "Announcement text", "info": "Shown above the progress bar inside the quiz section. Leave blank to hide.", "default": "Save $10 with code TRYMTB10" },
+    { "type": "color",  "id": "announce_background", "label": "Announcement background", "default": "#FFCB12" },
+    { "type": "select", "id": "announce_align",      "label": "Announcement alignment",
+      "options": [
+        { "value": "full", "label": "Full width (centered)" },
+        { "value": "left", "label": "Left aligned (auto width)" }
+      ], "default": "full" },
+    { "type": "text",   "id": "back_label",          "label": "Back-button label",  "default": "Back" },
+
+    { "type": "header", "content": "Step 0 — Intro" },
+    { "type": "text",     "id": "intro_kicker",  "label": "Kicker",  "default": "Fishing Simplified" },
+    { "type": "richtext", "id": "intro_heading", "label": "Headline", "default": "<p>Find the box <em>that fits</em> your fishing.</p>" },
+    { "type": "richtext", "id": "intro_lede",    "label": "Lede",     "default": "<p>Two taps. We'll match you to the right box, plan and species. Your $10 off is already locked in.</p>" },
+    { "type": "range",    "id": "star_rating",   "label": "Star rating", "min": 0, "max": 5, "step": 0.5, "default": 4.5 },
+    { "type": "text",     "id": "star_review_text", "label": "Review text", "default": "4.5 · 7,754 reviews" },
+    { "type": "text",     "id": "intro_cta",     "label": "Primary CTA", "default": "Start · 20 seconds" },
+    { "type": "text",     "id": "skip_cta",      "label": "Skip CTA",    "default": "Skip the quiz, show me the boxes" },
+    { "type": "text",     "id": "takes_label",   "label": "Progress hint", "default": "Takes 20 seconds" },
+
+    { "type": "header", "content": "Step 1 — Species" },
+    { "type": "text", "id": "step1_heading", "label": "Heading", "default": "What do you fish?" },
+    { "type": "text", "id": "step1_sub",     "label": "Sub",     "default": "We'll pack your box with baits proven to catch it." },
+
+    { "type": "header", "content": "Step 2 — Skill level" },
+    { "type": "text", "id": "step2_heading", "label": "Heading", "default": "What's your skill level?" },
+    { "type": "text", "id": "step2_sub",     "label": "Sub",     "default": "Helps us match the right tackle mix — beginner-friendly or pro-grade." },
+    { "type": "text", "id": "skill_new_label",     "label": "Skill 1 label", "default": "New to fishing" },
+    { "type": "text", "id": "skill_new_sub",       "label": "Skill 1 sub",   "default": "Learning the ropes · need the basics" },
+    { "type": "text", "id": "skill_growing_label", "label": "Skill 2 label", "default": "Getting serious" },
+    { "type": "text", "id": "skill_growing_sub",   "label": "Skill 2 sub",   "default": "Know what works, building my arsenal" },
+    { "type": "text", "id": "skill_expert_label",  "label": "Skill 3 label", "default": "Experienced angler" },
+    { "type": "text", "id": "skill_expert_sub",    "label": "Skill 3 sub",   "default": "Chasing variety + premium gear" },
+
+    { "type": "header", "content": "Step 3 — Result / Buy" },
+    { "type": "text", "id": "result_kicker",  "label": "Kicker", "default": "We recommend" },
+    { "type": "text", "id": "match_stamp",    "label": "Match stamp", "default": "YOUR MATCH" },
+    { "type": "text", "id": "plan_kicker",    "label": "Plan kicker", "default": "Plan length" },
+    { "type": "select", "id": "default_plan_key", "label": "Default plan", "options": [
+      { "value": "1",  "label": "1 month" },
+      { "value": "4",  "label": "4 months" },
+      { "value": "6",  "label": "6 months" },
+      { "value": "12", "label": "12 months" }
+    ], "default": "6" },
+    { "type": "richtext", "id": "fineprint", "label": "Fine print under CTA", "default": "<p>Cancel anytime · First box ships within 24 hours</p>" },
+
+    { "type": "header", "content": "Discount" },
+    { "type": "text", "id": "discount_code", "label": "Discount code", "info": "Applied at checkout via return_to=/checkout?discount=…", "default": "trymtb10" },
+
+    { "type": "header", "content": "Press marquee" },
+    { "type": "text", "id": "press_kicker", "label": "Press kicker", "default": "As seen in" },
+
+    { "type": "header", "content": "Reviews strip" },
+    { "type": "text",     "id": "reviews_kicker",  "label": "Reviews kicker",  "default": "7,754 reviews · 4.5 stars" },
+    { "type": "richtext", "id": "reviews_heading", "label": "Reviews heading", "default": "<p>Real members. <em>Real</em> catches.</p>" },
+
+    { "type": "header", "content": "What's inside" },
+    { "type": "text",     "id": "inside_kicker",  "label": "Inside kicker",  "default": "What's inside" },
+    { "type": "richtext", "id": "inside_heading", "label": "Inside heading", "default": "<p>Full-size lures. <em>No samples.</em></p>" },
+
+    { "type": "header", "content": "Featured brands" },
+    { "type": "text", "id": "brands_heading", "label": "Brands heading",  "default": "Featured brands." },
+    { "type": "text", "id": "brands_tagline", "label": "Brands tagline",  "default": "There's no such thing as too much tackle." },
+
+    { "type": "header", "content": "Section Heading" },
+    { "type": "richtext", "id": "heading", "label": "Heading" },
+    { "type": "select",   "id": "heading_alignment",        "label": "Heading Alignment",          "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}], "default": "center" },
+    { "type": "select",   "id": "heading_alignment_mobile", "label": "Heading Alignment (Mobile)", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}], "default": "center" },
+    { "type": "checkbox", "id": "limit_heading_width",      "label": "Limit Heading Width", "default": true },
+
+    { "type": "header", "content": "Section Settings" },
+    { "type": "checkbox", "id": "section_inverse", "label": "Inverted Section", "default": false },
+    { "type": "select", "id": "section_background_style", "label": "Section Background Style", "options": [
+      { "value": "section-background-style-normal",   "label": "Normal" },
+      { "value": "section-background-style-floating", "label": "Floating" }
+    ], "default": "section-background-style-normal" },
+    { "type": "select", "id": "section_background_colour", "label": "Section Background Colour", "options": [
+      { "value": "section-background-colour-normal",      "label": "Normal" },
+      { "value": "section-background-colour-alt-100",     "label": "Alt (100)" },
+      { "value": "section-background-colour-alt",         "label": "Alt" },
+      { "value": "section-background-colour-alt-900",     "label": "Alt (900)" },
+      { "value": "section-background-colour-surface-100", "label": "Surface (100)" },
+      { "value": "section-background-colour-surface",     "label": "Surface" },
+      { "value": "section-background-colour-surface-900", "label": "Surface (900)" }
+    ], "default": "section-background-colour-normal" },
+    { "type": "select", "id": "section_spacing", "label": "Section Spacing", "options": [
+      { "value": "section-spacing-top-bottom", "label": "Top & Bottom" },
+      { "value": "section-spacing-top",        "label": "Top" },
+      { "value": "section-spacing-bottom",     "label": "Bottom" },
+      { "value": "section-spacing-none",       "label": "None" }
+    ], "default": "section-spacing-bottom" },
+    { "type": "text", "id": "custom_id", "label": "Custom ID", "info": "Anchor id for in-page links" },
+    { "type": "checkbox", "id": "section_visible", "label": "Section Visible", "default": true }
+  ],
+  "blocks": [
+    {
+      "name": "Species",
+      "type": "species",
+      "settings": [
+        { "type": "text",         "id": "name",  "label": "Name",  "default": "Bass" },
+        { "type": "color",        "id": "color", "label": "Accent colour", "default": "#33534B" },
+        { "type": "image_picker", "id": "image", "label": "Tile image (optional)" }
+      ]
+    },
+    {
+      "name": "Product (Tier)",
+      "type": "product",
+      "settings": [
+        { "type": "product",      "id": "product",       "label": "Product" },
+        { "type": "text",         "id": "custom_name",   "label": "Custom Name", "placeholder": "Pro Box" },
+        { "type": "checkbox",     "id": "preselected",   "label": "Preselected (default tier when quiz is skipped)", "default": false },
+        { "type": "select",       "id": "recommendation_skill", "label": "Recommended for skill level",
+          "options": [
+            { "value": "new",     "label": "New to fishing" },
+            { "value": "growing", "label": "Getting serious" },
+            { "value": "expert",  "label": "Experienced angler" }
+          ], "default": "growing" },
+        { "type": "select",       "id": "recommendation_plan", "label": "Recommended plan length",
+          "options": [
+            { "value": "1",  "label": "1 month" },
+            { "value": "4",  "label": "4 months" },
+            { "value": "6",  "label": "6 months" },
+            { "value": "12", "label": "12 months" }
+          ], "default": "6" },
+        { "type": "richtext",     "id": "tag_text",      "label": "Tag (e.g. 6-8 items)" },
+        { "type": "image_picker", "id": "icon_image",    "label": "Rec-card icon",      "info": "Small icon shown next to the tier name in the recommendation card. Falls back to the first letter of the tier name." },
+        { "type": "header",       "content": "Gallery" },
+        { "type": "image_picker", "id": "image",         "label": "Main image" },
+        { "type": "image_picker", "id": "image_2",       "label": "Gallery image 2" },
+        { "type": "image_picker", "id": "image_3",       "label": "Gallery image 3" },
+        { "type": "image_picker", "id": "image_4",       "label": "Gallery image 4" },
+        { "type": "image_picker", "id": "image_5",       "label": "Gallery image 5" },
+        { "type": "color",        "id": "tier_color",    "label": "Tier colour", "default": "#33534B" },
+        { "type": "header",       "content": "Plan-1 Prices (in cents)" },
+        { "type": "number",       "id": "price",            "label": "Price",           "default": 1999 },
+        { "type": "number",       "id": "compare_at_price", "label": "Compare at price","default": 2500 }
+      ]
+    },
+    {
+      "name": "Subscription Plan",
+      "type": "subscription_product",
+      "settings": [
+        { "type": "product", "id": "parent_product", "label": "Parent Product (tier)" },
+        { "type": "product", "id": "product",        "label": "Plan-length product (variant carrier)" },
+        { "type": "select",  "id": "plan_key", "label": "Plan key",
+          "options": [
+            { "value": "",   "label": "Auto-detect from option text" },
+            { "value": "1",  "label": "1 month" },
+            { "value": "4",  "label": "4 months" },
+            { "value": "6",  "label": "6 months" },
+            { "value": "12", "label": "12 months" }
+          ], "default": "" },
+        { "type": "text",     "id": "subscription_option_text", "label": "Option text", "default": "6 Months" },
+        { "type": "richtext", "id": "subscription_tag_text",    "label": "Tag (e.g. + Extra $10 off)" },
+        { "type": "header",   "content": "Prices (in cents)" },
+        { "type": "number",   "id": "price",            "label": "Price",           "default": 12999 },
+        { "type": "number",   "id": "compare_at_price", "label": "Compare at price","default": 15000 }
+      ]
+    },
+    {
+      "name": "Risk / Info Item",
+      "type": "info",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Icon" },
+        { "type": "richtext",     "id": "text",  "label": "Headline" },
+        { "type": "text",         "id": "description", "label": "Description" }
+      ]
+    },
+    {
+      "name": "Press / Publication",
+      "type": "press_item",
+      "settings": [
+        { "type": "image_picker", "id": "logo",  "label": "Publication logo" },
+        { "type": "text",         "id": "label", "label": "Placeholder label", "info": "Shown when no logo image is set", "default": "LOGO" },
+        { "type": "text",         "id": "quote", "label": "Pull quote" }
+      ]
+    },
+    {
+      "name": "Review",
+      "type": "review",
+      "settings": [
+        { "type": "range", "id": "star_rating", "label": "Star rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "text",     "id": "heading",  "label": "Headline" },
+        { "type": "textarea", "id": "review",   "label": "Review body" },
+        { "type": "text",     "id": "name",     "label": "Reviewer name" },
+        { "type": "text",     "id": "location", "label": "Location / role", "default": "MTB Subscriber" }
+      ]
+    },
+    {
+      "name": "Inside Tile",
+      "type": "inside_tile",
+      "settings": [
+        { "type": "text",         "id": "label", "label": "Label", "default": "Soft plastics" },
+        { "type": "image_picker", "id": "image", "label": "Tile background image", "info": "Upload a photo of this category (soft plastics, hard baits, jigs, hooks, terminal tackle, pro tip cards, seasonal picks). Falls back to background colour if empty." },
+        { "type": "color",        "id": "color", "label": "Background colour (fallback / overlay tint)", "default": "#33534B" }
+      ]
+    },
+    {
+      "name": "Brand Tile",
+      "type": "brand_tile",
+      "settings": [
+        { "type": "image_picker", "id": "logo", "label": "Brand logo" },
+        { "type": "text",         "id": "name", "label": "Brand name", "info": "Shown when no logo image is set", "default": "BRAND" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,2160 @@
+{% assign id = section.settings.custom_id | default: section.id %}
+
+{% for block in section.blocks %}
+  {% if block.type == "product" and block.settings.product %}
+    {% assign first_product_block = block %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% assign ignored_list = section.settings.ignored_variants | newline_to_br | split: "<br />" %}
+
+{% assign ignored_keys = "" %}
+{% for name in ignored_list %}
+  {% assign trimmed = name | strip %}
+  {% if trimmed != "" %}
+    {% assign ignored_keys = ignored_keys | append: "||" | append: trimmed | append: "||" %}
+  {% endif %}
+{% endfor %}
+
+{% for block in section.blocks %}
+  {% if block.type == "product" and block.settings.product %}
+    {% assign main = block.settings.product %}
+
+    {% unless main.id %}
+      <script type="module">
+        setTimeout(() => {
+          console.log("TEST", {{ main | json }})
+          openModal(
+            "Unsupported product!",
+            `
+            <div>
+              The product <b>{{ main }}</b> is not enabled in the <b>Online Store</b> sales channel.
+            </div>
+            `
+          )
+        })
+      </script>
+      {% break %}
+    {% endunless %}
+
+    {% for subblock in section.blocks %}
+      {% if subblock.type == "subscription_product" and subblock.settings.product and subblock.settings.parent_product.id == main.id %}
+        {% assign sub = subblock.settings.product %}
+
+        {% assign main_titles = "" %}
+        {% for v in main.variants %}
+          {% assign main_titles = main_titles | append: "||" | append: v.title | append: "||" %}
+        {% endfor %}
+
+        {% assign sub_titles = "" %}
+        {% for v in sub.variants %}
+          {% assign sub_titles = sub_titles | append: "||" | append: v.title | append: "||" %}
+        {% endfor %}
+
+        {% assign issues = "" %}
+
+        {% for v in main.variants %}
+          {% assign key = "||" | append: v.title | append: "||" %}
+
+          {% unless ignored_keys contains key %}
+            {% unless sub_titles contains key %}
+              {% assign issues = issues | append: "<div>Missing variant: <b>" | append: v.title | append: "</b></div>" %}
+            {% endunless %}
+          {% endunless %}
+        {% endfor %}
+
+        {% for v in sub.variants %}
+          {% assign key = "||" | append: v.title | append: "||" %}
+
+          {% unless ignored_keys contains key %}
+            {% unless main_titles contains key %}
+              {% assign issues = issues | append: "<div>Extra variant: <b>" | append: v.title | append: "</b></div>" %}
+            {% endunless %}
+          {% endunless %}
+        {% endfor %}
+
+        {% unless issues == "" %}
+          <script type="module">
+            setTimeout(() => {
+              console.log("TEST", {{ main | json }})
+              openModal(
+                "Incompatible products!",
+                `
+                <div>
+                  The following differences were found between:
+                  <br><br>
+                  <b>{{ main.title }}</b> (ID {{ main.id }})<br>
+                  <b>{{ sub.title }}</b> (ID {{ sub.id }})<br>
+                  <br>
+                  {{ issues }}
+                </div>
+                `
+              )
+            })
+          </script>
+        {% endunless %}
+
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+<style>
+  #{{ id }} .ante-section-content {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-small);
+    align-items: flex-start;
+    max-width: var(--width-10);
+  }
+
+  #{{ id }} .section-left {
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - var(--spacing-small) / 2);
+    position: sticky;
+    top: var(--sticky-top);
+    transition: top .25s;
+    gap: var(--spacing-x-small);
+  }
+
+  @media (max-height: 1100px) {
+    #{{ id }} .section-left {
+      max-width: 720px;
+    }
+  }
+
+  @media (max-height: 930px) {
+    #{{ id }} .section-left {
+      max-width: 600px;
+    }
+  }
+
+  #{{ id }} .section-right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: var(--spacing-medium);
+  }
+
+  #{{ id }} .section-right-top {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-x-small);
+  }
+
+  #{{ id }} .section-right-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--micropad-x-large);
+  }
+
+  #{{ id }} .starting-from {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: var(--micropad-large);
+  }
+
+  #{{ id }} .save-big,
+  #{{ id }} .section-call-out {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-sale);
+    align-self: center;
+    padding: var(--padding-tab);
+    gap: 4px;
+    border-radius: var(--radius-large);
+    width: 100%;
+    max-height: 56px;
+    color: var(--color-sale-text);
+  }
+
+  #{{ id }} .section-call-out {
+    background-color: var(--color-sale);
+    color: var(--color-sale-text);
+    width: initial;
+  }
+
+  #{{ id }} .save-big-icon,
+  #{{ id }} .section-call-out-icon {
+    height: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  #{{ id }} .save-big-icon svg,
+  #{{ id }} .section-call-out-icon .ante-image {
+    width: 90px;
+    height: 94px;
+    margin-left: -10px;
+    transform: translateY(-3px);
+  }
+
+  #{{ id }} .section-call-out-icon .ante-image {
+    width: initial !important;
+  }
+
+  #{{ id }} .save-big *,
+    #{{ id }} .section-call-out * {
+    margin: 0;
+  }
+
+  #{{ id }} .save-big p,
+  #{{ id }} .section-call-out p {
+    font-family: var(--font-caption-alt);
+    font-size: 16px;
+  }
+
+  @media (max-width: 1919px) {
+    #{{ id }} .save-big p,
+    #{{ id }} .section-call-out p {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    #{{ id }} .save-big p,
+    #{{ id }} .section-call-out p {
+      font-size: 12px;
+    }
+  }
+
+  #{{ id }} h2 {
+    text-align: center;
+  }
+
+  #{{ id }} .review-stars {
+    justify-content: center;
+  }
+
+  @media (max-width: 1024px) {
+    #{{ id }} .ante-section-content {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--spacing-medium);
+      max-width: 100%;
+    }
+
+    #{{ id }} .ante-section-content > div {
+      display: contents !important;
+    }
+
+    #{{ id }} .ante-section-content > div > * {
+      order: 10;
+    }
+
+    #{{ id }} .ante-image-carousel-container {
+      order: 0 !important;
+    }
+
+    #{{ id }} .section-right > * {
+      max-width: 100%;
+      width: var(--width-6);
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  @media (max-width: 600px) {
+    #{{ id }} .section-right > * {
+      width: 100% !important;
+    }
+
+    #{{ id }} .section-call-out {
+      width: max-content !important;
+      max-width: 100%:
+    }
+
+    #{{ id }} .save-big-icon svg {
+      width: 80px;
+      height: 84px;
+    }
+
+    #{{ id }} .section-call-out-icon .ante-image {
+      height: 64px;
+    }
+  }
+</style>
+
+<style>
+  #{{ id }} .buy-box {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-small);
+    background-color: var(--color-surface-100);
+    border: 1px solid var(--color-border);
+    padding: var(--padding-large);
+    border-radius: var(--radius-large);
+  }
+
+  #{{ id }} .sold {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--micropad-medium);
+    margin-top: calc(var(--spacing-small) * -1);
+    padding-top: var(--spacing-small);
+  }
+
+  #{{ id }} .sold svg:first-child {
+    transform: rotate(180deg);
+  }
+
+  #{{ id }} .sold-content {
+    display: flex;
+    align-items: center;
+    gap: var(--micropad-medium);
+    flex-direction: column;
+    gap: var(--micropad-x-small);
+    text-align: center;
+  }
+
+  #{{ id }} .sold-count {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-family: var(--font-heading);
+    font-size: 20.955px;
+    font-weight: 900;
+  }
+
+  #{{ id }} .sold-count > div {
+    border: 1px solid var(--color-text-default);
+    width: 18px;
+    height: 24px;
+    border-radius: 3.629px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-surface-100);
+  }
+
+  @media (max-width: 1024px) {
+    #{{ id }} .sold-count > div {
+      width: 15px;
+      height: 20px;
+      font-size: 17.462px;
+    }
+  }
+</style>
+
+<style>
+  #{{ id }} .products {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-x-small);
+  }
+
+  #{{ id }} .products input {
+    display: none;
+  }
+
+  #{{ id }} .products > label {
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    transition: background-color .25s, border .25s;
+    border-radius: var(--radius-medium);
+    width: 100%;
+  }
+
+  #{{ id }} .products > input:checked + label {
+    cursor: initial;
+  }
+
+  #{{ id }} .products label.has-outer-tag {
+    margin-top: calc(var(--spacing-x-small) * -1);
+    border-top-left-radius: 0;
+  }
+
+  #{{ id }} .products .label-content {
+    background-color: var(--color-surface-alt);
+    transition: background-color .25s, margin-bottom .25s, border-radius .25s;
+    display: flex;
+    border-radius: var(--radius-medium);
+  }
+
+  #{{ id }} input:checked + label .label-content.has-extra-info {
+    margin-bottom: 64px;
+    border-radius: var(--radius-medium) var(--radius-medium) 0 0;
+  }
+
+  #{{ id }} .products label * {
+    transition: color .25s, background-color .25s, border-radius .25s, height .25s, translate .25s;
+  }
+
+  #{{ id }} .input-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  #{{ id }} .input-row > * {
+    order: 1;
+  }
+
+  #{{ id }} .input-row::before {
+    content: "";
+    min-width: 22px;
+    height: 22px;
+    border: 2px solid var(--color-text-default);
+    border-radius: 50%;
+    transition: border .25s;
+    order: 0;
+  }
+
+  #{{ id }} .input-row::after {
+    content: "";
+    min-width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transition: background-color .25s, scale .25s;
+    order: 0;
+    scale: 0;
+    margin-left: -16px;
+    margin-right: calc(5px + var(--micropad-medium));
+  }
+
+  #{{ id }} .products > input:checked + label {
+    border: 1px solid var(--color-text-default);
+  }
+
+  #{{ id }} .products > input:checked + label .input-row::before {
+    border: 2px solid var(--inverse-color-text-alt);
+  }
+
+  #{{ id }} .products > input:checked + label .input-row::after {
+    background-color: var(--inverse-color-text-alt);
+    scale: 1;
+  }
+
+  #{{ id }} .input-facts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--micropad-x-small);
+  }
+
+  #{{ id }} .fact {
+    display: flex;
+    align-items: center;
+    gap: var(--micropad-x-small);
+  }
+
+  #{{ id }} .fact path {
+    transition: stroke .25s;
+  }
+
+  #{{ id }} custom-select .ante-image {
+    min-width: 48px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+  }
+
+  #{{ id }} .selected-content-drop {
+    overflow: hidden;
+    height: 0;
+    transition: height .25s !important;
+  }
+
+  #{{ id }} .selected-content-drop:has(custom-select .select-button.active) {
+    overflow: visible;
+  }
+
+  #{{ id }} input:checked + label .selected-content-drop {
+    height: auto;
+  }
+
+  #{{ id }} .selected-content {
+    padding-top: var(--spacing-x-small);
+    margin-top: var(--spacing-x-small);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: var(--micropad-large);
+  }
+
+  #{{ id }} .subscription {
+    display: flex;
+    flex-direction: column;
+    gap: var(--micropad-medium);
+  }
+
+  #{{ id }} .info-box {
+    display: flex;
+    gap: var(--micropad-x-large);
+    {% if section.settings.info_box_background_image %}
+      background-image: url({{ section.settings.info_box_background_image }});
+      background-size: cover;
+      background-position: center;
+    {% else %}
+      background-image: {{ section.settings.info_box_background_colour }};
+    {% endif %}
+    border: 1px solid {{ section.settings.info_box_border_colour }};
+    color: {{ section.settings.info_box_text_colour }};
+    padding: var(--padding-large) var(--padding-medium);
+    border-radius: var(--radius-medium);
+    margin-top: calc(var(--spacing-small) * -1 + var(--spacing-medium));
+  }
+
+  #{{ id }} .info-box-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--micropad-large);
+    flex: 1;
+    align-items: flex-start;
+  }
+
+  #{{ id }} .info-box h5 {
+    color: {{ section.settings.info_box_heading_colour }};
+  }
+
+  #{{ id }} .info-box-content {
+    display: flex;
+    align-items: center;
+    gap: gap: var(--micropad-x-large);
+    width: 100%;
+  }
+
+  #{{ id }} .info-box-facts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--micropad-small);
+    flex: 1;
+  }
+
+  #{{ id }} .info-box-fact {
+    display: flex;
+    gap: var(--micropad-medium);
+  }
+
+  #{{ id }} .info-box-fact svg {
+    margin-top: 2px;
+    min-width: 20px;
+    height: 20px;
+  }
+
+  #{{ id }} .info-box .ante-image {
+    width: {{ section.settings.info_box_image_width }}px;
+    margin-top: calc({{ section.settings.info_box_image_top_offset }}px * -1);
+    margin-right: calc({{ section.settings.info_box_image_right_offset }}px * -1);
+    margin-bottom: calc({{ section.settings.info_box_image_bottom_offset }}px * -1);
+    margin-left: calc({{ section.settings.info_box_image_left_offset }}px * -1);
+  }
+
+  #{{ id }} .input-content {
+    flex: 1;
+    padding: var(--padding-small);
+  }
+
+  #{{ id }} .has-extra-info .input-content {
+    padding-bottom: 0;
+  }
+
+  #{{ id }} .input-price {
+    background-color: var(--color-surface-alt-900);
+    width: 100px;
+  }
+
+  #{{ id }} .product-price-variant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--micropad-x-small);
+    height: 100%;
+    translate: 0 calc(var(--micropad-x-small) / 2);
+  }
+
+  #{{ id }} .input-price .ante-price {
+    flex-direction: column;
+  }
+
+  #{{ id }} input:checked + label .input-price .body-caption.alt {
+    color: var(--color-info);
+  }
+
+  #{{ id }} .input-main {
+    display: flex;
+    gap: var(--micropad-large);
+  }
+
+  #{{ id }} .input-main .ante-image {
+    width: 108px;
+    height: 108px;
+    min-width: 108px;
+  }
+
+  {% for block in section.blocks %}
+    {% if block.type == "product" and block.settings.product %}
+      #{{ id }} #label-{{ block.id }} .input-main .ante-image {
+        width: {{ block.settings.image_size }}px;
+        height: {{ block.settings.image_size }}px;
+        min-width: {{ block.settings.image_size }}px;
+      }
+
+      #{{ id }} #label-{{ block.id }} .product-price-variant {        
+        padding-top: {{ block.settings.price_padding_top }}px;
+        transition: padding-top .25s;
+      }
+
+      #{{ id }} input:checked + #label-{{ block.id }} .product-price-variant {        
+        padding-top: {{ block.settings.price_padding_top_checked }}px;
+      }
+    {% endif %}
+  {% endfor %}
+
+  #{{ id }} .input-main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-x-small);
+    flex: 1;
+  }
+
+  #{{ id }} .extra-info-drop-button-wrapper {
+    height: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: height .25s;
+    overflow: hidden;
+  }
+
+  #{{ id }} input:checked + label .extra-info-drop-button-wrapper {
+    height: 64px;
+  }
+
+  #{{ id }} .extra-info-drop-content-wrapper {
+    height: 0;
+    overflow: hidden;
+    padding-top: var(--padding-small);
+  }
+
+  #{{ id }} input:checked + label .extra-info-input:checked ~ .extra-info-drop-content-wrapper {
+    height: auto;
+  }
+
+  #{{ id }} .extra-info-drop-content {
+    padding: calc(var(--spacing-x-small) - var(--padding-small)) 0 var(--padding-small);
+  }
+
+  #{{ id }} .extra-info-drop-button {
+    background-color: var(--color-surface-100);
+    height: 64px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    gap: var(--spacing-x-small);
+  }
+
+  #{{ id }} .extra-info-drop-button > :nth-child(2) {
+    display: none;
+  }
+
+  #{{ id }} .extra-info-input:checked + .extra-info-drop-button-wrapper .extra-info-drop-button > :first-child {
+    display: none;
+  }
+
+  #{{ id }} .extra-info-input:checked + .extra-info-drop-button-wrapper .extra-info-drop-button > :nth-child(2) {
+    display: initial;
+  }
+
+  #{{ id }} .extra-info-drop-arrow {
+    min-width: 24px;
+    height: 24px;
+    background-color: var(--color-accent-background);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .25s var(--transition-drop-ease) !important;
+  }
+
+  #{{ id }} .extra-info-drop-arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  #{{ id }} .extra-info-input:checked + .extra-info-drop-button-wrapper .extra-info-drop-arrow {
+    transform: rotate(180deg);
+  }
+
+  #{{ id }} .plan-message,
+  #{{ id }} .buy-button-message {
+    text-align: center;
+  }
+
+  #{{ id }} .plan-message em,
+  #{{ id }} .buy-button-message em {
+    font-style: normal;
+    font-family: var(--font-caption-alt);
+    color: var(--color-text-alt);
+  }
+
+  #{{ id }} .section-info {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(3, auto);
+    grid-auto-columns: 1fr;
+    column-gap: var(--spacing-small);
+    row-gap: var(--micropad-medium);
+    text-align: center;
+  }
+
+  #{{ id }} .section-media {
+    display: flex;
+    gap: var(--spacing-x-small);
+    align-items: center;
+  }
+
+  #{{ id }} .section-media > :last-child {
+    display: flex;
+    flex-direction: column;
+    gap: var(--micropad-x-large);
+  }
+
+  #{{ id }} .section-media .ante-image {
+    min-width: 146px;
+    border-radius: var(--radius-large);
+  }
+
+  #{{ id }} .products .label-content.ante-inverse {
+    background-color: var(--color-surface-900);
+  }
+
+  #{{ id }} .products .label-content.ante-inverse .input-price {
+    background-color: var(--color-surface-100);
+  }
+
+  #{{ id }} .products .label-content.ante-inverse .extra-info-drop-button {
+    background-color: var(--color-surface);
+  }
+
+  #{{ id }} .buy-box .ante-buy-button-container {
+    margin-top: calc(var(--spacing-small) * -1 + var(--spacing-medium));
+  }
+
+  #{{ id }} .extra-info-drop-content ul {
+    padding: 0;
+  }
+
+  #{{ id }} .extra-info-drop-content li {
+    display: flex;
+    gap: var(--micropad-large);
+    position: relative;
+    z-index: 1;
+  }
+
+  {% capture check %}
+    {% render "ante-svg", icon: "check" %}
+  {% endcapture %}
+
+  #{{ id }} .extra-info-drop-content li::before {
+    content: "";
+    background-color: var(--color-info-text);
+    mask-image: url('data:image/svg+xml,{{ check | strip | strip_newlines | replace: "#", "%23" }}');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    min-width: 18px;
+    height: 18px;
+    mask-size: 9px;
+    margin-top: calc(var(--micropad-x-small) / 3);
+  }
+
+  #{{ id }} .extra-info-drop-content li::after {
+    content: "";
+    background-color: var(--color-info);
+    position: absolute;
+    top: calc(var(--micropad-x-small) / 3);
+    left: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    z-index: -1;
+  }
+
+  #{{ id }} .extra-info-drop-content li:not(:last-child) {
+    margin-bottom: var(--micropad-x-large);
+  }
+
+  #{{ id }} .subscription custom-select {
+    --color-custom-select-background: var(--color-surface);
+    --color-custom-select-background-active: var(--color-surface-900);
+  }
+
+  #{{ id }} .subscription custom-select .select-button,
+  #{{ id }} .subscription custom-select .select-drop > div {
+    padding: var(--micropad-small) var(--micropad-medium);
+    gap: var(--micropad-medium);
+  }
+
+  #{{ id }} .subscription custom-select .select-button {
+    border: none;
+  }
+
+  #{{ id }} .subscription custom-select .select-drop {
+    border: none;
+  }
+
+  @media (min-width: 601px) {
+    #{{ id }} .section-info {
+      margin-top: calc(var(--spacing-medium) * -1);
+      padding-top: var(--spacing-x-small);
+    }
+  }
+
+  @media (max-width: 600px) {
+    #{{ id }} custom-select .ante-image {
+      min-width: 32px;
+      width: 32px;
+      height: 32px;
+    }
+
+    #{{ id }} .info-box-fact svg {
+      min-width: 18px;
+      height: 18px;
+    }
+
+    #{{ id }} .info-box .ante-image {
+      width: {{ section.settings.info_box_image_width_mobile }}px;
+      margin-top: calc({{ section.settings.info_box_image_top_offset_mobile }}px * -1);
+      margin-right: calc({{ section.settings.info_box_image_right_offset_mobile }}px * -1);
+      margin-bottom: calc({{ section.settings.info_box_image_bottom_offset_mobile }}px * -1);
+      margin-left: calc({{ section.settings.info_box_image_left_offset_mobile }}px * -1);
+    }
+
+    {% for block in section.blocks %}
+      {% if block.type == "product" and block.settings.product %}
+        #{{ id }} #label-{{ block.id }} .input-main .ante-image {
+          width: {{ block.settings.image_size_mobile }}px;
+          height: {{ block.settings.image_size_mobile }}px;
+          min-width: {{ block.settings.image_size_mobile }}px;
+        }
+        
+        #{{ id }} #label-{{ block.id }} .product-price-variant {        
+          padding-top: {{ block.settings.price_padding_top_mobile }}px;
+        }
+
+        #{{ id }} input:checked + #label-{{ block.id }} .product-price-variant {        
+          padding-top: {{ block.settings.price_padding_top_mobile_checked }}px;
+        }
+      {% endif %}
+    {% endfor %}
+
+    #{{ id }} .input-price {
+      width: 64px;
+    }
+
+    #{{ id }} .product-price-variant {
+      padding-top: 20px;
+    }
+
+    #{{ id }} input:checked + label .extra-info-drop-button-wrapper,
+    #{{ id }} .extra-info-drop-button {
+      height: 34px;
+    }
+
+    #{{ id }} input:checked + label .label-content.has-extra-info {
+      margin-bottom: 34px;
+    }
+
+    #{{ id }} .extra-info-drop-arrow {
+      min-width: 18px;
+      height: 18px;
+    }
+
+    #{{ id }} .extra-info-drop-arrow svg {
+      min-width: 14px;
+      height: 14px;
+    }
+  }
+</style>
+
+{% assign price = first_product_block.settings.price %}
+{% assign compare_price = first_product_block.settings.compare_at_price %}
+{% if compare_price < price %}
+  {% assign compare_price = price %}
+{% endif %}
+
+{% capture info_box %}
+  {% if section.settings.info_box_heading != blank %}
+    <div class="info-box">
+      <div class="info-box-main-content">
+        {% if section.settings.info_box_tag_text != blank %}
+          <div class="ante-tag info-alt richtext">{{ section.settings.info_box_tag_text }}</div>
+        {% endif %}
+        <h5>{{ section.settings.info_box_heading }}</h5>
+        {% if section.settings.info_box_description != blank %}
+          <div class="richtext">{{ section.settings.info_box_description }}</div>
+        {% endif %}
+        <div class="info-box-content">
+          {% assign lines = section.settings.info_box_facts | newline_to_br | split: "<br />" %}
+          <div class="info-box-facts">
+            {% for line in lines %}
+              <div class="info-box-fact">
+                {% render "ante-svg", icon: "circle-check", colour: section.settings.info_box_check_background_colour, colour2: section.settings.info_box_check_colour %}
+                <div class="body-caption">{{ line }}</div>
+              </div>
+            {% endfor %}
+          </div>
+          {% render "ante-image", image: section.settings.info_box_image %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endcapture %}
+
+{% render "ante-section-structure", section: section %}
+  <div class="section-left">
+    {% assign final_urls = "" %}
+
+    {% for block in section.blocks %}
+      {% if block.type == "carousel_images" and block.settings.position == "before" %}
+        {% for i in (1..16) %}
+          {% assign image_key = "image_" | append: i %}
+          {% assign video_key = "video_url_" | append: i %}
+          {% assign image = block.settings[image_key] %}
+          {% assign video = block.settings[video_key] %}
+          {% if image %}
+            {% assign url = image | image_url: width: 1024 %}
+            {% if video %}
+              {% assign url = url | append: "___" | append: video %}
+            {% endif %}
+            {% assign final_urls = final_urls | append: url | append: "|||" %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+
+    {% if section.settings.show_product_images_in_carousel %}
+      {% for image in product.images %}
+        {% assign url = image | image_url: width: 1024 %}
+        {% assign final_urls = final_urls | append: url | append: "|||" %}
+      {% endfor %}
+    {% endif %}
+
+    {% for block in section.blocks %}
+      {% if block.type == "carousel_images" and block.settings.position == "after" %}
+        {% for i in (1..16) %}
+          {% assign image_key = "image_" | append: i %}
+          {% assign video_key = "video_url_" | append: i %}
+          {% assign image = block.settings[image_key] %}
+          {% assign video = block.settings[video_key] %}
+          {% if image %}
+            {% assign url = image | image_url: width: 1024 %}
+            {% if video %}
+              {% assign url = url | append: "___" | append: video %}
+            {% endif %}
+            {% assign final_urls = final_urls | append: url | append: "|||" %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+
+    {% assign final_urls = final_urls | split: "|||" | compact %}
+    
+    {% render "ante-image-carousel", images: final_urls, id: id %}
+  </div>
+  <div class="section-right">
+    <div class="section-right-top">
+      <div class="section-right-header">
+        {% render "ante-stars", rating: section.settings.star_rating, text: section.settings.star_review_text, link: section.settings.star_link %}
+        <h2>{{ section.settings.custom_heading }}</h2>
+      </div>
+      <div class="starting-from">
+        <div class="body-caption alt">Starting from</div>
+        {% render "ante-new-price", large: true, static: true, price: price, compare_price: compare_price, label: section.settings.main_price_label %}
+      </div>
+    </div>
+    {% if section.settings.call_out_text != blank %}
+      <div class="section-call-out">
+        <div class="section-call-out-icon">
+          {% render "ante-image", image: section.settings.call_out_image %}
+        </div>
+        {{ section.settings.call_out_text }}
+      </div>
+    {% endif %}
+    {% assign info_blocks = section.blocks | where: "type", "info" %}
+    {% if info_blocks.size > 0 %}
+      <div class="section-info">
+        {% for block in info_blocks %}
+          {% render "ante-image", image: block.settings.image, height: 80 %}
+          <h6 class="richtext">{{ block.settings.text }}</h6>
+          <div class="body-caption muted">{{ block.settings.description }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <div class="buy-box">
+      <h5>{{ section.settings.variant_step_title }}</h5>
+      {% if section.settings.variant_step_description != blank %}
+        <div class="richtext body-caption">{{ section.settings.variant_step_description }}</div>
+      {% endif %}
+      {% assign seen_titles = "" %}
+      <custom-select class="variant-select">
+        {% for block in section.blocks %}
+          {% if block.type == "product" and block.settings.product %}
+            {% for variant in block.settings.product.variants %}
+              {% assign key = "||" | append: variant.title | append: "||" %}
+              {% unless ignored_keys contains key %}
+                {% unless seen_titles contains key %}
+                  {% assign seen_titles = seen_titles | append: key %}
+                  <option value="{{ variant.title }}">
+                    {% assign image = variant.metafields.ante.variant_image | default: variant.image | default: block.settings.product.featured_image %}
+                    {% render "ante-image", image: image, height: 48 %}
+                    <h6>{{ variant.title }}</h6>
+                  </option>
+                {% endunless %}
+              {% endunless %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </custom-select>
+      {% if section.settings.info_box_position == "higher" %}
+        {{ info_box }}  
+      {% endif %}
+      <h5>{{ section.settings.product_step_title }}</h5>
+      {% if section.settings.product_step_description != blank %}
+        <div class="richtext body-caption">{{ section.settings.product_step_description }}</div>
+      {% endif %}
+      <div class="products">
+        {% assign index = 0 %}
+        {% for block in section.blocks %}
+          {% if block.type == "product" and block.settings.product %}
+            {% if block.settings.outer_tag_text != blank %}
+              <div class="ante-outer-tag">{{ block.settings.outer_tag_text }}</div>
+            {% endif %}
+            <input
+              type="radio"
+              name="products"
+              id="product-{{ index }}"
+              value="{{ block.settings.product.id }}"
+              {% if index == 0 %}checked{% endif %}
+              autocomplete="off"
+              data-variants="{% for variant in block.settings.product.variants %}{% unless forloop.index == 0 %},{% endunless %}{{ variant.title }}{% endfor %}"
+            >
+            {% for variant in block.settings.product.variants %}
+              {% if variant.title == first_product_block.settings.product.variants.first.title %}
+                {% assign has_variant = true %}
+              {% endif %}
+            {% endfor %}
+            <label
+              id="label-{{ block.id }}"
+              for="product-{{ index }}"
+              {% if block.settings.outer_tag_text != blank %}class="has-outer-tag"{% endif %}
+              {% unless has_variant %}hidden{% endunless %}
+            >
+              <div class="label-content{% if index == 0 %} ante-inverse{% endif %}{% if block.settings.extra_info_drop_content != blank %} has-extra-info{% endif %}">
+                <div class="input-content">
+                  <div class="input-main">
+                    <div class="input-main-content">
+                      <div class="input-row">
+                        <h6 class="input-name">{{ block.settings.custom_name | default: block.settings.product.title }}</h6>
+                      </div>
+                      {% if block.settings.tag_text != blank %}
+                        <div class="ante-tag {{ block.settings.tag_colour }}">{{ block.settings.tag_text }}</div>
+                      {% endif %}
+                      {% if block.settings.facts != blank %}
+                        <div class="input-facts{% unless block.settings.show_facts_on_mobile %} desktop{% endunless %}">
+                          {% assign facts = block.settings.facts | newline_to_br | split: '<br />' %}
+                          {% for fact in facts %}
+                            {% assign trimmed_fact = fact | strip %}
+                            {% if trimmed_fact != blank %}
+                              <div class="fact body-caption muted">{% render "ante-svg", icon: "check" %} {{ trimmed_fact }}</div>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                    </div>
+                    {% render "ante-image", image: block.settings.image %}
+                  </div>
+                  <div class="selected-content-drop">
+                    <div class="selected-content">
+                      <div class="subscription">
+                        <div>{{ block.settings.subscription_label }}</div>
+                        <custom-select class="ante-inverse">
+                          <option value="{{ block.settings.product.id }}">
+                            <div>{{ block.settings.subscription_option_text }}</div>
+                            {% if block.settings.subscription_tag_text != blank %}
+                              <div class="spacer"></div>
+                              <div class="ante-tag {{ block.settings.subscription_tag_colour }}">{{ block.settings.subscription_tag_text }}</div>
+                            {% else %}
+                              <div class="ante-tag {{ block.settings.subscription_tag_colour }}" style="visibility: hidden; padding-left: 0; padding-right: 0;">e</div>
+                            {% endif %}
+                          </option>
+                          {% for subblock in section.blocks %}
+                            {% if subblock.type == "subscription_product" and subblock.settings.product and subblock.settings.parent_product.id == block.settings.product.id %}
+                              <option value="{{ subblock.settings.product.id }}">
+                                <div>{{ subblock.settings.subscription_option_text }}</div>
+                                {% if subblock.settings.subscription_tag_text != blank %}
+                                  <div class="spacer"></div>
+                                  <div class="ante-tag {{ subblock.settings.subscription_tag_colour }}">{{ subblock.settings.subscription_tag_text }}</div>
+                                {% endif %}
+                              </option>
+                            {% endif %}
+                          {% endfor %}
+                        </custom-select>
+                      </div>
+                    </div>
+                  </div>
+                  {% if block.settings.extra_info_drop_content != blank %}
+                    <input type="checkbox" class="extra-info-input" id="extra-info-{{ block.id }}">
+                    <label class="extra-info-drop-button-wrapper" for="extra-info-{{ block.id }}">
+                      <div class="extra-info-drop-button body-caption alt">
+                        <span>{{ block.settings.extra_info_drop_button_text }}</span>
+                        <span>{{ block.settings.extra_info_drop_button_text_active }}</span>
+                        <div class="extra-info-drop-arrow">
+                          {% render "ante-svg", icon: "drop", colour: "accent-text" %}
+                        </div>
+                      </div>
+                    </label>
+                    <div class="extra-info-drop-content-wrapper">
+                      <div class="extra-info-drop-content richtext body-caption">{{ block.settings.extra_info_drop_content }}</div>
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="input-price">
+                  <div class="product-price-variant for-{{ block.settings.product.id }}" data-price="{{ block.settings.price }}" data-compare="{{ block.settings.compare_at_price }}">
+                    {% render "ante-new-price", static: true, mixed: true, price: block.settings.price, compare_price: block.settings.compare_at_price %}
+                    {% if block.settings.compare_at_price > block.settings.price %}
+                      <div class="body-caption alt">{% if block.settings.savings_emoji != blank %}{{ block.settings.savings_emoji }} {% endif %}Save {{ block.settings.compare_at_price | minus: block.settings.price | money | replace: ".00", "" }}</div>
+                    {% endif %}
+                  </div>
+                  {% for subblock in section.blocks %}
+                    {% if subblock.type == "subscription_product" and subblock.settings.product and subblock.settings.parent_product.id == block.settings.product.id %}
+                      <div class="product-price-variant for-{{ subblock.settings.product.id }}" data-price="{{ subblock.settings.price }}" data-compare="{{ subblock.settings.compare_at_price }}" hidden>
+                        {% render "ante-new-price", static: true, mixed: true, price: subblock.settings.price, compare_price: subblock.settings.compare_at_price %}
+                        {% if subblock.settings.compare_at_price > subblock.settings.price %}
+                          <div class="body-caption alt">{% if block.settings.savings_emoji != blank %}{{ block.settings.savings_emoji }} {% endif %}Save {{ subblock.settings.compare_at_price | minus: subblock.settings.price | money | replace: ".00", "" }}</div>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+            </label>
+            {% assign index = index | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% for block in section.blocks %}
+        {% if block.type == "product" or block.type == "subscription_product" %}
+          {% if block.settings.product and block.settings.plan_message != blank %}
+            <div class="plan-message body-small for-{{ block.settings.product.id }} richtext" hidden>{{ block.settings.plan_message }}</div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      {% render "ante-buy-button", show_price: true %}
+      {% for block in section.blocks %}
+        {% if block.type == "product" or block.type == "subscription_product" %}
+          {% if block.settings.product and block.settings.buy_button_message != blank %}
+            <div class="buy-button-message body-caption for-{{ block.settings.product.id }} richtext" hidden>{{ block.settings.buy_button_message }}</div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      {% if section.settings.sold_count != blank %}
+        <div class="sold">
+          {% render "ante-svg", icon: "spark" %}
+          <div class="sold-content">
+            <div class="sold-count">
+              {% assign chars = section.settings.sold_count | split: "" %}
+              {% for c in chars %}
+                {% if c >= "0" and c <= "9" %}
+                  <div>{{ c }}</div>
+                {% else %}
+                  {{ c }}
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="body-caption alt">{{ section.settings.sold_text }}</div>
+          </div>
+          {% render "ante-svg", icon: "spark", colour: "accent-background" %}
+        </div>
+      {% endif %}
+      <div class="save-big">
+        <div class="save-big-icon">
+          {% render "ante-svg", icon: "face-wow" %}
+        </div>
+        {{ section.settings.save_bar_text }}
+      </div>
+      {% if section.settings.info_box_position == "lower" %}
+        {{ info_box }}  
+      {% endif %}
+    </div>
+    <div class="section-media-container">
+      {% for block in section.blocks %}
+        {% if block.type == "media" %}
+          <div class="section-media">
+            {% render "ante-image", image: block.settings.image, width: 146, height: 122, video: block.settings.video_url %}
+            <div>
+              <h5>{{ block.settings.heading }}</h5>
+              <div class="body-base muted">{{ block.settings.text }}</div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% render "ante-drops", blocks: section.blocks, type: "drop", collapsed: true %}
+  </div>
+{% render "ante-section-structure", end: true %}
+
+<script type="module">
+  const container = document.querySelector("#{{ id }}")
+
+  const products = {
+    {%- for block in section.blocks -%}
+      {%- if block.type == "product" and block.settings.product -%}
+        "{{ block.settings.product.id }}": {
+          products: [
+            "{{ block.settings.product.id }}",
+            {%- for subblock in section.blocks -%}
+              {%- if subblock.type == "subscription_product" and subblock.settings.product and subblock.settings.parent_product.id == block.settings.product.id -%}
+                "{{ subblock.settings.product.id }}",
+              {%- endif -%}
+            {%- endfor -%}
+          ],
+          "{{ block.settings.product.id }}": {
+            variants: {
+              {%- for variant in block.settings.product.variants -%}
+                "{{ variant.title }}": [
+                  "{{ variant.id }}",
+                  "{{ variant.selling_plan_allocations.first.selling_plan.id }}"
+                ],
+              {%- endfor -%}
+            },
+            freebies: [
+              {%- for product in block.settings.freebies -%}
+                "{{ product.selected_or_first_available_variant.id }}",
+              {%- endfor %}
+            ]
+          },
+          {%- for subblock in section.blocks -%}
+            {%- if subblock.type == "subscription_product" and subblock.settings.product and subblock.settings.parent_product.id == block.settings.product.id -%}
+              "{{ subblock.settings.product.id }}": {
+                variants: {
+                  {%- for variant in subblock.settings.product.variants -%}
+                    "{{ variant.title }}": [
+                      "{{ variant.id }}",
+                      "{{ variant.selling_plan_allocations.first.selling_plan.id }}"
+                    ],
+                  {%- endfor -%}
+                },
+                freebies: [
+                  {%- for product in subblock.settings.freebies -%}
+                    "{{ product.selected_or_first_available_variant.id }}",
+                  {%- endfor %}
+                ]
+              },
+            {%- endif -%}
+          {%- endfor -%}
+        },
+      {%- endif -%}
+    {%- endfor -%}
+  }
+
+  setPrice({{ price }}, {{ compare_price }})
+
+  const variantSelect = container.querySelector(".variant-select")
+  const inputs = Array.from(container.querySelectorAll(".products > input"))
+  const selects = Array.from(container.querySelectorAll(".products custom-select"))
+
+  let timeout, allowScroll
+
+  variantSelect.addEventListener("change", e => {
+    let allowed
+    for (const input of inputs) {
+      const variants = input.dataset.variants.split(",")
+      if (variants.includes(variantSelect.value)) {
+        input.nextElementSibling.hidden = false
+        allowed ??= input
+      } else {
+        input.nextElementSibling.hidden = true
+        if (input.checked) {
+          allowScroll = false
+        }
+      }
+    }
+    if (!allowScroll) {
+      allowed.click()
+    }
+  })
+
+  for (const input of inputs) {
+    const select = input.nextElementSibling.querySelector("custom-select")
+    const prices = Array.from(input.nextElementSibling.querySelectorAll(".product-price-variant"))
+
+    input.addEventListener("change", e => {
+      for (const input of inputs) {
+        input.nextElementSibling.children[0].classList.remove("ante-inverse")
+      }
+      input.nextElementSibling.children[0].classList.add("ante-inverse")
+      const price = input.nextElementSibling.querySelector(`.for-${select.value}`)
+      setPrice(price.dataset.price, price.dataset.compare)
+
+      updateMessages()
+
+      clearTimeout(timeout)
+      if (allowScroll) {
+        timeout = setTimeout(() => smoothScroll(input.nextElementSibling), 250)
+      }
+      allowScroll = true
+    })
+
+    select.addEventListener("change", e => {
+      prices.forEach(e => e.hidden = true)
+      const price = input.nextElementSibling.querySelector(`.for-${select.value}`)
+      price.hidden = false
+      setPrice(price.dataset.price, price.dataset.compare)
+
+      const index = products[input.value].products.indexOf(select.value)
+
+      for (let i = 0; i < selects.length; i++) {
+        if (select === selects[i]) continue
+        const product = products[inputs[i].value].products[index]
+        selects[i].value = product
+        Array.from(inputs[i].nextElementSibling.querySelectorAll(".product-price-variant")).forEach(e => e.hidden = true)
+        inputs[i].nextElementSibling.querySelector(`.for-${product}`).hidden = false
+      }
+
+      updateMessages()
+    })
+  }
+
+  const planMessages = Array.from(container.querySelectorAll(".plan-message"))
+  const buyButtonMessages = Array.from(container.querySelectorAll(".buy-button-message"))
+
+  function updateMessages() {
+    planMessages.forEach(e => e.hidden = true)
+    buyButtonMessages.forEach(e => e.hidden = true)
+    const selected = container.querySelector(".products > input:checked + label custom-select")
+    if (!selected) return
+    const planMessage = container.querySelector(`.plan-message.for-${selected.value}`)
+    if (planMessage) {
+      planMessage.hidden = false
+    }
+    const buyButtonMessage = container.querySelector(`.buy-button-message.for-${selected.value}`)
+    if (buyButtonMessage) {
+      buyButtonMessage.hidden = false
+    }
+  }
+
+  setTimeout(() => {
+    updateMessages()
+    {% assign index = 0 %}
+    {% for block in section.blocks %}
+      {% if block.type == "product" and block.settings.product %}
+        {% if block.settings.preselected %}
+          {% if index > 0 %}
+            container.querySelector('.products > input[value="{{ block.settings.product.id }}"]')?.click()
+            {% assign selected = block.settings.product.id %}
+          {% endif %}
+          {% break %}
+        {% endif %}
+        {% assign index = index | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+    {% unless selected %}
+      {% for block in section.blocks %}
+        {% if block.type == "product" and block.settings.product %}
+          {% assign selected = block.settings.product.id %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+    {% endunless %}
+    {% if section.settings.preselected_subscription_index > 1 %}
+      {% for block in section.blocks %}
+        {% if block.type == "product" and block.settings.product.id == selected %}
+          {% assign index = 1 %}
+          {% for subblock in section.blocks %}
+            {% if subblock.type == "subscription_product" and subblock.settings.product and subblock.settings.parent_product.id == block.settings.product.id %}
+              {% assign index = index | plus: 1 %}
+              {% if index == section.settings.preselected_subscription_index %}
+                const select = container.querySelector('.products > input[value="{{ block.settings.product.id }}"] + label custom-select')
+                select.value = "{{ subblock.settings.product.id }}"
+                select.dispatchEvent(new Event("change", { bubbles: true }))
+                {% break %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    allowScroll = true
+  })
+
+  document.querySelectorAll("buy-button").forEach((button, i) => button.addEventListener("click", async e => {
+    if (!button.closest("#{{ id }}")) {
+      smoothScroll(document.querySelector("#{{ id }} .buy-box"))
+      return
+    }
+
+    button.loading = true
+    await fetch("/cart/clear")
+
+    const mainProductId = container.querySelector("input[name='products']:checked").value
+    const mainProduct = products[mainProductId]
+
+    const selectedProductID = container.querySelector("input[name='products']:checked + label custom-select").value
+    const selectedProduct = mainProduct[selectedProductID]
+
+    console.log("TEST", selectedProduct, variantSelect.value)
+
+    const [variantId, sellingPlan] = selectedProduct.variants[variantSelect.value]
+
+    const from = new URL(location.href).pathname.split("/").at(-1)
+
+    const items = [
+      {
+        id: variantId,
+        quantity: 1,
+        selling_plan: sellingPlan,
+        properties: {
+          _data: `f:${from},t:m`
+        }
+      },
+      ...selectedProduct.freebies.map(id => ({
+        id,
+        quantity: 1,
+        properties: {
+          _data: `f:${from},t:f`
+        }
+      }))
+    ]
+
+    const r = await fetch("/cart/add.js", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ items })
+    })
+
+    if (!r.ok) {
+      button.loading = false
+      throw `Failed to add to cart: ${await r.text()}`
+    }
+
+    {% if section.settings.discount_code %}
+      await fetch("/discount/{{ section.settings.discount_code }}")
+    {% endif %}
+
+    button.loading = false
+    location = "/checkout"
+  }))
+</script>
+
+{% schema %}
+  {
+    "name": "Variants Buybox [L]",
+    "presets": [
+      {
+        "name": "Variants Buybox [L]"
+      }
+    ],
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_product_images_in_carousel",
+        "label": "Show Product Images In Carousel",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "star_rating",
+        "label": "Star Rating",
+        "min": 0,
+        "max": 5,
+        "step": 0.5,
+        "default": 4.5
+      },
+      {
+        "type": "text",
+        "id": "star_review_text",
+        "label": "Star Review Text",
+        "default": "(1,000)"
+      },
+      {
+        "type": "url",
+        "id": "star_link",
+        "label": "Star Link"
+      },
+      {
+        "type": "text",
+        "id": "custom_heading",
+        "label": "Custom Heading",
+        "default": "Custom Heading",
+        "placeholder": "Custom Heading"
+      },
+      {
+        "type": "text",
+        "id": "main_price_label",
+        "label": "Main Price Label",
+        "default": "/month",
+        "placeholder": "/month"
+      },
+      {
+        "type": "richtext",
+        "id": "call_out_text",
+        "label": "Call Out Text"
+      },
+      {
+        "type": "image_picker",
+        "id": "call_out_image",
+        "label": "Call Out Image"
+      },
+      {
+        "type": "richtext",
+        "id": "save_bar_text",
+        "label": "Save Bar Text"
+      },
+      {
+        "type": "text",
+        "id": "variant_step_title",
+        "label": "Variant Step Title",
+        "default": "Variant Step Title",
+        "placeholder": "Variant Step Title"
+      },
+      {
+        "type": "richtext",
+        "id": "variant_step_description",
+        "label": "Variant Step Description"
+      },
+      {
+        "type": "textarea",
+        "id": "ignored_variants",
+        "label": "Ignored Variants",
+        "placeholder": "Variant Name",
+        "info": "One variant name per line."
+      },
+      {
+        "type": "text",
+        "id": "product_step_title",
+        "label": "Product Step Title",
+        "default": "Product Step Title",
+        "placeholder": "Product Step Title"
+      },
+      {
+        "type": "richtext",
+        "id": "product_step_description",
+        "label": "Product Step Description"
+      },
+      {
+        "type": "number",
+        "id": "preselected_subscription_index",
+        "label": "Preselected Subscription Index",
+        "default": 1,
+        "info": "Starts from 1"
+      },
+      {
+        "type": "text",
+        "id": "sold_count",
+        "label": "Sold Count",
+        "default": "1,000",
+        "placeholder": "1,000"
+      },
+      {
+        "type": "text",
+        "id": "sold_text",
+        "label": "Sold Text",
+        "default": "items sold",
+        "placeholder": "items sold"
+      },
+      {
+        "type": "header",
+        "content": "Info Box"
+      },
+      {
+        "type": "select",
+        "id": "info_box_position",
+        "label": "Info Box Position",
+        "options": [
+          {
+            "value": "higher",
+            "label": "Higher"
+          },
+          {
+            "value": "lower",
+            "label": "Lower"
+          }
+        ],
+        "default": "higher"
+      },
+      {
+        "type": "text",
+        "id": "info_box_heading",
+        "label": "Info Box Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "info_box_description",
+        "label": "Info Box Description"
+      },
+      {
+        "type": "richtext",
+        "id": "info_box_tag_text",
+        "label": "Info Box Tag Text"
+      },
+      {
+        "type": "textarea",
+        "id": "info_box_facts",
+        "label": "Info Box Facts",
+        "placeholder": "Fact",
+        "info": "One fact per line"
+      },
+      {
+        "type": "image_picker",
+        "id": "info_box_image",
+        "label": "Info Box Image"
+      },
+      {
+        "type": "number",
+        "id": "info_box_image_width",
+        "label": "Info Box Image Wdith",
+        "default": 200
+      },
+      {
+        "type": "number",
+        "id": "info_box_image_top_offset",
+        "label": "Info Box Image Top Offset",
+        "default": 0
+      },
+      {
+        "type": "number",
+        "id": "info_box_image_right_offset",
+        "label": "Info Box Image Right Offset",
+        "default": 0
+      },
+      {
+        "type": "number",
+        "id": "info_box_image_bottom_offset",
+        "label": "Info Box Image Bottom Offset",
+        "default": 0
+      },
+      {
+        "type": "number",
+        "id": "info_box_image_left_offset",
+        "label": "Info Box Image Left Offset",
+        "default": 0
+      },
+      {
+        "type": "number",
+        "id": "info_box_image_width_mobile",
+        "label": "Info Box Image Wdith (Mobile)",
+        "default": 128
+      },
+      {
+        "type": "number",
+        "id": "info_box_image_top_offset_mobile",
+        "label": "Info Box Image Top Offset (Mobile)",
+        "default": 0
+      },
+      {
+        "type": "number",
+        "id": "info_box_image_right_offset_mobile",
+        "label": "Info Box Image Right Offset (Mobile)",
+        "default": 0
+      },
+      {
+        "type": "number",
+        "id": "info_box_image_bottom_offset_mobile",
+        "label": "Info Box Image Bottom Offset (Mobile)",
+        "default": 0
+      },
+      {
+        "type": "number",
+        "id": "info_box_image_left_offset_mobile",
+        "label": "Info Box Image Left Offset (Mobile)",
+        "default": 0
+      },
+      {
+        "type": "color",
+        "id": "info_box_heading_colour",
+        "label": "Info Box Heading Colour",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "info_box_text_colour",
+        "label": "Info Box Text Colour",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "info_box_check_colour",
+        "label": "Info Box Check Colour",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "info_box_check_background_colour",
+        "label": "Info Box Check Background Colour",
+        "default": "#ff0000"
+      },
+      {
+        "type": "color",
+        "id": "info_box_border_colour",
+        "label": "Info Box Border Colour",
+        "default": "#000000"
+      },
+      {
+        "type": "color_background",
+        "id": "info_box_background_colour",
+        "label": "Info Box Background Colour",
+        "default": "linear-gradient(#ffffff, #EFF9F4)"
+      },
+      {
+        "type": "image_picker",
+        "id": "info_box_background_image",
+        "label": "Info Box Background Image",
+        "info": "If this is used, the background colour will not be used"
+      },
+      {
+        "type": "text",
+        "id": "discount_code",
+        "label": "Discount Code",
+        "info": "A discount code to apply at checkout"
+      },
+      {"type":"header","content":"Section Heading"},{"type":"richtext","id":"heading","label":"Heading"},{"type":"select","id":"heading_alignment","label":"Heading Alignment","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"},{"value":"row","label":"Row"}],"default":"center"},{"type":"select","id":"heading_alignment_mobile","label":"Heading Alignment (Mobile)","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"center"},{"type":"checkbox","id":"limit_heading_width","label":"Limit Heading Width","default": true},{"type":"header","content":"Section Settings"},{"type":"checkbox","id":"section_inverse","label":"Inverted Section","default":false},{"type":"select","id":"section_background_style","label":"Section Background Style","options":[{"value":"section-background-style-normal","label":"Normal"},{"value":"section-background-style-floating","label":"Floating"}],"default":"section-background-style-normal"},{"type":"select","id":"section_background_colour","label":"Section Background Colour","options":[{"value":"section-background-colour-normal","label":"Normal"},{"value":"section-background-colour-alt-100","label":"Alt (100)"},{"value":"section-background-colour-alt","label":"Alt"},{"value":"section-background-colour-alt-900","label":"Alt (900)"},{"value":"section-background-colour-surface-100","label":"Surface (100)"},{"value":"section-background-colour-surface","label":"Surface"},{"value":"section-background-colour-surface-900","label":"Surface (900)"}],"default":"section-background-colour-normal"},{"type":"select","id":"section_spacing","label":"Section Spacing","options":[{"value":"section-spacing-top-bottom","label":"Top & Bottom"},{"value":"section-spacing-top","label":"Top"},{"value":"section-spacing-bottom","label":"Bottom"},{"value":"section-spacing-none","label":"None"}],"default":"section-spacing-bottom"},{"type":"text","id":"custom_id","label":"Custom ID","placeholder":"id","info":"Assign a custom ID to this section, allowing you to easily reference it"},{"type": "checkbox","id": "section_visible","label":"Section Visible","default":true,"info": "Turning this off hides the section but doesn't remove it from the page."}
+    ],
+    "blocks": [
+      {
+        "name": "Carousel Images",
+        "type": "carousel_images",
+        "settings": [
+          {
+            "type": "select",
+            "id": "position",
+            "label": "Position",
+            "options": [
+              { "value": "before", "label": "Before" },
+              { "value": "after", "label": "After" }
+            ],
+            "default": "after",
+            "info": "Should the images appear before or after the product images"
+          },
+          { "type": "image_picker", "id": "image_1", "label": "Image 1" },
+          { "type": "url", "id": "video_url_1", "label": "Video URL 1" },
+          { "type": "image_picker", "id": "image_2", "label": "Image 2" },
+          { "type": "url", "id": "video_url_2", "label": "Video URL 2" },
+          { "type": "image_picker", "id": "image_3", "label": "Image 3" },
+          { "type": "url", "id": "video_url_3", "label": "Video URL 3" },
+          { "type": "image_picker", "id": "image_4", "label": "Image 4" },
+          { "type": "url", "id": "video_url_4", "label": "Video URL 4" },
+          { "type": "image_picker", "id": "image_5", "label": "Image 5" },
+          { "type": "url", "id": "video_url_5", "label": "Video URL 5" },
+          { "type": "image_picker", "id": "image_6", "label": "Image 6" },
+          { "type": "url", "id": "video_url_6", "label": "Video URL 6" },
+          { "type": "image_picker", "id": "image_7", "label": "Image 7" },
+          { "type": "url", "id": "video_url_7", "label": "Video URL 7" },
+          { "type": "image_picker", "id": "image_8", "label": "Image 8" },
+          { "type": "url", "id": "video_url_8", "label": "Video URL 8" },
+          { "type": "image_picker", "id": "image_9", "label": "Image 9" },
+          { "type": "url", "id": "video_url_9", "label": "Video URL 9" },
+          { "type": "image_picker", "id": "image_10", "label": "Image 10" },
+          { "type": "url", "id": "video_url_10", "label": "Video URL 10" },
+          { "type": "image_picker", "id": "image_11", "label": "Image 11" },
+          { "type": "url", "id": "video_url_11", "label": "Video URL 11" },
+          { "type": "image_picker", "id": "image_12", "label": "Image 12" },
+          { "type": "url", "id": "video_url_12", "label": "Video URL 12" },
+          { "type": "image_picker", "id": "image_13", "label": "Image 13" },
+          { "type": "url", "id": "video_url_13", "label": "Video URL 13" },
+          { "type": "image_picker", "id": "image_14", "label": "Image 14" },
+          { "type": "url", "id": "video_url_14", "label": "Video URL 14" },
+          { "type": "image_picker", "id": "image_15", "label": "Image 15" },
+          { "type": "url", "id": "video_url_15", "label": "Video URL 15" },
+          { "type": "image_picker", "id": "image_16", "label": "Image 16" },
+          { "type": "url", "id": "video_url_16", "label": "Video URL 16" }
+        ]
+      },
+      {
+        "name": "Product",
+        "type": "product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "text",
+            "id": "custom_name",
+            "label": "Custom Name",
+            "placeholder": "Custom Name"
+          },
+          {
+            "type": "checkbox",
+            "id": "preselected",
+            "label": "Preselected",
+            "default": false,
+            "info": "Only one product can be preselected at a time"
+          },
+          {
+            "type": "richtext",
+            "id": "tag_text",
+            "label": "Tag Text"
+          },
+          {
+            "type": "select",
+            "id": "tag_colour",
+            "label": "Tag Colour",
+            "options": [
+              {
+                "value": "info",
+                "label": "Info"
+              },
+              {
+                "value": "info-alt",
+                "label": "Info Alt"
+              },
+              {
+                "value": "sale",
+                "label": "Sale"
+              },
+              {
+                "value": "sale-alt",
+                "label": "Sale Alt"
+              }
+            ],
+            "default": "info-alt"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "number",
+            "id": "image_size",
+            "label": "Image Size",
+            "default": 108
+          },
+          {
+            "type": "number",
+            "id": "image_size_mobile",
+            "label": "Image Size (Mobile)",
+            "default": 55
+          },
+          {
+            "type": "textarea",
+            "id": "facts",
+            "label": "Facts",
+            "default": "Facts",
+            "placeholder": "Facts",
+            "info": "Put each fact on is own line"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_facts_on_mobile",
+            "label": "Show Facts On Mobile",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "subscription_label",
+            "label": "Subscription Label",
+            "default": "Subscription Label",
+            "placeholder": "Subscription Label"
+          },
+          {
+            "type": "text",
+            "id": "subscription_option_text",
+            "label": "Subscription Option Text",
+            "default": "Subscription Option Text",
+            "placeholder": "Subscription Option Text"
+          },
+          {
+            "type": "richtext",
+            "id": "subscription_tag_text",
+            "label": "Subscription Tag Text"
+          },
+          {
+            "type": "select",
+            "id": "subscription_tag_colour",
+            "label": "Subscription Tag Colour",
+            "options": [
+              {
+                "value": "info",
+                "label": "Info"
+              },
+              {
+                "value": "info-alt",
+                "label": "Info Alt"
+              },
+              {
+                "value": "sale",
+                "label": "Sale"
+              },
+              {
+                "value": "sale-alt",
+                "label": "Sale Alt"
+              }
+            ],
+            "default": "info"
+          },
+          {
+            "type": "product_list",
+            "id": "freebies",
+            "label": "Freebies"
+          },
+          {
+            "type": "richtext",
+            "id": "plan_message",
+            "label": "Plan Message",
+            "info": "A message to display above the buy button"
+          },
+          {
+            "type": "richtext",
+            "id": "buy_button_message",
+            "label": "Buy Button Message",
+            "info": "A message to display below the buy button"
+          },
+          {
+            "type": "header",
+            "content": "Prices"
+          },
+          {
+            "type": "number",
+            "id": "price",
+            "label": "Price",
+            "default": 1000,
+            "info": "In cents"
+          },
+          {
+            "type": "number",
+            "id": "compare_at_price",
+            "label": "Compare at Price",
+            "default": 2000,
+            "info": "In cents"
+          },
+          {
+            "type": "text",
+            "id": "savings_emoji",
+            "label": "Savings Emoji",
+            "placeholder": "🔥"
+          },
+          {
+            "type": "number",
+            "id": "price_padding_top",
+            "label": "Price Padding Top",
+            "default": 27
+          },
+          {
+            "type": "number",
+            "id": "price_padding_top_checked",
+            "label": "Price Padding Top (Checked)",
+            "default": 27
+          },
+          {
+            "type": "number",
+            "id": "price_padding_top_mobile",
+            "label": "Price Padding Top (Mobile)",
+            "default": 20
+          },
+          {
+            "type": "number",
+            "id": "price_padding_top_mobile_checked",
+            "label": "Price Padding Top (Mobile) (Checked)",
+            "default": 20
+          },
+          {
+            "type": "header",
+            "content": "Extra Info Drop"
+          },
+          {
+            "type": "text",
+            "id": "extra_info_drop_button_text",
+            "label": "Extra Info Drop Button Text",
+            "default": "Extra Info Drop Button Text",
+            "placeholder": "Extra Info Drop Button Text"
+          },
+          {
+            "type": "text",
+            "id": "extra_info_drop_button_text_active",
+            "label": "Extra Info Drop Button Text (Active)",
+            "default": "Extra Info Drop Button Text (Active)",
+            "placeholder": "Extra Info Drop Button Text (Active)"
+          },
+          {
+            "type": "richtext",
+            "id": "extra_info_drop_content",
+            "label": "Extra Info Drop Content",
+            "info": "Extra Info Drop Content"
+          }
+        ]
+      },
+      {
+        "name": "Subscription Product",
+        "type": "subscription_product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "parent_product",
+            "label": "Parent Product"
+          },
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "text",
+            "id": "subscription_option_text",
+            "label": "Subscription Option Text",
+            "default": "Subscription Option Text",
+            "placeholder": "Subscription Option Text"
+          },
+          {
+            "type": "richtext",
+            "id": "subscription_tag_text",
+            "label": "Subscription Tag Text"
+          },
+          {
+            "type": "select",
+            "id": "subscription_tag_colour",
+            "label": "Subscription Tag Colour",
+            "options": [
+              {
+                "value": "info",
+                "label": "Info"
+              },
+              {
+                "value": "info-alt",
+                "label": "Info Alt"
+              },
+              {
+                "value": "sale",
+                "label": "Sale"
+              },
+              {
+                "value": "sale-alt",
+                "label": "Sale Alt"
+              }
+            ],
+            "default": "info"
+          },
+          {
+            "type": "product_list",
+            "id": "freebies",
+            "label": "Freebies"
+          },
+          {
+            "type": "richtext",
+            "id": "plan_message",
+            "label": "Plan Message",
+            "info": "A message to display above the buy button"
+          },
+          {
+            "type": "richtext",
+            "id": "buy_button_message",
+            "label": "Buy Button Message",
+            "info": "A message to display below the buy button"
+          },
+          {
+            "type": "header",
+            "content": "Prices"
+          },
+          {
+            "type": "number",
+            "id": "price",
+            "label": "Price",
+            "default": 1000,
+            "info": "In cents"
+          },
+          {
+            "type": "number",
+            "id": "compare_at_price",
+            "label": "Compare at Price",
+            "default": 2000,
+            "info": "In cents"
+          }
+        ]
+      },
+      {
+        "name": "Info",
+        "type": "info",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Text</p>"
+          },
+          {
+            "type": "text",
+            "id": "description",
+            "label": "Description",
+            "default": "Description",
+            "placeholder": "Description"
+          }
+        ]
+      },
+      {
+        "name": "Media",
+        "type": "media",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Heading",
+            "placeholder": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text",
+            "default": "Text",
+            "placeholder": "Text"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "video_url",
+            "label": "Video URL"
+          }
+        ]
+      },
+      {
+        "name": "Drop",
+        "type": "drop",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Title",
+            "placeholder": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content",
+            "default": "<p>Content</p>"
+          }
+        ]
+      },
+      {
+        "type": "sticker",
+        "name": "Sticker",
+        "settings": [{"type":"image_picker","id":"image","label":"Image","info":"Main sticker image that will be displayed"},{"type":"select","id":"layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below","info":"Choose if the sticker should appear above or below the content"},{"type":"number","id":"width","label":"Width","default":128,"info":"Width of the sticker in pixels"},{"type":"number","id":"rotation","label":"Rotation","default":0,"info":"Rotate the sticker in degrees"},{"type":"header","content":"Position Settings"},{"type":"select","id":"horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left","info":"Choose horizontal position of the sticker"},{"type":"select","id":"vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content","info":"Choose vertical position of the sticker"},{"type":"number","id":"offset_x","label":"Horizontal Offset","default":0,"info":"Shift in pixels left or right from chosen horizontal position"},{"type":"number","id":"offset_y","label":"Vertical Offset","default":0,"info":"Shift in pixels up or down from chosen vertical position"},{"type":"header","content":"Override 1"},{"type":"select","id":"override_1_visibility","label":"Override Visibility","options":[{"value":"disabled","label":"Disabled"},{"value":"enabled","label":"Enabled"},{"value":"hidden","label":"Hidden"}],"default":"disabled","info":"Override settings are applied at the selected width and below"},{"type":"number","id":"override_1_page_width","label":"Page Width","default":1920,"info":"Screen width when this override will activate (and below)"},{"type":"image_picker","id":"override_1_image","label":"Image","info":"Override image for this screen size"},{"type":"select","id":"override_1_layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below"},{"type":"number","id":"override_1_width","label":"Width","default":128},{"type":"number","id":"override_1_rotation","label":"Rotation","default":0},{"type":"select","id":"override_1_horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"override_1_vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content"},{"type":"number","id":"override_1_offset_x","label":"Horizontal Offset","default":0},{"type":"number","id":"override_1_offset_y","label":"Vertical Offset","default":0},{"type":"header","content":"Override 2"},{"type":"select","id":"override_2_visibility","label":"Override Visibility","options":[{"value":"disabled","label":"Disabled"},{"value":"enabled","label":"Enabled"},{"value":"hidden","label":"Hidden"}],"default":"disabled","info":"Override settings are applied at the selected width and below"},{"type":"number","id":"override_2_page_width","label":"Page Width","default":1024,"info":"Screen width when this override will activate (and below)"},{"type":"image_picker","id":"override_2_image","label":"Image","info":"Override image for this screen size"},{"type":"select","id":"override_2_layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below"},{"type":"number","id":"override_2_width","label":"Width","default":128},{"type":"number","id":"override_2_rotation","label":"Rotation","default":0},{"type":"select","id":"override_2_horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"override_2_vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content"},{"type":"number","id":"override_2_offset_x","label":"Horizontal Offset","default":0},{"type":"number","id":"override_2_offset_y","label":"Vertical Offset","default":0},{"type":"header","content":"Override 3"},{"type":"select","id":"override_3_visibility","label":"Override Visibility","options":[{"value":"disabled","label":"Disabled"},{"value":"enabled","label":"Enabled"},{"value":"hidden","label":"Hidden"}],"default":"disabled","info":"Override settings are applied at the selected width and below"},{"type":"number","id":"override_3_page_width","label":"Page Width","default":600,"info":"Screen width when this override will activate (and below)"},{"type":"image_picker","id":"override_3_image","label":"Image","info":"Override image for this screen size"},{"type":"select","id":"override_3_layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below"},{"type":"number","id":"override_3_width","label":"Width","default":128},{"type":"number","id":"override_3_rotation","label":"Rotation","default":0},{"type":"select","id":"override_3_horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"override_3_vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content"},{"type":"number","id":"override_3_offset_x","label":"Horizontal Offset","default":0},{"type":"number","id":"override_3_offset_y","label":"Vertical Offset","default":0}]
+      }
+    ]
+  }
+{% endschema %}

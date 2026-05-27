@@ -1,0 +1,79 @@
+{% if image %}
+  {% assign caption = nil %}
+  {% assign type = nil %}
+  {% assign rotation = nil %}
+  {% assign align = nil %}
+  {% assign parts = image.alt | split: "|" %}
+  {% for part in parts %}
+    {% assign key = part | split: "=" | first | strip %}
+    {% assign value = part | split: "=" | last | strip %}
+    {% if key == "caption" %}
+      {% assign caption = value %}
+    {% elsif key == "type" %}
+      {% assign type = value %}
+    {% elsif key == "rotation" %}
+      {% assign rotation = value %}
+    {% elsif key == "align" %}
+      {% assign align = value %}
+    {% endif %}
+  {% endfor %}
+
+  <div
+    class="ante-image{% if type %} ante-image-type-{{ type }}{% endif %}"
+    style="{% if rotation %}transform: rotate({{ rotation }}deg);{% endif %}{% if align %} text-align: {{ align }};{% endif %}{% if video %} cursor: pointer;{% endif %}"
+    {% if video %}
+      {% assign youtube_id = nil %}
+      {% if video contains "youtube.com/watch?v=" %}
+        {% assign youtube_id = video | split: "v=" | last | split: "&" | first %}
+      {% elsif video contains "youtu.be/" %}
+        {% assign youtube_id = video | split: "youtu.be/" | last | split: "?" | first %}
+      {% endif %}
+
+      {% if youtube_id %}
+        data-modal='<iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen></iframe>'
+        data-modal-title="{{ video_caption | default: "" }}"
+        data-modal-id="video-modal"
+      {% else %}
+        data-modal='<video controls playsinline src="{{ video | escape }}"></video>'
+        data-modal-title="{{ video_caption | default: "" }}"
+        data-modal-id="video-modal"
+      {% endif %}
+    {% endif %}
+  >
+    {% assign alt_text = alt | default: "Image" %}
+    {% if force_width %}
+      {% assign src = image | image_url: width: force_width %}
+    {% else %}
+      {% assign src = image | image_url: width: image.width %}
+    {% endif %}
+    <img src="{{ src }}"lazy" }}"{% if class %} class="{{ class }}"{% endif %}{% if width %} width="{{ width }}"{% endif %}{% if height %} height="{{ height }}"{% endif %} style="{% if width %}max-width: min(100%, {{ width }}px){% else %}max-width: 100%{% endif %};{% if height %}max-height: min(100%, {{ height }}px){% else %}max-height: 100%{% endif %}" alt="{{ alt_text }}">
+    {% if video %}
+      <div class="ante-image-play">
+        <svg xmlns="http://www.w3.org/2000/svg" width="46" height="32" viewBox="0 0 46 32" fill="none">
+          <foreignObject x="-6.51133" y="-6.51133" width="58.2902" height="44.8596">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(3.26px);clip-path:url(#bgblur_0_20131_17828_clip_path);height:100%;width:100%"></div>
+          </foreignObject>
+
+          <path data-figma-bg-blur-radius="6.51133" fill-rule="evenodd" clip-rule="evenodd" d="M42.6195 2.13099C41.7052 1.30107 40.5474 0.756783 39.281 0.616864C36.5287 0.3088 33.7514 0.153735 30.9648 0.0759893C28.1962 -0.00122254 25.4157 -0.00122245 22.6414 0.000377249C19.8674 -0.00122244 17.0871 -0.00122253 14.3181 0.0759893C11.5313 0.153734 8.75314 0.308798 5.99921 0.616864C4.7341 0.756854 3.57675 1.30139 2.66334 2.13166C1.75575 2.95661 1.08893 4.06452 0.797216 5.33808C0.403406 7.04524 0.204192 8.8264 0.103553 10.6186C0.00252376 12.4184 0 14.1954 0 15.9205C0 17.6434 3.5779e-05 19.418 0.0986833 21.2189C0.196869 23.0103 0.393666 24.7914 0.787686 26.4989C1.08114 27.773 1.74828 28.8812 2.65581 29.7061C3.56866 30.5359 4.72488 31.0801 5.98963 31.2201C8.7439 31.5282 11.522 31.6832 14.3089 31.7609C17.0778 31.8381 19.8582 31.8381 22.6325 31.8365C25.4081 31.8381 28.1884 31.8381 30.9569 31.7609C33.7434 31.6832 36.5207 31.5281 39.2747 31.2201C40.5392 31.0801 41.6952 30.5361 42.6084 29.7065C43.5164 28.8817 44.1845 27.7734 44.4798 26.4989C44.8721 24.7914 45.0689 23.0103 45.1675 21.2189C45.2647 19.4524 45.2655 17.6603 45.2654 15.9205H45.2673V15.8332H45.2654C45.2655 12.3764 45.2655 8.71528 44.4894 5.33812C44.1959 4.06398 43.5281 2.95584 42.6195 2.13099Z" fill="#FF0032" fill-opacity="0.9"/>
+
+          <!-- overlay icon -->
+          <g transform="translate(15,7)">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.7854 7.71716C12.2065 6.37033 9.64484 5.03363 7.08628 3.69856C4.95947 2.58876 2.83459 1.47996 0.703545 0.367323L0 0V0.792452V15.4425V16.233L0.70166 15.8695C3.05537 14.6503 5.39904 13.4356 7.74261 12.2206L14.7835 8.5693L15.6031 8.14421L14.7854 7.71716Z" fill="white"/>
+          </g>
+
+          <defs>
+            <clipPath id="bgblur_0_20131_17828_clip_path" transform="translate(6.51133 6.51133)">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M42.6195 2.13099C41.7052 1.30107 40.5474 0.756783 39.281 0.616864C36.5287 0.3088 33.7514 0.153735 30.9648 0.0759893C28.1962 -0.00122254 25.4157 -0.00122245 22.6414 0.000377249C19.8674 -0.00122244 17.0871 -0.00122253 14.3181 0.0759893C11.5313 0.153734 8.75314 0.308798 5.99921 0.616864C4.7341 0.756854 3.57675 1.30139 2.66334 2.13166C1.75575 2.95661 1.08893 4.06452 0.797216 5.33808C0.403406 7.04524 0.204192 8.8264 0.103553 10.6186C0.00252376 12.4184 0 14.1954 0 15.9205C0 17.6434 3.5779e-05 19.418 0.0986833 21.2189C0.196869 23.0103 0.393666 24.7914 0.787686 26.4989C1.08114 27.773 1.74828 28.8812 2.65581 29.7061C3.56866 30.5359 4.72488 31.0801 5.98963 31.2201C8.7439 31.5282 11.522 31.6832 14.3089 31.7609C17.0778 31.8381 19.8582 31.8381 22.6325 31.8365C25.4081 31.8381 28.1884 31.8381 30.9569 31.7609C33.7434 31.6832 36.5207 31.5281 39.2747 31.2201C40.5392 31.0801 41.6952 30.5361 42.6084 29.7065C43.5164 28.8817 44.1845 27.7734 44.4798 26.4989C44.8721 24.7914 45.0689 23.0103 45.1675 21.2189C45.2647 19.4524 45.2655 17.6603 45.2654 15.9205H45.2673V15.8332H45.2654C45.2655 12.3764 45.2655 8.71528 44.4894 5.33812C44.1959 4.06398 43.5281 2.95584 42.6195 2.13099Z"/>
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+    {% endif %}
+
+    {% if caption %}
+      <div class="ante-image-caption">{{ caption }}</div>
+    {% endif %}
+  </div>
+{% elsif force == true %}
+  <div class="ante-image"></div>
+{% endif %}

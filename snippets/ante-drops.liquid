@@ -1,0 +1,65 @@
+<div class="ante-drops">
+  {% assign index = 0 %}
+  {% if drops %}
+    {% for i in (1..999) %}
+      {% assign index = index | plus: 1 %}
+      {% assign title = "drop_" | append: i | append: "_title" %}
+      {% assign content = "drop_" | append: i | append: "_content" %}
+      {% if drops.settings[content] == blank %}
+        {% break %}
+      {% endif %}
+      {% if index == 1 and collapsed != true %}
+        {% assign dropped = true %}
+      {% else %}
+        {% assign dropped = false %}
+      {% endif %}
+      {% if indexes %}
+        {% assign display_index = index %}
+      {% endif %}
+      {% render "ante-drop", title: drops.settings[title], content: drops.settings[content], dropped: dropped, big: big, index: display_index %}
+    {% endfor %}
+  {% else %}
+    {% for block in blocks %}
+      {% if block.type == type %}
+        {% if condition %}
+          {% if block.settings[condition] == matches %}
+            {% assign valid = true %}
+          {% else %}
+            {% assign valid = false %}
+          {% endif %}
+        {% else %}
+          {% assign valid = true %}
+        {% endif %}
+        {% if valid %}
+          {% assign index = index | plus: 1 %}
+          {% if index == 1 and collapsed != true %}
+            {% assign dropped = true %}
+          {% else %}
+            {% assign dropped = false %}
+          {% endif %}
+          {% if indexes %}
+            {% assign display_index = index %}
+          {% endif %}
+          {% if block.settings.drop_1_content != blank %}
+            {% render "ante-drop", title: block.settings.title, drops: block, dropped: dropped, big: big, indexes: indexes, index: display_index, collapsed: collapsed %}
+          {% else %}
+            {% render "ante-drop", title: block.settings.title, content: block.settings.content, dropped: dropped, big: big, index: display_index %}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</div>
+
+<script>
+  {
+    const container = document.currentScript.previousElementSibling
+    container.addEventListener("click", e => {
+      if (e.target.matches("input")) {
+        for (const input of container.querySelectorAll(":scope > .drop-menu > input")) {
+          if (input !== e.target) input.checked = false
+        }
+      }
+    })
+  }
+</script>

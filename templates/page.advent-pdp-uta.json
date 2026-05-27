@@ -1,0 +1,1169 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "ante_page_config_eaMRw3": {
+      "type": "ante-page-config",
+      "name": "Page Config [UTA] ✅",
+      "settings": {
+        "default_buy_button_text": "GET YOUR BOX",
+        "default_buy_button_label": "/month",
+        "style_override": "christmas",
+        "use_original_headerfooter": false,
+        "particles": "none"
+      }
+    },
+    "ante_lander_nav_qYpcak": {
+      "type": "ante-nav-bar",
+      "blocks": {
+        "cta_fact_yhX4rx": {
+          "type": "cta_fact",
+          "name": "Sticky bullet #1 ",
+          "settings": {
+            "text": "Cancel or switch species anytime"
+          }
+        },
+        "cta_fact_H3GyUA": {
+          "type": "cta_fact",
+          "name": "Sticky bullet #2",
+          "settings": {
+            "text": "Limited supply"
+          }
+        }
+      },
+      "block_order": [
+        "cta_fact_yhX4rx",
+        "cta_fact_H3GyUA"
+      ],
+      "name": "Lander Nav | UTA ✅",
+      "settings": {
+        "nav_style": "bar",
+        "inverted_colours": true,
+        "invert_on_scroll": false,
+        "nav_contrast_style": "solid_border",
+        "logo": "shopify://shop_images/MTB_logo.webp",
+        "logo_inverse": "shopify://shop_images/MTB_logo_d0b14c35-52f0-41ba-8bb1-3a515a2ba7d6.webp",
+        "menu": "",
+        "enable_cart_button": false,
+        "enable_account_button": false,
+        "use_cta": true,
+        "cta_title": "save 15% when you buy multiple",
+        "hide_elements": "#buy-box, #hero",
+        "cta_hide_buffer": 15,
+        "section_visible": true
+      }
+    },
+    "ante_announcement_bar_jzyCN6": {
+      "type": "ante-announcement-bar",
+      "name": "Announcement Bar [UTA] ✅",
+      "settings": {
+        "announcement": "<p>Get up to 15% off when you buy multiple gifts</p>",
+        "link": "",
+        "background_colour": "#7a853a",
+        "text_colour": "#ffffff",
+        "bold_text_colour": "",
+        "section_visible": true
+      }
+    },
+    "ante_lander_hero_4rrgGG2": {
+      "type": "ante-lander-hero",
+      "blocks": {
+        "review_stars_RdWCbd": {
+          "type": "review_stars",
+          "settings": {
+            "rating": 4.5,
+            "text": "Sold out within 46 days last year",
+            "link": "#reviewticker",
+            "side": "left",
+            "below_gap": "spacing-small",
+            "show_on": "both"
+          }
+        },
+        "text_efKgTL": {
+          "type": "text",
+          "settings": {
+            "text": "<h1>It’s back! better, fishier and bigger than ever</h1><p>12 days of fishing surprises, from premium lures to an exclusive MeatEater treat. The perfect holiday gift for any angler.</p>",
+            "side": "left",
+            "below_gap": "spacing-small",
+            "show_on": "both"
+          }
+        },
+        "spacer_nPWwtC": {
+          "type": "spacer",
+          "settings": {
+            "height": 0,
+            "stretch": true,
+            "side": "left",
+            "show_on": "tablet-mobile"
+          }
+        },
+        "buy_button_jkwGUk": {
+          "type": "buy_button",
+          "settings": {
+            "button_text": "secure yours now",
+            "show_price": false,
+            "show_footer": false,
+            "side": "left",
+            "below_gap": "none",
+            "show_on": "both"
+          }
+        },
+        "background_image_raFTN6": {
+          "type": "background_image",
+          "name": "Small Desktop",
+          "settings": {
+            "background_image": "shopify://shop_images/hero_desktop_mtb.webp",
+            "kick_in": 1919
+          }
+        },
+        "background_image_4pXmdj": {
+          "type": "background_image",
+          "name": "Tablet & Mobile",
+          "settings": {
+            "background_image": "shopify://shop_images/hero_mobile_mtb.webp",
+            "kick_in": 1024
+          }
+        }
+      },
+      "block_order": [
+        "review_stars_RdWCbd",
+        "text_efKgTL",
+        "spacer_nPWwtC",
+        "buy_button_jkwGUk",
+        "background_image_raFTN6",
+        "background_image_4pXmdj"
+      ],
+      "name": "Lander Hero [UTA] 🚦",
+      "settings": {
+        "background_image": "shopify://shop_images/hero_desktop_mtb.webp",
+        "content_alignment": "center",
+        "content_background": false,
+        "min_height": "0",
+        "max_height": "0",
+        "min_height_mobile": "0",
+        "max_height_mobile": "0",
+        "background_gradient": "linear-gradient(90deg, rgba(0, 0, 0, 0.68) 5%, rgba(0, 0, 0, 0) 62%)",
+        "background_gradient_mobile": "linear-gradient(180deg, rgba(0, 0, 0, 0.76), rgba(255, 228, 49, 0) 62%)",
+        "heading": "",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": true,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-bottom",
+        "custom_id": "hero",
+        "section_visible": true
+      }
+    },
+    "ante_multi_step_variants_KPAzmG": {
+      "type": "ante-advent-buybox",
+      "blocks": {
+        "quantity_AfbfHH": {
+          "type": "quantity",
+          "name": "1x",
+          "settings": {
+            "quantity": 1,
+            "label": "$9 Off",
+            "name": "Calendar",
+            "price_text": "$51",
+            "price": "$51",
+            "compare_price": "$70",
+            "preselected": false
+          }
+        },
+        "quantity_dL989C": {
+          "type": "quantity",
+          "name": "2x",
+          "settings": {
+            "quantity": 2,
+            "label": "$18 Off",
+            "name": "Calendars",
+            "price_text": "$102",
+            "price": "$102",
+            "compare_price": "$140",
+            "preselected": true
+          }
+        },
+        "quantity_DbECPX": {
+          "type": "quantity",
+          "name": "3x",
+          "settings": {
+            "quantity": 3,
+            "label": "🔥 $27 Off",
+            "name": "Calendars",
+            "price_text": "$153",
+            "price": "$153",
+            "compare_price": "$210",
+            "preselected": false
+          }
+        },
+        "drop_Q4PJeA": {
+          "type": "drop",
+          "name": "What’s in the box?",
+          "settings": {
+            "title": "Why BUY IT?",
+            "content": "<p>Can’t think of what to get your teen, hubby, or fishing buddy? This advent calendar hooks smiles all December long.</p>"
+          }
+        },
+        "drop_trG3YK": {
+          "type": "drop",
+          "name": "Can I cancel or switch?",
+          "settings": {
+            "title": "What’s Inside?",
+            "content": "<p>Every day reveals a lure, bait, or fishing goodie—plus a decal and a secret MeatEater surprise. Packed with top brands.</p>"
+          }
+        },
+        "drop_Yhe6xC": {
+          "type": "drop",
+          "name": "Is the gear legit?",
+          "settings": {
+            "title": "shipping & limited supply",
+            "content": "<p>Limited supply. Once they’re gone, they’re gone. US shipping in 7 days. Selling fast!</p>"
+          }
+        },
+        "image_wnhEze": {
+          "type": "image",
+          "name": "PHG #1",
+          "settings": {
+            "image": "shopify://shop_images/phg_1_final_a8fe555e-4144-4841-802c-2b8362ce5eb0.webp",
+            "position": "before"
+          }
+        },
+        "image_fa9Q9t": {
+          "type": "image",
+          "name": "PHG #2",
+          "settings": {
+            "image": "shopify://shop_images/phg_2_final_3a53ec0d-f971-4b19-a959-97884a6ae2f9.webp",
+            "position": "after"
+          }
+        },
+        "image_LGHpqU": {
+          "type": "image",
+          "name": "PHG #3",
+          "settings": {
+            "image": "shopify://shop_images/phg_3_final_1c4f9bcc-9834-4d7e-b1bd-f79284d05c64.webp",
+            "position": "after"
+          }
+        },
+        "image_8Ltzkw": {
+          "type": "image",
+          "name": "PHG #4",
+          "settings": {
+            "image": "shopify://shop_images/phg_4_final_14648740-6402-4ef6-9e56-2f6fa75ab49f.webp",
+            "position": "after"
+          }
+        },
+        "image_zTzRTr": {
+          "type": "image",
+          "name": "PHG #5",
+          "settings": {
+            "image": "shopify://shop_images/phg_5_final_c69bebdd-7719-40e4-8152-3e436a0f2f6b.webp",
+            "position": "after"
+          }
+        },
+        "image_VJBg9M": {
+          "type": "image",
+          "name": "PHG #6",
+          "settings": {
+            "image": "shopify://shop_images/phg_6_advent.webp",
+            "position": "after"
+          }
+        },
+        "image_eBUwbM": {
+          "type": "image",
+          "name": "PHG #7",
+          "settings": {
+            "image": "shopify://shop_images/phg_7_final_c7ca95a0-47cc-437b-bcb6-8a264e34c6f6.webp",
+            "position": "after"
+          }
+        },
+        "fact_hzt9NQ": {
+          "type": "fact",
+          "settings": {
+            "icon": "shopify://shop_images/inclusions.webp",
+            "fact": "Included: 10x surprise lures and baits, 1x fishmas decal, 1x mystery gift from MeatEater"
+          }
+        },
+        "fact_8VAXJT": {
+          "type": "fact",
+          "settings": {
+            "icon": "shopify://shop_images/12_days.webp",
+            "fact": "Open 12 days of fishing surprises one at a time - or all at once (we won’t tell)"
+          }
+        },
+        "fact_xUdtk8": {
+          "type": "fact",
+          "settings": {
+            "icon": "shopify://shop_images/limited_time.webp",
+            "fact": "Limited supply - Snag one early, or you’ll get skunked!"
+          }
+        },
+        "fact_ynLweG": {
+          "type": "fact",
+          "settings": {
+            "icon": "shopify://shop_images/extra_discount.webp",
+            "fact": "Extra discounts if you’re buying gifts for more than one lucky angler"
+          }
+        }
+      },
+      "block_order": [
+        "quantity_AfbfHH",
+        "quantity_dL989C",
+        "quantity_DbECPX",
+        "drop_Q4PJeA",
+        "drop_trG3YK",
+        "drop_Yhe6xC",
+        "image_wnhEze",
+        "image_fa9Q9t",
+        "image_LGHpqU",
+        "image_8Ltzkw",
+        "image_zTzRTr",
+        "image_VJBg9M",
+        "image_eBUwbM",
+        "fact_hzt9NQ",
+        "fact_8VAXJT",
+        "fact_xUdtk8",
+        "fact_ynLweG"
+      ],
+      "disabled": true,
+      "name": "15% Global",
+      "settings": {
+        "product": "mtb-advent-calendar-12-days-of-fishmas",
+        "show_product_images_in_carousel": false,
+        "star_rating": 4.5,
+        "star_review_text": "Sold out within 46 days last year",
+        "star_link": "#reviewticker",
+        "custom_heading": "the calendar that sells out every year!",
+        "sold_count": "18,987",
+        "sold_text": "Calendars sold already",
+        "heading": "",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": false,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-top-bottom",
+        "custom_id": "buy-box",
+        "section_visible": true
+      }
+    },
+    "ante_advent_buybox_CJMG7A": {
+      "type": "ante-advent-buybox",
+      "blocks": {
+        "quantity_VkpVAP": {
+          "type": "quantity",
+          "name": "1x",
+          "settings": {
+            "quantity": 1,
+            "label": "",
+            "name": "Calendar",
+            "price_text": "$59.99",
+            "price": "$59.99",
+            "compare_price": "$70",
+            "preselected": false
+          }
+        },
+        "quantity_jDmTXJ": {
+          "type": "quantity",
+          "name": "2x",
+          "settings": {
+            "quantity": 2,
+            "label": "5% Off",
+            "name": "Calendars",
+            "price_text": "$56.99 /each",
+            "price": "$113.98",
+            "compare_price": "$140",
+            "preselected": true
+          }
+        },
+        "quantity_wAqee8": {
+          "type": "quantity",
+          "name": "3x",
+          "settings": {
+            "quantity": 3,
+            "label": "🔥 10% Off",
+            "name": "Calendars",
+            "price_text": "$53.99 /each",
+            "price": "$161.97",
+            "compare_price": "$210",
+            "preselected": false
+          }
+        },
+        "drop_8mPEkY": {
+          "type": "drop",
+          "name": "What’s in the box?",
+          "settings": {
+            "title": "Why BUY IT?",
+            "content": "<p>Can’t think of what to get your teen, hubby, or fishing buddy? This advent calendar hooks smiles all December long.</p>"
+          }
+        },
+        "drop_Uyjfpz": {
+          "type": "drop",
+          "name": "Can I cancel or switch?",
+          "settings": {
+            "title": "What’s Inside?",
+            "content": "<p>Every day reveals a lure, bait, or fishing goodie—plus a decal and a secret MeatEater surprise. Packed with top brands.</p>"
+          }
+        },
+        "drop_GVLnRm": {
+          "type": "drop",
+          "name": "Is the gear legit?",
+          "settings": {
+            "title": "shipping & limited supply",
+            "content": "<p>Limited supply. Once they’re gone, they’re gone. US shipping in 7 days. Likely to sell out by middle of November.</p>"
+          }
+        },
+        "image_3DKWDA": {
+          "type": "image",
+          "name": "PHG #1",
+          "settings": {
+            "image": "shopify://shop_images/phg_1_final_a8fe555e-4144-4841-802c-2b8362ce5eb0.webp",
+            "position": "before"
+          }
+        },
+        "image_Gafqme": {
+          "type": "image",
+          "name": "PHG #2",
+          "settings": {
+            "image": "shopify://shop_images/phg_2_final_3a53ec0d-f971-4b19-a959-97884a6ae2f9.webp",
+            "position": "after"
+          }
+        },
+        "image_VgbdLB": {
+          "type": "image",
+          "name": "PHG #3",
+          "settings": {
+            "image": "shopify://shop_images/phg_3_final_1c4f9bcc-9834-4d7e-b1bd-f79284d05c64.webp",
+            "position": "after"
+          }
+        },
+        "image_mt9tYw": {
+          "type": "image",
+          "name": "PHG #4",
+          "settings": {
+            "image": "shopify://shop_images/phg_4_final_14648740-6402-4ef6-9e56-2f6fa75ab49f.webp",
+            "position": "after"
+          }
+        },
+        "image_46XkqB": {
+          "type": "image",
+          "name": "PHG #5",
+          "settings": {
+            "image": "shopify://shop_images/phg_5_final_c69bebdd-7719-40e4-8152-3e436a0f2f6b.webp",
+            "position": "after"
+          }
+        },
+        "image_Gp389W": {
+          "type": "image",
+          "name": "PHG #6",
+          "settings": {
+            "image": "shopify://shop_images/phg_6_advent.webp",
+            "position": "after"
+          }
+        },
+        "image_XWdUi8": {
+          "type": "image",
+          "name": "PHG #7",
+          "settings": {
+            "image": "shopify://shop_images/phg_7_final_c7ca95a0-47cc-437b-bcb6-8a264e34c6f6.webp",
+            "position": "after"
+          }
+        },
+        "fact_hD4TQ9": {
+          "type": "fact",
+          "settings": {
+            "icon": "shopify://shop_images/inclusions.webp",
+            "fact": "Included: 10x surprise lures and baits, 1x fishmas decal, 1x mystery gift from MeatEater"
+          }
+        },
+        "fact_mqUiam": {
+          "type": "fact",
+          "settings": {
+            "icon": "shopify://shop_images/12_days.webp",
+            "fact": "Open 12 days of fishing surprises one at a time - or all at once (we won’t tell)"
+          }
+        },
+        "fact_3Ufbth": {
+          "type": "fact",
+          "settings": {
+            "icon": "shopify://shop_images/limited_time.webp",
+            "fact": "Limited supply - Snag one early, or you’ll get skunked!"
+          }
+        },
+        "fact_gQ3wMx": {
+          "type": "fact",
+          "settings": {
+            "icon": "shopify://shop_images/extra_discount.webp",
+            "fact": "Extra discounts if you’re buying gifts for more than one lucky angler"
+          }
+        }
+      },
+      "block_order": [
+        "quantity_VkpVAP",
+        "quantity_jDmTXJ",
+        "quantity_wAqee8",
+        "drop_8mPEkY",
+        "drop_Uyjfpz",
+        "drop_GVLnRm",
+        "image_3DKWDA",
+        "image_Gafqme",
+        "image_VgbdLB",
+        "image_mt9tYw",
+        "image_46XkqB",
+        "image_Gp389W",
+        "image_XWdUi8",
+        "fact_hD4TQ9",
+        "fact_mqUiam",
+        "fact_3Ufbth",
+        "fact_gQ3wMx"
+      ],
+      "disabled": true,
+      "name": "5/10%",
+      "settings": {
+        "product": "mtb-advent-calendar-12-days-of-fishmas",
+        "show_product_images_in_carousel": false,
+        "star_rating": 4.5,
+        "star_review_text": "Sold out within 46 days last year",
+        "star_link": "#reviewticker",
+        "custom_heading": "the calendar that sells out every year!",
+        "sold_count": "2,038",
+        "sold_text": "Calendars sold already",
+        "heading": "",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": false,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-top-bottom",
+        "custom_id": "buy-box",
+        "section_visible": true
+      }
+    },
+    "ante_advent_buybox_kzaaE4": {
+      "type": "ante-advent-buybox",
+      "blocks": {
+        "quantity_hDpPpq": {
+          "type": "quantity",
+          "name": "1x",
+          "settings": {
+            "quantity": 1,
+            "label": "10% Off",
+            "name": "Calendar",
+            "price_text": "$53.99",
+            "price": "$53.99",
+            "compare_price": "$70",
+            "preselected": false
+          }
+        },
+        "quantity_HecXgW": {
+          "type": "quantity",
+          "name": "2x",
+          "settings": {
+            "quantity": 2,
+            "label": "20% Off",
+            "name": "Calendars",
+            "price_text": "$47.99 /each",
+            "price": "$95.98",
+            "compare_price": "$140",
+            "preselected": true
+          }
+        },
+        "quantity_Q7nnyX": {
+          "type": "quantity",
+          "name": "3x",
+          "settings": {
+            "quantity": 3,
+            "label": "🔥 30% Off",
+            "name": "Calendars",
+            "price_text": "$41.99 /each",
+            "price": "$125.97",
+            "compare_price": "$210",
+            "preselected": false
+          }
+        },
+        "drop_HhMRae": {
+          "type": "drop",
+          "name": "What’s in the box?",
+          "settings": {
+            "title": "Why BUY IT?",
+            "content": "<p>Can’t think of what to get your teen, hubby, or fishing buddy? This advent calendar hooks smiles all December long.</p>"
+          }
+        },
+        "drop_rQXApx": {
+          "type": "drop",
+          "name": "Can I cancel or switch?",
+          "settings": {
+            "title": "What’s Inside?",
+            "content": "<p>Every day reveals a lure, bait, or fishing goodie—plus a decal and a secret MeatEater surprise. Packed with top brands.</p>"
+          }
+        },
+        "drop_pedDgk": {
+          "type": "drop",
+          "name": "Is the gear legit?",
+          "settings": {
+            "title": "shipping & limited supply",
+            "content": "<p>Limited supply. Once they’re gone, they’re gone. US shipping in 7 days. Likely to sell out by middle of November.</p>"
+          }
+        },
+        "image_6tyNNc": {
+          "type": "image",
+          "name": "PHG #1",
+          "settings": {
+            "image": "shopify://shop_images/phg_1_final_a8fe555e-4144-4841-802c-2b8362ce5eb0.webp",
+            "position": "before"
+          }
+        },
+        "image_b39BQ3": {
+          "type": "image",
+          "name": "PHG #2",
+          "settings": {
+            "image": "shopify://shop_images/phg_2_final_3a53ec0d-f971-4b19-a959-97884a6ae2f9.webp",
+            "position": "after"
+          }
+        },
+        "image_U3BNt8": {
+          "type": "image",
+          "name": "PHG #3",
+          "settings": {
+            "image": "shopify://shop_images/phg_3_final_1c4f9bcc-9834-4d7e-b1bd-f79284d05c64.webp",
+            "position": "after"
+          }
+        },
+        "image_4PWXch": {
+          "type": "image",
+          "name": "PHG #4",
+          "settings": {
+            "image": "shopify://shop_images/phg_4_final_14648740-6402-4ef6-9e56-2f6fa75ab49f.webp",
+            "position": "after"
+          }
+        },
+        "image_jrXUMb": {
+          "type": "image",
+          "name": "PHG #5",
+          "settings": {
+            "image": "shopify://shop_images/phg_5_final_c69bebdd-7719-40e4-8152-3e436a0f2f6b.webp",
+            "position": "after"
+          }
+        },
+        "image_FbEiji": {
+          "type": "image",
+          "name": "PHG #6",
+          "settings": {
+            "image": "shopify://shop_images/phg_6_advent.webp",
+            "position": "after"
+          }
+        },
+        "image_j98NDb": {
+          "type": "image",
+          "name": "PHG #7",
+          "settings": {
+            "image": "shopify://shop_images/phg_7_final_c7ca95a0-47cc-437b-bcb6-8a264e34c6f6.webp",
+            "position": "after"
+          }
+        },
+        "fact_bcCKRq": {
+          "type": "fact",
+          "settings": {
+            "icon": "shopify://shop_images/inclusions.webp",
+            "fact": "Included: 10x surprise lures and baits, 1x fishmas decal, 1x mystery gift from MeatEater"
+          }
+        },
+        "fact_7CCmUt": {
+          "type": "fact",
+          "settings": {
+            "icon": "shopify://shop_images/12_days.webp",
+            "fact": "Open 12 days of fishing surprises one at a time - or all at once (we won’t tell)"
+          }
+        },
+        "fact_QRHGh6": {
+          "type": "fact",
+          "settings": {
+            "icon": "shopify://shop_images/limited_time.webp",
+            "fact": "Limited supply - Snag one early, or you’ll get skunked!"
+          }
+        },
+        "fact_LeHXnz": {
+          "type": "fact",
+          "settings": {
+            "icon": "shopify://shop_images/extra_discount.webp",
+            "fact": "Extra discounts if you’re buying gifts for more than one lucky angler"
+          }
+        }
+      },
+      "block_order": [
+        "quantity_hDpPpq",
+        "quantity_HecXgW",
+        "quantity_Q7nnyX",
+        "drop_HhMRae",
+        "drop_rQXApx",
+        "drop_pedDgk",
+        "image_6tyNNc",
+        "image_b39BQ3",
+        "image_U3BNt8",
+        "image_4PWXch",
+        "image_jrXUMb",
+        "image_FbEiji",
+        "image_j98NDb",
+        "fact_bcCKRq",
+        "fact_7CCmUt",
+        "fact_QRHGh6",
+        "fact_LeHXnz"
+      ],
+      "name": "10/20/30%",
+      "settings": {
+        "product": "mtb-advent-calendar-12-days-of-fishmas",
+        "show_product_images_in_carousel": false,
+        "star_rating": 4.5,
+        "star_review_text": "Sold out within 46 days last year",
+        "star_link": "#reviewticker",
+        "custom_heading": "the calendar that sells out every year!",
+        "sold_count": "2,038",
+        "sold_text": "Calendars sold already",
+        "heading": "",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": false,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-top-bottom",
+        "custom_id": "buy-box",
+        "section_visible": true
+      }
+    },
+    "ante_testimonial_ticker_YTqFBY": {
+      "type": "ante-testimonial-ticker",
+      "blocks": {
+        "brand_bjtDMU": {
+          "type": "marquee-item",
+          "name": "testimonial",
+          "settings": {
+            "logo": "shopify://shop_images/five_star_tp.webp",
+            "text": "\"Fun way to learn fishing tackle. Great quality, helpful QR code info, and perfect gift for anyone starting out.\"",
+            "name": "Dynamo",
+            "customer_image": "shopify://shop_images/wallmart_logomark.webp"
+          }
+        },
+        "brand_7bpWLi": {
+          "type": "marquee-item",
+          "name": "testimonial",
+          "settings": {
+            "logo": "shopify://shop_images/4_star_trustpilot_b5417abb-919b-4f2f-a384-f9604b8142ee.webp",
+            "text": "\"Honestly impressed. Packed with quality lures and tackle, plus neat item info. Thought I’d gift it, but I had to keep it.\"",
+            "name": "FluffyBear",
+            "customer_image": "shopify://shop_images/wallmart_logomark.webp"
+          }
+        },
+        "brand_VYeTzk": {
+          "type": "marquee-item",
+          "name": "testimonial",
+          "settings": {
+            "logo": "shopify://shop_images/five_star_tp.webp",
+            "text": "\"Struggle to shop for men? Same. This box solved it—fun, different sets, and guaranteed they’ll actually enjoy it.\"",
+            "name": "99Cole",
+            "customer_image": "shopify://shop_images/wallmart_logomark.webp"
+          }
+        },
+        "brand_tFKVax": {
+          "type": "marquee-item",
+          "name": "testimonial",
+          "settings": {
+            "logo": "shopify://shop_images/five_star_tp.webp",
+            "text": "\"Fun early Christmas gift for new anglers or teens. Decorative box, solid tackle, and QR codes make it exciting to open.\"",
+            "name": "MissMegan",
+            "customer_image": "shopify://shop_images/wallmart_logomark.webp"
+          }
+        },
+        "brand_kwHQdH": {
+          "type": "marquee-item",
+          "name": "testimonial",
+          "settings": {
+            "logo": "shopify://shop_images/five_star_tp.webp",
+            "text": "\"So much fun for the kids to open with dad! Each window had fishing gear, perfect for beginners and fishing fans alike.\"",
+            "name": "Bargainshopper1313",
+            "customer_image": "shopify://shop_images/wallmart_logomark.webp"
+          }
+        },
+        "brand_46B8Vy": {
+          "type": "marquee-item",
+          "name": "testimonial",
+          "settings": {
+            "logo": "shopify://shop_images/five_star_tp.webp",
+            "text": "\"Quirky, unique gift! My husband loved the bright, quality saltwater lures and goodies inside—made every day exciting.\"",
+            "name": "HayleyC925",
+            "customer_image": "shopify://shop_images/wallmart_logomark.webp"
+          }
+        },
+        "brand_mawiYw": {
+          "type": "marquee-item",
+          "name": "testimonial",
+          "settings": {
+            "logo": "shopify://shop_images/five_star_tp.webp",
+            "text": "\"Loaded with colorful lures, hooks, and baits. My son will love it, and the value makes me want to grab another next year.\"",
+            "name": "ExpatMomNJ",
+            "customer_image": "shopify://shop_images/wallmart_logomark.webp"
+          }
+        },
+        "brand_kENEbK": {
+          "type": "marquee-item",
+          "name": "testimonial",
+          "settings": {
+            "logo": "shopify://shop_images/five_star_tp.webp",
+            "text": "\"Fun 12-day set. Some gear was common, but a couple lures—like the metal fish—felt really worth it. Helpful item info too.\"",
+            "name": "Peaser21",
+            "customer_image": "shopify://shop_images/wallmart_logomark.webp"
+          }
+        },
+        "sticker_MfcaXK": {
+          "type": "sticker",
+          "settings": {
+            "image": "shopify://shop_images/desktop_testimonial.webp",
+            "layer_order": "below",
+            "width": 180,
+            "rotation": 0,
+            "horizontal_position": "right",
+            "vertical_position": "top_content",
+            "offset_x": 0,
+            "offset_y": 0,
+            "override_1_visibility": "enabled",
+            "override_1_page_width": 1438,
+            "override_1_layer_order": "below",
+            "override_1_width": 180,
+            "override_1_rotation": 0,
+            "override_1_horizontal_position": "right",
+            "override_1_vertical_position": "top_content",
+            "override_1_offset_x": 0,
+            "override_1_offset_y": 48,
+            "override_2_visibility": "enabled",
+            "override_2_page_width": 1230,
+            "override_2_image": "shopify://shop_images/sticker_mobile_reviews.webp",
+            "override_2_layer_order": "below",
+            "override_2_width": 200,
+            "override_2_rotation": 0,
+            "override_2_horizontal_position": "right",
+            "override_2_vertical_position": "bottom_section",
+            "override_2_offset_x": 0,
+            "override_2_offset_y": -20,
+            "override_3_visibility": "enabled",
+            "override_3_page_width": 768,
+            "override_3_image": "shopify://shop_images/sticker_mobile_reviews.webp",
+            "override_3_layer_order": "below",
+            "override_3_width": 180,
+            "override_3_rotation": 0,
+            "override_3_horizontal_position": "right",
+            "override_3_vertical_position": "bottom_section",
+            "override_3_offset_x": 0,
+            "override_3_offset_y": -30
+          }
+        }
+      },
+      "block_order": [
+        "brand_bjtDMU",
+        "brand_7bpWLi",
+        "brand_VYeTzk",
+        "brand_tFKVax",
+        "brand_kwHQdH",
+        "brand_46B8Vy",
+        "brand_mawiYw",
+        "brand_kENEbK",
+        "sticker_MfcaXK"
+      ],
+      "custom_css": [
+        ".ante-section-content {margin-top: 200px;}",
+        "@media (max-width: 1919px) {.ante-section-content {margin-top: 160px; }}",
+        "@media (max-width: 1230px) {.ante-section-content {margin-bottom: 96px; } .ante-section-content {margin-top: var(--spacing-large); }}"
+      ],
+      "name": "Testimonial Ticker | UTA ✅",
+      "settings": {
+        "speed": 96,
+        "always_scroll": true,
+        "pause_on_hover": true,
+        "heading": "<h1>It’s Not Just a Calendar… It’s a Fishmas Ritual</h1>",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": true,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-top-bottom",
+        "custom_id": "reviewticker",
+        "section_visible": true
+      }
+    },
+    "ante_faq_bbGdh4": {
+      "type": "ante-faq",
+      "blocks": {
+        "faq_9MxfPN": {
+          "type": "faq",
+          "name": "subscription #1",
+          "settings": {
+            "category": "fishmas info",
+            "title": "What’s inside the Advent Calendar?",
+            "content": "<p>Each calendar includes 10 premium fishing pieces of tackle (like hard baits, soft plastics, and hooks), 1 exclusive Fishmas decal, and 1 surprise mystery gift from our friends at MeatEater. Every slot reveals something new to help anglers catch more fish and spread holiday cheer. It also includes access to digital content with tips & tricks about how to fish everything in your box.</p>"
+          }
+        },
+        "faq_6qbzUh": {
+          "type": "faq",
+          "name": "subscription #2",
+          "settings": {
+            "category": "fishmas info",
+            "title": "What fishing brands are included?",
+            "content": "<p>We partner with the best brands in fishing like Xcite Baits, Lunkerhunt, Googan Squad, and Luck E Strike to deliver quality products guaranteed to catch more fish.</p>"
+          }
+        },
+        "faq_ey66Va": {
+          "type": "faq",
+          "name": "subscription #3",
+          "settings": {
+            "category": "fishmas info",
+            "title": "Is this for kids, adults, or both?",
+            "content": "<p>Both! The Fishmas Calendar makes the perfect fishing gift for anglers of any age or skill level. Whether you’re shopping for a young beginner or a seasoned pro, the curated mix of tackle guarantees fun and fish-catching potential.</p>"
+          }
+        },
+        "faq_MWAqz4": {
+          "type": "faq",
+          "name": "subscription #4",
+          "settings": {
+            "category": "fishmas info",
+            "title": "How big is the calendar?",
+            "content": "<p>Bigger is better when it comes to fishing—and advent calendars! This box is 18.5” wide x 16.5” tall, making it a statement gift that looks great under the tree (or next to the tackle box).</p>"
+          }
+        },
+        "faq_9j6tt9": {
+          "type": "faq",
+          "name": "Delivery & Returns #1",
+          "settings": {
+            "category": "Delivery & Returns",
+            "title": "When will I get my Advent Calendar?",
+            "content": "<p>Customers in the continental US, please allow up to 7 business days from the time the order ships for delivery. Final delivery will be made by the United States Postal Service (USPS). Customers in Canada, please allow up to 2-3 weeks for delivery.</p>"
+          }
+        },
+        "faq_PdQMNG": {
+          "type": "faq",
+          "name": "Delivery & Returns #2",
+          "settings": {
+            "category": "Delivery & Returns",
+            "title": "If I want this by Christmas, when should I order?",
+            "content": "<p>If you want to receive your order on the official start of the 12 Days of Fishmas, order by 12/3/25. If you want to receive your order by Christmas, order by 12/15/25.</p>"
+          }
+        },
+        "faq_3xdT9j": {
+          "type": "faq",
+          "name": "Delivery & Returns #3",
+          "settings": {
+            "category": "Delivery & Returns",
+            "title": "How do I track my order?",
+            "content": "<p>You will receive an email with your tracking number when the order ships. If you did not receive this email, we recommend checking your spam & promotions folders. If you are still unable to locate the tracking email, please reach out to our team at support@mysterytacklebox.com, and we'll be happy to help!</p>"
+          }
+        },
+        "faq_FQTPGn": {
+          "type": "faq",
+          "name": "Delivery & Returns #4",
+          "settings": {
+            "category": "Delivery & Returns",
+            "title": "What happens if I am missing something in my box?",
+            "content": "<p>If you are missing anything from your box, please contact our support team at support@mysterytacklebox.com. Our friendly staff will always ensure you receive the correct products or box.</p>"
+          }
+        },
+        "sticker_h7VGaw": {
+          "type": "sticker",
+          "settings": {
+            "image": "shopify://shop_images/faq_sticker.webp",
+            "layer_order": "below",
+            "width": 270,
+            "rotation": 0,
+            "horizontal_position": "left",
+            "vertical_position": "bottom_section",
+            "offset_x": 0,
+            "offset_y": -32,
+            "override_1_visibility": "enabled",
+            "override_1_page_width": 1919,
+            "override_1_layer_order": "below",
+            "override_1_width": 270,
+            "override_1_rotation": 0,
+            "override_1_horizontal_position": "left",
+            "override_1_vertical_position": "bottom_section",
+            "override_1_offset_x": 0,
+            "override_1_offset_y": -160,
+            "override_2_visibility": "enabled",
+            "override_2_page_width": 1390,
+            "override_2_layer_order": "below",
+            "override_2_width": 270,
+            "override_2_rotation": 0,
+            "override_2_horizontal_position": "left",
+            "override_2_vertical_position": "bottom_section",
+            "override_2_offset_x": -50,
+            "override_2_offset_y": -150,
+            "override_3_visibility": "enabled",
+            "override_3_page_width": 890,
+            "override_3_layer_order": "below",
+            "override_3_width": 190,
+            "override_3_rotation": 0,
+            "override_3_horizontal_position": "left",
+            "override_3_vertical_position": "bottom_section",
+            "override_3_offset_x": 0,
+            "override_3_offset_y": -95
+          }
+        }
+      },
+      "block_order": [
+        "faq_9MxfPN",
+        "faq_6qbzUh",
+        "faq_ey66Va",
+        "faq_MWAqz4",
+        "faq_9j6tt9",
+        "faq_PdQMNG",
+        "faq_3xdT9j",
+        "faq_FQTPGn",
+        "sticker_h7VGaw"
+      ],
+      "custom_css": [
+        "@media (max-width: 1390px) {.faqs {margin-bottom: 60px; }}",
+        "@media (max-width: 890px) {.faqs {margin-bottom: 100px; }}"
+      ],
+      "name": "FAQ | UTA ✅",
+      "settings": {
+        "show_indexes": true,
+        "video_url": "",
+        "video_caption": "Video",
+        "media_position": "right",
+        "media_position_mobile": "below",
+        "heading": "<h1>What Most Anglers Ask Us First...</h1>",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": false,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-top-bottom",
+        "custom_id": "faqs",
+        "section_visible": true
+      }
+    },
+    "ante_footer_rDhftJ": {
+      "type": "ante-footer",
+      "blocks": {
+        "social_media_6KGbqW": {
+          "type": "social_media",
+          "settings": {
+            "icon": "shopify://shop_images/icons8-facebook_b8b56da9-6bda-49ba-966d-2319e318fa6a.svg",
+            "link": "https://www.facebook.com/mysterytacklebox"
+          }
+        },
+        "social_media_gDGqjP": {
+          "type": "social_media",
+          "settings": {
+            "icon": "shopify://shop_images/instagram-with-circle-svgrepo-com_31c8ae9f-b472-4f10-9024-5f3da8ebefc0.svg",
+            "link": "https://www.instagram.com/mysterytacklebox"
+          }
+        },
+        "social_media_yrGpAE": {
+          "type": "social_media",
+          "settings": {
+            "icon": "shopify://shop_images/icons8-twitter-circled_932bc513-cbf1-48f9-9939-412f326ece2a.svg",
+            "link": "https://x.com/mysterytacklebx"
+          }
+        },
+        "social_media_ekdi3a": {
+          "type": "social_media",
+          "settings": {
+            "icon": "shopify://shop_images/youtube-with-circle_93dbf91d-4398-4323-9960-1366715a2094.svg",
+            "link": "https://www.youtube.com/@MysteryTackleBox"
+          }
+        },
+        "menu_hdwRcy": {
+          "type": "menu",
+          "name": "Plans & Boxes",
+          "settings": {
+            "menu": "mystery-tackle-box",
+            "name": "PLANS & BOXES"
+          }
+        },
+        "menu_neaLjp": {
+          "type": "menu",
+          "settings": {
+            "menu": "ante-help",
+            "name": "NEED HELP?"
+          }
+        },
+        "payment_icon_n7LzUB": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "shopify://shop_images/amex.webp"
+          }
+        },
+        "payment_icon_8GbWJj": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "shopify://shop_images/apple_pay.webp"
+          }
+        },
+        "payment_icon_7qBHVJ": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "shopify://shop_images/shoppay.webp"
+          }
+        },
+        "payment_icon_rX66Td": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "shopify://shop_images/visa.webp"
+          }
+        },
+        "payment_icon_qx8jDb": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "shopify://shop_images/mastercard.webp"
+          }
+        }
+      },
+      "block_order": [
+        "social_media_6KGbqW",
+        "social_media_gDGqjP",
+        "social_media_yrGpAE",
+        "social_media_ekdi3a",
+        "menu_hdwRcy",
+        "menu_neaLjp",
+        "payment_icon_n7LzUB",
+        "payment_icon_8GbWJj",
+        "payment_icon_7qBHVJ",
+        "payment_icon_rX66Td",
+        "payment_icon_qx8jDb"
+      ],
+      "name": "Footer | UTA ✅",
+      "settings": {
+        "background_image": "shopify://shop_images/bg.webp",
+        "logo": "shopify://shop_images/MTB_logo.webp",
+        "description": "<p>Pro-picked tackle, delivered with a little mystery and a lot of fish.</p>",
+        "legal_menu": "ante-legal",
+        "credit": "Page designed by Ante Studio",
+        "credit_link": "https://ante.studio/",
+        "section_inverse": true,
+        "section_background_colour": "section-background-colour-normal",
+        "section_visible": true
+      }
+    }
+  },
+  "order": [
+    "ante_page_config_eaMRw3",
+    "ante_lander_nav_qYpcak",
+    "ante_announcement_bar_jzyCN6",
+    "ante_lander_hero_4rrgGG2",
+    "ante_multi_step_variants_KPAzmG",
+    "ante_advent_buybox_CJMG7A",
+    "ante_advent_buybox_kzaaE4",
+    "ante_testimonial_ticker_YTqFBY",
+    "ante_faq_bbGdh4",
+    "ante_footer_rDhftJ"
+  ]
+}

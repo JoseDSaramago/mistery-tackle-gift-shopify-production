@@ -1,0 +1,83 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "custom_css": [
+        ".title--primary,.collection-hero__title {font-size: 3.5rem;}"
+      ],
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "mtb_article_6wYpCR": {
+      "type": "MTB-article",
+      "blocks": {
+        "section_4yEwGM": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Subscription Plans</strong>",
+            "text": "",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_4yEwGM"
+      ],
+      "disabled": true,
+      "settings": {
+        "text_align": "text-align-left",
+        "title_size": "h2",
+        "header_color": "",
+        "header_uppercase": true,
+        "text_color": "#33534b",
+        "text_link_hover_color": "#172421",
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 20,
+        "component_tablet_pt": 30,
+        "component_tablet_pb": 30,
+        "component_desktop_pt": 40,
+        "component_desktop_pb": 40
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 36,
+        "columns_desktop": 3,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "drawer",
+        "enable_sorting": true,
+        "columns_mobile": "2",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "mtb_article_6wYpCR",
+    "product-grid"
+  ]
+}

@@ -1,0 +1,1072 @@
+{% comment %}
+  Comparison Section - Shopify Liquid
+  Compatible with Shopify Online Store 2.0 (Dawn and similar themes)
+  All content elements are independent, reorderable blocks.
+{% endcomment %}
+
+{% assign section_id = 'us-vs-them-s1-' | append: section.id %}
+
+<style>
+  #{{ section_id }} {
+    background-color: {{ section.settings.section_bg_color }};
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+
+  @media (max-width: 768px) {
+    #{{ section_id }} {
+      padding-top: {{ section.settings.mobile_padding_top }}px;
+      padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+  }
+
+  #{{ section_id }} .cmp__inner {
+    max-width: {{ section.settings.section_max_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── Logos block ── */
+  #{{ section_id }} .cmp__logos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+  }
+
+  #{{ section_id }} .cmp__logo {
+    width: 40%;
+    text-align: center;
+  }
+
+  #{{ section_id }} .cmp__logo--right {
+    text-align: right;
+  }
+
+  #{{ section_id }} .cmp__logo img {
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  #{{ section_id }} .cmp__logo-placeholder {
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  /* ── Comparison table ── */
+  #{{ section_id }} .cmp__table {
+    width: 100%;
+  }
+
+  #{{ section_id }} .cmp__row {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    border-top: 1px solid {{ section.settings.divider_color }};
+  }
+
+  #{{ section_id }} .cmp__row:last-child {
+    border-bottom: 1px solid {{ section.settings.divider_color }};
+  }
+
+  #{{ section_id }} .cmp__row--shaded {
+    background-color: {{ section.settings.row_alt_bg_color }};
+  }
+
+  #{{ section_id }} .cmp__cell {
+    padding: {{ section.settings.row_padding_y }}px 10px;
+    text-align: center;
+    color: {{ section.settings.row_text_color }};
+  }
+
+  #{{ section_id }} .cmp__cell--label {
+    color: {{ section.settings.row_label_color }};
+  }
+
+  #{{ section_id }} .cmp__cell p {
+    margin: 0;
+    padding: 0;
+  }
+
+  #{{ section_id }} .cmp__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  #{{ section_id }} .cmp__icon--yes {
+    background-color: {{ section.settings.icon_yes_color }};
+    color: #fff;
+  }
+
+  #{{ section_id }} .cmp__icon--no {
+    background-color: {{ section.settings.icon_no_color }};
+    color: #fff;
+  }
+
+  #{{ section_id }} .cmp__price-text { font-weight: 700; }
+  #{{ section_id }} .cmp__price-text--left  { color: {{ section.settings.price_left_color }};  }
+  #{{ section_id }} .cmp__price-text--right { color: {{ section.settings.price_right_color }}; }
+
+  /* ── Button block ── */
+  #{{ section_id }} .cmp__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  #{{ section_id }} .cmp__btn:hover { opacity: 0.85; }
+
+  #{{ section_id }} .cmp__btn svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    fill: currentColor;
+  }
+
+  /* ── Per-block mobile overrides ── */
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'heading' %}
+        @media (max-width: 768px) {
+          #{{ section_id }} [data-block-id="{{ block.id }}"] h2 {
+            font-size: {{ block.settings.mobile_font_size }}px !important;
+            text-align: {{ block.settings.mobile_text_align }} !important;
+          }
+        }
+      {% when 'subtext' %}
+        @media (max-width: 768px) {
+          #{{ section_id }} [data-block-id="{{ block.id }}"] {
+            text-align: {{ block.settings.mobile_text_align }} !important;
+          }
+          #{{ section_id }} [data-block-id="{{ block.id }}"] div {
+            font-size: {{ block.settings.mobile_font_size }}px !important;
+          }
+        }
+      {% when 'button' %}
+        @media (max-width: 768px) {
+          #{{ section_id }} [data-block-id="{{ block.id }}"] {
+            text-align: {{ block.settings.mobile_text_align }} !important;
+          }
+          #{{ section_id }} [data-block-id="{{ block.id }}"] .cmp__btn {
+            font-size: {{ block.settings.mobile_font_size }}px !important;
+            padding: {{ block.settings.mobile_padding_y }}px {{ block.settings.mobile_padding_x }}px !important;
+          }
+        }
+    {% endcase %}
+  {% endfor %}
+</style>
+
+<section id="{{ section_id }}" class="cmp-section">
+  <div class="cmp__inner">
+
+    {% for block in section.blocks %}
+      {% case block.type %}
+
+        {% when 'heading' %}
+          <div data-block-id="{{ block.id }}"
+               {{ block.shopify_attributes }}
+               style="
+                 text-align: {{ block.settings.text_align }};
+                 margin-top: {{ block.settings.margin_top }}px;
+                 margin-bottom: {{ block.settings.margin_bottom }}px;
+               ">
+            <h2 style="
+              color: {{ block.settings.text_color }};
+              font-weight: {{ block.settings.font_weight }};
+              margin: 0; padding: 0;
+              {% if block.settings.use_theme_font %}
+                font-size: var(--font-heading-size, 2rem);
+                font-family: var(--font-heading-family, inherit);
+              {% else %}
+                font-size: {{ block.settings.font_size }}px;
+                font-family: '{{ block.settings.font_family }}', sans-serif;
+              {% endif %}
+            ">{{ block.settings.text }}</h2>
+          </div>
+
+        {% when 'subtext' %}
+          <div data-block-id="{{ block.id }}"
+               {{ block.shopify_attributes }}
+               style="
+                 text-align: {{ block.settings.text_align }};
+                 margin-top: {{ block.settings.margin_top }}px;
+                 margin-bottom: {{ block.settings.margin_bottom }}px;
+               ">
+            <div style="
+              color: {{ block.settings.text_color }};
+              max-width: {{ block.settings.max_width }}px;
+              margin: 0 auto;
+              {% if block.settings.use_theme_font %}
+                font-size: var(--font-body-size, 1rem);
+                font-family: var(--font-body-family, inherit);
+              {% else %}
+                font-size: {{ block.settings.font_size }}px;
+                font-family: '{{ block.settings.font_family }}', sans-serif;
+              {% endif %}
+            ">{{ block.settings.text }}</div>
+          </div>
+
+        {% when 'logos' %}
+          <div class="cmp__logos"
+               {{ block.shopify_attributes }}
+               style="
+                 margin-top: {{ block.settings.margin_top }}px;
+                 margin-bottom: {{ block.settings.margin_bottom }}px;
+               ">
+            <div class="cmp__logo cmp__logo--left">
+              {% if block.settings.logo_left != blank %}
+                <img src="{{ block.settings.logo_left | image_url: width: 300 }}"
+                     alt="{{ block.settings.logo_left_alt | escape }}"
+                     style="max-height: {{ block.settings.logo_max_height }}px;"
+                     loading="lazy">
+              {% else %}
+                <span class="cmp__logo-placeholder"
+                      style="color: {{ block.settings.logo_text_color }};">
+                  {{ block.settings.logo_left_text }}
+                </span>
+              {% endif %}
+            </div>
+            <div class="cmp__logo cmp__logo--right">
+              {% if block.settings.logo_right != blank %}
+                <img src="{{ block.settings.logo_right | image_url: width: 300 }}"
+                     alt="{{ block.settings.logo_right_alt | escape }}"
+                     style="max-height: {{ block.settings.logo_max_height }}px;"
+                     loading="lazy">
+              {% else %}
+                <span class="cmp__logo-placeholder"
+                      style="color: {{ block.settings.logo_text_color }};">
+                  {{ block.settings.logo_right_text }}
+                </span>
+              {% endif %}
+            </div>
+          </div>
+
+        {% when 'comparison_row' %}
+          <div class="cmp__table" {{ block.shopify_attributes }}>
+            <div class="cmp__row {% cycle 'cmp__row--shaded', '' %}"
+                 role="row"
+                 style="
+                   margin-top: {{ block.settings.row_margin_top }}px;
+                   margin-bottom: {{ block.settings.row_margin_bottom }}px;
+                   {% if block.settings.use_theme_font %}
+                     font-size: var(--font-body-size, 0.95rem);
+                     font-family: var(--font-body-family, inherit);
+                   {% else %}
+                     font-size: {{ block.settings.font_size }}px;
+                     font-family: '{{ block.settings.font_family }}', sans-serif;
+                   {% endif %}
+                 ">
+              <div class="cmp__cell" role="cell">
+                {% if block.settings.left_type == 'check_yes' %}
+                  <span class="cmp__icon cmp__icon--yes" aria-label="Yes">&#10003;</span>
+                {% elsif block.settings.left_type == 'check_no' %}
+                  <span class="cmp__icon cmp__icon--no" aria-label="No">&#10007;</span>
+                {% elsif block.settings.left_type == 'price' %}
+                  <span class="cmp__price-text cmp__price-text--left">{{ block.settings.left_price_text }}</span>
+                {% elsif block.settings.left_type == 'text' %}
+                  <span>{{ block.settings.left_custom_text }}</span>
+                {% endif %}
+              </div>
+              <div class="cmp__cell cmp__cell--label" role="cell">
+                {{ block.settings.row_label }}
+              </div>
+              <div class="cmp__cell" role="cell">
+                {% if block.settings.right_type == 'check_yes' %}
+                  <span class="cmp__icon cmp__icon--yes" aria-label="Yes">&#10003;</span>
+                {% elsif block.settings.right_type == 'check_no' %}
+                  <span class="cmp__icon cmp__icon--no" aria-label="No">&#10007;</span>
+                {% elsif block.settings.right_type == 'price' %}
+                  <span class="cmp__price-text cmp__price-text--right">{{ block.settings.right_price_text }}</span>
+                {% elsif block.settings.right_type == 'text' %}
+                  <span>{{ block.settings.right_custom_text }}</span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+        {% when 'button' %}
+          <div data-block-id="{{ block.id }}"
+               {{ block.shopify_attributes }}
+               style="
+                 text-align: {{ block.settings.text_align }};
+                 margin-top: {{ block.settings.margin_top }}px;
+                 margin-bottom: {{ block.settings.margin_bottom }}px;
+               ">
+            <a href="{{ block.settings.button_url }}"
+               class="cmp__btn"
+               {% if block.settings.button_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+               style="
+                 background-color: {{ block.settings.button_bg_color }};
+                 color: {{ block.settings.button_text_color }};
+                 border: 2px solid {{ block.settings.button_border_color }};
+                 border-radius: {{ block.settings.button_border_radius }}px;
+                 padding: {{ block.settings.button_padding_y }}px {{ block.settings.button_padding_x }}px;
+                 font-weight: {{ block.settings.font_weight }};
+                 {% if block.settings.use_theme_font %}
+                   font-size: var(--font-body-size, 1rem);
+                   font-family: var(--font-body-family, inherit);
+                 {% else %}
+                   font-size: {{ block.settings.font_size }}px;
+                   font-family: '{{ block.settings.font_family }}', sans-serif;
+                 {% endif %}
+               ">
+              {{ block.settings.button_label }}
+              {% if block.settings.show_arrow %}
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/>
+                </svg>
+              {% endif %}
+            </a>
+          </div>
+
+      {% endcase %}
+    {% endfor %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "[LM] Us v Them Table",
+  "tag": "section",
+  "class": "cmp-section-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Layout — Desktop"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "section_max_width",
+      "label": "Max section width (px)",
+      "min": 400,
+      "max": 1400,
+      "step": 10,
+      "default": 860
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Padding top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Padding bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Section Layout — Mobile"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "Padding top — mobile (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "Padding bottom — mobile (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Comparison Table"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Row divider color",
+      "default": "#dddddd"
+    },
+    {
+      "type": "color",
+      "id": "row_alt_bg_color",
+      "label": "Alternating row background color",
+      "default": "#f5f7d8"
+    },
+    {
+      "type": "range",
+      "id": "row_padding_y",
+      "label": "Row padding top/bottom (px)",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "default": 15
+    },
+    {
+      "type": "color",
+      "id": "row_text_color",
+      "label": "Row cell text/icon color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "row_label_color",
+      "label": "Row label text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "icon_yes_color",
+      "label": "Checkmark (yes) icon color",
+      "default": "#2e7d32"
+    },
+    {
+      "type": "color",
+      "id": "icon_no_color",
+      "label": "Cross (no) icon color",
+      "default": "#c62828"
+    },
+    {
+      "type": "color",
+      "id": "price_left_color",
+      "label": "Left price text color",
+      "default": "#2e7d32"
+    },
+    {
+      "type": "color",
+      "id": "price_right_color",
+      "label": "Right price text color",
+      "default": "#c62828"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Heading text",
+          "default": "Mystery Tackle Box vs. Lucky Tackle Box"
+        },
+        {
+          "type": "header",
+          "content": "Desktop"
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Alignment",
+          "options": [
+            { "value": "left",   "label": "Left"   },
+            { "value": "center", "label": "Center" },
+            { "value": "right",  "label": "Right"  }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#111111"
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font weight",
+          "options": [
+            { "value": "400", "label": "Normal"     },
+            { "value": "600", "label": "Semi-bold"  },
+            { "value": "700", "label": "Bold"       },
+            { "value": "800", "label": "Extra bold" }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_theme_font",
+          "label": "Use theme heading font & size",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "label": "Font size (px) — if not using theme font",
+          "min": 16,
+          "max": 72,
+          "step": 1,
+          "default": 32
+        },
+        {
+          "type": "text",
+          "id": "font_family",
+          "label": "Font family — if not using theme font",
+          "default": "Georgia"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Margin top (px)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "label": "Margin bottom (px)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 15
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "range",
+          "id": "mobile_font_size",
+          "label": "Font size — mobile (px)",
+          "min": 12,
+          "max": 60,
+          "step": 1,
+          "default": 24
+        },
+        {
+          "type": "select",
+          "id": "mobile_text_align",
+          "label": "Alignment — mobile",
+          "options": [
+            { "value": "left",   "label": "Left"   },
+            { "value": "center", "label": "Center" },
+            { "value": "right",  "label": "Right"  }
+          ],
+          "default": "center"
+        }
+      ]
+    },
+    {
+      "type": "subtext",
+      "name": "Subtext",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Subtext",
+          "default": "<p>See why anglers choose Mystery Tackle Box for the best fishing gear delivered monthly.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Desktop"
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Alignment",
+          "options": [
+            { "value": "left",   "label": "Left"   },
+            { "value": "center", "label": "Center" },
+            { "value": "right",  "label": "Right"  }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#444444"
+        },
+        {
+          "type": "range",
+          "id": "max_width",
+          "label": "Max text width (px)",
+          "min": 200,
+          "max": 1000,
+          "step": 10,
+          "default": 560
+        },
+        {
+          "type": "checkbox",
+          "id": "use_theme_font",
+          "label": "Use theme body font & size",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "label": "Font size (px) — if not using theme font",
+          "min": 10,
+          "max": 36,
+          "step": 1,
+          "default": 15
+        },
+        {
+          "type": "text",
+          "id": "font_family",
+          "label": "Font family — if not using theme font",
+          "default": "Georgia"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Margin top (px)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "label": "Margin bottom (px)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 30
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "range",
+          "id": "mobile_font_size",
+          "label": "Font size — mobile (px)",
+          "min": 10,
+          "max": 32,
+          "step": 1,
+          "default": 14
+        },
+        {
+          "type": "select",
+          "id": "mobile_text_align",
+          "label": "Alignment — mobile",
+          "options": [
+            { "value": "left",   "label": "Left"   },
+            { "value": "center", "label": "Center" },
+            { "value": "right",  "label": "Right"  }
+          ],
+          "default": "center"
+        }
+      ]
+    },
+    {
+      "type": "logos",
+      "name": "Logos Row",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo_left",
+          "label": "Left logo image"
+        },
+        {
+          "type": "text",
+          "id": "logo_left_alt",
+          "label": "Left logo alt text",
+          "default": "Mystery Tackle Box"
+        },
+        {
+          "type": "text",
+          "id": "logo_left_text",
+          "label": "Left logo fallback text (if no image)",
+          "default": "Mystery Tackle Box"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_right",
+          "label": "Right logo image"
+        },
+        {
+          "type": "text",
+          "id": "logo_right_alt",
+          "label": "Right logo alt text",
+          "default": "Lucky Tackle Box"
+        },
+        {
+          "type": "text",
+          "id": "logo_right_text",
+          "label": "Right logo fallback text (if no image)",
+          "default": "Lucky Tackle Box"
+        },
+        {
+          "type": "range",
+          "id": "logo_max_height",
+          "label": "Logo max height (px)",
+          "min": 20,
+          "max": 120,
+          "step": 5,
+          "default": 40
+        },
+        {
+          "type": "color",
+          "id": "logo_text_color",
+          "label": "Fallback text color",
+          "default": "#111111"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Margin top (px)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "label": "Margin bottom (px)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 20
+        }
+      ]
+    },
+    {
+      "type": "comparison_row",
+      "name": "Comparison Row",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "row_label",
+          "label": "Row label (center)",
+          "default": "<p>Premium Lures & Tackle</p>"
+        },
+        {
+          "type": "header",
+          "content": "Left Column (Your Brand)"
+        },
+        {
+          "type": "select",
+          "id": "left_type",
+          "label": "Left cell type",
+          "options": [
+            { "value": "check_yes", "label": "Checkmark (Yes)" },
+            { "value": "check_no",  "label": "Cross (No)"      },
+            { "value": "price",     "label": "Price text"      },
+            { "value": "text",      "label": "Custom text"     }
+          ],
+          "default": "check_yes"
+        },
+        {
+          "type": "text",
+          "id": "left_price_text",
+          "label": "Left price text (e.g. $$)",
+          "default": "$$"
+        },
+        {
+          "type": "text",
+          "id": "left_custom_text",
+          "label": "Left custom text",
+          "default": "Custom text"
+        },
+        {
+          "type": "header",
+          "content": "Right Column (Competitor)"
+        },
+        {
+          "type": "select",
+          "id": "right_type",
+          "label": "Right cell type",
+          "options": [
+            { "value": "check_yes", "label": "Checkmark (Yes)" },
+            { "value": "check_no",  "label": "Cross (No)"      },
+            { "value": "price",     "label": "Price text"      },
+            { "value": "text",      "label": "Custom text"     }
+          ],
+          "default": "check_yes"
+        },
+        {
+          "type": "text",
+          "id": "right_price_text",
+          "label": "Right price text (e.g. $$$$)",
+          "default": "$$$$"
+        },
+        {
+          "type": "text",
+          "id": "right_custom_text",
+          "label": "Right custom text",
+          "default": "Custom text"
+        },
+        {
+          "type": "header",
+          "content": "Row Typography"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_theme_font",
+          "label": "Use theme body font & size",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "label": "Font size (px) — if not using theme font",
+          "min": 10,
+          "max": 32,
+          "step": 1,
+          "default": 15
+        },
+        {
+          "type": "text",
+          "id": "font_family",
+          "label": "Font family — if not using theme font",
+          "default": "Georgia"
+        },
+        {
+          "type": "header",
+          "content": "Row Spacing"
+        },
+        {
+          "type": "range",
+          "id": "row_margin_top",
+          "label": "Row margin top (px)",
+          "min": 0,
+          "max": 50,
+          "step": 5,
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "row_margin_bottom",
+          "label": "Row margin bottom (px)",
+          "min": 0,
+          "max": 50,
+          "step": 5,
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Get Your Mystery Box Today"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button destination URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_new_tab",
+          "label": "Open link in new tab",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_arrow",
+          "label": "Show arrow icon",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Desktop"
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Button alignment",
+          "options": [
+            { "value": "left",   "label": "Left"   },
+            { "value": "center", "label": "Center" },
+            { "value": "right",  "label": "Right"  }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "color",
+          "id": "button_bg_color",
+          "label": "Background color",
+          "default": "#2c3e2d"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "button_border_color",
+          "label": "Border color",
+          "default": "#d4e157"
+        },
+        {
+          "type": "range",
+          "id": "button_border_radius",
+          "label": "Border radius (px)",
+          "min": 0,
+          "max": 60,
+          "step": 2,
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "button_padding_y",
+          "label": "Vertical padding (px)",
+          "min": 5,
+          "max": 40,
+          "step": 5,
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "button_padding_x",
+          "label": "Horizontal padding (px)",
+          "min": 10,
+          "max": 80,
+          "step": 5,
+          "default": 35
+        },
+        {
+          "type": "checkbox",
+          "id": "use_theme_font",
+          "label": "Use theme body font & size",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "label": "Font size (px) — if not using theme font",
+          "min": 10,
+          "max": 36,
+          "step": 1,
+          "default": 16
+        },
+        {
+          "type": "text",
+          "id": "font_family",
+          "label": "Font family — if not using theme font",
+          "default": "Georgia"
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font weight",
+          "options": [
+            { "value": "400", "label": "Normal"     },
+            { "value": "600", "label": "Semi-bold"  },
+            { "value": "700", "label": "Bold"       },
+            { "value": "800", "label": "Extra bold" }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Margin top (px)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "label": "Margin bottom (px)",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "select",
+          "id": "mobile_text_align",
+          "label": "Button alignment — mobile",
+          "options": [
+            { "value": "left",   "label": "Left"   },
+            { "value": "center", "label": "Center" },
+            { "value": "right",  "label": "Right"  }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "range",
+          "id": "mobile_font_size",
+          "label": "Font size — mobile (px)",
+          "min": 10,
+          "max": 36,
+          "step": 1,
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_y",
+          "label": "Vertical padding — mobile (px)",
+          "min": 5,
+          "max": 40,
+          "step": 5,
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_x",
+          "label": "Horizontal padding — mobile (px)",
+          "min": 10,
+          "max": 80,
+          "step": 5,
+          "default": 25
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "[LM] Us v Them Table",
+      "blocks": [
+        { "type": "heading",  "settings": { "text": "Mystery Tackle Box vs. Lucky Tackle Box" } },
+        { "type": "subtext",  "settings": { "text": "<p>See why anglers choose Mystery Tackle Box for the best fishing gear delivered monthly.</p>" } },
+        { "type": "logos",    "settings": { "logo_left_text": "Mystery Tackle Box", "logo_right_text": "Lucky Tackle Box" } },
+        { "type": "comparison_row", "settings": { "row_label": "<p>Premium Brand Lures</p>",                    "left_type": "check_yes", "right_type": "check_yes" } },
+        { "type": "comparison_row", "settings": { "row_label": "<p>Customized To Your Fishing Style</p>",       "left_type": "check_yes", "right_type": "check_no" } },
+        { "type": "comparison_row", "settings": { "row_label": "<p>Exclusive Member Discounts</p>",      "left_type": "check_yes", "right_type": "check_yes" } },
+        { "type": "comparison_row", "settings": { "row_label": "<p>Pro Tips & Techniques Included</p>",            "left_type": "check_yes", "right_type": "check_no" } },
+        { "type": "comparison_row", "settings": { "row_label": "<p>Money-Back Guarantee</p>",   "left_type": "check_yes", "right_type": "check_yes" } },
+        { "type": "comparison_row", "settings": { "row_label": "<p>Free Shipping</p>",   "left_type": "check_yes", "right_type": "check_no"  } },
+        { "type": "comparison_row", "settings": { "row_label": "<p>Cancel Anytime</p>","left_type": "check_yes", "right_type": "check_yes"  } },
+        { "type": "comparison_row", "settings": { "row_label": "<p>Gift Options Available</p>",            "left_type": "check_yes", "right_type": "check_yes" } },
+        { "type": "comparison_row", "settings": { "row_label": "<p>Mobile App Access</p>",    "left_type": "check_yes", "right_type": "check_no"  } },
+        { "type": "comparison_row", "settings": { "row_label": "<p>Price Per Month</p>", "left_type": "price", "left_price_text": "$16.99", "right_type": "price", "right_price_text": "$24.99" } },
+        { "type": "button",   "settings": { "button_label": "Get Your Mystery Box Today" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

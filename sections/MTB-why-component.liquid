@@ -1,0 +1,211 @@
+{{ 'section-MTB-why.css' | asset_url | stylesheet_tag }}
+
+<section class="why-component page-width">
+  <style>
+    .why-component__content {
+      padding-top: {{ section.settings.component_mobile_pt }}px;
+      padding-bottom: {{ section.settings.component_mobile_pb }}px;
+    }
+
+    .why-component__header {
+      color: {{ section.settings.component_header_color }};
+    }
+
+    @media screen and (min-width: 641px) and (max-width: 989px) {
+      .why-component__content {
+        padding-top: {{ section.settings.component_tablet_pt }}px;
+        padding-bottom: {{ section.settings.component_tablet_pb }}px;
+      }
+    }
+
+    @media screen and (min-width: 990px) {
+     .why-component__content {
+        padding-top: {{ section.settings.component_desktop_pt }}px;
+        padding-bottom: {{ section.settings.component_desktop_pb }}px;
+      }
+    }
+  </style>
+  <div class="why-component__content">
+    <div class="page-width">
+      <div class="why-component__header-wrap">
+        {%- if section.settings.header_img != blank -%}
+          {{
+            section.settings.header_img
+            | image_url: width: '100'
+            | image_tag: loading: 'lazy', widths: '100', class: 'lazyload why-component__img'
+          }}
+        {%- endif -%}
+        <h2 class="why-component__header">{{ section.settings.component_header }}</h2>
+      </div>
+      <div>
+        <p class="why-component__subheader header_font">{{ section.settings.component_subheader }}</p>
+      </div>
+    </div>
+
+    <div class="why-component__points-wrap">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'point' -%}
+            <div class="why-component__point_wrap">
+              <div class="why-component__point-img-wrap">
+                {%- if block.settings.point_image != blank -%}
+                  {{
+                    block.settings.point_image
+                    | image_url: width: '500'
+                    | image_tag: loading: 'lazy', widths: '500', class: 'why-component__point-img'
+                  }}
+                {%- endif -%}
+              </div>
+              <div class="why-component__point-text-wrap header_font">
+                {%- if block.settings.point_text_1 != blank -%}
+                  <p class="why-component__point-text">{{ block.settings.point_text_1 }}</p>
+                {%- endif -%}
+                {%- if block.settings.point_header != blank -%}
+                  <h6 class="why-component__point-header">{{ block.settings.point_header }}</h6>
+                {%- endif -%}
+                {%- if block.settings.point_text_2 != blank -%}
+                  <p class="why-component__point-text">{{ block.settings.point_text_2 }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MTB Why",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "component_header",
+      "label": "Component header"
+    },
+    {
+      "type": "color",
+      "id": "component_header_color",
+      "label": "Component header color",
+      "default": "#31554B"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_img",
+      "label": "Header image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "component_subheader",
+      "label": "Component subheader"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pt",
+      "label": "Component mobile padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pb",
+      "label": "Component mobile padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+
+    {
+      "type": "header",
+      "content": "Tablet Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pt",
+      "label": "Component tablet padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pb",
+      "label": "Component tablet padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pt",
+      "label": "Component desktop padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pb",
+      "label": "Component desktop padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "limit": 1,
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Point",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "point_image",
+          "label": "Point image"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "point_text_1",
+          "label": "Text 1"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "point_header",
+          "label": "Header"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "point_text_2",
+          "label": "Text 2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTB Why"
+    }
+  ]
+}
+{% endschema %}

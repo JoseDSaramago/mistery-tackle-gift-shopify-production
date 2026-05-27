@@ -1,0 +1,599 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "page_config": {
+      "type": "ante-page-config",
+      "name": "Page Config | Plans LP — GWP",
+      "settings": {
+        "default_buy_button_text": "EXPLORE TACKLE PLANS",
+        "default_buy_button_label": "",
+        "style_override": "none",
+        "use_original_headerfooter": false,
+        "particles": "none"
+      }
+    },
+    "plans_lp_gwp": {
+      "type": "ante-plans-lp-gwp-v2",
+      "blocks": {
+        "kit_hat": {
+          "type": "kit_item",
+          "settings": {
+            "label": "MTB Snapback Trucker Hat"
+          }
+        },
+        "kit_baits": {
+          "type": "kit_item",
+          "settings": {
+            "label": "2 Premium Hard Baits"
+          }
+        },
+        "kit_cutterz": {
+          "type": "kit_item",
+          "settings": {
+            "label": "Line Cutterz Tool"
+          }
+        },
+        "kit_stickers": {
+          "type": "kit_item",
+          "settings": {
+            "label": "FishSlaps Sticker Pack"
+          }
+        },
+        "value_picked": {
+          "type": "value_cell",
+          "settings": {
+            "number": "01",
+            "title": "Hand-picked",
+            "body": "Real anglers curate every box to your species & season."
+          }
+        },
+        "value_fresh": {
+          "type": "value_cell",
+          "settings": {
+            "number": "02",
+            "title": "Always Fresh",
+            "body": "6-8 hand-selected baits & terminal tackle in each shipment."
+          }
+        },
+        "value_tips": {
+          "type": "value_cell",
+          "settings": {
+            "number": "03",
+            "title": "Pro Tips",
+            "body": "Bait cards with how-to-fish-it from MTB pros."
+          }
+        },
+        "value_skip": {
+          "type": "value_cell",
+          "settings": {
+            "number": "04",
+            "title": "Skip Anytime",
+            "body": "Pause, skip, or cancel with one click. Zero hassle."
+          }
+        },
+        "species_bass": {
+          "type": "species",
+          "settings": {
+            "name": "Bass",
+            "preselected": true,
+            "gallery_1": "shopify://shop_images/PDP-carousel-pro-1-box-white_76e5fb8e-6d63-46e3-9edf-fe8af65aef71.jpg",
+            "gallery_1_alt": "Mystery Tackle Box Pro Bass Species",
+            "gallery_2": "shopify://shop_images/PDP-carousel-pro-free-gift.jpg",
+            "gallery_2_alt": "Get a free gift with select plans for a limited time",
+            "gallery_3": "shopify://shop_images/PDP-carousel-pro-2-baits-white_8a51953c-085f-43ee-9f34-7ab4edeac9f2.jpg",
+            "gallery_3_alt": "Each Pro box comes with 68 Premium Lures and Baits",
+            "gallery_4": "shopify://shop_images/PDP-carousel-pro-3-decal-white_9065d914-864c-4f11-bb98-196fee2987b6.jpg",
+            "gallery_4_alt": "Includes a custom decal every month",
+            "gallery_5": "shopify://shop_images/PDP-carousel-pro-4-tips_a1189076-fa5b-4b48-8146-d22098ef4f11.jpg",
+            "gallery_5_alt": "Learn tips and tricks on how to fish everything in your box.",
+            "image": "shopify://shop_images/selector-bass_b618bf51-b8ef-4b79-9ac6-0b26a6ddf7b6.png",
+            "color": "#f2f3e3"
+          }
+        },
+        "species_pantrout": {
+          "type": "species",
+          "settings": {
+            "name": "Panfish & Trout",
+            "preselected": false,
+            "gallery_1": "shopify://shop_images/PDP-carousel-pro-pnt_9d742342-ac69-49f8-9906-11f5ce12ee66.jpg",
+            "gallery_1_alt": "MTB Pro Panfish and Trout Box",
+            "gallery_2": "shopify://shop_images/PDP-carousel-pro-free-gift.jpg",
+            "gallery_2_alt": "Free MTB gift with purchase for a limited time",
+            "gallery_3": "shopify://shop_images/PDP-carousel-pro-2-baits-white_8a51953c-085f-43ee-9f34-7ab4edeac9f2.jpg",
+            "gallery_3_alt": "Six to seven fishing items in every pro box.",
+            "gallery_4": "shopify://shop_images/PDP-carousel-pro-3-decal-white_9065d914-864c-4f11-bb98-196fee2987b6.jpg",
+            "gallery_4_alt": "Includes a custom decal every month",
+            "gallery_5": "shopify://shop_images/PDP-carousel-pro-4-tips_a1189076-fa5b-4b48-8146-d22098ef4f11.jpg",
+            "gallery_5_alt": "Learn tips and tricks on how to use everything in your box.",
+            "image": "shopify://shop_images/selector-panfish-trout_d315f9d2-3c97-487d-906e-c811195f9a2d.png",
+            "color": "#f2f3e3"
+          }
+        },
+        "species_inshore": {
+          "type": "species",
+          "settings": {
+            "name": "Inshore Saltwater",
+            "preselected": false,
+            "gallery_1": "shopify://shop_images/PDP-carousel-pro-salt.jpg",
+            "gallery_1_alt": "",
+            "gallery_2": "shopify://shop_images/PDP-carousel-pro-free-gift.jpg",
+            "gallery_2_alt": "",
+            "gallery_3": "shopify://shop_images/PDP-carousel-pro-2-baits-white_8a51953c-085f-43ee-9f34-7ab4edeac9f2.jpg",
+            "gallery_3_alt": "",
+            "gallery_4": "shopify://shop_images/PDP-carousel-pro-3-decal-white_9065d914-864c-4f11-bb98-196fee2987b6.jpg",
+            "gallery_4_alt": "",
+            "gallery_5": "shopify://shop_images/PDP-carousel-pro-4-tips_a1189076-fa5b-4b48-8146-d22098ef4f11.jpg",
+            "gallery_5_alt": "",
+            "image": "shopify://shop_images/selector-salt_d4ac62b1-5e12-4572-9034-adcc4cc7c07f.png",
+            "color": "#f2f3e3"
+          }
+        },
+        "species_multi": {
+          "type": "species",
+          "settings": {
+            "name": "Multi-Species",
+            "preselected": false,
+            "gallery_1": "shopify://shop_images/PDP-carousel-pro-new-multi.jpg",
+            "gallery_1_alt": "",
+            "gallery_2": "shopify://shop_images/PDP-carousel-pro-free-gift.jpg",
+            "gallery_2_alt": "",
+            "gallery_3": "shopify://shop_images/PDP-carousel-pro-2-baits-white_8a51953c-085f-43ee-9f34-7ab4edeac9f2.jpg",
+            "gallery_3_alt": "",
+            "gallery_4": "shopify://shop_images/PDP-carousel-pro-3-decal-white_9065d914-864c-4f11-bb98-196fee2987b6.jpg",
+            "gallery_4_alt": "",
+            "gallery_5": "shopify://shop_images/PDP-carousel-pro-4-tips_a1189076-fa5b-4b48-8146-d22098ef4f11.jpg",
+            "gallery_5_alt": "",
+            "image": "shopify://shop_images/selector-multi-species_5f996b13-9ad0-4bb9-b736-142471b67a29.png",
+            "color": "#f2f3e3"
+          }
+        },
+        "species_walleye": {
+          "type": "species",
+          "settings": {
+            "name": "Walleye",
+            "preselected": false,
+            "gallery_1": "shopify://shop_images/PDP-carousel-pro-walleye.jpg",
+            "gallery_1_alt": "",
+            "gallery_2": "shopify://shop_images/PDP-carousel-pro-free-gift.jpg",
+            "gallery_2_alt": "",
+            "gallery_3": "shopify://shop_images/PDP-carousel-pro-2-baits-white_8a51953c-085f-43ee-9f34-7ab4edeac9f2.jpg",
+            "gallery_3_alt": "",
+            "gallery_4": "shopify://shop_images/PDP-carousel-pro-3-decal-white_9065d914-864c-4f11-bb98-196fee2987b6.jpg",
+            "gallery_4_alt": "",
+            "gallery_5": "shopify://shop_images/PDP-carousel-pro-4-tips_a1189076-fa5b-4b48-8146-d22098ef4f11.jpg",
+            "gallery_5_alt": "",
+            "image": "shopify://shop_images/selector-walleye_8d90356e-ba90-49d4-b2d1-fe5a51dd5018.png",
+            "color": "#f2f3e3"
+          }
+        },
+        "cadence_Lrzbad": {
+          "type": "cadence",
+          "settings": {
+            "label": "Monthly",
+            "sub": "Renews Monthly",
+            "ship_price": "$31.99",
+            "ship_unit": "/box",
+            "shipping_line": "",
+            "total_price": "+ $4.99 Shipping",
+            "ribbon_label": "FREE Hat",
+            "ribbon_color": "#b94b38",
+            "save_badge": "",
+            "preselected": false,
+            "gift_tag": "★ FREE GIFT UNLOCKED",
+            "gift_name": "MTB Field Kit",
+            "gift_note": "",
+            "gift_image": "shopify://shop_images/MTB-badge-hat.png",
+            "product": "pro-monthly-plan-2"
+          }
+        },
+        "cad_4mo": {
+          "type": "cadence",
+          "settings": {
+            "label": "4-Month",
+            "sub": "Prepaid · Free Shipping!",
+            "ship_price": "$34.25",
+            "ship_unit": "/box",
+            "shipping_line": "",
+            "total_price": "$136.99",
+            "ribbon_label": "FREE Hat",
+            "ribbon_color": "#d14424",
+            "save_badge": "Save 7%",
+            "preselected": false,
+            "gift_tag": "★ FREE GIFT UNLOCKED",
+            "gift_name": "MTB Snapback Hat",
+            "gift_note": "Ships with your first box.",
+            "gift_image": "shopify://shop_images/MTB-badge-hat.png",
+            "product": "pro-4-month"
+          }
+        },
+        "cad_6mo": {
+          "type": "cadence",
+          "settings": {
+            "label": "6-Month",
+            "sub": "Most Popular · Free Shipping!",
+            "ship_price": "$31.65",
+            "ship_unit": "/box",
+            "shipping_line": "",
+            "total_price": "$189.99",
+            "ribbon_label": "FREE Field Kit",
+            "ribbon_color": "#37b777",
+            "save_badge": "Save 14%",
+            "preselected": true,
+            "gift_tag": "★ FREE GIFT UNLOCKED",
+            "gift_name": "MTB Field Kit",
+            "gift_note": "Ships with your first box.",
+            "gift_image": "shopify://shop_images/field-kit-unboxed-2.png",
+            "product": "pro-6-month-2"
+          }
+        },
+        "cad_12mo": {
+          "type": "cadence",
+          "settings": {
+            "label": "12-Month",
+            "sub": "Best Value · Free Shipping",
+            "ship_price": "$30.83",
+            "ship_unit": "/box",
+            "shipping_line": "",
+            "total_price": "$369.99",
+            "ribbon_label": "FREE Field Kit",
+            "ribbon_color": "#37b777",
+            "save_badge": "Save 17%",
+            "preselected": false,
+            "gift_tag": "★ FREE GIFT UNLOCKED",
+            "gift_name": "MTB Field Kit",
+            "gift_note": "Ships with your first box.",
+            "gift_image": "shopify://shop_images/field-kit-unboxed-2.png",
+            "product": "pro-12-month-1"
+          }
+        },
+        "press_forbes": {
+          "type": "press_logo",
+          "settings": {
+            "logo": "shopify://shop_images/forbes.svg",
+            "label": "FORBES"
+          }
+        },
+        "press_outdoor": {
+          "type": "press_logo",
+          "settings": {
+            "logo": "shopify://shop_images/outdoor_life.svg",
+            "label": "OUTDOOR LIFE"
+          }
+        },
+        "press_us": {
+          "type": "press_logo",
+          "settings": {
+            "logo": "shopify://shop_images/us_today.svg",
+            "label": "USA TODAY"
+          }
+        },
+        "press_field": {
+          "type": "press_logo",
+          "settings": {
+            "logo": "shopify://shop_images/field_and_stream.svg",
+            "label": "FIELD & STREAM"
+          }
+        },
+        "press_angler": {
+          "type": "press_logo",
+          "settings": {
+            "logo": "shopify://shop_images/US_angler.svg",
+            "label": "US ANGLER"
+          }
+        },
+        "how_pick": {
+          "type": "how_step",
+          "settings": {
+            "image": "shopify://shop_images/how-it-works-1.jpg",
+            "eyebrow": "Step 01",
+            "title": "Pick Your Plan",
+            "body": "Pick your species & cadence — every plan unlocks a free MTB gift. Monthly + 4-Month plans get the Snapback Hat. 6 + 12-Month plans get the Field Kit. Ships with your first box, 2–3 business days after signup.",
+            "whack_show": true,
+            "whack_script": "free",
+            "whack_big": "GIFT",
+            "whack_sub": "WITH EVERY PLAN"
+          }
+        },
+        "how_build": {
+          "type": "how_step",
+          "settings": {
+            "image": "shopify://shop_images/how-it-works-2a.jpg",
+            "eyebrow": "Step 02",
+            "title": "We Build Your Box",
+            "body": "Real anglers hand-pick 6–8 premium baits dialed in to your local water. Bait cards walk you through how to fish every piece — like a pro looking over your shoulder.",
+            "whack_show": false,
+            "whack_script": "free",
+            "whack_big": "GIFT",
+            "whack_sub": "WITH EVERY PLAN"
+          }
+        },
+        "how_fish": {
+          "type": "how_step",
+          "settings": {
+            "image": "shopify://shop_images/how-it-works-3.jpg",
+            "eyebrow": "Step 03",
+            "title": "Fish, Skip or Cancel",
+            "body": "Big trip next weekend? Hit the water. Slammed at work? Skip a month. Done for the season? Cancel from your dashboard — zero phone calls, zero hassle.",
+            "whack_show": false,
+            "whack_script": "free",
+            "whack_big": "GIFT",
+            "whack_sub": "WITH EVERY PLAN"
+          }
+        },
+        "rev_mike": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "tag": "Verified · Trustpilot",
+            "title": "The Mystery Tackle Box subscription is a great gift!",
+            "body": "The Mystery Tackle Box subscription was a gift from my wife. This is such a great gift idea. I received a box with fishing lures, baits and hooks. These are accompanied with a QR code that takes you to a video that explains what you received. Looking forward to putting these baits to use soon. Again, a great gift idea!",
+            "name": "Mike Fritz",
+            "loc": "US · Apr 3, 2025"
+          }
+        },
+        "rev_wendy": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "tag": "Verified · Trustpilot",
+            "title": "Husband LOVES it!!!",
+            "body": "Husband LOVES it!!!",
+            "name": "Wendy Burleson",
+            "loc": "US · Apr 2, 2025"
+          }
+        },
+        "rev_matt": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "tag": "Verified · Trustpilot",
+            "title": "Fishing not floundering",
+            "body": "I ordered the Elite Mystery Box (bass) for my son, who is consumed by bass fishing. He now sends me pictures of the fish he catches. He loves getting the new boxes monthly and I save money by not going to a big box store and buying what he picks out. He says it's like Christmas or a birthday every month.",
+            "name": "Matt West",
+            "loc": "US · Apr 1, 2025"
+          }
+        },
+        "rev_patrice": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "tag": "Verified · Trustpilot",
+            "title": "Our Grandson loved it",
+            "body": "Our Grandson loved it! Fishing is his thing. If he's wetting a hook he's happy. He said there were lots of good things and everything was probably worth $150!",
+            "name": "Patrice Markham",
+            "loc": "US · Mar 27, 2025"
+          }
+        },
+        "rev_gift": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "tag": "Verified · Trustpilot",
+            "title": "Received this great gift from my pal",
+            "body": "Received this great gift from my pal and I'm loving it. The first box had loads of cool stuff to augment my aging collection of tackle. Can't wait for the next one!",
+            "name": "Gift Getter",
+            "loc": "US · Mar 26, 2025"
+          }
+        },
+        "rev_jason": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "tag": "Verified · Trustpilot",
+            "title": "Loved getting a box every month",
+            "body": "I really loved getting a box every month for 6 months. It was like Christmas every month! Received a great variety of lures and some really cool ones that I would never think to purchase. The quality is also very nice. Would definitely recommend.",
+            "name": "Jason",
+            "loc": "US · Feb 23, 2025"
+          }
+        },
+        "rev_karen": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "tag": "Verified · Trustpilot",
+            "title": "Gift for my teenage son",
+            "body": "Gift for my teenage son. He loved the subscription so much he had it for several years. He liked being able to choose boxes. The repeats were things he chose because he liked them. His truck and archery car are covered in the cool stickers that come in the boxes.",
+            "name": "Karen Miller",
+            "loc": "US · Jan 21, 2025"
+          }
+        },
+        "faq_ship": {
+          "type": "faq_item",
+          "settings": {
+            "question": "When does my free gift ship?",
+            "answer": "<p>Your free gift ships with your first MTB box. Monthly and 4-month plans get an MTB Snapback Hat. 6-month and 12-month plans get the MTB Field Kit. Both ship from our warehouse in Illinois within 2–3 business days of signup.</p>"
+          }
+        },
+        "faq_color": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I pick the color of my snapback or field kit?",
+            "answer": "<p>We send the current-season colorway — usually MTB Green or Squid Ink. Field Kit contents and color are fixed (it's a curated kit, not a build-your-own). Fair warning: they're limited runs.</p>"
+          }
+        },
+        "faq_cancel": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if I cancel after I get my free gift?",
+            "answer": "<p>Keep the gift, it's yours. We just ask that you stay subscribed long enough to receive your first box (so we're not running a hat-only giveaway here). After that — pause, skip, or cancel from your dashboard anytime.</p>"
+          }
+        },
+        "faq_species": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is the gift available on every species?",
+            "answer": "<p>Yep. Bass, Multi-Species, Catfish, Inshore Saltwater, and Panfish — pick any species, any cadence, and your free gift unlocks automatically based on the plan length.</p>"
+          }
+        },
+        "faq_gift": {
+          "type": "faq_item",
+          "settings": {
+            "question": "I want to gift this to someone else. Will the hat fit them?",
+            "answer": "<p>Our snapback is one-size-fits-most with a flexible mesh-back. Cheat code: at checkout, choose &quot;Send as a gift&quot; and we'll include a personalized note and ship straight to your recipient. The free gift goes with the first box.</p>"
+          }
+        },
+        "faq_kit": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's actually in the MTB Field Kit?",
+            "answer": "<p>A waxed-canvas tackle wrap, MTB-branded line snips, a digital fish scale, retractable tape measure, microfiber rag, and a pack of pro stickers. Retail value runs about $68. Field-tested by our own pros — not white-labeled junk.</p>"
+          }
+        },
+        "faq_duration": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long is this gift-with-purchase offer running?",
+            "answer": "<p>Through the end of the season, while supplies last. We made plenty, but the field kits in particular tend to run out fast around Father's Day and the holidays. Lock yours in.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "kit_hat",
+        "kit_baits",
+        "kit_cutterz",
+        "kit_stickers",
+        "value_picked",
+        "value_fresh",
+        "value_tips",
+        "value_skip",
+        "species_bass",
+        "species_pantrout",
+        "species_inshore",
+        "species_multi",
+        "species_walleye",
+        "cadence_Lrzbad",
+        "cad_4mo",
+        "cad_6mo",
+        "cad_12mo",
+        "press_forbes",
+        "press_outdoor",
+        "press_us",
+        "press_field",
+        "press_angler",
+        "how_pick",
+        "how_build",
+        "how_fish",
+        "rev_mike",
+        "rev_wendy",
+        "rev_matt",
+        "rev_patrice",
+        "rev_gift",
+        "rev_jason",
+        "rev_karen",
+        "faq_ship",
+        "faq_color",
+        "faq_cancel",
+        "faq_species",
+        "faq_gift",
+        "faq_kit",
+        "faq_duration"
+      ],
+      "name": "Plans LP — GWP",
+      "settings": {
+        "brand_green": "#33534b",
+        "brand_green_deep": "#00594f",
+        "brand_orange": "#d14424",
+        "brand_orange_burn": "#a8351a",
+        "brand_weedline": "#37b777",
+        "brand_sunrise": "#ffcb12",
+        "brand_cream": "#f8f3ea",
+        "brand_cream_warm": "#faf6ef",
+        "brand_cream_soft": "#f2f3e3",
+        "brand_ink": "#101820",
+        "hero_logo": "shopify://shop_images/logo-mtb-horizontal-white.png",
+        "hero_logo_link": "",
+        "hero_bg_desktop": "shopify://shop_images/hero-mobile-ryan-fish-desktop.jpg",
+        "hero_bg_mobile": "shopify://shop_images/hero-mobile-GWP-feature-2.jpg",
+        "hero_eyebrow": "★ LIMITED-TIME FATHER'S DAY GIFT!",
+        "hero_eyebrow_bg": "#d14424",
+        "hero_eyebrow_color": "#ffffff",
+        "hero_script": "it's on us —",
+        "hero_title": "FREE GIFT WITH EVERY PLAN",
+        "hero_sub": "A fishing gift that keeps showing up every month. Premium tackle, new baits, helpful tips, and a FREE $70+ fishing kit with any 6 or 12-month plan.",
+        "hero_cta_primary_label": "Explore Tackle Plans",
+        "hero_cta_primary_link": "#buy",
+        "hero_cta_secondary_label": "How it works",
+        "hero_cta_secondary_link": "#how",
+        "kit_title": "THE FREE FIELD KIT INCLUDES:",
+        "kit_show": true,
+        "trust_rating": "4.8",
+        "trust_text": "10+ million boxes shipped · Free shipping on multi-month plans",
+        "stamp_show": true,
+        "stamp_script": "free",
+        "stamp_big": "GIFT",
+        "stamp_sub": "WITH EVERY PLAN • APPLIED AT CHECKOUT",
+        "gift1_show": true,
+        "gift1_image": "shopify://shop_images/MTB-badge-hat.png",
+        "gift1_eyebrow": "FREE WITH 1- + 4-MO PLANS",
+        "gift1_name": "MTB Snapback",
+        "gift1_strike": "$25",
+        "gift1_free": "FREE",
+        "or_text": "or",
+        "gift2_show": true,
+        "gift2_image": "shopify://shop_images/field-kit-unboxed-2.png",
+        "gift2_eyebrow": "FREE WITH 6 + 12-MO PLANS",
+        "gift2_name": "MTB Field Kit",
+        "gift2_strike": "$71",
+        "gift2_free": "FREE",
+        "buy_script": "— build your box —",
+        "buy_title": "PICK YOUR SPECIES",
+        "buy_sub": "Every plan ships with a free MTB gift. We do the homework. You catch the fish.",
+        "buy_main_badge_script": "free",
+        "buy_main_badge_label": "GIFT INCLUDED",
+        "buy_rating_stars": "4.8",
+        "buy_rating_count": "7,840 reviews",
+        "buy_plan_name": "PRO PLAN",
+        "buy_plan_pitch": "Our most popular plan • $40 value in every box",
+        "buy_species_label": "1 · Choose your species",
+        "buy_cadence_label": "2 · Choose your cadence",
+        "buy_gift_default_tag": "★ FREE GIFT UNLOCKED",
+        "buy_gift_default_name": "Free MTB gift",
+        "buy_gift_default_note": "Ships with your first box.",
+        "buy_cta_template": "Start My Plan",
+        "buy_fineprint": "<p>Free U.S. shipping · Cancel anytime · Auto-renews until you say so.</p>",
+        "discount_code": "",
+        "press_script": "— as seen in —",
+        "how_script": "— dead simple —",
+        "how_title": "HOW IT WORKS",
+        "how_sub": "Three steps. Then sit back, get baits, and go catch fish. Skip, swap species, or cancel anytime.",
+        "how_cta_label": "Get Started",
+        "how_cta_link": "#buy",
+        "how_cta_note": "Free shipping on multi-month plans · Skip or cancel anytime.",
+        "reviews_script": "the gift that keeps —",
+        "reviews_title": "RECEIVING.",
+        "reviews_rating_num": "4.8 / 5",
+        "reviews_rating_sub": "12,840 verified reviews",
+        "faq_script": "— questions? —",
+        "faq_title": "WE GOT ANSWERS",
+        "faq_more_text": "Still curious?",
+        "faq_more_link_label": "Chat with a Hat Guy →",
+        "faq_more_link": "",
+        "footer_show": true,
+        "footer_logo": "shopify://shop_images/MTB_Badge_Only_Outline_White.png",
+        "footer_logo_link": "",
+        "footer_support_label": "Need help with your subscription? Email",
+        "footer_support_email": "support@mysterytacklebox.com",
+        "footer_support_suffix": "and we'll get back within 1 business day.",
+        "footer_legal": "© 2026 CatchCo · Mystery Tackle Box™",
+        "section_inverse": false,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-none",
+        "custom_id": "plans-lp-gwp",
+        "section_visible": true
+      }
+    }
+  },
+  "order": [
+    "page_config",
+    "plans_lp_gwp"
+  ]
+}

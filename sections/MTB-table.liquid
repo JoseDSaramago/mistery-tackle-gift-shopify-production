@@ -1,0 +1,380 @@
+{{ 'section-MTB-table.css' | asset_url | stylesheet_tag }}
+
+<section class="table-component">
+  <style>
+     .table-component {
+      padding-top: {{ section.settings.component_mobile_pt }}px;
+      padding-bottom: {{ section.settings.component_mobile_pb }}px;
+      background-color: {{ section.settings.bg_color }};
+    }
+
+    .table-component__header {
+      color: {{ section.settings.header_color }};
+    }
+
+    .table-component__subheader, .table-component__subheader a {
+      color: {{ section.settings.subheader_color }};
+    }
+
+    .table-component__subheader a:hover {
+      color: {{ section.settings.subheader_link_hover_color }};
+    }
+
+    .table-component__item-number {
+      color: {{ section.settings.item_number_color }};
+    }
+
+    .table-component__item-img {
+      height: {{ section.settings.item_img_height }}px;
+    }
+
+    .table-component__summary-img-wrap {
+      border-color: {{ section.settings.bg_color }};
+    }
+
+    @media screen and (min-width: 641px) and (max-width: 989px) {
+      .table-component {
+        padding-top: {{section.settings.component_tablet_pt}}px;
+        padding-bottom: {{section.settings.component_tablet_pb}}px;
+      }
+    }
+
+    @media screen and (min-width: 990px) {
+     .table-component {
+        padding-top: {{section.settings.component_desktop_pt}}px;
+        padding-bottom: {{section.settings.component_desktop_pb}}px;
+      }
+    }
+  </style>
+
+  <div class="table-component__content page-width">
+    <div class="table-component__header-wrap">
+      <h3 class="table-component__header">{{ section.settings.component_header }}</h3>
+      <p class="table-component__subheader header_font">{{ section.settings.component_subheader }}</p>
+    </div>
+
+    <div class="table-component__items-wrap header_font">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'row' -%}
+            <style>
+               .table-component__row_wrap-{{ block.id }} {
+                 background-color: {{ block.settings.row_bg }};
+                 color: {{ block.settings.row_color }}
+               }
+
+              .table-component__row_wrap-{{ block.id }} .table-component__summary-column {
+                 background-color: {{ block.settings.summary_bg }};
+                 color: {{ block.settings.summary_color }}
+               }
+
+               {%- if section.settings.marker_image != blank and block.settings.use_column_marker -%}
+                 .table-component__row_wrap-{{ block.id }} .table-component__column {
+                   background-image: url('{{ section.settings.marker_image | image_url: width: 50 }}');
+                   padding-left: 4rem;
+                   margin: 3rem 0 3rem 2rem;
+                 }
+               {%- endif -%}
+
+               {%- if block.settings.summary_marker_image -%}
+                 .table-component__row_wrap-{{ block.id }} .table-component__summary-column {
+                   background-image: url('{{ block.settings.summary_marker_image | image_url: width: 50 }}');
+
+                 }
+
+               {%- endif -%}
+
+               .table-component__row_wrap-{{ block.id }} .table-component__summary-banner {
+                 background-color: {{ block.settings.summary_banner_bg }};
+                 color: {{ block.settings.summary_banner_color }}
+               }
+            </style>
+            <div class="table-component__row_wrap table-component__row_wrap-{{ block.id }}">
+              <div class="table-component__content-wrap">
+                {%- if block.settings.column_1 != blank -%}
+                  <div class="table-component__column">
+                    <p class="table-component__item-text">{{ block.settings.column_1 }}</p>
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.column_2 != blank -%}
+                  <div class="table-component__column">
+                    <p class="table-component__item-text">{{ block.settings.column_2 }}</p>
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.column_3 != blank -%}
+                  <div class="table-component__column">
+                    <p class="table-component__item-text">{{ block.settings.column_3 }}</p>
+                  </div>
+                {%- endif -%}
+              </div>
+              {%- if block.settings.summary != blank -%}
+                <div class="table-component__summary-column">
+                  {%- if block.settings.summary_image != blank -%}
+                    <div class="table-component__summary-img-wrap">
+                      {{
+                        block.settings.summary_image
+                        | image_url: width: '57'
+                        | image_tag: loading: 'lazy', widths: '57', class: 'table-component__summary-img'
+                      }}
+                    </div>
+                  {%- endif -%}
+                  <div class="table-component__summary-text-wrap">
+                    {%- if block.settings.summary_banner -%}
+                      <p class="table-component__summary-banner">{{ block.settings.summary_banner }}</p>
+                    {%- endif -%}
+                    <div class="table-component__item-text">{{ block.settings.summary }}</div>
+                  </div>
+                </div>
+              {%- endif -%}
+
+              <div class="table-component__item-img-wrap">
+                {%- if block.settings.item_image != blank -%}
+                  {{
+                    block.settings.item_image
+                    | image_url: width: '900'
+                    | image_tag: loading: 'lazy', widths: '900', class: 'table-component__item-img'
+                  }}
+                {%- endif -%}
+              </div>
+              <div class="table-component__item-text-wrap header_font">
+                {%- if block.settings.item_header != blank -%}
+                  <h5 class="table-component__item-header">{{ block.settings.item_header }}</h5>
+                {%- endif -%}
+                {%- if block.settings.item_text != blank -%}
+                  <p class="table-component__item-text">{{ block.settings.item_text }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MTB Table",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "component_header",
+      "label": "Component Header"
+    },
+    {
+      "type": "color",
+      "id": "header_color",
+      "label": "Header Color",
+      "default": "#00574f"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "component_subheader",
+      "label": "Component Subheader"
+    },
+    {
+      "type": "color",
+      "id": "subheader_color",
+      "label": "Component Subheader Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subheader_link_hover_color",
+      "label": "Component Subheader Link Hower Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Component Background Color",
+      "default": "#33534b"
+    },
+    {
+      "type": "range",
+      "id": "item_img_height",
+      "label": "Item Image Height",
+      "min": 60,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "image_picker",
+      "id": "marker_image",
+      "label": "Marker Image"
+    },
+
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pt",
+      "label": "Component mobile padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pb",
+      "label": "Component mobile padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Tablet Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pt",
+      "label": "Component tablet padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pb",
+      "label": "Component tablet padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pt",
+      "label": "Component desktop padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pb",
+      "label": "Component desktop padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "limit": 1,
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        {
+          "type": "color",
+          "id": "row_color",
+          "label": "Color",
+          "default": "#212529"
+        },
+        {
+          "type": "color",
+          "id": "summary_color",
+          "label": "Summary Color",
+          "default": "#212529"
+        },
+
+        {
+          "type": "color",
+          "id": "row_bg",
+          "label": "Background Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "summary_bg",
+          "label": "Summary Background Color",
+          "default": "#a8e46c"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_column_marker",
+          "label": "Use Column Marker",
+          "default": true
+        },
+        {
+          "type": "inline_richtext",
+          "id": "column_1",
+          "label": "Column 1"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "column_2",
+          "label": "Column 2"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "column_3",
+          "label": "Column 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "summary_image",
+          "label": "Summary Image"
+        },
+        {
+          "type": "richtext",
+          "id": "summary",
+          "label": "Summary"
+        },
+        {
+          "type": "image_picker",
+          "id": "summary_marker_image",
+          "label": "Summary Marker Image"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "summary_banner",
+          "label": "Summary Banner"
+        },
+        {
+          "type": "color",
+          "id": "summary_banner_color",
+          "label": "Summary Banner Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "summary_banner_bg",
+          "label": "Summary Banner Background Color",
+          "default": "#31554B"
+        },
+
+        {
+          "type": "inline_richtext",
+          "id": "item_text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTB Table"
+    }
+  ]
+}
+{% endschema %}

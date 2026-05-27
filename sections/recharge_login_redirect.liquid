@@ -1,0 +1,20 @@
+{% schema %}
+  {
+    "name": "recharge_login_redirect",
+    "settings": []
+  }
+{% endschema %}
+
+<!-- Subscriptions Powered by ReCharge Payments: Begin Liquid Code -->
+<form id="login_with_shopify_customer_id" action="/tools/recurring/get-subscription-access">
+  <input type="hidden" name="redirect" value="">
+</form>
+<script>
+  form = document.querySelector("#login_with_shopify_customer_id");
+  checkoutUrl = new URLSearchParams(window.location.search).get("checkout_url");
+  if (checkoutUrl) {
+    form.redirect.value = "checkout";
+  }
+  form.submit();
+</script>
+<!-- Subscriptions Powered by ReCharge Payments: End Liquid Code -->

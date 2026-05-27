@@ -1,0 +1,208 @@
+{{ 'section-MTB-brands.css' | asset_url | stylesheet_tag }}
+
+<section class="brands-component">
+  <style>
+    .blands-list-wrap {
+      padding-top: {{ section.settings.component_mobile_pt }}px;
+      padding-bottom: {{ section.settings.component_mobile_pb }}px;
+    }
+    .brand_wrap {
+      width: calc({{ section.settings.img_mobile_width }}px + 30px);
+    }
+
+    @media screen and (min-width: 641px) and (max-width: 989px) {
+      .blands-list-wrap {
+        padding-top: {{ section.settings.component_tablet_pt }}px;
+        padding-bottom: {{ section.settings.component_tablet_pb }}px;
+      }
+
+      .brand_wrap {
+        width: calc({{ section.settings.img_tablet_width }}px + 30px);
+      }
+    }
+
+    @media screen and (min-width: 990px) {
+     .blands-list-wrap {
+        padding-top: {{ section.settings.component_desktop_pt }}px;
+        padding-bottom: {{ section.settings.component_desktop_pb }}px;
+      }
+
+      .brand_wrap {
+        width: calc({{ section.settings.img_desktop_width }}px + 30px);
+      }
+
+    }
+  </style>
+  <div class="brands-component__content">
+    <div class="blands-list-wrap">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'brand' -%}
+            {%- unless section.settings.has_scroll -%}
+              <style>
+                @media screen and (min-width: 990px) {
+                  .brand_wrap-{{ block.id }} {
+                    max-width: calc(100vw / {{ section.blocks.size }});
+                  }
+                }
+              </style>
+            {%- endunless -%}
+            <div class="brand_wrap brand_wrap-{{ block.id }}">
+              <div>
+                {%- if block.settings.brand_logo != blank -%}
+                  {{
+                    block.settings.brand_logo
+                    | image_url: width: '500'
+                    | image_tag: loading: 'lazy', widths: '500', class: 'lazyload brand-component__img'
+                  }}
+                {%- endif -%}
+              </div>
+              <div>
+                <p class="brands-component_text">{{ block.settings.brand_text }}</p>
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MTB Brands",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "img_mobile_width",
+      "label": "Image mobile width",
+      "min": 100,
+      "max": 300,
+      "step": 2,
+      "unit": "px",
+      "default": 136
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pt",
+      "label": "Component mobile padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pb",
+      "label": "Component mobile padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Tablet Settings"
+    },
+    {
+      "type": "range",
+      "id": "img_tablet_width",
+      "label": "Image tablet width",
+      "min": 100,
+      "max": 300,
+      "step": 2,
+      "unit": "px",
+      "default": 136
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pt",
+      "label": "Component tablet padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pb",
+      "label": "Component tablet padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "has_scroll",
+      "label": "Show with scroll on Desktop",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "img_desktop_width",
+      "label": "Image desktop width",
+      "min": 100,
+      "max": 300,
+      "step": 2,
+      "unit": "px",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pt",
+      "label": "Component desktop padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pb",
+      "label": "Component desktop padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "limit": 1,
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "brand_logo",
+          "label": "Brand Logo"
+        },
+        {
+          "type": "text",
+          "id": "brand_text",
+          "label": "Brand text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTB Brands"
+    }
+  ]
+}
+{% endschema %}

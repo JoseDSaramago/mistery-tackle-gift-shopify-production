@@ -1,0 +1,172 @@
+<style>
+  .ante-section-header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .ante-section-header.header-alignment-left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .ante-section-header.header-alignment-right {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .ante-section-header.header-alignment-row {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .ante-section-header * {
+    flex: 1;
+  }
+
+  .ante-section-header :is(h1, h2, h3, h4, h5, h6) {
+    display: block;
+  }
+
+  .ante-section-header :is(h1, h2, h3, h4, h5, h6) + p {
+    margin-top: var(--spacing-small);
+  }
+
+  .ante-section-header :is(h1, h2, h3, h4, h5, h6) strong {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .ante-section-header :is(h1, h2, h3, h4, h5, h6) strong::before {
+    content: "";
+    position: absolute;
+    height: 44px;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    background-color: var(--color-button);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .ante-section-header.header-alignment-row :is(h1, h2, h3, h4, h5) {
+    min-width: 60%;
+  }
+
+  .ante-section-header.header-alignment-row:not(:last-child) :is(h1, h2, h3, h4, h5) {
+    max-width: 60%;
+  }
+
+  .ante-section-header h6 {
+    min-width: 100%;
+    margin-bottom: var(--micropad-x-large);
+    color: var(--color-text-alt);
+    font-size: 16px;
+    letter-spacing: .15em;
+    line-height: 150%;
+  }
+
+  .ante-section-header em {
+    text-decoration: underline;
+  }
+
+  .ante-section-header + .ante-section-content {
+    margin-top: var(--spacing-large);
+  }
+
+  .ante-section-header:not(.header-alignment-row).limit-width :is(h1, h2, h3, h4, h5) {
+    max-width: var(--width-8);
+    display: block;
+  }
+
+  .ante-section-header:not(.header-alignment-row).limit-width p {
+    max-width: var(--width-6);
+  }
+
+  .ante-section.ante-inverse.section-background-colour-normal {
+    background-color: #20413f;
+  }
+
+  .ante-section.ante-inverse.section-background-colour-normal:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url(/cdn/shop/files/Untitled-1.webp?v=1756913358);
+    opacity: .08;
+    background-size: 50%;
+    pointer-events: none;
+  }
+
+  @media (max-width: 1919px) {
+    .ante-section-header :is(h1, h2, h3, h4, h5, h6) strong::before {
+      height: 36px;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .ante-section-header.header-alignment-row {
+      column-gap: var(--spacing-medium);
+    }
+
+    .ante-section-header.header-alignment-row p {
+      margin: 0;
+      align-self: flex-end;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .ante-section-header {
+      flex-direction: column !important;
+    }
+
+    .ante-section-header.header-alignment-mobile-center {
+      align-items: center;
+      text-align: center;
+    }
+
+    .ante-section-header.header-alignment-mobile-left {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .ante-section-header.header-alignment-mobile-right {
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .ante-section-header.limit-width :is(h1, h2, h3, h4, h5, h6) {
+      max-width: 100% !important;
+    }
+
+    .ante-section-header.limit-width p {
+      max-width: var(--width-7);
+    }
+
+    .ante-section-header h6 {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .ante-section-header :is(h1, h2, h3, h4, h5, h6) strong::before {
+      height: 24px;
+    }
+
+    .ante-section-header.limit-width p {
+      max-width: 100%;
+    }
+
+    .ante-section-header h6 {
+      font-size: 12px;
+    }
+  }
+</style>

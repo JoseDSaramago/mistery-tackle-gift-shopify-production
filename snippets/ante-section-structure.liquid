@@ -1,0 +1,14 @@
+{% unless end %}
+  {% assign id = id | default: section.settings.custom_id | default: section.id %}
+  <section id="{{ id }}" class="ante-section {% if section.settings.section_inverse %}ante-inverse {% endif %}{{ section.settings.section_background_style }} {{ section.settings.section_background_colour }} {{ section.settings.section_spacing }}{% if section.settings.section_visible == false %} ante-section-hidden{% endif %}">
+    <div class="ante-container">
+      {% render "ante-stickers", blocks: section.blocks %}
+      {% if section.settings.heading != blank %}
+        <div class="ante-section-header richtext header-alignment-{{ section.settings.heading_alignment }} header-alignment-mobile-{{ section.settings.heading_alignment_mobile }}{% if section.settings.limit_heading_width %} limit-width{% endif %}">{{ section.settings.heading }}</div>
+      {% endif %}
+      <div class="ante-section-content">
+{% else %}
+      </div>
+    </div>
+  </section>
+{% endunless %}

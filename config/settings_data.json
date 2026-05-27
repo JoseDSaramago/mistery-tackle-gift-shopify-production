@@ -1,0 +1,499 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "logo": "shopify://shop_images/logo-MTB-horiz-green.png",
+    "logo_width": 250,
+    "favicon": "shopify://shop_images/badge-MTB-green-square.png",
+    "type_header_font": "assistant_n4",
+    "is_heading_font_custom": true,
+    "heading_font_custom_name": "Gotham_SSm",
+    "heading_font_custom_url": "https://cdn.shopify.com/s/files/1/0672/1794/8724/files/GothamSSm-Light.otf?v=1730382630",
+    "heading_font_bold_custom_url": "https://cdn.shopify.com/s/files/1/0672/1794/8724/files/GothamSSm-Bold.otf?v=1730383208",
+    "heading_font_custom_format": "opentype",
+    "heading_scale": 100,
+    "type_body_font": "assistant_n4",
+    "body_scale": 100,
+    "link_color": "#902f19",
+    "page_width": 1200,
+    "spacing_sections": 0,
+    "spacing_grid_horizontal": 16,
+    "spacing_grid_vertical": 8,
+    "animations_reveal_on_scroll": false,
+    "animations_hover_elements": "none",
+    "buttons_border_thickness": 0,
+    "buttons_border_opacity": 100,
+    "buttons_radius": 0,
+    "buttons_shadow_opacity": 0,
+    "buttons_shadow_horizontal_offset": 0,
+    "buttons_shadow_vertical_offset": 4,
+    "buttons_shadow_blur": 5,
+    "variant_pills_border_thickness": 1,
+    "variant_pills_border_opacity": 55,
+    "variant_pills_radius": 40,
+    "variant_pills_shadow_opacity": 0,
+    "variant_pills_shadow_horizontal_offset": 0,
+    "variant_pills_shadow_vertical_offset": 4,
+    "variant_pills_shadow_blur": 5,
+    "inputs_border_thickness": 1,
+    "inputs_border_opacity": 55,
+    "inputs_radius": 0,
+    "inputs_shadow_opacity": 0,
+    "inputs_shadow_horizontal_offset": 0,
+    "inputs_shadow_vertical_offset": 4,
+    "inputs_shadow_blur": 5,
+    "card_style": "standard",
+    "card_image_padding": 0,
+    "card_text_alignment": "left",
+    "card_color_scheme": "scheme-2",
+    "card_border_thickness": 0,
+    "card_border_opacity": 10,
+    "card_corner_radius": 0,
+    "card_shadow_opacity": 0,
+    "card_shadow_horizontal_offset": 0,
+    "card_shadow_vertical_offset": 4,
+    "card_shadow_blur": 5,
+    "collection_card_style": "standard",
+    "collection_card_image_padding": 0,
+    "collection_card_text_alignment": "left",
+    "collection_card_color_scheme": "scheme-2",
+    "collection_card_border_thickness": 0,
+    "collection_card_border_opacity": 10,
+    "collection_card_corner_radius": 0,
+    "collection_card_shadow_opacity": 0,
+    "collection_card_shadow_horizontal_offset": 0,
+    "collection_card_shadow_vertical_offset": 4,
+    "collection_card_shadow_blur": 5,
+    "blog_card_style": "standard",
+    "blog_card_image_padding": 0,
+    "blog_card_text_alignment": "left",
+    "blog_card_color_scheme": "scheme-2",
+    "blog_card_border_thickness": 0,
+    "blog_card_border_opacity": 10,
+    "blog_card_corner_radius": 0,
+    "blog_card_shadow_opacity": 0,
+    "blog_card_shadow_horizontal_offset": 0,
+    "blog_card_shadow_vertical_offset": 4,
+    "blog_card_shadow_blur": 5,
+    "text_boxes_border_thickness": 0,
+    "text_boxes_border_opacity": 10,
+    "text_boxes_radius": 0,
+    "text_boxes_shadow_opacity": 0,
+    "text_boxes_shadow_horizontal_offset": 0,
+    "text_boxes_shadow_vertical_offset": 4,
+    "text_boxes_shadow_blur": 5,
+    "media_border_thickness": 1,
+    "media_border_opacity": 5,
+    "media_radius": 0,
+    "media_shadow_opacity": 0,
+    "media_shadow_horizontal_offset": 0,
+    "media_shadow_vertical_offset": 4,
+    "media_shadow_blur": 5,
+    "popup_border_thickness": 1,
+    "popup_border_opacity": 10,
+    "popup_corner_radius": 0,
+    "popup_shadow_opacity": 5,
+    "popup_shadow_horizontal_offset": 0,
+    "popup_shadow_vertical_offset": 4,
+    "popup_shadow_blur": 5,
+    "drawer_border_thickness": 1,
+    "drawer_border_opacity": 10,
+    "drawer_shadow_opacity": 0,
+    "drawer_shadow_horizontal_offset": 0,
+    "drawer_shadow_vertical_offset": 4,
+    "drawer_shadow_blur": 5,
+    "badge_position": "bottom left",
+    "badge_corner_radius": 40,
+    "sale_badge_color_scheme": "scheme-3ce67617-882c-48b4-b8c8-c3ff502e854e",
+    "sold_out_badge_color_scheme": "scheme-3",
+    "brand_headline": "",
+    "brand_description": "<p></p>",
+    "brand_image_width": 100,
+    "social_facebook_link": "https://www.facebook.com/mysterytacklebox",
+    "social_facebook_icon": "shopify://shop_images/icons8-facebook.svg",
+    "social_instagram_link": "https://www.instagram.com/mysterytacklebox",
+    "social_instagram_icon": "shopify://shop_images/instagram-with-circle-svgrepo-com.svg",
+    "social_youtube_link": "https://www.youtube.com/@MysteryTackleBox",
+    "social_youtube_icon": "shopify://shop_images/youtube-with-circle.svg",
+    "social_tiktok_link": "",
+    "social_twitter_link": "https://x.com/mysterytacklebx",
+    "social_twitter_icon": "shopify://shop_images/icons8-twitter-circled.svg",
+    "social_snapchat_link": "",
+    "social_pinterest_link": "",
+    "social_tumblr_link": "",
+    "social_vimeo_link": "",
+    "predictive_search_enabled": true,
+    "predictive_search_show_vendor": true,
+    "predictive_search_show_price": true,
+    "predictive_search_show_rating": true,
+    "search_excluded_product_ids": "8718214103092,8718208761908,8697267290164,8694620520500,8694619439156,8662650945588,8662041100340,8662011346996,8650004103220,8650002137140,8649998073908,8644952752180,8644915363892,7760153837620,7687146766388,7687147978804,7687148437556,7687148666932,7687134314548,7687143587892,7687144898612,7687145390132,7686800080948,7686799556660,7686778093620,8667101855796,8623174680628,7746147418164,7746149908532,7746152988724,8698694959156,8585666363444",
+    "currency_code_enabled": true,
+    "cart_type": "notification",
+    "show_vendor": false,
+    "show_cart_note": false,
+    "limited_product_ids": "45666103689268,45666103722036,45666103754804,45666103787572,45666103820340,45666108342324,45666108375092,45666108407860,45666108440628,45666108473396,45666651013172,45666651045940,45666651078708,45666651111476,45666651144244,45666655109172,45666655141940,45666655174708,45666655207476,45666655240244,45672832368692,45672921301044,45672832401460,45672832434228,45672832466996,45672832499764,45673134850100,45673135013940,45673134882868,45673134915636,45673134948404,45673134981172,45673142681652,45673142845492,45673142714420,45673142747188,45673142779956,45673142812724,45673146220596,45673146384436,45673146253364,45673146286132,45673146318900,45673146351668,45673209954356,45673210118196,45673210019892,45673210085428,45673278734388,45673278832692,45673278767156,45673278799924,45673282240564,45673282338868,45673282273332,45673282306100,45673282961460,45673283059764,45673282994228,45673283026996,45703309295668,45703309426740,45703309328436,45703309361204,45703309393972,45703320698932,45703320731700,45703320764468,45703320797236,45703298285620,45703298318388,45703298351156,45703298383924,45703293304884,45703293435956,45703293468724,45703293337652,45703293370420,45703293403188,45703293567028,45703293730868,45703293599796,45703293632564,45703293665332,45703291011124,45703291174964,45703291043892,45703291076660,45703291109428,45703283245108,45703283310644,45703283343412,45703283277876,45703284555828,45703284621364,45703284654132,45703284588596,45703279378484,45703279476788,45703279411252,45896868495412,45896868528180,45896868560948,45896868593716,45896868626484,45896868659252,45896868692020,45896868724788,45896868757556,45901917880372,45901917683764,45901917618228,45901916307508,45901913587764,45901903265844,45901610057780,45901608288308,45901599670324",
+    "cart_drawer_collection": "",
+    "cart_color_scheme": "scheme-1",
+    "sections": {
+      "main-password-header": {
+        "type": "main-password-header",
+        "settings": {
+          "color_scheme": "scheme-1"
+        }
+      },
+      "main-password-footer": {
+        "type": "main-password-footer",
+        "settings": {
+          "color_scheme": "scheme-1"
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "855628211100114053": {
+        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": false,
+        "settings": {}
+      },
+      "17151115064775110295": {
+        "type": "shopify://apps/recharge-subscriptions/blocks/recharge-theme/371eed76-0b44-4869-9813-730372ea378e",
+        "disabled": false,
+        "settings": {
+          "color_brand": "#33534b",
+          "contrast_color": "#ffffff",
+          "color_brand_secondary": "#dd5638",
+          "corners": "8px",
+          "app_background": "#f9f8f4",
+          "app_container": 1200,
+          "app_vertical_padding": 32,
+          "images_aspect_ratio": "1",
+          "cards_background": "#ffffff",
+          "cards_border_color": "rgba(0,0,0,0)"
+        }
+      },
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      },
+      "2567389343055140935": {
+        "type": "shopify://apps/microsoft-clarity/blocks/clarity_js/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
+        "disabled": false,
+        "settings": {}
+      },
+      "1877152918344802950": {
+        "type": "shopify://apps/intelligems-a-b-testing/blocks/intelligems-script/fa83b64c-0c77-4c0c-b4b2-b94b42f5ef19",
+        "disabled": false,
+        "settings": {}
+      },
+      "15685250022964305326": {
+        "type": "shopify://apps/elevar-conversion-tracking/blocks/dataLayerEmbed/bc30ab68-b15c-4311-811f-8ef485877ad6",
+        "disabled": false,
+        "settings": {}
+      },
+      "18380801738182334087": {
+        "type": "shopify://apps/addingwell/blocks/aw-gtm/c8ed21e7-0ac8-4249-8c91-cbdde850b5b8",
+        "disabled": false,
+        "settings": {}
+      },
+      "15614416626742018354": {
+        "type": "shopify://apps/userway-website-accessibility/blocks/uw-widget-extension/bc2d8a34-1a37-451b-ab1a-271bc4e9daa7",
+        "disabled": false,
+        "settings": {}
+      },
+      "14330285684745061375": {
+        "type": "shopify://apps/atb-attribution-reports/blocks/attribution-analytics/019a3a2e-e84b-7e9e-8c95-ba47d5e8d147",
+        "disabled": false,
+        "settings": {}
+      },
+      "15351435345818755577": {
+        "type": "shopify://apps/pandectes-gdpr/blocks/banner/58c0baa2-6cc1-480c-9ea6-38d6d559556a",
+        "disabled": false,
+        "settings": {}
+      },
+      "5099108079832727417": {
+        "type": "shopify://apps/avada-seo-suite/blocks/avada-seo/15507c6e-1aa3-45d3-b698-7e175e033440",
+        "disabled": false,
+        "settings": {}
+      },
+      "2780066564730972057": {
+        "type": "shopify://apps/sp-hide-price-access/blocks/mp-access-control-embed/19eec9a7-4327-421e-96f6-ed656b5258cc",
+        "disabled": false,
+        "settings": {}
+      }
+    },
+    "color_schemes": {
+      "scheme-1": {
+        "settings": {
+          "background": "#f9f5ed",
+          "background_gradient": "",
+          "header": "#33534b",
+          "text": "#00342d",
+          "button": "#fb5a2e",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#00342d",
+          "shadow": "#121212"
+        }
+      },
+      "scheme-2": {
+        "settings": {
+          "background": "#ffffff",
+          "background_gradient": "",
+          "header": "#121212",
+          "text": "#121212",
+          "button": "#fb5a2e",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#00342d",
+          "shadow": "#121212"
+        }
+      },
+      "scheme-3": {
+        "settings": {
+          "background": "#30544b",
+          "background_gradient": "",
+          "header": "#ffffff",
+          "text": "#ffffff",
+          "button": "#ffffff",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#ffffff",
+          "shadow": "#121212"
+        }
+      },
+      "scheme-4": {
+        "settings": {
+          "background": "#121212",
+          "background_gradient": "",
+          "header": "#121212",
+          "text": "#ffffff",
+          "button": "#ffffff",
+          "button_label": "#121212",
+          "secondary_button_label": "#ffffff",
+          "shadow": "#121212"
+        }
+      },
+      "scheme-5": {
+        "settings": {
+          "background": "#334fb4",
+          "background_gradient": "",
+          "header": "#121212",
+          "text": "#ffffff",
+          "button": "#ffffff",
+          "button_label": "#334fb4",
+          "secondary_button_label": "#ffffff",
+          "shadow": "#121212"
+        }
+      },
+      "scheme-3ce67617-882c-48b4-b8c8-c3ff502e854e": {
+        "settings": {
+          "background": "#fb5a2e",
+          "background_gradient": "",
+          "header": "#ffffff",
+          "text": "#ffffff",
+          "button": "#fb5a2e",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#00342d",
+          "shadow": "#121212"
+        }
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "logo_width": 90,
+      "color_schemes": {
+        "scheme-1": {
+          "settings": {
+            "background": "#FFFFFF",
+            "background_gradient": "",
+            "text": "#121212",
+            "button": "#121212",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#121212",
+            "shadow": "#121212"
+          }
+        },
+        "scheme-2": {
+          "settings": {
+            "background": "#F3F3F3",
+            "background_gradient": "",
+            "text": "#121212",
+            "button": "#121212",
+            "button_label": "#F3F3F3",
+            "secondary_button_label": "#121212",
+            "shadow": "#121212"
+          }
+        },
+        "scheme-3": {
+          "settings": {
+            "background": "#242833",
+            "background_gradient": "",
+            "text": "#FFFFFF",
+            "button": "#FFFFFF",
+            "button_label": "#000000",
+            "secondary_button_label": "#FFFFFF",
+            "shadow": "#121212"
+          }
+        },
+        "scheme-4": {
+          "settings": {
+            "background": "#121212",
+            "background_gradient": "",
+            "text": "#FFFFFF",
+            "button": "#FFFFFF",
+            "button_label": "#121212",
+            "secondary_button_label": "#FFFFFF",
+            "shadow": "#121212"
+          }
+        },
+        "scheme-5": {
+          "settings": {
+            "background": "#334FB4",
+            "background_gradient": "",
+            "text": "#FFFFFF",
+            "button": "#FFFFFF",
+            "button_label": "#334FB4",
+            "secondary_button_label": "#FFFFFF",
+            "shadow": "#121212"
+          }
+        }
+      },
+      "type_header_font": "assistant_n4",
+      "heading_scale": 100,
+      "type_body_font": "assistant_n4",
+      "body_scale": 100,
+      "page_width": 1200,
+      "spacing_sections": 0,
+      "spacing_grid_horizontal": 8,
+      "spacing_grid_vertical": 8,
+      "animations_reveal_on_scroll": true,
+      "animations_hover_elements": "none",
+      "buttons_border_thickness": 1,
+      "buttons_border_opacity": 100,
+      "buttons_radius": 0,
+      "buttons_shadow_opacity": 0,
+      "buttons_shadow_horizontal_offset": 0,
+      "buttons_shadow_vertical_offset": 4,
+      "buttons_shadow_blur": 5,
+      "variant_pills_border_thickness": 1,
+      "variant_pills_border_opacity": 55,
+      "variant_pills_radius": 40,
+      "variant_pills_shadow_opacity": 0,
+      "variant_pills_shadow_horizontal_offset": 0,
+      "variant_pills_shadow_vertical_offset": 4,
+      "variant_pills_shadow_blur": 5,
+      "inputs_border_thickness": 1,
+      "inputs_border_opacity": 55,
+      "inputs_radius": 0,
+      "inputs_shadow_opacity": 0,
+      "inputs_shadow_horizontal_offset": 0,
+      "inputs_shadow_vertical_offset": 4,
+      "inputs_shadow_blur": 5,
+      "card_style": "standard",
+      "card_image_padding": 0,
+      "card_text_alignment": "left",
+      "card_color_scheme": "scheme-2",
+      "card_border_thickness": 0,
+      "card_border_opacity": 10,
+      "card_corner_radius": 0,
+      "card_shadow_opacity": 0,
+      "card_shadow_horizontal_offset": 0,
+      "card_shadow_vertical_offset": 4,
+      "card_shadow_blur": 5,
+      "collection_card_style": "standard",
+      "collection_card_image_padding": 0,
+      "collection_card_text_alignment": "left",
+      "collection_card_color_scheme": "scheme-2",
+      "collection_card_border_thickness": 0,
+      "collection_card_border_opacity": 10,
+      "collection_card_corner_radius": 0,
+      "collection_card_shadow_opacity": 0,
+      "collection_card_shadow_horizontal_offset": 0,
+      "collection_card_shadow_vertical_offset": 4,
+      "collection_card_shadow_blur": 5,
+      "blog_card_style": "standard",
+      "blog_card_image_padding": 0,
+      "blog_card_text_alignment": "left",
+      "blog_card_color_scheme": "scheme-2",
+      "blog_card_border_thickness": 0,
+      "blog_card_border_opacity": 10,
+      "blog_card_corner_radius": 0,
+      "blog_card_shadow_opacity": 0,
+      "blog_card_shadow_horizontal_offset": 0,
+      "blog_card_shadow_vertical_offset": 4,
+      "blog_card_shadow_blur": 5,
+      "text_boxes_border_thickness": 0,
+      "text_boxes_border_opacity": 10,
+      "text_boxes_radius": 0,
+      "text_boxes_shadow_opacity": 0,
+      "text_boxes_shadow_horizontal_offset": 0,
+      "text_boxes_shadow_vertical_offset": 4,
+      "text_boxes_shadow_blur": 5,
+      "media_border_thickness": 1,
+      "media_border_opacity": 5,
+      "media_radius": 0,
+      "media_shadow_opacity": 0,
+      "media_shadow_horizontal_offset": 0,
+      "media_shadow_vertical_offset": 4,
+      "media_shadow_blur": 5,
+      "popup_border_thickness": 1,
+      "popup_border_opacity": 10,
+      "popup_corner_radius": 0,
+      "popup_shadow_opacity": 5,
+      "popup_shadow_horizontal_offset": 0,
+      "popup_shadow_vertical_offset": 4,
+      "popup_shadow_blur": 5,
+      "drawer_border_thickness": 1,
+      "drawer_border_opacity": 10,
+      "drawer_shadow_opacity": 0,
+      "drawer_shadow_horizontal_offset": 0,
+      "drawer_shadow_vertical_offset": 4,
+      "drawer_shadow_blur": 5,
+      "badge_position": "bottom left",
+      "badge_corner_radius": 40,
+      "sale_badge_color_scheme": "scheme-4",
+      "sold_out_badge_color_scheme": "scheme-3",
+      "brand_headline": "",
+      "brand_description": "<p></p>",
+      "brand_image_width": 100,
+      "social_twitter_link": "",
+      "social_facebook_link": "",
+      "social_pinterest_link": "",
+      "social_instagram_link": "",
+      "social_tiktok_link": "",
+      "social_tumblr_link": "",
+      "social_snapchat_link": "",
+      "social_youtube_link": "",
+      "social_vimeo_link": "",
+      "predictive_search_enabled": true,
+      "predictive_search_show_vendor": false,
+      "predictive_search_show_price": false,
+      "currency_code_enabled": true,
+      "cart_type": "notification",
+      "show_vendor": false,
+      "show_cart_note": false,
+      "cart_drawer_collection": "",
+      "cart_color_scheme": "scheme-1",
+      "sections": {
+        "main-password-header": {
+          "type": "main-password-header",
+          "settings": {
+            "color_scheme": "scheme-1"
+          }
+        },
+        "main-password-footer": {
+          "type": "main-password-footer",
+          "settings": {
+            "color_scheme": "scheme-1"
+          }
+        }
+      }
+    }
+  }
+}

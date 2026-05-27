@@ -1,0 +1,194 @@
+{{ 'section-MTB-previous-boxes.css' | asset_url | stylesheet_tag }}
+
+<section class="previous-boxes-component page-width">
+  <style>
+     .previous-boxes-component {
+      padding-top: {{ section.settings.component_mobile_pt }}px;
+      padding-bottom: {{ section.settings.component_mobile_pb }}px;
+    }
+
+    .previous-boxes__header {
+      color: {{ section.settings.header_color }};
+    }
+
+    .previous-boxes__box-text {
+      color: {{ section.settings.box_text_color }};
+    }
+
+    .previous-boxes__box-img-wrap {
+      border-color: {{ section.settings.box_border_color }}
+    }
+
+
+    @media screen and (min-width: 641px) and (max-width: 989px) {
+      .previous-boxes-component {
+        padding-top: {{ section.settings.component_tablet_pt }}px;
+        padding-bottom: {{ section.settings.component_tablet_pb }}px;
+      }
+    }
+
+    @media screen and (min-width: 990px) {
+     .previous-boxes-component {
+        padding-top: {{ section.settings.component_desktop_pt }}px;
+        padding-bottom: {{ section.settings.component_desktop_pb }}px;
+      }
+    }
+  </style>
+  <div class="previous-boxes__content">
+    <div class="previous-boxes__header-wrap">
+      <h2 class="previous-boxes__header">{{ section.settings.component_header }}</h2>
+    </div>
+
+    <div class="previous-boxes__blocks-wrap">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'box' -%}
+            <div class="previous-boxes__box_wrap">
+              <div class="previous-boxes__box-img-wrap">
+                {%- if block.settings.box_image != blank -%}
+                  {{
+                    block.settings.box_image
+                    | image_url: width: '900'
+                    | image_tag: loading: 'lazy', widths: '900', class: 'previous-boxes__box-img'
+                  }}
+                {%- endif -%}
+              </div>
+              <div class="previous-boxes__box-text-wrap header_font">
+                {%- if block.settings.box_text != blank -%}
+                  <p class="previous-boxes__box-text">{{ block.settings.box_text }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MTB Previous Boxes",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "component_header",
+      "label": "Component header"
+    },
+    {
+      "type": "color",
+      "id": "header_color",
+      "label": "Header color",
+      "default": "#00574f"
+    },
+    {
+      "type": "color",
+      "id": "box_text_color",
+      "label": "Boxes text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "box_border_color",
+      "label": "Boxes border color",
+      "default": "#bbbbbb"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pt",
+      "label": "Component mobile padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pb",
+      "label": "Component mobile padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+
+    {
+      "type": "header",
+      "content": "Tablet Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pt",
+      "label": "Component tablet padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pb",
+      "label": "Component tablet padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pt",
+      "label": "Component desktop padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pb",
+      "label": "Component desktop padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "limit": 1,
+  "blocks": [
+    {
+      "type": "box",
+      "name": "Box",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "box_image",
+          "label": "Point image"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "box_text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTB Previous Boxes"
+    }
+  ]
+}
+{% endschema %}

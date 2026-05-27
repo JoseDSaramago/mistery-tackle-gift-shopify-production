@@ -1,0 +1,30 @@
+<label class="drop-menu">
+  <input type="checkbox"{% if dropped %} checked{% endif %}>
+  <div class="drop-button">
+    {% if index %}
+      {% render "ante-svg", icon: index %}
+    {% endif %}
+    {% if big %}
+      <h5>{{ title }}</h5>
+    {% else %}
+      <h6>{{ title }}</h6>
+    {% endif %}
+    {% render "ante-svg", icon: "arrow" %}
+  </div>
+  <div class="drop-content-container">
+    {% if drops %}
+      <div class="drop-content">
+        {% render "ante-drops", drops: drops, collapsed: collapsed, big: big, indexes: indexes %}
+      </div>
+    {% else %}
+      <div class="drop-content richtext muted">{{ content }}</div>
+    {% endif %}
+  </div>
+</label>
+<script>
+  {
+    const label = document.currentScript.previousElementSibling
+    const input = label.querySelector(":scope > input")
+    label.querySelector(":scope > .drop-content-container").addEventListener("click", e => setTimeout(() => input.checked = true))
+  }
+</script>

@@ -1,0 +1,109 @@
+<div class="border-component-{{ section.id }} page-width">
+  <style>
+     .border-component-{{ section.id }} {
+      border-bottom: 2px dotted #d4d1cd;
+      padding-top: {{ section.settings.component_mobile_pt }}px;
+      padding-bottom: {{ section.settings.component_mobile_pb }}px;
+    }
+
+    @media screen and (min-width: 641px) and (max-width: 989px) {
+      .border-component-{{ section.id }} {
+        padding-top: {{ section.settings.component_tablet_pt }}px;
+        padding-bottom: {{ section.settings.component_tablet_pb }}px;
+      }
+    }
+
+    @media screen and (min-width: 990px) {
+     .border-component-{{ section.id }} {
+        padding-top: {{ section.settings.component_desktop_pt }}px;
+        padding-bottom: {{ section.settings.component_desktop_pb }}px;
+      }
+    }
+  </style>
+</div>
+
+{% schema %}
+{
+  "name": "MTB Border",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pt",
+      "label": "Component mobile padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pb",
+      "label": "Component mobile padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+
+    {
+      "type": "header",
+      "content": "Tablet Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pt",
+      "label": "Component tablet padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pb",
+      "label": "Component tablet padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pt",
+      "label": "Component desktop padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pb",
+      "label": "Component desktop padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTB Border"
+    }
+  ]
+}
+{% endschema %}

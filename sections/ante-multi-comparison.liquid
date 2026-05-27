@@ -1,0 +1,215 @@
+{% assign id = section.settings.custom_id | default: section.id %}
+
+<style>
+  #{{ id }} .tab-contents {
+    width: var(--width-8);
+  }
+
+  #{{ id }} .tab-content {
+    display: flex;
+    gap: var(--micropad-small);
+    width: 100%;
+  }
+
+  #{{ id }} .tab-content-inner {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: var(--micropad-small);
+  }
+
+  #{{ id }} .tab-block {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-surface-100);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-large);
+    padding: var(--padding-medium);
+    gap: var(--spacing-small);
+  }
+
+  #{{ id }} h4 {
+    text-align: center;
+  }
+
+  #{{ id }} .tab-block svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  #{{ id }} .ante-image {
+    min-width: 50%;
+    position: relative;
+  }
+
+  #{{ id }} .ante-image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #{{ id }} .items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-small);
+  }
+
+  #{{ id }} .items > div {
+    display: flex;
+    gap: var(--micropad-small);
+  }
+
+  #{{ id }} .tab-block svg {
+    min-width: 30px;
+  }
+
+  @media (max-width: 1919px) {
+    #{{ id }} .tab-contents {
+      width: var(--width-9);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    #{{ id }} .tab-contents {
+      width: 100%;
+    }
+
+    #{{ id }} .tab-content {
+      flex-direction: column;
+    }
+
+    #{{ id }} .tab-content-inner {
+      flex-direction: row;
+    }
+
+    #{{ id }} .ante-image img {
+      position: initial;
+    }
+  }
+
+  @media (max-width: 600px) {
+    #{{ id }} .tab-content,
+    #{{ id }} .tab-content-inner {
+      flex-direction: column;
+    }
+
+    #{{ id }} .tab-block svg {
+      width: 22px;
+      min-width: 22px;
+      height: 22px;
+    }
+  }
+</style>
+
+{% render "ante-section-structure", section: section %}
+  <div class="tab-bar">
+    {% assign index = 0 %}
+    {% for block in section.blocks %}
+      {% if block.type == "tab" %}
+        {% assign index = index | plus: 1 %}
+        <button class="tab-bar-button{% if index == 1 %} active{% endif %}">{{ block.settings.tab }}</button>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="tab-contents">
+    {% assign index = 0 %}
+    {% for block in section.blocks %}
+      {% if block.type == "tab" %}
+        {% assign index = index | plus: 1 %}
+          <div class="tab-content{% if forloop.first %} active{% endif %}" data-tab="{{ block.settings.tab }}">
+            <div class="tab-content-inner">
+            <div class="tab-block">
+              <h4>{{ block.settings.before_title }}</h4>
+              <div class="items">
+                {% assign lines = block.settings.before_content | newline_to_br | split: '<br />' %}
+                {% for line in lines %}
+                  <div class="body-base muted">{% render "ante-svg", icon: "cross", colour: "#D14424" %} {{ line }}</div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="tab-block">
+              <h4>{{ block.settings.after_title }}</h4>
+              <div class="items">
+                {% assign lines = block.settings.after_content | newline_to_br | split: '<br />' %}
+                {% for line in lines %}
+                  <div class="body-base muted">{% render "ante-svg", icon: "check", colour: "#219A50" %} {{ line }}</div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% render "ante-image", image: block.settings.image %}
+          </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% render "ante-section-structure", end: true %}
+
+{% schema %}
+  {
+    "name": "Multi Comparison [UTA]",
+    "presets": [
+      {
+        "name": "Multi Comparison [UTA]"
+      }
+    ],
+    "settings": [
+      {"type":"header","content":"Section Heading"},{"type":"richtext","id":"heading","label":"Heading"},{"type":"select","id":"heading_alignment","label":"Heading Alignment","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"},{"value":"row","label":"Row"}],"default":"center"},{"type":"select","id":"heading_alignment_mobile","label":"Heading Alignment (Mobile)","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"center"},{"type":"checkbox","id":"limit_heading_width","label":"Limit Heading Width","default": true},{"type":"header","content":"Section Settings"},{"type":"checkbox","id":"section_inverse","label":"Inverted Section","default":false},{"type":"select","id":"section_background_style","label":"Section Background Style","options":[{"value":"section-background-style-normal","label":"Normal"},{"value":"section-background-style-floating","label":"Floating"}],"default":"section-background-style-normal"},{"type":"select","id":"section_background_colour","label":"Section Background Colour","options":[{"value":"section-background-colour-normal","label":"Normal"},{"value":"section-background-colour-alt-100","label":"Alt (100)"},{"value":"section-background-colour-alt","label":"Alt"},{"value":"section-background-colour-alt-900","label":"Alt (900)"},{"value":"section-background-colour-surface-100","label":"Surface (100)"},{"value":"section-background-colour-surface","label":"Surface"},{"value":"section-background-colour-surface-900","label":"Surface (900)"}],"default":"section-background-colour-normal"},{"type":"select","id":"section_spacing","label":"Section Spacing","options":[{"value":"section-spacing-top-bottom","label":"Top & Bottom"},{"value":"section-spacing-top","label":"Top"},{"value":"section-spacing-bottom","label":"Bottom"},{"value":"section-spacing-none","label":"None"}],"default":"section-spacing-bottom"},{"type":"text","id":"custom_id","label":"Custom ID","placeholder":"id","info":"Assign a custom ID to this section, allowing you to easily reference it"},{"type": "checkbox","id": "section_visible","label":"Section Visible","default":true,"info": "Turning this off hides the section but doesn't remove it from the page."}
+    ],
+    "blocks": [
+      {
+        "name": "Tab",
+        "type": "tab",
+        "settings": [
+          {
+            "type": "text",
+            "id": "tab",
+            "label": "Tab",
+            "default": "Tab",
+            "placeholder": "Tab"
+          },
+          {
+            "type": "text",
+            "id": "before_title",
+            "label": "Before Title",
+            "default": "Before Title",
+            "placeholder": "Before Title"
+          },
+          {
+            "type": "textarea",
+            "id": "before_content",
+            "label": "Before Content",
+            "default": "Before Content",
+            "placeholder": "Before Content",
+            "info": "Put each item on a new line"
+          },
+          {
+            "type": "text",
+            "id": "after_title",
+            "label": "After Title",
+            "default": "After Title",
+            "placeholder": "After Title"
+          },
+          {
+            "type": "textarea",
+            "id": "after_content",
+            "label": "After Content",
+            "default": "After Content",
+            "placeholder": "After Content",
+            "info": "Put each item on a new line"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      },
+      {
+        "type": "sticker",
+        "name": "Sticker",
+        "settings": [{"type":"image_picker","id":"image","label":"Image","info":"Main sticker image that will be displayed"},{"type":"select","id":"layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below","info":"Choose if the sticker should appear above or below the content"},{"type":"number","id":"width","label":"Width","default":128,"info":"Width of the sticker in pixels"},{"type":"number","id":"rotation","label":"Rotation","default":0,"info":"Rotate the sticker in degrees"},{"type":"header","content":"Position Settings"},{"type":"select","id":"horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left","info":"Choose horizontal position of the sticker"},{"type":"select","id":"vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content","info":"Choose vertical position of the sticker"},{"type":"number","id":"offset_x","label":"Horizontal Offset","default":0,"info":"Shift in pixels left or right from chosen horizontal position"},{"type":"number","id":"offset_y","label":"Vertical Offset","default":0,"info":"Shift in pixels up or down from chosen vertical position"},{"type":"header","content":"Override 1"},{"type":"select","id":"override_1_visibility","label":"Override Visibility","options":[{"value":"disabled","label":"Disabled"},{"value":"enabled","label":"Enabled"},{"value":"hidden","label":"Hidden"}],"default":"disabled","info":"Override settings are applied at the selected width and below"},{"type":"number","id":"override_1_page_width","label":"Page Width","default":1920,"info":"Screen width when this override will activate (and below)"},{"type":"image_picker","id":"override_1_image","label":"Image","info":"Override image for this screen size"},{"type":"select","id":"override_1_layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below"},{"type":"number","id":"override_1_width","label":"Width","default":128},{"type":"number","id":"override_1_rotation","label":"Rotation","default":0},{"type":"select","id":"override_1_horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"override_1_vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content"},{"type":"number","id":"override_1_offset_x","label":"Horizontal Offset","default":0},{"type":"number","id":"override_1_offset_y","label":"Vertical Offset","default":0},{"type":"header","content":"Override 2"},{"type":"select","id":"override_2_visibility","label":"Override Visibility","options":[{"value":"disabled","label":"Disabled"},{"value":"enabled","label":"Enabled"},{"value":"hidden","label":"Hidden"}],"default":"disabled","info":"Override settings are applied at the selected width and below"},{"type":"number","id":"override_2_page_width","label":"Page Width","default":1024,"info":"Screen width when this override will activate (and below)"},{"type":"image_picker","id":"override_2_image","label":"Image","info":"Override image for this screen size"},{"type":"select","id":"override_2_layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below"},{"type":"number","id":"override_2_width","label":"Width","default":128},{"type":"number","id":"override_2_rotation","label":"Rotation","default":0},{"type":"select","id":"override_2_horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"override_2_vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content"},{"type":"number","id":"override_2_offset_x","label":"Horizontal Offset","default":0},{"type":"number","id":"override_2_offset_y","label":"Vertical Offset","default":0},{"type":"header","content":"Override 3"},{"type":"select","id":"override_3_visibility","label":"Override Visibility","options":[{"value":"disabled","label":"Disabled"},{"value":"enabled","label":"Enabled"},{"value":"hidden","label":"Hidden"}],"default":"disabled","info":"Override settings are applied at the selected width and below"},{"type":"number","id":"override_3_page_width","label":"Page Width","default":600,"info":"Screen width when this override will activate (and below)"},{"type":"image_picker","id":"override_3_image","label":"Image","info":"Override image for this screen size"},{"type":"select","id":"override_3_layer_order","label":"Layer Order","options":[{"value":"above","label":"Above Content"},{"value":"below","label":"Below Content"}],"default":"below"},{"type":"number","id":"override_3_width","label":"Width","default":128},{"type":"number","id":"override_3_rotation","label":"Rotation","default":0},{"type":"select","id":"override_3_horizontal_position","label":"Horizontal Position","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"override_3_vertical_position","label":"Vertical Position","options":[{"value":"top_section","label":"Top of Section"},{"value":"top_content","label":"Top of Content"},{"value":"center","label":"Center"},{"value":"bottom_content","label":"Bottom of Content"},{"value":"bottom_section","label":"Bottom of Section"}],"default":"top_content"},{"type":"number","id":"override_3_offset_x","label":"Horizontal Offset","default":0},{"type":"number","id":"override_3_offset_y","label":"Vertical Offset","default":0}]
+      }
+    ]
+  }
+{% endschema %}

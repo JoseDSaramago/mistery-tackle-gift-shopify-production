@@ -1,0 +1,623 @@
+{% comment %}theme-check-disable UndefinedObject{% endcomment %}
+{{ 'section-footer.css' | asset_url | stylesheet_tag }}
+{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .footer {
+    margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
+    {%- if section.settings.footer_bg_mobile_img != blank -%}
+      background-image: url('{{ section.settings.footer_bg_mobile_img | image_url: width: 750 }}');
+    {% endif %}
+  }
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .footer {
+      margin-top: {{ section.settings.margin_top }}px;
+      {%- if section.settings.footer_bg_img != blank -%}
+        background-image: url('{{ section.settings.footer_bg_img | image_url: width: 1100 }}');
+      {% endif %}
+    }
+
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding header_font">
+  {%- liquid
+    assign has_social_icons = true
+    if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
+      assign has_social_icons = false
+    endif
+
+    if settings.brand_image == blank and settings.brand_headline == blank and settings.brand_description == blank
+      assign brand_empty = true
+    endif
+
+    if section.blocks.size == 1 and section.blocks[0].type == 'brand_information' and brand_empty and has_social_icons == false and section.settings.newsletter == 'none' and section.settings.enable_follow_on_shop == false
+      assign only_empty_brand = true
+    endif
+  -%}
+  {%- if section.blocks.size > 0
+    or section.settings.show_social
+    and has_social_icons == true
+    or section.settings.enable_follow_on_shop
+  -%}
+    {%- unless only_empty_brand -%}
+      <div class="footer__content-top page-width">
+        {%- if section.blocks.size > 0 -%}
+          {%- assign remaining_blocks = section.blocks.size %}
+          {%- if section.blocks.size > section.settings.max_columns %}
+            {%- assign remaining_blocks = section.blocks.size | minus: section.settings.max_columns %}
+          {% endif %}
+          {%- liquid
+            if remaining_blocks == 9
+              assign footer_grid_class = 'grid--3-col-tablet'
+            elsif remaining_blocks > 6
+              assign footer_grid_class = 'grid--4-col-desktop'
+            elsif remaining_blocks > 5
+              assign footer_grid_class = 'grid--3-col-tablet'
+            endif
+          -%}
+          <div
+            class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            {% if settings.animations_reveal_on_scroll %}
+              data-cascade
+            {% endif %}
+          >
+            {%- assign max_columns = section.settings.max_columns -%}
+
+            {%- for block in section.blocks limit: max_columns -%}
+              <div
+                class="footer-block grid__item{% if block.type == 'link_list' %} footer-block--menu{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                {{ block.shopify_attributes }}
+                {% if settings.animations_reveal_on_scroll %}
+                  data-cascade
+                  style="--animation-order: {{ forloop.index }};"
+                {% endif %}
+              >
+                {%- render 'footer-block-types', block: block, has_social_icons: has_social_icons -%}
+
+                {% if max_columns == forloop.index %}
+                  {%- for nestedBlock in section.blocks offset: max_columns -%}
+                    {%- render 'footer-block-types', block: nestedBlock -%}
+                  {%- endfor -%}
+                {% endif %}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        <div
+          class="footer-block--newsletter{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+          {% endif %}
+        >
+          {%- if section.settings.show_social and has_social_icons -%}
+            {%- render 'social-icons', class: 'footer__list-social' -%}
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endunless -%}
+  {%- endif -%}
+
+  <style>
+    .footer__content-bottom {
+      background-color: {{ section.settings.footer_bottom_bg }};
+    }
+  </style>
+
+  <div
+    class="footer__content-bottom{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+    {% if settings.animations_reveal_on_scroll %}
+      data-cascade
+    {% endif %}
+  >
+    <div class="footer__content-bottom-wrapper page-width">
+      <div class="footer__column footer__localization isolate">
+        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+          <localization-form>
+            {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="caption-large text-body" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                {%- render 'country-localization', localPosition: 'FooterCountry' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {%- endif -%}
+
+        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+          <localization-form>
+            {%- form 'localization', id: 'FooterLanguageForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="caption-large text-body" id="FooterLanguageLabel">
+                  {{ 'localization.language_label' | t }}
+                </h2>
+                {%- render 'language-localization', localPosition: 'FooterLanguage' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {%- endif -%}
+      </div>
+      <div class="footer__column footer__column--info">
+        {%- if section.settings.payment_enable -%}
+          <div class="footer__payment">
+            <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
+            <ul class="list list-payment" role="list">
+              {%- for type in shop.enabled_payment_types -%}
+                <li class="list-payment__item">
+                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="footer__content-bottom-wrapper page-width{% if section.settings.enable_country_selector == false and section.settings.enable_language_selector == false %} footer__content-bottom-wrapper--center{% endif %}">
+      <div class="copyright__content">
+        <p class="link link--text list-menu__item list-menu__item--link">
+          &copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
+        </p>
+      </div>
+      {%- if section.settings.show_policy -%}
+        <ul class="policies list-unstyled">
+          {%- if section.settings.terms_link == blank
+            and section.settings.privacy_link == blank
+            and section.settings.sms_mms_terms_link == blank
+          -%}
+            {%- for policy in shop.policies -%}
+              {%- if policy != blank -%}
+                <li>
+                  <p class="policy_list_item">
+                    <a class="link link--text list-menu__item list-menu__item--link" href="{{ policy.url }}">
+                      {{- policy.title | escape -}}
+                    </a>
+                  </p>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if policy != blank -%}
+              <li>
+                <p class="policy_list_item">
+                  <a class="link link--text list-menu__item list-menu__item--link" href="{{ policy.url }}">
+                    {{- policy.title | escape -}}
+                  </a>
+                </p>
+              </li>
+            {%- endif -%}
+          {%- else -%}
+            {%- if section.settings.terms_link != blank -%}
+              <li>
+                <p class="policy_list_item">
+                  <a
+                    class="link link--text list-menu__item list-menu__item--link"
+                    href="{{ section.settings.terms_link }}"
+                    >Terms</a
+                  >
+                </p>
+              </li>
+            {%- endif -%}
+            {%- if section.settings.privacy_link != blank -%}
+              <li>
+                <p class="policy_list_item">
+                  <a
+                    class="link link--text list-menu__item list-menu__item--link"
+                    href="{{ section.settings.privacy_link }}"
+                    >Privacy</a
+                  >
+                </p>
+              </li>
+            {%- endif -%}
+            {%- if section.settings.sms_mms_terms_link != blank -%}
+              <li>
+                <p class="policy_list_item">
+                  <a
+                    class="link link--text list-menu__item list-menu__item--link"
+                    href="{{ section.settings.sms_mms_terms_link }}"
+                    >SMS & MMS Terms</a
+                  >
+                </p>
+              </li>
+            {%- endif -%}
+          {%- endif -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "link_list",
+      "name": "t:sections.footer.blocks.link_list.name",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "t:sections.footer.blocks.link_list.settings.heading.default",
+          "label": "t:sections.footer.blocks.link_list.settings.heading.label"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "default": "footer",
+          "label": "t:sections.footer.blocks.link_list.settings.menu.label",
+          "info": "t:sections.footer.blocks.link_list.settings.menu.info"
+        }
+      ]
+    },
+    {
+      "type": "brand_information",
+      "name": "t:sections.footer.blocks.brand_information.name",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.footer.blocks.brand_information.settings.paragraph.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "brand_logo",
+          "label": "t:sections.footer.blocks.brand_information.settings.brand_logo.label"
+        },
+        {
+          "type": "range",
+          "id": "brand_logo_mobile_width",
+          "min": 20,
+          "max": 100,
+          "step": 2,
+          "unit": "%",
+          "label": "t:sections.footer.blocks.brand_information.settings.brand_logo_mobile_width.label",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "brand_logo_width",
+          "min": 60,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "label": "t:sections.footer.blocks.brand_information.settings.brand_logo_width.label",
+          "default": 80
+        },
+        {
+          "type": "header",
+          "content": "t:sections.footer.blocks.brand_information.settings.header__newsletter.content"
+        },
+        
+        {
+          "type": "select",
+          "id": "newsletter",
+          "label": "Newsletter",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "shopify",
+              "label": "Shopify"
+            },
+            {
+              "value": "klavio",
+              "label": "Klavio"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "text",
+          "id": "klavio_public_api_key",
+          "label": "Klavio Public API key"
+        },
+        {
+          "type": "html",
+          "id": "klavio_form",
+          "label": "Klavio Form"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "newsletter_heading",
+          "default": "t:sections.footer.settings.newsletter_heading.default",
+          "label": "t:sections.footer.settings.newsletter_heading.label"
+        },
+        {
+          "type": "text",
+          "id": "newsletter_text",
+          "label": "t:sections.footer.blocks.brand_information.settings.newsletter_text.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.footer.settings.header__9.content",
+          "info": "t:sections.footer.settings.header__9.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_follow_on_shop",
+          "default": true,
+          "label": "t:sections.footer.settings.enable_follow_on_shop.label"
+        },
+        {
+          "type": "text",
+          "id": "newsletter_submit_text",
+          "default": "SIGN UP!",
+          "label": "t:sections.footer.blocks.brand_information.settings.newsletter_submit_text.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_sign_in_icon",
+          "label": "t:sections.footer.blocks.brand_information.settings.custom_sign_in_icon.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.footer.blocks.brand_information.settings.header__1.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social",
+          "default": true,
+          "label": "t:sections.footer.blocks.brand_information.settings.show_social.label",
+          "info": "t:sections.footer.blocks.brand_information.settings.show_social.info"
+        },
+        {
+          "type": "range",
+          "id": "social_icons_size",
+          "min": 20,
+          "max": 60,
+          "step": 1,
+          "unit": "px",
+          "label": "t:sections.footer.blocks.brand_information.settings.social_icons_size.label",
+          "default": 20
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:sections.footer.blocks.text.name",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "t:sections.footer.blocks.text.settings.heading.default",
+          "label": "t:sections.footer.blocks.text.settings.heading.label"
+        },
+        {
+          "type": "richtext",
+          "id": "subtext",
+          "default": "t:sections.footer.blocks.text.settings.subtext.default",
+          "label": "t:sections.footer.blocks.text.settings.subtext.label"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "min": 50,
+          "max": 550,
+          "step": 5,
+          "unit": "px",
+          "label": "Image width",
+          "default": 100
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Image alignment on large screen",
+          "options": [
+            {
+              "value": "",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
+        }
+      ]
+    },
+    {
+      "type": "trustpilot_mark",
+      "name": "Trustpilot",
+      "settings": [
+        {
+          "type": "text",
+          "id": "trustpilot_header",
+          "label": "t:sections.footer.blocks.trustpilot_mark.settings.trustpilot_header.label"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__1.content",
+      "info": "t:sections.footer.settings.header__1.info"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_bg_mobile_img",
+      "label": "t:sections.footer.settings.icons.footer_bg_mobile_img.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_bg_img",
+      "label": "t:sections.footer.settings.icons.footer_bg_img.label"
+    },
+
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__2.content",
+      "info": "t:sections.footer.settings.header__2.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": true,
+      "label": "t:sections.footer.settings.show_social.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__3.content",
+      "info": "t:sections.footer.settings.header__4.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "t:sections.footer.settings.enable_country_selector.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__5.content",
+      "info": "t:sections.footer.settings.header__6.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": true,
+      "label": "t:sections.footer.settings.enable_language_selector.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__7.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_enable",
+      "default": true,
+      "label": "t:sections.footer.settings.payment_enable.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__8.content",
+      "info": "t:sections.footer.settings.header__8.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy",
+      "default": true,
+      "label": "t:sections.footer.settings.show_policy.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.footer.settings.margin_top.label",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "max_columns",
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "unit": "col",
+      "label": "t:sections.footer.settings.max_columns.label",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.footer_bottom_header"
+    },
+    {
+      "type": "color",
+      "id": "footer_bottom_bg",
+      "label": "t:sections.footer.settings.footer_bottom_bg.label"
+    },
+    {
+      "type": "url",
+      "id": "terms_link",
+      "label": "t:sections.footer.settings.terms_link.label"
+    },
+    {
+      "type": "url",
+      "id": "privacy_link",
+      "label": "t:sections.footer.settings.privacy_link.label"
+    },
+    {
+      "type": "url",
+      "id": "sms_mms_terms_link",
+      "label": "t:sections.footer.settings.sms_mms_terms_link.label"
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "link_list"
+      },
+      {
+        "type": "text"
+      }
+    ]
+  }
+}
+{% endschema %}

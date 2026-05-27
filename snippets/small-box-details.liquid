@@ -1,0 +1,20 @@
+{% comment %}
+  Renders small box MTB-box-details-component
+
+  Usage:
+  {% render 'small-box-details', img, subcopy, copy %}
+{% endcomment %}
+
+<div class="text-align-center box-details-component__box-desk-">
+  {%- if img != blank -%}
+    {{
+      img
+      | image_url: width: '200'
+      | image_tag: loading: 'lazy', widths: '200', class: 'lazyload box-details-component__box_img'
+    }}
+  {%- endif -%}
+  <div class="box-details-component__box-text-wrap">
+    <p class="box-details-component__subcopy">{{ subcopy }}</p>
+    <p class="box-details-component__copy">{{ copy }}</p>
+  </div>
+</div>

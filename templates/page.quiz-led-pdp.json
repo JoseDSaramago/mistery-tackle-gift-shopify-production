@@ -1,0 +1,705 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "page_config": {
+      "type": "ante-page-config",
+      "name": "Page Config | Quiz-Led PDP",
+      "settings": {
+        "default_buy_button_text": "GET YOUR BOX",
+        "default_buy_button_label": "",
+        "style_override": "none",
+        "use_original_headerfooter": false,
+        "particles": "none"
+      }
+    },
+    "quiz_pdp": {
+      "type": "ante-quiz-led-pdp",
+      "blocks": {
+        "species_bass": {
+          "type": "species",
+          "settings": {
+            "name": "Bass",
+            "color": "#33534b",
+            "image": "shopify://shop_images/selector-bass_b618bf51-b8ef-4b79-9ac6-0b26a6ddf7b6.png"
+          }
+        },
+        "species_pantrout": {
+          "type": "species",
+          "settings": {
+            "name": "Panfish & Trout",
+            "color": "#b53035",
+            "image": "shopify://shop_images/selector-panfish-trout_d315f9d2-3c97-487d-906e-c811195f9a2d.png"
+          }
+        },
+        "species_salt": {
+          "type": "species",
+          "settings": {
+            "name": "Inshore Saltwater",
+            "color": "#142648",
+            "image": "shopify://shop_images/selector-salt_d4ac62b1-5e12-4572-9034-adcc4cc7c07f.png"
+          }
+        },
+        "species_walleye": {
+          "type": "species",
+          "settings": {
+            "name": "Walleye",
+            "color": "#00594f",
+            "image": "shopify://shop_images/selector-walleye_8d90356e-ba90-49d4-b2d1-fe5a51dd5018.png"
+          }
+        },
+        "species_multi": {
+          "type": "species",
+          "settings": {
+            "name": "Multi-Species",
+            "color": "#33534b",
+            "image": "shopify://shop_images/selector-multi-species_5f996b13-9ad0-4bb9-b736-142471b67a29.png"
+          }
+        },
+        "tier_regular": {
+          "type": "product",
+          "name": "Regular Box",
+          "settings": {
+            "product": "regular-monthly-plan-1",
+            "custom_name": "Regular Box",
+            "preselected": false,
+            "recommendation_skill": "new",
+            "recommendation_plan": "6",
+            "tag_text": "<p>4-6 Items</p>",
+            "icon_image": "shopify://shop_images/reg-box-front-trans.png",
+            "image": "shopify://shop_images/337154327bffc56f7e0641c1d56791bc99b0284b.png",
+            "image_2": "shopify://shop_images/pdp-carousel-reg-2-baits-trans.png",
+            "image_3": "shopify://shop_images/pdp-carousel-reg-3-decal-trans.png",
+            "image_4": "shopify://shop_images/pdp-carousel-reg-4-tips_185b4cfb-3c45-45eb-ae0f-f56a7c4f0a14.jpg",
+            "tier_color": "#142648",
+            "price": 1999,
+            "compare_at_price": 2500
+          }
+        },
+        "tier_regular_4mo": {
+          "type": "subscription_product",
+          "name": "Regular · 4 month",
+          "settings": {
+            "parent_product": "regular-monthly-plan-1",
+            "product": "regular-4-month",
+            "plan_key": "4",
+            "subscription_option_text": "4 Months",
+            "subscription_tag_text": "<p><strong>$10 OFF</strong></p>",
+            "price": 9499,
+            "compare_at_price": 10000
+          }
+        },
+        "tier_regular_6mo": {
+          "type": "subscription_product",
+          "name": "Regular · 6 month",
+          "settings": {
+            "parent_product": "regular-monthly-plan-1",
+            "product": "regular-6-month-2",
+            "plan_key": "6",
+            "subscription_option_text": "6 Months",
+            "subscription_tag_text": "<p><strong>$10 OFF</strong></p>",
+            "price": 12999,
+            "compare_at_price": 15000
+          }
+        },
+        "tier_regular_12mo": {
+          "type": "subscription_product",
+          "name": "Regular · 12 month",
+          "settings": {
+            "parent_product": "regular-monthly-plan-1",
+            "product": "regular-12-month-1",
+            "plan_key": "12",
+            "subscription_option_text": "12 Months",
+            "subscription_tag_text": "<p><strong>$10 OFF</strong></p>",
+            "price": 24999,
+            "compare_at_price": 30000
+          }
+        },
+        "tier_pro": {
+          "type": "product",
+          "name": "Pro Box",
+          "settings": {
+            "product": "pro-monthly-plan-2",
+            "custom_name": "Pro Box",
+            "preselected": true,
+            "recommendation_skill": "growing",
+            "recommendation_plan": "6",
+            "tag_text": "<p>6-8 Items</p>",
+            "icon_image": "shopify://shop_images/pro-box-front-trans.png",
+            "image": "shopify://shop_images/pro_b4758d25-0aa8-4ded-85f6-6de557425617.webp",
+            "image_2": "shopify://shop_images/PDP-carousel-pro-2-baits-trans.png",
+            "image_3": "shopify://shop_images/PDP-carousel-pro-3-decal-trans.png",
+            "image_4": "shopify://shop_images/PDP-carousel-pro-4-tips_7942cd9d-6acb-4145-9341-ffb3bab62d97.jpg",
+            "tier_color": "#33534b",
+            "price": 3199,
+            "compare_at_price": 4000
+          }
+        },
+        "tier_pro_4mo": {
+          "type": "subscription_product",
+          "name": "Pro · 4 month",
+          "settings": {
+            "parent_product": "pro-monthly-plan-2",
+            "product": "pro-4-month",
+            "plan_key": "4",
+            "subscription_option_text": "4 Months",
+            "subscription_tag_text": "<p><strong>$10 OFF</strong></p>",
+            "price": 13699,
+            "compare_at_price": 16000
+          }
+        },
+        "tier_pro_6mo": {
+          "type": "subscription_product",
+          "name": "Pro · 6 month",
+          "settings": {
+            "parent_product": "pro-monthly-plan-2",
+            "product": "pro-6-month-2",
+            "plan_key": "6",
+            "subscription_option_text": "6 Months",
+            "subscription_tag_text": "<p><strong>$10 OFF</strong></p>",
+            "price": 18999,
+            "compare_at_price": 24000
+          }
+        },
+        "tier_pro_12mo": {
+          "type": "subscription_product",
+          "name": "Pro · 12 month",
+          "settings": {
+            "parent_product": "pro-monthly-plan-2",
+            "product": "pro-12-month-1",
+            "plan_key": "12",
+            "subscription_option_text": "12 Months",
+            "subscription_tag_text": "<p><strong>$10 OFF</strong></p>",
+            "price": 36999,
+            "compare_at_price": 48000
+          }
+        },
+        "tier_elite": {
+          "type": "product",
+          "name": "Elite Box",
+          "settings": {
+            "product": "elite-monthly-plan-2",
+            "custom_name": "Elite Box",
+            "preselected": false,
+            "recommendation_skill": "expert",
+            "recommendation_plan": "12",
+            "tag_text": "<p>8-10 Items</p>",
+            "icon_image": "shopify://shop_images/elite-box-front-trans.png",
+            "image": "shopify://shop_images/elite_1751c9b0-756f-40fd-9b59-602bf8a29ecd.webp",
+            "image_2": "shopify://shop_images/PDP-carousel-elite-2-baits-trans.png",
+            "image_3": "shopify://shop_images/PDP-carousel-elite-3-decal-trans.png",
+            "image_4": "shopify://shop_images/PDP-carousel-elite-4-tips_1934bb05-5ac1-4080-bc24-7f3832f3eccd.jpg",
+            "tier_color": "#b53035",
+            "price": 4499,
+            "compare_at_price": 6000
+          }
+        },
+        "tier_elite_4mo": {
+          "type": "subscription_product",
+          "name": "Elite · 4 month",
+          "settings": {
+            "parent_product": "elite-monthly-plan-2",
+            "product": "elite-4-month",
+            "plan_key": "4",
+            "subscription_option_text": "4 Months",
+            "subscription_tag_text": "<p><strong>$10 OFF</strong></p>",
+            "price": 18899,
+            "compare_at_price": 24000
+          }
+        },
+        "tier_elite_6mo": {
+          "type": "subscription_product",
+          "name": "Elite · 6 month",
+          "settings": {
+            "parent_product": "elite-monthly-plan-2",
+            "product": "elite-6-month-2",
+            "plan_key": "6",
+            "subscription_option_text": "6 Months",
+            "subscription_tag_text": "<p><strong>$10 OFF</strong></p>",
+            "price": 27499,
+            "compare_at_price": 36000
+          }
+        },
+        "tier_elite_12mo": {
+          "type": "subscription_product",
+          "name": "Elite · 12 month",
+          "settings": {
+            "parent_product": "elite-monthly-plan-2",
+            "product": "elite-12-month-1",
+            "plan_key": "12",
+            "subscription_option_text": "12 Months",
+            "subscription_tag_text": "<p><strong>$10 OFF</strong></p>",
+            "price": 52999,
+            "compare_at_price": 72000
+          }
+        },
+        "info_cancel": {
+          "type": "info",
+          "name": "Cancel anytime",
+          "settings": {
+            "image": "shopify://shop_images/Switch_Icon_52191746-3cd7-4eff-95ab-610dcf5b4899.webp",
+            "text": "<p>Cancel anytime</p>",
+            "description": "One click in your account. No calls, no forms."
+          }
+        },
+        "info_ship": {
+          "type": "info",
+          "name": "Ships in 24 hours",
+          "settings": {
+            "image": "shopify://shop_images/price_tag_sticker.webp",
+            "text": "<p>Ships in 24 hours</p>",
+            "description": "Order today, your first box goes out tomorrow."
+          }
+        },
+        "info_swap": {
+          "type": "info",
+          "name": "Switch species",
+          "settings": {
+            "image": "shopify://shop_images/6-8_items.webp",
+            "text": "<p>Switch species</p>",
+            "description": "Bass, walleye, saltwater — change any month."
+          }
+        },
+        "press_forbes": {
+          "type": "press_item",
+          "name": "Forbes",
+          "settings": {
+            "logo": "shopify://shop_images/forbes.svg",
+            "label": "FORBES",
+            "quote": "Best overall fishing tackle subscription box out there."
+          }
+        },
+        "press_outdoor": {
+          "type": "press_item",
+          "name": "Outdoor Life",
+          "settings": {
+            "logo": "shopify://shop_images/outdoor_life.svg",
+            "label": "OUTDOOR LIFE",
+            "quote": "Dabble in different species, sticking with your favorite or switching as the months progress."
+          }
+        },
+        "press_us_today": {
+          "type": "press_item",
+          "name": "USA Today",
+          "settings": {
+            "logo": "shopify://shop_images/us_today.svg",
+            "label": "USA TODAY",
+            "quote": "We're big fans of any gift that gets kids outside for a bit of adventure."
+          }
+        },
+        "press_field": {
+          "type": "press_item",
+          "name": "Field & Stream",
+          "settings": {
+            "logo": "shopify://shop_images/field_and_stream.svg",
+            "label": "FIELD & STREAM",
+            "quote": "For anglers wanting to try new techniques, this is a great way to test new baits."
+          }
+        },
+        "press_us_angler": {
+          "type": "press_item",
+          "name": "US Angler",
+          "settings": {
+            "logo": "shopify://shop_images/US_angler.svg",
+            "label": "US ANGLER",
+            "quote": "For new or less experienced anglers, this box is simply awesome. You're getting good tackle that's going to catch fish."
+          }
+        },
+        "review_jay": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "heading": "What a Father's Day gift",
+            "review": "I fish every weekend and can't wait to try the new lures out. The boxes have been better each month and I'm getting more fish.",
+            "name": "Jay P",
+            "location": "MTB Subscriber"
+          }
+        },
+        "review_charles": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "heading": "Stepping up paid off",
+            "review": "After a 3-month trial of the smaller box, I traded my last 2 remaining boxes for one Elite. Much happier with the results.",
+            "name": "Charles Hughes Jr",
+            "location": "MTB Subscriber"
+          }
+        },
+        "review_mia": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "heading": "Best monthly surprise",
+            "review": "Hands down the best fishing subscription on the market. The variety and quality of lures + detailed tips make it something I look forward to every month.",
+            "name": "Mia Wallace",
+            "location": "MTB Subscriber"
+          }
+        },
+        "review_patrice": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "heading": "Our grandson loved it",
+            "review": "Fishing is his thing. He said there were lots of good things and everything was probably worth $150!",
+            "name": "Patrice Markham",
+            "location": "MTB Subscriber"
+          }
+        },
+        "review_stephen": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "heading": "Highly recommend",
+            "review": "I highly recommend Mystery Tackle Box. They send amazing lures.",
+            "name": "Stephen",
+            "location": "MTB Subscriber"
+          }
+        },
+        "inside_soft": {
+          "type": "inside_tile",
+          "settings": {
+            "label": "Soft plastics",
+            "image": "shopify://shop_images/Soft_Plastic_Top_Five_4.jpg",
+            "color": "#33534b"
+          }
+        },
+        "inside_hard": {
+          "type": "inside_tile",
+          "settings": {
+            "label": "Hard baits",
+            "image": "shopify://shop_images/crankbaits_d24283dd-0d45-49b2-b82e-aaa2a0d78f99.jpg",
+            "color": "#d14424"
+          }
+        },
+        "inside_jigs": {
+          "type": "inside_tile",
+          "settings": {
+            "label": "Jigs & hooks",
+            "image": "shopify://shop_images/Copy-of-1200px-x-628px-_-Untitled-Design_9a49c66f-5b2e-4694-bba7-8ad12c1a5b0e.png",
+            "color": "#fbad18"
+          }
+        },
+        "inside_terminal": {
+          "type": "inside_tile",
+          "settings": {
+            "label": "Terminal tackle",
+            "image": "shopify://shop_images/Split-Shot-Weights.png",
+            "color": "#b53035"
+          }
+        },
+        "inside_tips": {
+          "type": "inside_tile",
+          "settings": {
+            "label": "Pro tips card",
+            "image": "shopify://shop_images/DSC00709-1024x683.jpg",
+            "color": "#35ade2"
+          }
+        },
+        "inside_seasonal": {
+          "type": "inside_tile",
+          "settings": {
+            "label": "Seasonal picks",
+            "image": "shopify://shop_images/best-craws.jpg",
+            "color": "#142648"
+          }
+        },
+        "brand_xzone": {
+          "type": "brand_tile",
+          "settings": {
+            "logo": "shopify://shop_images/x_zone_logo_1.webp",
+            "name": "X Zone"
+          }
+        },
+        "brand_bassmafia": {
+          "type": "brand_tile",
+          "settings": {
+            "logo": "shopify://shop_images/bass_mafia_logo_1.webp",
+            "name": "Bass Mafia"
+          }
+        },
+        "brand_eurotackle": {
+          "type": "brand_tile",
+          "settings": {
+            "logo": "shopify://shop_images/eurotackle_logo_1.webp",
+            "name": "Eurotackle"
+          }
+        },
+        "brand_lucky": {
+          "type": "brand_tile",
+          "settings": {
+            "logo": "shopify://shop_images/luckestrike_logo_1.webp",
+            "name": "Lucky Strike"
+          }
+        },
+        "brand_optimum": {
+          "type": "brand_tile",
+          "settings": {
+            "logo": "shopify://shop_images/optimum_baits_logo_1.webp",
+            "name": "Optimum Baits"
+          }
+        },
+        "brand_xcite": {
+          "type": "brand_tile",
+          "settings": {
+            "logo": "shopify://shop_images/xcite_baits_logo_2.webp",
+            "name": "Xcite Baits"
+          }
+        },
+        "brand_googan": {
+          "type": "brand_tile",
+          "settings": {
+            "logo": "shopify://shop_images/googan_squad_1.webp",
+            "name": "Googan Squad"
+          }
+        },
+        "brand_lunker": {
+          "type": "brand_tile",
+          "settings": {
+            "logo": "shopify://shop_images/lunkerhunt_logo_1.webp",
+            "name": "Lunkerhunt"
+          }
+        },
+        "brand_ark": {
+          "type": "brand_tile",
+          "settings": {
+            "logo": "shopify://shop_images/ark_logo_1.webp",
+            "name": "Ark"
+          }
+        },
+        "brand_vm": {
+          "type": "brand_tile",
+          "settings": {
+            "logo": "shopify://shop_images/v_and_m_logo_1.webp",
+            "name": "V&M"
+          }
+        },
+        "brand_zman": {
+          "type": "brand_tile",
+          "settings": {
+            "logo": "shopify://shop_images/z_man_logo_1.webp",
+            "name": "Z-Man"
+          }
+        },
+        "brand_tile_BcpNyq": {
+          "type": "brand_tile",
+          "settings": {
+            "logo": "shopify://shop_images/Logo_BioSpawn.webp",
+            "name": "BioSpawn"
+          }
+        }
+      },
+      "block_order": [
+        "species_bass",
+        "species_pantrout",
+        "species_salt",
+        "species_walleye",
+        "species_multi",
+        "tier_regular",
+        "tier_regular_4mo",
+        "tier_regular_6mo",
+        "tier_regular_12mo",
+        "tier_pro",
+        "tier_pro_4mo",
+        "tier_pro_6mo",
+        "tier_pro_12mo",
+        "tier_elite",
+        "tier_elite_4mo",
+        "tier_elite_6mo",
+        "tier_elite_12mo",
+        "info_cancel",
+        "info_ship",
+        "info_swap",
+        "press_forbes",
+        "press_outdoor",
+        "press_us_today",
+        "press_field",
+        "press_us_angler",
+        "review_jay",
+        "review_charles",
+        "review_mia",
+        "review_patrice",
+        "review_stephen",
+        "inside_soft",
+        "inside_hard",
+        "inside_jigs",
+        "inside_terminal",
+        "inside_tips",
+        "inside_seasonal",
+        "brand_xzone",
+        "brand_bassmafia",
+        "brand_eurotackle",
+        "brand_lucky",
+        "brand_optimum",
+        "brand_xcite",
+        "brand_googan",
+        "brand_lunker",
+        "brand_ark",
+        "brand_vm",
+        "brand_zman",
+        "brand_tile_BcpNyq"
+      ],
+      "name": "Quiz-Led PDP",
+      "settings": {
+        "brand_green": "#33534b",
+        "brand_gold": "#fbad18",
+        "brand_orange": "#d14424",
+        "brand_cream": "#f8f3ea",
+        "brand_ink": "#101820",
+        "announce_text": "Save $10 with code TRYMTB10",
+        "announce_background": "#ffcb12",
+        "announce_align": "full",
+        "back_label": "Back",
+        "intro_kicker": "Fishing Simplified",
+        "intro_heading": "<p>Find the box <em>that fits</em> your fishing.</p>",
+        "intro_lede": "<p>Two taps. We'll match you to the right box, plan and species. Your $10 off is already locked in.</p>",
+        "star_rating": 4.5,
+        "star_review_text": "4.5 · 7,754 reviews",
+        "intro_cta": "Start · 20 seconds",
+        "skip_cta": "Skip the quiz, show me the boxes",
+        "takes_label": "Takes 20 seconds",
+        "step1_heading": "What do you fish?",
+        "step1_sub": "We'll pack your box with baits proven to catch it.",
+        "step2_heading": "What's your skill level?",
+        "step2_sub": "Helps us match the right tackle mix — beginner-friendly or pro-grade.",
+        "skill_new_label": "New to fishing",
+        "skill_new_sub": "Learning the ropes · need the basics",
+        "skill_growing_label": "Getting serious",
+        "skill_growing_sub": "Know what works, building my arsenal",
+        "skill_expert_label": "Experienced angler",
+        "skill_expert_sub": "Chasing variety + premium gear",
+        "result_kicker": "We recommend",
+        "match_stamp": "YOUR MATCH",
+        "plan_kicker": "Plan length",
+        "default_plan_key": "6",
+        "fineprint": "<p>Cancel anytime · First box ships within 24 hours</p>",
+        "discount_code": "trymtb10",
+        "press_kicker": "As seen in",
+        "reviews_kicker": "7,754 reviews · 4.5 stars",
+        "reviews_heading": "<p>Real members. <em>Real</em> catches.</p>",
+        "inside_kicker": "What's inside",
+        "inside_heading": "<p>Full-size lures. <em>No samples.</em></p>",
+        "brands_heading": "Featured brands.",
+        "brands_tagline": "There's no such thing as too much tackle.",
+        "heading": "",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": false,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-bottom",
+        "custom_id": "quiz-pdp",
+        "section_visible": true
+      }
+    },
+    "faq": {
+      "type": "ante-faq",
+      "blocks": {
+        "faq_cancel": {
+          "type": "faq",
+          "settings": {
+            "category": "subscription",
+            "title": "Can I cancel anytime?",
+            "content": "<p>Yes. Cancel from your account dashboard anytime before the last day of the month and you won't be billed again.</p>"
+          }
+        },
+        "faq_switch": {
+          "type": "faq",
+          "settings": {
+            "category": "subscription",
+            "title": "Can I switch species later?",
+            "content": "<p>Absolutely. Change your box type at any time in your account.</p>"
+          }
+        },
+        "faq_dupes": {
+          "type": "faq",
+          "settings": {
+            "category": "subscription",
+            "title": "Will I get duplicates?",
+            "content": "<p>We work hard to keep boxes fresh with seasonal, pro-picked lures. Customers say the variety keeps them discovering new baits.</p>"
+          }
+        },
+        "faq_lure": {
+          "type": "faq",
+          "settings": {
+            "category": "subscription",
+            "title": "What if I don't like a lure?",
+            "content": "<p>Every lure is full-sized, expert-vetted, and proven to catch fish. Even if one isn't your favorite, anglers tell us they often discover new confidence baits.</p>"
+          }
+        },
+        "faq_first_ship": {
+          "type": "faq",
+          "settings": {
+            "category": "Delivery & Returns",
+            "title": "When will my first box ship?",
+            "content": "<p>Within 24 hours of your order. After that, boxes ship during the first 10 days of each month.</p>"
+          }
+        },
+        "faq_delivery": {
+          "type": "faq",
+          "settings": {
+            "category": "Delivery & Returns",
+            "title": "How long does delivery take?",
+            "content": "<p>Most boxes arrive within 5–7 business days in the US (a little longer in Canada). You'll always get a tracking number.</p>"
+          }
+        },
+        "faq_shipping_cost": {
+          "type": "faq",
+          "settings": {
+            "category": "Delivery & Returns",
+            "title": "Do I pay for shipping?",
+            "content": "<p>Free shipping on 4+ month plans. 1-month plans include shipping in the price.</p>"
+          }
+        },
+        "faq_returns": {
+          "type": "faq",
+          "settings": {
+            "category": "Delivery & Returns",
+            "title": "Can I return or exchange my box?",
+            "content": "<p>All sales are final on subscription boxes. If your box is missing items or arrives damaged, our support team will replace it quickly.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_cancel",
+        "faq_switch",
+        "faq_dupes",
+        "faq_lure",
+        "faq_first_ship",
+        "faq_delivery",
+        "faq_shipping_cost",
+        "faq_returns"
+      ],
+      "name": "FAQ | Quiz-Led PDP",
+      "settings": {
+        "show_indexes": true,
+        "video_url": "",
+        "video_caption": "Video",
+        "media_position": "right",
+        "media_position_mobile": "below",
+        "heading": "<h1>Quick <em>answers.</em></h1>",
+        "heading_alignment": "center",
+        "heading_alignment_mobile": "center",
+        "limit_heading_width": true,
+        "section_inverse": false,
+        "section_background_style": "section-background-style-normal",
+        "section_background_colour": "section-background-colour-normal",
+        "section_spacing": "section-spacing-top-bottom",
+        "custom_id": "faqs",
+        "section_visible": true
+      }
+    }
+  },
+  "order": [
+    "page_config",
+    "quiz_pdp",
+    "faq"
+  ]
+}

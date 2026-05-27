@@ -1,0 +1,414 @@
+{{ 'section-MTB-faq-preview.css' | asset_url | stylesheet_tag }}
+{{ 'question.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'jquery-3.6.0.min.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'slick.min.js' | asset_url }}" defer="defer"></script>
+
+<link rel="stylesheet" href="{{ 'slick.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'slick-theme.css' | asset_url }}">
+
+<style>
+  .faq-preview__container {
+      padding-top: {{ section.settings.component_mobile_pt }}px;
+      padding-bottom: {{ section.settings.component_mobile_pb }}px;
+    }
+
+  .faq-preview__questions-wrap,
+  .faq-preview__questions-wrap h3 {
+    color :{{section.settings.faq_color}};
+  }
+
+    @media screen and (min-width: 641px)  and (max-width: 989px) {
+       .faq-preview__container {
+          padding-top: {{ section.settings.component_tablet_pt }}px;
+          padding-bottom: {{ section.settings.component_tablet_pb }}px;
+       }
+     }
+
+     @media screen and (min-width: 989px) {
+       .faq-preview__container {
+         padding-top: {{ section.settings.component_desktop_pt }}px;
+         padding-bottom: {{ section.settings.component_desktop_pb }}px;
+       }
+     }
+</style>
+
+<section class="faq-preview__container page-width">
+  <div class="faq-preview__grid">
+    <div class="faq-preview__images-side">
+      <div class="faq-preview__header-wrap">
+        {%- if section.settings.header_brand_image != blank -%}
+          {{
+            section.settings.header_brand_image
+            | image_url: width: '500'
+            | image_tag: loading: 'lazy', widths: '500', class: 'lazyload faq-preview__header-img'
+          }}
+        {%- endif -%}
+
+        {%- if section.settings.brand_header != blank -%}
+          <h2 class="faq-preview__title">{{ section.settings.brand_header }}</h2>
+        {%- endif -%}
+        {%- if section.settings.brand_subheader != blank -%}
+          <p class="faq-preview__subtitle">{{ section.settings.brand_subheader }}</p>
+        {%- endif -%}
+      </div>
+      <div class="faq-preview__slideshow mobile">
+        <div class="faq-preview__buttons-wrap">
+          <div class="faq-preview__slider-wrap">
+            {% assign prev_block = null %}
+
+            {% for block in section.blocks %}
+              {%- if block.type == 'brand' -%}
+                {% assign is_even = forloop.index0 | modulo: 2 %}
+
+                {%- if block.settings.image != blank -%}
+                  {%- if is_even != 0 -%}
+                    <div class="faq-preview_slider-group">
+                      <div class="faq-preview_flex-wrap">
+                        {% if prev_block %}
+                          <div class="faq-preview_img-wrap">
+                            {{
+                              prev_block.settings.image
+                              | image_url: width: '500'
+                              | image_tag: loading: 'lazy', widths: '500', class: 'lazyload faq-preview_slider-img'
+                            }}
+                          </div>
+                        {% endif %}
+                        <div class="faq-preview_img-wrap">
+                          {{
+                            block.settings.image
+                            | image_url: width: '500'
+                            | image_tag: loading: 'lazy', widths: '500', class: 'lazyload faq-preview_slider-img'
+                          }}
+                        </div>
+                      </div>
+                    </div>
+                  {%- elsif forloop.last -%}
+                    <div class="faq-preview_slider-group">
+                      <div class="faq-preview_img-wrap">
+                        <div class="faq-preview_img-wrap">
+                          {{
+                            block.settings.image
+                            | image_url: width: '500'
+                            | image_tag: loading: 'lazy', widths: '500', class: 'lazyload faq-preview_slider-img'
+                          }}
+                        </div>
+                      </div>
+                    </div>
+                  {%- endif -%}
+
+                  {% assign prev_block = block %}
+                {%- endif -%}
+              {%- endif -%}
+            {% endfor %}
+          </div>
+          <button class="mobile arrow slideshow-arrow prev" type="button">
+            {{- 'icon-chevron-left.svg' | inline_asset_content -}}
+          </button>
+          <button class="mobile arrow slideshow-arrow next" type="button">
+            {{- 'icon-chevron-right.svg' | inline_asset_content -}}
+          </button>
+        </div>
+      </div>
+      <div class="faq-preview__images-tablet-desktop tablet-desktop">
+        {% for block in section.blocks %}
+          {%- if block.type == 'brand' -%}
+            {%- if block.settings.image != blank -%}
+              <div class="faq-preview_img-wrap">
+                {{
+                  block.settings.image
+                  | image_url: width: '500'
+                  | image_tag: loading: 'lazy', widths: '500', class: 'lazyload faq-preview_slider-img'
+                }}
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="faq-preview__faq-container">
+      <div class="faq-preview__header-wrap">
+        {%- if section.settings.header_faq_image != blank -%}
+          {{
+            section.settings.header_faq_image
+            | image_url: width: '500'
+            | image_tag: loading: 'lazy', widths: '500', class: 'lazyload faq-preview__header-img'
+          }}
+        {%- endif -%}
+
+        {%- if section.settings.faq_header != blank -%}
+          <h2 class="faq-preview__title">{{ section.settings.faq_header }}</h2>
+        {%- endif -%}
+        {%- if section.settings.faq_subheader != blank -%}
+          <p class="faq-preview__subtitle">{{ section.settings.faq_subheader }}</p>
+        {%- endif -%}
+      </div>
+      <div class="faq-preview__questions-wrap">
+        {% for block in section.blocks %}
+          {%- if block.type == 'question' -%}
+            {% render 'question',
+              header: block.settings.question_header,
+              text: block.settings.question_text,
+              question_color: section.settings.faq_question_color,
+              answer_color: section.settings.faq_answer_color,
+              link_hover_color: section.settings.faq_link_hover_color
+            %}
+          {%- endif -%}
+        {% endfor %}
+      </div>
+
+      {%- if section.settings.button_text != blank -%}
+        <div class="faq-preview__btn-wrap">
+          <a class="middle_btn mtb-button primary-button header_font" href="{{ section.settings.button_url }}">
+            {{- section.settings.button_text -}}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript">
+  window.addEventListener('DOMContentLoaded', function () {
+    const $slider = $('.faq-preview__slider-wrap');
+
+    $slider.slick({
+      arrows: true,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      dots: true,
+      infinite: true,
+      prevArrow: '.slideshow-arrow.prev',
+      nextArrow: '.slideshow-arrow.next',
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "MTB FAQs Preview",
+  "tag": "section",
+  "class": "section",
+  "limit": 1,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "header_brand_image",
+      "label": "Header Brand Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "brand_header",
+      "label": "Brand Header"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "brand_subheader",
+      "label": "Brand Subheader"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_faq_image",
+      "label": "Header FAQ Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "faq_header",
+      "label": "FAQ Header"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "faq_subheader",
+      "label": "FAQ Subheader"
+    },
+    {
+      "type": "color",
+      "id": "faq_color",
+      "label": "FAQ Header Color",
+      "default": "#31554b"
+    },
+    {
+      "type": "color",
+      "id": "faq_question_color",
+      "label": "FAQ Question color",
+      "default": "#31554b"
+    },
+    {
+      "type": "color",
+      "id": "faq_answer_color",
+      "label": "FAQ Answer Color",
+      "default": "#31554b"
+    },
+    {
+      "type": "color",
+      "id": "faq_link_hover_color",
+      "label": "FAQ Link Hover Color",
+      "default": "#902F19"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "button_text",
+      "label": "FAQs Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "FAQs Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "slides_to_show_mobile",
+      "label": "Slides to show on Mobile",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pt",
+      "label": "Component mobile padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pb",
+      "label": "Component mobile padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+
+    {
+      "type": "header",
+      "content": "Tablet Settings"
+    },
+    {
+      "type": "range",
+      "id": "slides_to_show_tablet",
+      "label": "Slides to show on Tablet",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pt",
+      "label": "Component tablet padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pb",
+      "label": "Component tablet padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "slides_to_show_desktop",
+      "label": "Slides to show on Desktop",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pt",
+      "label": "Component desktop padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pb",
+      "label": "Component desktop padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "question_header",
+          "label": "Question Header"
+        },
+        {
+          "type": "richtext",
+          "id": "question_text",
+          "label": "Question Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTB FAQs Preview",
+      "blocks": [
+        {
+          "type": "brand"
+        },
+        {
+          "type": "brand"
+        },
+        {
+          "type": "question"
+        },
+        {
+          "type": "question"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

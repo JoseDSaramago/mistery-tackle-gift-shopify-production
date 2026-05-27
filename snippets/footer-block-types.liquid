@@ -1,0 +1,265 @@
+{% comment %}
+  Renders a footer block by the type.
+
+  Usage:
+  {% render 'footer-block-types', block, has_social_icons %}
+{% endcomment %}
+
+<div class="footer-nested-block">
+  {%- if block.settings.heading != blank -%}
+    <h2 class="footer-block__heading inline-richtext">{{- block.settings.heading -}}</h2>
+  {%- endif -%}
+
+  {%- case block.type -%}
+    {%- when '@app' -%}
+      {% render block %}
+    {%- when 'text' -%}
+      <div class="footer-block__details-content rte">
+        {{ block.settings.subtext }}
+      </div>
+    {%- when 'link_list' -%}
+      {%- if block.settings.menu != blank -%}
+        <ul class="footer-block__details-content list-unstyled">
+          {%- for link in block.settings.menu.links -%}
+            <li>
+              <a
+                href="{{ link.url }}"
+                class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+              >
+                {{ link.title | escape }}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    {%- when 'brand_information' -%}
+      <div class="footer-block__brand-info">
+        {%- if block.settings.brand_logo != blank -%}
+          <style>
+            .footer__brand_logo {
+              width: {{ block.settings.brand_logo_mobile_width }}%;
+            }
+
+            {%- if block.settings.custom_sign_in_icon != blank -%}
+              .submit_newsletter_text {
+                margin-left: 4px;
+              }
+            {%- endif -%}
+
+            @media screen and (min-width: 640px) {
+              .footer__brand_logo {
+                width: {{ block.settings.brand_logo_width }}px;
+              }
+            }
+          </style>
+          <div class="footer-block__image-wrapper">
+            {{
+              block.settings.brand_logo
+              | image_url: width: 1100
+              | image_tag:
+                loading: 'lazy',
+                widths: '50, 100, 150, 200, 300, 400, 550, 800, 1100',
+                class: 'footer__brand_logo'
+            }}
+          </div>
+        {%- endif -%}
+
+        {%- if block.settings.newsletter == 'shopify' -%}
+          <div class="footer-block__newsletter">
+            {%- if block.settings.newsletter_heading != blank -%}
+              <p class="footer__newsletter_title inline-richtext">{{ block.settings.newsletter_heading }}</p>
+            {%- endif -%}
+            {%- if block.settings.newsletter_text -%}
+              <p class="newsletter_text">{{ block.settings.newsletter_text }}</p>
+            {%- endif -%}
+            
+            {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <div class="newsletter-form__field-wrapper">
+                <div class="field input-wrap">
+                  <input
+                    id="NewsletterForm--{{ section.id }}"
+                    type="email"
+                    name="contact[email]"
+                    class="newsletter_input "
+                    value="{{ form.email }}"
+                    aria-required="true"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autocomplete="email"
+                    {% if form.errors %}
+                      autofocus
+                      aria-invalid="true"
+                      aria-describedby="ContactFooter-error"
+                    {% elsif form.posted_successfully? %}
+                      aria-describedby="ContactFooter-success"
+                    {% endif %}
+                    placeholder="{{ 'newsletter.label' | t }}"
+                    required
+                  >
+                </div>
+
+                <div>
+                  <button
+                    type="submit"
+                    class="mtb-button primary-button submit_newsletter"
+                    name="commit"
+                    id="Subscribe"
+                    aria-label="{{ 'newsletter.button_label' | t }}"
+                  >
+                    {%- if block.settings.custom_sign_in_icon != blank -%}
+                      {{
+                        block.settings.custom_sign_in_icon
+                        | image_url: width: 20
+                        | image_tag: loading: 'lazy', widths: '20'
+                      }}
+                    {%- endif -%}
+                    <span class="submit_newsletter_text">{{ block.settings.newsletter_submit_text }}</span>
+                  </button>
+                </div>
+                {%- if form.errors -%}
+                  <small class="newsletter-form__message form__message" id="ContactFooter-error">
+                    <span class="svg-wrapper">
+                      {{- 'icon-error.svg' | inline_asset_content -}}
+                    </span>
+                    {{- form.errors.translated_fields.email | capitalize }}
+                    {{ form.errors.messages.email -}}
+                  </small>
+                {%- endif -%}
+              </div>
+              {%- if form.posted_successfully? -%}
+                <h3
+                  class="newsletter-form__message newsletter-form__message--success form__message"
+                  id="ContactFooter-success"
+                  tabindex="-1"
+                  autofocus
+                >
+                  <span class="svg-wrapper">
+                    {{- 'icon-success.svg' | inline_asset_content -}}
+                  </span>
+                  {{- 'newsletter.success' | t }}
+                </h3>
+              {%- endif -%}
+            {%- endform -%}
+            
+            <div class="klaviyo-form-XiQtwB"></div>
+          </div>
+
+          {%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
+            <div class="footer__follow-on-shop">
+              {{ shop | login_button: action: 'follow' }}
+            </div>
+          {%- endif -%}
+
+        {%- elsif block.settings.newsletter == 'klavio' -%}
+          <div class="footer-block__newsletter">
+            {%- if block.settings.newsletter_heading != blank -%}
+              <p class="footer__newsletter_title inline-richtext">{{ block.settings.newsletter_heading }}</p>
+            {%- endif -%}
+            {%- if block.settings.newsletter_text -%}
+              <p class="newsletter_text">{{ block.settings.newsletter_text }}</p>
+            {%- endif -%}
+            <script async src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id={{ block.settings.klavio_public_api_key }}"></script>
+            <style>
+              .klaviyo-form .klaviyo-form {
+                background-color: transparent!important;
+                font-family: Gotham SSm, "Gotham SSm", Brandon, Arial, "Helvetica Neue", Helvetica, sans-serif!important;
+              }
+
+              .klaviyo-form form.klaviyo-form {
+                padding: 10px 0!important;
+              }
+
+              .klaviyo-form form.klaviyo-form div:first-child {
+                min-height: auto!important;
+              }
+
+              .klaviyo-form form.klaviyo-form > div > div > div {
+                padding: 4px 0!important;
+              }
+
+              .klaviyo-form form.klaviyo-form > div > div > div > div > input {
+                font-family: Gotham SSm, "Gotham SSm", Brandon, Arial, "Helvetica Neue", Helvetica, sans-serif!important;
+                font-size: 16px!important;
+                height: 35px!important;
+              }
+
+              .klaviyo-form form.klaviyo-form > div > div > div > button {
+                font-family: Gotham SSm, "Gotham SSm", Brandon, Arial, "Helvetica Neue", Helvetica, sans-serif!important;
+                font-size: 14px!important;
+                padding: 10px 30px!important;
+                height: auto!important;
+              }
+
+              .klaviyo-form form.klaviyo-form > div > div > div > button:hover {
+                background-color: #943019!important;
+              }
+
+              .klaviyo-form form.klaviyo-form > div > div > div > button.go3265039304.go3265039304.go3265039304:hover {
+                background-color: #943019!important;
+              }
+
+              .klaviyo-form form.klaviyo-form > div > div > div > div > h1,
+              .klaviyo-form form.klaviyo-form > div > div > div > div > p {
+                text-align: left!important;
+              }
+
+              .klaviyo-form form.klaviyo-form > div > div > div > div > h1 span,
+              .klaviyo-form form.klaviyo-form > div > div > div > div > p span {
+                color: #fff!important;
+              }
+            </style>
+            
+            {{ block.settings.klavio_form }}
+          </div>
+
+          {%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
+            <div class="footer__follow-on-shop">
+              {{ shop | login_button: action: 'follow' }}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if block.settings.show_social and has_social_icons -%}
+          <style>
+            .footer__list-social .list-social__link .svg-wrapper,
+            .footer__list-social .list-social__link .icon,
+            .footer__list-social .list-social__link .social_custom_img {
+              height: {{ block.settings.social_icons_size }}px;
+              width: {{ block.settings.social_icons_size }}px;
+            }
+          </style>
+          {%- render 'social-icons', class: 'footer__list-social' -%}
+        {%- endif -%}
+      </div>
+    {%- when 'image' -%}
+      <div class="footer-block__details-content footer-block-image {{ block.settings.alignment }}">
+        {%- if block.settings.image != blank -%}
+          {%- assign image_size_2x = block.settings.image_width | times: 2 | at_most: 5760 -%}
+          <div
+            class="footer-block__image-wrapper"
+            style="max-width: min(100%, {{ block.settings.image_width }}px);"
+          >
+            <img
+              srcset="{{ block.settings.image | image_url: width: block.settings.image_width }}, {{ block.settings.image | image_url: width: image_size_2x }} 2x"
+              src="{{ block.settings.image | image_url: width: 760 }}"
+              alt="{{ block.settings.image.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.height }}"
+            >
+          </div>
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+        {%- endif -%}
+      </div>
+    {%- when 'trustpilot_mark' -%}
+      <div class="trustpilot_mark">
+        {%- if block.settings.trustpilot_header != blank -%}
+          <h2 class="footer-block__heading inline-richtext">{{- block.settings.trustpilot_header -}}</h2>
+        {% endif %}
+
+        {%- render 'trustpilot-micro-star', theme_color: 'dark' -%}
+      </div>
+  {%- endcase -%}
+</div>

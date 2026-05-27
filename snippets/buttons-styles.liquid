@@ -1,0 +1,100 @@
+{% comment %}
+  Renders buttons styles according to common settings.
+
+  Usage:
+  {% render 'buttons-styles' %}
+{% endcomment %}
+
+<style>
+  .primary-button,
+  .primary-button:visited,
+  .primary-button:active,
+  .shopify-challenge__button {
+    background-color: {{ settings.primary_btn_bg_color }};
+    border: 2px solid {{ settings.primary_btn_border_color }};
+    color: {{ settings.primary_btn_text_color }};
+  }
+
+  .primary-button:hover {
+    border-color: {{ settings.primary_btn_hover_color }};
+    background-color: {{ settings.primary_btn_hover_color }};
+    color: {{ settings.primary_btn_text_color }};
+  }
+
+  .secondary-button,
+  .secondary-button:visited,
+  .secondary-button:active {
+    background-color: {{ settings.secondary_btn_bg_color }};
+    border: 2px solid {{ settings.secondary_btn_border_color }};
+    color: {{ settings.secondary_btn_text_color }};
+  }
+
+  .secondary-button:hover {
+    background-color: {{ settings.secondary_btn_hover_color }};
+    color: {{ settings.secondary_btn_text_color }};
+  }
+
+  .big_btn {
+    padding: {{ settings.big_btn_padding_y }}px {{ settings.big_btn_padding_x }}px;
+    font-size: {{ settings.big_btn_font_size }}px;
+  }
+
+  .middle_btn {
+    padding: {{ settings.middle_btn_padding_y }}px {{ settings.middle_btn_padding_x }}px;
+    font-size: {{ settings.middle_btn_font_size }}px;
+  }
+
+  .medium_btn {
+    padding: {{ settings.medium_btn_padding_y }}px {{ settings.medium_btn_padding_x }}px;
+    font-size: {{ settings.medium_btn_font_size }}px;
+  }
+
+  .small_btn {
+    padding: {{ settings.small_btn_padding_y }}px {{ settings.small_btn_padding_x }}px;
+    font-size: {{ settings.small_btn_font_size }}px;
+  }
+
+  @media screen and (min-width: 641px) and (max-width: 989px) {
+    .big_btn {
+      padding: {{ settings.big_btn_tablet_padding_y }}px {{ settings.big_btn_tablet_padding_x }}px;
+      font-size: {{ settings.big_btn_tablet_font_size }}px;
+    }
+
+    .middle_btn {
+      padding: {{ settings.middle_btn_tablet_padding_y }}px {{ settings.middle_btn_tablet_padding_x }}px;
+      font-size: {{ settings.middle_btn_tablet_font_size }}px;
+    }
+
+    .medium_btn {
+      padding: {{ settings.medium_btn_tablet_padding_y }}px {{ settings.medium_btn_tablet_padding_x }}px;
+      font-size: {{ settings.medium_btn_tablet_font_size }}px;
+    }
+
+    .small_btn {
+      padding: {{ settings.small_btn_tablet_padding_y }}px {{ settings.small_btn_tablet_padding_x }}px;
+      font-size: {{ settings.small_btn_tablet_font_size }}px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .big_btn {
+      padding: {{ settings.big_btn_desktop_padding_y }}px {{ settings.big_btn_desktop_padding_x }}px;
+      font-size: {{ settings.big_btn_desktop_font_size }}px;
+    }
+
+    .middle_btn {
+      padding: {{ settings.middle_btn_desktop_padding_y }}px {{ settings.middle_btn_desktop_padding_x }}px;
+      font-size: {{ settings.middle_btn_desktop_font_size }}px;
+    }
+
+    .medium_btn {
+      padding: {{ settings.medium_btn_desktop_padding_y }}px {{ settings.medium_btn_desktop_padding_x }}px;
+      font-size: {{ settings.medium_btn_desktop_font_size }}px;
+    }
+
+    .small_btn {
+      padding: {{ settings.small_btn_desktop_padding_y }}px {{ settings.small_btn_desktop_padding_x }}px;
+      font-size: {{ settings.small_btn_desktop_font_size }}px;
+    }
+  }
+</style>

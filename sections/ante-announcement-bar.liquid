@@ -1,0 +1,98 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    z-index: 2 !important;
+  }
+  
+  #ante-announcement-bar {
+    height: min(40px, var(--section-horizontal-padding));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    {% if section.settings.background_colour != blank and section.settings.background_colour != 'rgba(0,0,0,0)' %}
+      background: {{ section.settings.background_colour }};
+    {% else %}
+      background: initial;
+    {% endif %}
+    {% if section.settings.text_colour != blank and section.settings.text_colour != 'rgba(0,0,0,0)' %}
+      color: {{ section.settings.text_colour }};
+    {% endif %}
+  }
+
+  #ante-announcement-bar > * {
+    line-height: 1;
+    display: flex;
+    gap: var(--micropad-small);
+    align-items: center;
+  }
+
+  #ante-announcement-bar > *::before {
+    bottom: -2px;
+  }
+
+  #ante-announcement-bar strong  {
+    font-family: var(--font-heading);
+    font-size: 17px;
+    {% if section.settings.bold_text_colour != blank and section.settings.bold_text_colour != 'rgba(0,0,0,0)' %}
+      color: {{ section.settings.bold_text_colour }};
+    {% endif %}
+  }
+
+  @media (max-width: 600px) {
+    #ante-announcement-bar {
+      height: 28px;
+    }
+
+    #ante-announcement-bar strong  {
+      font-size: 13px;
+    }
+  }
+</style>
+
+<section id="ante-announcement-bar" class="ante-section">
+  {% if section.settings.link %}
+    <a href="{{ section.settings.link }}" class="body-caption alt link richtext">{{ section.settings.announcement }} {% render "ante-svg", icon: "arrow" %}</a>
+  {% else %}
+    <div class="body-caption alt richtext">{{ section.settings.announcement }}</div>
+  {% endif %}
+</section>
+
+{% schema %}
+  {
+    "name": "Announcement Bar [UTA]",
+    "presets": [
+      {
+        "name": "Announcement Bar [UTA]"
+      }
+    ],
+    "settings": [
+      {
+        "type": "richtext",
+        "id": "announcement",
+        "label": "Announcement",
+        "default": "<p>Announcement</p>"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "Link"
+      },
+      {
+        "type": "color",
+        "id": "background_colour",
+        "label": "Background Colour"
+      },
+      {
+        "type": "color",
+        "id": "text_colour",
+        "label": "Text Colour"
+      },
+      {
+        "type": "color",
+        "id": "bold_text_colour",
+        "label": "Bold Text Colour"
+      },
+      {"type":"header","content":"Section Settings"},{"type": "checkbox","id": "section_visible","label":"Section Visible","default":true,"info": "Turning this off hides the section but doesn't remove it from the page."}
+    ]
+  }
+{% endschema %}

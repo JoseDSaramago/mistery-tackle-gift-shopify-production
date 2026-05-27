@@ -1,0 +1,212 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "uppercase": false,
+            "bold": true
+          }
+        },
+        "judge_me_reviews_preview_badge_zVTT3j": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle",
+            "variant_img_size": 80,
+            "use_custom_variants": true
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "collapsible_tab_kChchR": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What's Included",
+            "icon": "box",
+            "content": "<ul><li>6 - 8 baits consisting of hard baits, soft plastics, and terminal tackle designed specifically for finesse fishing applications</li><li>A custom MTB decal</li><li>Access to the Dibble Magazine and ABOUT MY BOX page to learn how to fish everything in your box</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_Y9pFgt": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Who is this for?",
+            "icon": "silhouette",
+            "content": "<p>This box is for anglers looking to up their finesse fishing skills, which has become increasing popular recently in bass fishing. Finesse fishing tactics are becoming more important for anglers to have in their arsenal as fish and bodies of water become more pressured from other anglers or when they face cold front conditions or clear water.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_piiTK7": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "FAQ's",
+            "icon": "question_mark",
+            "content": "<p><strong>Q: What is Finesse Fishing?<br/>A: </strong>Finesse fishing is a bass fishing approach that uses small, subtle lures and light tackle with natural presentations to entice pressured or inactive fish into biting when aggressive techniques fail.</p><p><strong>Q:</strong> <strong>What type of baits are used in Finesse Fishing?<br/>A: </strong>The Finesse Box will include items for these techniques or types of baits:</p><ul><li>Downsized hardbaits, wirebaits, jigs, and plastics</li><li>Neko Rigs</li><li>Ned Rigs</li><li>Drop Shots</li><li>Wacky Rigs</li><li>Weightless Presentations</li><li>Shakey Head Rigs<br/></li></ul>",
+            "page": ""
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "judge_me_reviews_preview_badge_zVTT3j",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "collapsible_tab_kChchR",
+        "collapsible_tab_Y9pFgt",
+        "collapsible_tab_piiTK7",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "disable_atc": false,
+        "color_scheme": "scheme-1",
+        "images_limit": 20,
+        "show_suggestions_only": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "mobile_thumbnails": "hide",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "thumbnails_display": "show_all",
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "9200c6c9c40f485aa29e762b98e438b8_builder_io_YQqPJa": {
+      "type": "9200c6c9c40f485aa29e762b98e438b8-builder-io",
+      "name": "Pdp finesse bass fishing ",
+      "settings": {
+        "builder_content_entry_preview": "d2741b73b3c24bd1a21e17b95b4b6d9b"
+      }
+    },
+    "featured_collection_GBJBhH": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "title": "You may also like",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "one-time-kits",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "174542935609580c1d": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_NTxBXf": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_NTxBXf"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "9200c6c9c40f485aa29e762b98e438b8_builder_io_YQqPJa",
+    "featured_collection_GBJBhH",
+    "related-products",
+    "174542935609580c1d"
+  ]
+}

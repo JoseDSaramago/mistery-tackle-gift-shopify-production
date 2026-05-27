@@ -1,0 +1,42 @@
+{% if request.design_mode and section.settings.builder_content_entry_preview == '62a550a602734d5a84bc085dfe0f321a' %}
+{% include 'content.62a550a602734d5a84bc085dfe0f321a.builder' %}
+  {% else %}
+    {% include 'model.hp-product-features-section.builder' %}
+  {% endif %}
+  
+  {% schema %}
+   {
+  "name": "HP | Product Features Sec",
+  "tag": "section",
+  "settings":[
+    {
+      "type": "header",
+      "content": "Custom Builder.io Section"
+    },
+    {
+      "type": "paragraph",
+      "content": "To edit and customize this section, visit the [model in Builder](https://builder.io/content?model=0a6339bb14e44b49884bccadcae81b40). To learn more about how sections in Builder work with Shopify, [visit the docs](https://www.builder.io/c/docs/shopify/sections-everywhere)."
+    },
+    {
+      "type": "select",
+      "id": "builder_content_entry_preview",
+      "label": "Content Entry Preview",
+      "info": "Targeting is not used while previewing sections in the Shopify theme editor, meaning this preview will not change based on the targeting you have set. If you are using targeting, you need to manually select an entry to preview it. This setting only affects the preview, not what displays on your live site.",
+      "options": [
+        { "value": "62a550a602734d5a84bc085dfe0f321a", "label": "HP | Product Features Section 2"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Builder entries used"
+    },
+    {
+    "type": "paragraph",
+    "content": "Name: HP | Product Features Section 2. Targeting: no targeting. Visit the [entry in Builder](https://builder.io/content/62a550a602734d5a84bc085dfe0f321a)"
+  }
+  ],
+  "presets":[{
+    "name": "HP | Product Features Sec"
+  }]
+}
+  {% endschema %}

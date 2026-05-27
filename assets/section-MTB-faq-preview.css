@@ -1,0 +1,134 @@
+.faq-preview__header-wrap {
+  text-align: center;
+}
+
+.faq-preview__header-img {
+  width: 100px;
+  height: auto;
+}
+
+.faq-preview__title {
+  margin: 1rem 0 0;
+}
+
+.faq-preview__subtitle {
+  margin: 1rem 0 0;
+}
+
+.faq-preview_flex-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-preview_img-wrap {
+  flex: 1;
+  min-height: 140px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.faq-preview_slider-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.faq-preview__container .slick-slide:not(:first-child) {
+  margin-left: 10px;
+}
+
+.faq-preview__buttons-wrap {
+  position: relative;
+  padding: 0 2rem;
+}
+
+.faq-preview__container .slick-dots li button:before {
+  font-size: 2rem;
+}
+
+.faq-preview__container .slideshow-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.faq-preview__container .slideshow-arrow .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.faq-preview__container .slideshow-arrow.prev {
+  left: -5px;
+}
+
+.faq-preview__container .slideshow-arrow.next {
+  right: -5px;
+}
+
+.faq-preview__container .slideshow-arrow svg {
+  width: 100%;
+  height: 100%;
+  fill: #333;
+}
+
+.faq-preview__container .slideshow-arrow:hover svg {
+  fill: #666;
+}
+
+.faq-preview__faq-container {
+  padding-top: 2rem;
+}
+
+.faq-preview__btn-wrap {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+@media screen and (min-width: 641px) and (max-width: 989px) {
+  .faq-preview__images-side {
+    border-bottom: 2px dotted #d4d1cd;
+  }
+}
+
+@media screen and (min-width: 641px) {
+  .faq-preview__images-tablet-desktop {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .faq-preview_slider-img {
+    width: 175px;
+  }
+
+  .faq-preview__questions-wrap {
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (min-width: 989px) {
+  .faq-preview__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .faq-preview_slider-img {
+    width: 130px;
+  }
+
+  .faq-preview__faq-container {
+    padding-top: 0;
+  }
+
+  .faq-preview__images-side {
+    padding-right: 2rem;
+    border-right: 2px dotted #d4d1cd;
+  }
+
+  .faq-preview__faq-container {
+    padding-left: 2rem;
+  }
+}

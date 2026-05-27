@@ -1,0 +1,248 @@
+{{ 'section-MTB-article.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="article-component article-component-{{ section.id }} page-width {{ section.settings.text_align }}"
+  id="{{ section.settings.section_id }}"
+>
+  <style>
+    .article-component-{{ section.id }} {
+      padding-top: {{ section.settings.component_mobile_pt }}px;
+      padding-bottom: {{ section.settings.component_mobile_pb }}px;
+    }
+
+    .article-component-{{ section.id }} .article-component__header {
+      color: {{ section.settings.header_color }};
+    }
+
+    .article-component-{{ section.id }} .article-component__text,
+    .article-component-{{ section.id }} .article-component__note,
+    .article-component-{{ section.id }} .article-component__text a {
+      color: {{ section.settings.text_color }};
+    }
+
+    .article-component-{{ section.id }} .article-component__text a:hover {
+      color: {{ section.settings.text_link_hover_color }};
+    }
+
+    @media screen and (min-width: 641px) and (max-width: 989px) {
+      .article-component-{{ section.id }} {
+        padding-top: {{ section.settings.component_tablet_pt }}px;
+        padding-bottom: {{ section.settings.component_tablet_pb }}px;
+      }
+    }
+
+    @media screen and (min-width: 990px) {
+      .article-component-{{ section.id }} {
+        padding-top: {{ section.settings.component_desktop_pt }}px;
+        padding-bottom: {{ section.settings.component_desktop_pb }}px;
+      }
+    }
+  </style>
+
+  {% for block in section.blocks %}
+    {%- if block.type == 'section' -%}
+      <div class="article-component__block-wrap" id="{{ block.settings.section_id }}">
+        {% render 'article-block',
+          header: block.settings.header,
+          header_uppercase: section.settings.header_uppercase,
+          text: block.settings.text,
+          button_text: block.settings.button_text,
+          button_url: block.settings.button_url,
+          note: block.settings.note
+        %}
+      </div>
+    {%- endif -%}
+  {% endfor %}
+</section>
+
+{% schema %}
+{
+  "name": "MTB Article",
+  "settings": [
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text align",
+      "options": [
+        {
+          "value": "text-align-left",
+          "label": "Left"
+        },
+        {
+          "value": "text-align-center",
+          "label": "Center"
+        },
+        {
+          "value": "text-align-right",
+          "label": "Right"
+        }
+      ],
+      "default": "text-align-center"
+    },
+    {
+      "type": "select",
+      "id": "title_size",
+      "label": "Header size",
+      "options": [
+        {
+          "value": "h1",
+          "label": "h1"
+        },
+        {
+          "value": "h2",
+          "label": "h2"
+        },
+        {
+          "value": "h3",
+          "label": "h3"
+        },
+        {
+          "value": "h4",
+          "label": "h4"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "color",
+      "id": "header_color",
+      "label": "Header Color"
+    },
+    {
+      "type": "checkbox",
+      "id": "header_uppercase",
+      "default": true,
+      "label": "Uppercase Header"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#33534b"
+    },
+    {
+      "type": "color",
+      "id": "text_link_hover_color",
+      "label": "Text Link Hover Color",
+      "default": "#172421"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pt",
+      "label": "Component mobile padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pb",
+      "label": "Component mobile padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+
+    {
+      "type": "header",
+      "content": "Tablet Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pt",
+      "label": "Component tablet padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pb",
+      "label": "Component tablet padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pt",
+      "label": "Component desktop padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pb",
+      "label": "Component desktop padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "section",
+      "name": "Section",
+      "settings": [
+        {
+          "type": "text",
+          "label": "Section ID",
+          "id": "section_id",
+          "info": "If you want to use links on this section, please, add unic id"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "header",
+          "label": "Header"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "button_text",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button Link"
+        },
+        {
+          "type": "richtext",
+          "id": "note",
+          "label": "Note"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTB Article"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,42 @@
+{% if request.design_mode and section.settings.builder_content_entry_preview == '33b3064ba00344b7829f86b536d1415d' %}
+{% include 'content.33b3064ba00344b7829f86b536d1415d.builder' %}
+  {% else %}
+    {% include 'model.pdp-florida-fishing-kit.builder' %}
+  {% endif %}
+  
+  {% schema %}
+   {
+  "name": "Pdp florida fishing kit",
+  "tag": "section",
+  "settings":[
+    {
+      "type": "header",
+      "content": "Custom Builder.io Section"
+    },
+    {
+      "type": "paragraph",
+      "content": "To edit and customize this section, visit the [model in Builder](https://builder.io/content?model=6307b5be867b4f23a885058899e1e4e6). To learn more about how sections in Builder work with Shopify, [visit the docs](https://www.builder.io/c/docs/shopify/sections-everywhere)."
+    },
+    {
+      "type": "select",
+      "id": "builder_content_entry_preview",
+      "label": "Content Entry Preview",
+      "info": "Targeting is not used while previewing sections in the Shopify theme editor, meaning this preview will not change based on the targeting you have set. If you are using targeting, you need to manually select an entry to preview it. This setting only affects the preview, not what displays on your live site.",
+      "options": [
+        { "value": "33b3064ba00344b7829f86b536d1415d", "label": "PDP | Florida Fishing Kit - 9/18/2025"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Builder entries used"
+    },
+    {
+    "type": "paragraph",
+    "content": "Name: PDP | Florida Fishing Kit - 9/18/2025. Targeting: no targeting. Visit the [entry in Builder](https://builder.io/content/33b3064ba00344b7829f86b536d1415d)"
+  }
+  ],
+  "presets":[{
+    "name": "Pdp florida fishing kit"
+  }]
+}
+  {% endschema %}

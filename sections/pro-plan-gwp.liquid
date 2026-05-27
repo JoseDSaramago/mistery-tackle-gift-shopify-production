@@ -1,0 +1,1998 @@
+{%- comment -%}
+  ante-plans-lp-gwp.liquid
+  Plans LP — Gift With Purchase landing page.
+  Ported from Claude Design handoff `plans-lp-gwp-feature` (May 2026).
+  One self-contained section covering: hero (with floating gift cluster + stamp),
+  value strip, buy box (species × cadence with gift reveal), press marquee,
+  how-it-works, reviews carousel, FAQ accordion. Everything copy/image/link
+  is editable from the theme editor via settings or blocks.
+{%- endcomment -%}
+
+{%- assign id = section.settings.custom_id | default: section.id -%}
+
+{%- comment -%} ── Block collections ── {%- endcomment -%}
+{%- assign kit_blocks      = section.blocks | where: "type", "kit_item"  -%}
+{%- assign value_blocks    = section.blocks | where: "type", "value_cell" -%}
+{%- assign species_blocks  = section.blocks | where: "type", "species"   -%}
+{%- assign gallery_blocks  = section.blocks | where: "type", "gallery_photo" -%}
+{%- assign cadence_blocks  = section.blocks | where: "type", "cadence"   -%}
+{%- assign press_blocks    = section.blocks | where: "type", "press_logo" -%}
+{%- assign how_blocks      = section.blocks | where: "type", "how_step"  -%}
+{%- assign review_blocks   = section.blocks | where: "type", "review"    -%}
+{%- assign faq_blocks      = section.blocks | where: "type", "faq_item"  -%}
+
+{%- comment -%} Default species + cadence (first preselected, else first) {%- endcomment -%}
+{%- assign default_species_id = blank -%}
+{%- for b in species_blocks -%}
+  {%- if b.settings.preselected and default_species_id == blank -%}
+    {%- assign default_species_id = b.id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if default_species_id == blank and species_blocks.size > 0 -%}
+  {%- assign default_species_id = species_blocks[0].id -%}
+{%- endif -%}
+
+{%- assign default_cadence_id = blank -%}
+{%- for c in cadence_blocks -%}
+  {%- if c.settings.preselected and default_cadence_id == blank -%}
+    {%- assign default_cadence_id = c.id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if default_cadence_id == blank and cadence_blocks.size > 0 -%}
+  {%- assign default_cadence_id = cadence_blocks[0].id -%}
+{%- endif -%}
+
+<section
+  id="{{ id }}"
+  class="ante-section lp-gwp-root {% if section.settings.section_inverse %}ante-inverse {% endif %}{{ section.settings.section_background_style }} {{ section.settings.section_background_colour }} {{ section.settings.section_spacing }}{% if section.settings.section_visible == false %} ante-section-hidden{% endif %}"
+  data-discount-code="{{ section.settings.discount_code }}"
+  data-default-species="{{ default_species_id }}"
+  data-default-cadence="{{ default_cadence_id }}"
+  style="
+    --gwp-flats:       {{ section.settings.brand_cream  | default: '#F9F3EA' }};
+    --gwp-cream-warm:  {{ section.settings.brand_cream_warm | default: '#F9F3EA' }};
+    --gwp-cream-soft:  {{ section.settings.brand_cream_soft | default: '#F2F3E3' }};
+    --gwp-green:       {{ section.settings.brand_green  | default: '#33534B' }};
+    --gwp-green-deep:  {{ section.settings.brand_green_deep | default: '#00594F' }};
+    --gwp-orange:      {{ section.settings.brand_orange | default: '#D14424' }};
+    --gwp-orange-burn: {{ section.settings.brand_orange_burn | default: '#A8351A' }};
+    --gwp-weedline:    {{ section.settings.brand_weedline | default: '#37B777' }};
+    --gwp-sunrise:     {{ section.settings.brand_sunrise | default: '#FFCB12' }};
+    --gwp-ink:         {{ section.settings.brand_ink    | default: '#101820' }};
+    --gwp-gray-50:     #8a8a8a;
+    --gwp-gray-70:     #4a4a4a;
+  "
+>
+  {%- comment -%} ══════════ 1 · HERO ══════════ {%- endcomment -%}
+  <div class="lp-hero-a" data-screen="hero">
+    {%- if section.settings.hero_logo != blank or section.settings.hero_logo_link != blank -%}
+      <a class="lp-hero-a__logo" href="{{ section.settings.hero_logo_link | default: '/' }}" aria-label="{{ shop.name | escape }}">
+        {%- if section.settings.hero_logo != blank -%}
+          <img src="{{ section.settings.hero_logo | image_url: width: 220 }}" alt="{{ shop.name | escape }}" width="220" height="44">
+        {%- endif -%}
+      </a>
+    {%- endif -%}
+
+    {%- if section.settings.hero_bg_desktop != blank -%}
+      <img class="lp-hero-a__bg-img lp-hero-a__bg-img--desktop"
+           src="{{ section.settings.hero_bg_desktop | image_url: width: 2400 }}"
+           srcset="{{ section.settings.hero_bg_desktop | image_url: width: 1280 }} 1280w,
+                   {{ section.settings.hero_bg_desktop | image_url: width: 2000 }} 2000w,
+                   {{ section.settings.hero_bg_desktop | image_url: width: 2400 }} 2400w"
+           sizes="100vw"
+           alt=""
+           loading="eager"
+           fetchpriority="high">
+    {%- endif -%}
+    {%- if section.settings.hero_bg_mobile != blank -%}
+      <img class="lp-hero-a__bg-img lp-hero-a__bg-img--mobile"
+           src="{{ section.settings.hero_bg_mobile | image_url: width: 1000 }}"
+           srcset="{{ section.settings.hero_bg_mobile | image_url: width: 600 }} 600w,
+                   {{ section.settings.hero_bg_mobile | image_url: width: 1000 }} 1000w"
+           sizes="100vw"
+           alt=""
+           loading="eager"
+           fetchpriority="high">
+    {%- endif -%}
+
+    <div class="lp-hero-a__scrim" aria-hidden="true"></div>
+
+    <div class="lp-hero-a__inner">
+      {%- if section.settings.hero_eyebrow != blank -%}
+        <div class="lp-hero-a__eyebrow">
+          <span class="lp-pill-eyebrow"
+                style="background: {{ section.settings.hero_eyebrow_bg | default: '#D14424' }}; color: {{ section.settings.hero_eyebrow_color | default: '#FFFFFF' }};">
+            {{ section.settings.hero_eyebrow }}
+          </span>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.hero_script != blank -%}
+        <div class="lp-gwp-script lp-hero-a__script">{{ section.settings.hero_script }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.hero_title != blank -%}
+        <h1 class="lp-hero-a__title">{{ section.settings.hero_title | newline_to_br }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.hero_sub != blank -%}
+        <p class="lp-hero-a__sub">{{ section.settings.hero_sub }}</p>
+      {%- endif -%}
+
+      <div class="lp-hero-a__ctas">
+        {%- if section.settings.hero_cta_primary_label != blank -%}
+          <a class="lp-btn lp-btn--orange lp-btn--lg"
+             href="{{ section.settings.hero_cta_primary_link | default: '#buy' }}">
+            {{ section.settings.hero_cta_primary_label }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.hero_cta_secondary_label != blank -%}
+          <a class="lp-btn lp-btn--ghost"
+             href="{{ section.settings.hero_cta_secondary_link | default: '#how' }}">
+            {{ section.settings.hero_cta_secondary_label }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if kit_blocks.size > 0 and section.settings.kit_show -%}
+        <div class="lp-hero-a__kit" aria-label="{{ section.settings.kit_title | default: 'Free Field Kit contents' | escape }}">
+          {%- if section.settings.kit_title != blank -%}
+            <div class="lp-hero-a__kit-title">{{ section.settings.kit_title }}</div>
+          {%- endif -%}
+          <ul class="lp-hero-a__kit-list">
+            {%- for ki in kit_blocks -%}
+              <li class="lp-hero-a__kit-item" {{ ki.shopify_attributes }}>
+                <span class="lp-hero-a__kit-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="5 12 10 17 19 7"/>
+                  </svg>
+                </span>
+                <span>{{ ki.settings.label }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.trust_text != blank -%}
+        <div class="lp-hero-a__trust">
+          <span>★★★★★</span>
+          {%- if section.settings.trust_rating != blank -%}<strong>{{ section.settings.trust_rating }}</strong>{%- endif -%}
+          <span>·</span>
+          <span>{{ section.settings.trust_text }}</span>
+        </div>
+      {%- endif -%}
+
+    {%- if section.settings.stamp_show -%}
+      <div class="lp-stamp" aria-hidden="true">
+        <div class="lp-stamp__inner">
+          {%- if section.settings.stamp_script != blank -%}
+            <div class="lp-gwp-script lp-stamp__script">{{ section.settings.stamp_script }}</div>
+          {%- endif -%}
+          {%- if section.settings.stamp_big != blank -%}
+            <div class="lp-stamp__big">{{ section.settings.stamp_big }}</div>
+          {%- endif -%}
+          {%- if section.settings.stamp_sub != blank -%}
+            <div class="lp-stamp__sub">{{ section.settings.stamp_sub }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.gift1_show or section.settings.gift2_show -%}
+      <div class="lp-hero-a__gifts">
+        {%- if section.settings.gift1_show -%}
+          <div class="lp-hero-a__gift lp-hero-a__gift--hat">
+            {%- if section.settings.gift1_eyebrow != blank -%}
+              <div class="lp-hero-a__gift-eyebrow">{{ section.settings.gift1_eyebrow }}</div>
+            {%- endif -%}
+            <div class="lp-hero-a__gift-media">
+              {%- if section.settings.gift1_image != blank -%}
+                <img src="{{ section.settings.gift1_image | image_url: width: 500 }}"
+                     alt="{{ section.settings.gift1_name | escape }}" loading="lazy">
+              {%- else -%}
+                <div class="lp-gwp-imgph"></div>
+              {%- endif -%}
+            </div>
+            {%- if section.settings.gift1_name != blank -%}
+              <div class="lp-hero-a__gift-name">{{ section.settings.gift1_name }}</div>
+            {%- endif -%}
+            {%- if section.settings.gift1_strike != blank or section.settings.gift1_free != blank -%}
+              <div class="lp-hero-a__gift-price">
+                {%- if section.settings.gift1_strike != blank -%}
+                  <span class="lp-hero-a__strike">{{ section.settings.gift1_strike }}</span>
+                {%- endif -%}
+                {%- if section.settings.gift1_free != blank -%}
+                  <span class="lp-hero-a__free">{{ section.settings.gift1_free }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.gift1_show and section.settings.gift2_show -%}
+          <div class="lp-hero-a__or-stamp" aria-hidden="true">
+            <span class="lp-gwp-script">{{ section.settings.or_text | default: 'or' }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.gift2_show -%}
+          <div class="lp-hero-a__gift lp-hero-a__gift--kit">
+            {%- if section.settings.gift2_eyebrow != blank -%}
+              <div class="lp-hero-a__gift-eyebrow lp-hero-a__gift-eyebrow--alt">{{ section.settings.gift2_eyebrow }}</div>
+            {%- endif -%}
+            <div class="lp-hero-a__gift-media">
+              {%- if section.settings.gift2_image != blank -%}
+                <img src="{{ section.settings.gift2_image | image_url: width: 500 }}"
+                     alt="{{ section.settings.gift2_name | escape }}" loading="lazy">
+              {%- else -%}
+                <div class="lp-gwp-imgph"></div>
+              {%- endif -%}
+            </div>
+            {%- if section.settings.gift2_name != blank -%}
+              <div class="lp-hero-a__gift-name">{{ section.settings.gift2_name }}</div>
+            {%- endif -%}
+            {%- if section.settings.gift2_strike != blank or section.settings.gift2_free != blank -%}
+              <div class="lp-hero-a__gift-price">
+                {%- if section.settings.gift2_strike != blank -%}
+                  <span class="lp-hero-a__strike">{{ section.settings.gift2_strike }}</span>
+                {%- endif -%}
+                {%- if section.settings.gift2_free != blank -%}
+                  <span class="lp-hero-a__free">{{ section.settings.gift2_free }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    </div>{%- comment -%} /lp-hero-a__inner {%- endcomment -%}
+  </div>
+
+  {%- comment -%} ══════════ 2 · VALUE STRIP ══════════ {%- endcomment -%}
+  {%- if value_blocks.size > 0 -%}
+    <div class="lp-strip">
+      {%- for v in value_blocks -%}
+        <div class="lp-strip__cell" {{ v.shopify_attributes }}>
+          <div class="lp-strip__num">{{ v.settings.number | default: forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+          <div class="lp-strip__title">{{ v.settings.title }}</div>
+          <div class="lp-strip__body">{{ v.settings.body }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ══════════ 3 · BUY BOX ══════════ {%- endcomment -%}
+  {%- if cadence_blocks.size > 0 -%}
+    <div class="lp-buy" id="buy" data-screen="buy">
+      <div class="lp-buy__head">
+        {%- if section.settings.buy_script != blank -%}
+          <span class="lp-gwp-script lp-buy__script">{{ section.settings.buy_script }}</span>
+        {%- endif -%}
+        {%- if section.settings.buy_title != blank -%}
+          <h2 class="lp-buy__title">{{ section.settings.buy_title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.buy_sub != blank -%}
+          <p class="lp-buy__sub">{{ section.settings.buy_sub }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="lp-buy__layout">
+        {%- comment -%} ── Gallery — initial photos from default species, fallback to global gallery_photo blocks ── {%- endcomment -%}
+        {%- assign default_species_block = blank -%}
+        {%- for s in species_blocks -%}
+          {%- if s.id == default_species_id and default_species_block == blank -%}
+            {%- assign default_species_block = s -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if default_species_block == blank and species_blocks.size > 0 -%}
+          {%- assign default_species_block = species_blocks[0] -%}
+        {%- endif -%}
+
+        {%- comment -%} Collect initial photo set: prefer the default species' images, fall back to gallery_photo blocks.
+           NOTE: must compute `image_url` into its own variable before
+           appending — chaining `append | image_url | append` makes image_url
+           operate on the concatenated string, which returns empty. {%- endcomment -%}
+        {%- assign init_imgs = '' -%}
+        {%- assign init_alts = '' -%}
+        {%- if default_species_block != blank -%}
+          {%- assign sp = default_species_block.settings -%}
+          {%- assign sp_name = sp.name | default: 'Box photo' -%}
+          {%- if sp.gallery_1 != blank -%}
+            {%- assign u = sp.gallery_1 | image_url: width: 1200 -%}
+            {%- assign a = sp.gallery_1_alt | default: sp_name -%}
+            {%- assign init_imgs = init_imgs | append: u | append: '|' -%}
+            {%- assign init_alts = init_alts | append: a | append: '|' -%}
+          {%- endif -%}
+          {%- if sp.gallery_2 != blank -%}
+            {%- assign u = sp.gallery_2 | image_url: width: 1200 -%}
+            {%- assign a = sp.gallery_2_alt | default: sp_name -%}
+            {%- assign init_imgs = init_imgs | append: u | append: '|' -%}
+            {%- assign init_alts = init_alts | append: a | append: '|' -%}
+          {%- endif -%}
+          {%- if sp.gallery_3 != blank -%}
+            {%- assign u = sp.gallery_3 | image_url: width: 1200 -%}
+            {%- assign a = sp.gallery_3_alt | default: sp_name -%}
+            {%- assign init_imgs = init_imgs | append: u | append: '|' -%}
+            {%- assign init_alts = init_alts | append: a | append: '|' -%}
+          {%- endif -%}
+          {%- if sp.gallery_4 != blank -%}
+            {%- assign u = sp.gallery_4 | image_url: width: 1200 -%}
+            {%- assign a = sp.gallery_4_alt | default: sp_name -%}
+            {%- assign init_imgs = init_imgs | append: u | append: '|' -%}
+            {%- assign init_alts = init_alts | append: a | append: '|' -%}
+          {%- endif -%}
+          {%- if sp.gallery_5 != blank -%}
+            {%- assign u = sp.gallery_5 | image_url: width: 1200 -%}
+            {%- assign a = sp.gallery_5_alt | default: sp_name -%}
+            {%- assign init_imgs = init_imgs | append: u | append: '|' -%}
+            {%- assign init_alts = init_alts | append: a | append: '|' -%}
+          {%- endif -%}
+        {%- endif -%}
+        {%- if init_imgs == '' -%}
+          {%- for p in gallery_blocks -%}
+            {%- if p.settings.image != blank -%}
+              {%- assign u = p.settings.image | image_url: width: 1200 -%}
+              {%- assign a = p.settings.alt | default: 'Box photo' -%}
+              {%- assign init_imgs = init_imgs | append: u | append: '|' -%}
+              {%- assign init_alts = init_alts | append: a | append: '|' -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+        {%- assign init_img_list = init_imgs | split: '|' -%}
+        {%- assign init_alt_list = init_alts | split: '|' -%}
+
+        <div class="lp-buy__gallery">
+          <div class="lp-buy__main">
+            {%- if init_img_list.size > 0 -%}
+              <img class="lp-buy__main-img"
+                   data-lp-buy-main
+                   src="{{ init_img_list[0] }}"
+                   alt="{{ init_alt_list[0] | default: 'Box photo' | escape }}"
+                   loading="lazy">
+            {%- else -%}
+              <div class="lp-gwp-imgph lp-buy__main-img" data-lp-buy-main></div>
+            {%- endif -%}
+            {%- if section.settings.buy_main_badge_label != blank -%}
+              <div class="lp-buy__main-badge">
+                {%- if section.settings.buy_main_badge_script != blank -%}
+                  <span class="lp-gwp-script">{{ section.settings.buy_main_badge_script }}</span>
+                {%- endif -%}
+                <span>{{ section.settings.buy_main_badge_label }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+          <div class="lp-buy__thumbs" data-lp-thumbs>
+            {%- if init_img_list.size > 0 -%}
+              {%- for src in init_img_list -%}
+                {%- assign alt = init_alt_list[forloop.index0] | default: 'Box photo' -%}
+                <button type="button"
+                        class="lp-buy__thumb{% if forloop.first %} is-active{% endif %}"
+                        data-lp-thumb
+                        data-lp-thumb-src="{{ src }}"
+                        data-lp-thumb-alt="{{ alt | escape }}"
+                        aria-label="View photo {{ forloop.index }}">
+                  <img src="{{ src }}" alt="" loading="lazy">
+                </button>
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
+        </div>
+
+        {%- comment -%} ── Form ── {%- endcomment -%}
+        <div class="lp-buy__form">
+          {%- if section.settings.buy_rating_stars != blank or section.settings.buy_rating_count != blank -%}
+            <div class="lp-buy__rating">
+              <span class="lp-buy__stars">★★★★★</span>
+              {%- if section.settings.buy_rating_stars != blank -%}<strong>{{ section.settings.buy_rating_stars }}</strong>{%- endif -%}
+              {%- if section.settings.buy_rating_count != blank -%}<span class="lp-buy__rating-count">· {{ section.settings.buy_rating_count }}</span>{%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.buy_plan_name != blank -%}
+            <h3 class="lp-buy__name">{{ section.settings.buy_plan_name }}</h3>
+          {%- endif -%}
+          {%- if section.settings.buy_plan_pitch != blank -%}
+            <p class="lp-buy__pitch">{{ section.settings.buy_plan_pitch }}</p>
+          {%- endif -%}
+
+          {%- if species_blocks.size > 0 -%}
+            <div class="lp-buy__field">
+              {%- if section.settings.buy_species_label != blank -%}
+                <div class="lp-buy__label">{{ section.settings.buy_species_label }}</div>
+              {%- endif -%}
+              <div class="lp-buy__species">
+                {%- for s in species_blocks -%}
+                  {%- comment -%} Pipe-joined image URLs + alts for this species' gallery.
+                     Must compute image_url BEFORE appending — chaining
+                     `append | image_url | append` makes image_url act on
+                     the concatenated string and return empty. {%- endcomment -%}
+                  {%- assign sp_imgs = '' -%}
+                  {%- assign sp_alts = '' -%}
+                  {%- assign s_name = s.settings.name | default: 'Box photo' -%}
+                  {%- if s.settings.gallery_1 != blank -%}
+                    {%- assign u = s.settings.gallery_1 | image_url: width: 1200 -%}
+                    {%- assign a = s.settings.gallery_1_alt | default: s_name -%}
+                    {%- assign sp_imgs = sp_imgs | append: u | append: '|' -%}
+                    {%- assign sp_alts = sp_alts | append: a | append: '|' -%}
+                  {%- endif -%}
+                  {%- if s.settings.gallery_2 != blank -%}
+                    {%- assign u = s.settings.gallery_2 | image_url: width: 1200 -%}
+                    {%- assign a = s.settings.gallery_2_alt | default: s_name -%}
+                    {%- assign sp_imgs = sp_imgs | append: u | append: '|' -%}
+                    {%- assign sp_alts = sp_alts | append: a | append: '|' -%}
+                  {%- endif -%}
+                  {%- if s.settings.gallery_3 != blank -%}
+                    {%- assign u = s.settings.gallery_3 | image_url: width: 1200 -%}
+                    {%- assign a = s.settings.gallery_3_alt | default: s_name -%}
+                    {%- assign sp_imgs = sp_imgs | append: u | append: '|' -%}
+                    {%- assign sp_alts = sp_alts | append: a | append: '|' -%}
+                  {%- endif -%}
+                  {%- if s.settings.gallery_4 != blank -%}
+                    {%- assign u = s.settings.gallery_4 | image_url: width: 1200 -%}
+                    {%- assign a = s.settings.gallery_4_alt | default: s_name -%}
+                    {%- assign sp_imgs = sp_imgs | append: u | append: '|' -%}
+                    {%- assign sp_alts = sp_alts | append: a | append: '|' -%}
+                  {%- endif -%}
+                  {%- if s.settings.gallery_5 != blank -%}
+                    {%- assign u = s.settings.gallery_5 | image_url: width: 1200 -%}
+                    {%- assign a = s.settings.gallery_5_alt | default: s_name -%}
+                    {%- assign sp_imgs = sp_imgs | append: u | append: '|' -%}
+                    {%- assign sp_alts = sp_alts | append: a | append: '|' -%}
+                  {%- endif -%}
+                  <button type="button"
+                          class="lp-buy__species-pill{% if s.id == default_species_id %} is-active{% endif %}"
+                          data-lp-species="{{ s.id }}"
+                          data-lp-species-name="{{ s.settings.name | escape }}"
+                          data-lp-species-imgs="{{ sp_imgs }}"
+                          data-lp-species-alts="{{ sp_alts | escape }}"
+                          {{ s.shopify_attributes }}>
+                    <span class="lp-buy__species-thumb" style="background: {{ s.settings.color | default: '#F2F3E3' }};">
+                      {%- if s.settings.image != blank -%}
+                        <img src="{{ s.settings.image | image_url: width: 160 }}" alt="" loading="lazy">
+                      {%- endif -%}
+                    </span>
+                    <span class="lp-buy__species-label">{{ s.settings.name }}</span>
+                  </button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endif -%}
+
+          <div class="lp-buy__field">
+            {%- if section.settings.buy_cadence_label != blank -%}
+              <div class="lp-buy__label">{{ section.settings.buy_cadence_label }}</div>
+            {%- endif -%}
+            <div class="lp-buy__cadences" role="radiogroup" aria-label="Choose your plan length">
+              {%- for c in cadence_blocks -%}
+                {%- comment -%} Skip orphan cadence blocks that have no product
+                   attached — they'd render as broken un-buyable cards. {%- endcomment -%}
+                {%- if c.settings.product == blank -%}{%- continue -%}{%- endif -%}
+                {%- if c.settings.product.first_available_variant == nil -%}{%- continue -%}{%- endif -%}
+                {%- assign cad_var = c.settings.product.first_available_variant -%}
+                {%- assign variant_id = cad_var.id -%}
+                {%- assign selling_plan_id = '' -%}
+                {%- if cad_var.selling_plan_allocations.size > 0 -%}
+                  {%- assign selling_plan_id = cad_var.selling_plan_allocations.first.selling_plan.id -%}
+                {%- endif -%}
+                {%- assign ribbon_color = c.settings.ribbon_color | default: '#D14424' -%}
+                <button type="button"
+                        class="lp-buy__cadence{% if c.id == default_cadence_id %} is-active{% endif %}"
+                        role="radio"
+                        aria-checked="{% if c.id == default_cadence_id %}true{% else %}false{% endif %}"
+                        data-lp-cadence="{{ c.id }}"
+                        data-lp-variant-id="{{ variant_id }}"
+                        data-lp-selling-plan="{{ selling_plan_id }}"
+                        data-lp-ship="{{ c.settings.ship_price | escape }}"
+                        data-lp-gift-name="{{ c.settings.gift_name | escape }}"
+                        data-lp-gift-tag="{{ c.settings.gift_tag | escape }}"
+                        data-lp-gift-note="{{ c.settings.gift_note | escape }}"
+                        data-lp-gift-image="{{ c.settings.gift_image | image_url: width: 240 }}"
+                        {{ c.shopify_attributes }}>
+                  {%- if c.settings.ribbon_label != blank -%}
+                    <div class="lp-buy__cadence-ribbon" style="background: {{ ribbon_color }}; box-shadow: 0 4px 8px {{ ribbon_color }}55;">
+                      <span class="lp-buy__ribbon-dot"></span>
+                      {{ c.settings.ribbon_label }}
+                    </div>
+                  {%- endif -%}
+                  {%- comment -%} Normalize the cadence fields so whitespace-only saved data still renders. {%- endcomment -%}
+                  {%- assign c_label = c.settings.label | strip -%}
+                  {%- if c_label == blank -%}{%- assign c_label = 'Plan' -%}{%- endif -%}
+                  {%- assign c_sub = c.settings.sub | strip -%}
+                  {%- assign c_ship_price = c.settings.ship_price | strip -%}
+                  {%- if c_ship_price == blank -%}{%- assign c_ship_price = '—' -%}{%- endif -%}
+                  {%- assign c_ship_unit = c.settings.ship_unit | strip | default: '/box' -%}
+                  <div class="lp-buy__cadence-row">
+                    <div class="lp-buy__cadence-l">
+                      <div class="lp-buy__cadence-label">{{ c_label }}</div>
+                      {%- if c_sub != blank -%}
+                        <div class="lp-buy__cadence-sub">{{ c_sub }}</div>
+                      {%- endif -%}
+                    </div>
+                    <div class="lp-buy__cadence-r">
+                      <div class="lp-buy__cadence-price">{{ c_ship_price }}</div>
+                      <div class="lp-buy__cadence-per">{{ c_ship_unit }}</div>
+                      {%- if c.settings.shipping_line != blank -%}
+                        <div class="lp-buy__cadence-ship">{{ c.settings.shipping_line }}</div>
+                      {%- endif -%}
+                      {%- if c.settings.total_price != blank -%}
+                        <div class="lp-buy__cadence-total">{{ c.settings.total_price }} total</div>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                  {%- if c.settings.save_badge != blank -%}
+                    <div class="lp-buy__cadence-save">{{ c.settings.save_badge }}</div>
+                  {%- endif -%}
+                </button>
+              {%- endfor -%}
+            </div>
+          </div>
+
+          <div class="lp-buy__gift-card" data-lp-gift-card>
+            <div class="lp-buy__gift-thumb" data-lp-gift-thumb>
+              <div class="lp-gwp-imgph"></div>
+            </div>
+            <div class="lp-buy__gift-text">
+              <div class="lp-buy__gift-tag" data-lp-gift-tag>{{ section.settings.buy_gift_default_tag | default: '★ FREE GIFT UNLOCKED' }}</div>
+              <div class="lp-buy__gift-name" data-lp-gift-name>{{ section.settings.buy_gift_default_name | default: 'Free MTB gift' }}</div>
+              <div class="lp-buy__gift-note" data-lp-gift-note>{{ section.settings.buy_gift_default_note | default: 'Ships with your first box.' }}</div>
+            </div>
+          </div>
+
+          <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data"
+                class="lp-buy-form" data-lp-buy-form>
+            <input type="hidden" name="id" value="" data-lp-cart-variant>
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="selling_plan" value="" data-lp-cart-selling-plan disabled>
+            <input type="hidden" name="properties[Species]" value="" data-lp-cart-species>
+            {%- if section.settings.discount_code != blank -%}
+              <input type="hidden" name="attributes[Discount Code]" value="{{ section.settings.discount_code }}">
+            {%- endif -%}
+            <button type="submit" class="lp-btn lp-btn--orange lp-btn--block">
+              <span data-lp-cta-label>{{ section.settings.buy_cta_template | default: 'Start My Plan' }}</span>
+            </button>
+          </form>
+          {%- if section.settings.buy_fineprint != blank -%}
+            <div class="lp-buy__fine">{{ section.settings.buy_fineprint }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ══════════ 4 · PRESS MARQUEE ══════════ {%- endcomment -%}
+  {%- if press_blocks.size > 0 -%}
+    <div class="lp-press" data-screen="press">
+      <div class="lp-press__head">
+        {%- if section.settings.press_script != blank -%}
+          <span class="lp-gwp-script lp-press__script">{{ section.settings.press_script }}</span>
+        {%- endif -%}
+      </div>
+      <div class="lp-press__track-wrap">
+        <div class="lp-press__track">
+          {%- for pass in (1..3) -%}
+            {%- for p in press_blocks -%}
+              <div class="lp-press__item" {% if pass != 1 %}aria-hidden="true"{% endif %} {{ p.shopify_attributes }}>
+                {%- if p.settings.logo != blank -%}
+                  <img src="{{ p.settings.logo | image_url: width: 320 }}" alt="{{ p.settings.label | escape }}" loading="lazy">
+                {%- else -%}
+                  <span class="lp-press__placeholder">{{ p.settings.label | default: 'LOGO' }}</span>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ══════════ 5 · HOW IT WORKS ══════════ {%- endcomment -%}
+  {%- if how_blocks.size > 0 -%}
+    <div class="lp-how" id="how" data-screen="how">
+      <div class="lp-how__head">
+        {%- if section.settings.how_script != blank -%}
+          <span class="lp-gwp-script lp-how__script">{{ section.settings.how_script }}</span>
+        {%- endif -%}
+        {%- if section.settings.how_title != blank -%}
+          <h2 class="lp-how__title">{{ section.settings.how_title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.how_sub != blank -%}
+          <p class="lp-how__sub">{{ section.settings.how_sub }}</p>
+        {%- endif -%}
+      </div>
+      <div class="lp-how__grid">
+        {%- for s in how_blocks -%}
+          <article class="lp-how__step" {{ s.shopify_attributes }}>
+            <div class="lp-how__media">
+              {%- if s.settings.image != blank -%}
+                <img src="{{ s.settings.image | image_url: width: 1000 }}"
+                     alt="{{ s.settings.title | escape }}" loading="lazy">
+              {%- else -%}
+                <div class="lp-gwp-imgph lp-how__imgph"></div>
+              {%- endif -%}
+              {%- if s.settings.whack_show -%}
+                <span class="lp-how__whack" aria-hidden="true">
+                  <span class="lp-how__whack-inner">
+                    {%- if s.settings.whack_script != blank -%}
+                      <span class="lp-gwp-script lp-how__whack-script">{{ s.settings.whack_script }}</span>
+                    {%- endif -%}
+                    {%- if s.settings.whack_big != blank -%}
+                      <span class="lp-how__whack-big">{{ s.settings.whack_big }}</span>
+                    {%- endif -%}
+                    {%- if s.settings.whack_sub != blank -%}
+                      <span class="lp-how__whack-sub">{{ s.settings.whack_sub }}</span>
+                    {%- endif -%}
+                  </span>
+                </span>
+              {%- endif -%}
+            </div>
+            {%- if s.settings.eyebrow != blank -%}
+              <div class="lp-how__eyebrow">{{ s.settings.eyebrow }}</div>
+            {%- endif -%}
+            {%- if s.settings.title != blank -%}
+              <h3 class="lp-how__step-title">{{ s.settings.title }}</h3>
+            {%- endif -%}
+            {%- if s.settings.body != blank -%}
+              <p class="lp-how__body">{{ s.settings.body }}</p>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      </div>
+      {%- if section.settings.how_cta_label != blank -%}
+        <div class="lp-how__cta">
+          <a class="lp-btn lp-btn--orange lp-btn--lg"
+             href="{{ section.settings.how_cta_link | default: '#buy' }}">
+            {{ section.settings.how_cta_label }}
+          </a>
+          {%- if section.settings.how_cta_note != blank -%}
+            <span class="lp-how__cta-note">{{ section.settings.how_cta_note }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ══════════ 6 · REVIEWS CAROUSEL ══════════ {%- endcomment -%}
+  {%- if review_blocks.size > 0 -%}
+    <div class="lp-reviews" data-screen="reviews">
+      <div class="lp-reviews__head">
+        <div class="lp-reviews__title-col">
+          {%- if section.settings.reviews_script != blank -%}
+            <span class="lp-gwp-script lp-reviews__script">{{ section.settings.reviews_script }}</span>
+          {%- endif -%}
+          {%- if section.settings.reviews_title != blank -%}
+            <h2 class="lp-reviews__title">{{ section.settings.reviews_title }}</h2>
+          {%- endif -%}
+        </div>
+        <div class="lp-reviews__rating">
+          <div class="lp-reviews__stars">★★★★★</div>
+          {%- if section.settings.reviews_rating_num != blank -%}
+            <div class="lp-reviews__rating-num">{{ section.settings.reviews_rating_num }}</div>
+          {%- endif -%}
+          {%- if section.settings.reviews_rating_sub != blank -%}
+            <div class="lp-reviews__rating-sub">{{ section.settings.reviews_rating_sub }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="lp-reviews__track-wrap">
+        <div class="lp-reviews__track">
+          {%- for pass in (1..3) -%}
+            {%- for r in review_blocks -%}
+              {%- assign stars = r.settings.stars | default: 5 -%}
+              <article class="lp-review" {% if pass != 1 %}aria-hidden="true"{% endif %} {{ r.shopify_attributes }}>
+                <div class="lp-review__stars">
+                  {%- for i in (1..stars) -%}★{%- endfor -%}
+                  {%- assign off = 5 | minus: stars -%}
+                  {%- if off > 0 -%}<span class="lp-review__stars-off">{%- for i in (1..off) -%}★{%- endfor -%}</span>{%- endif -%}
+                </div>
+                {%- if r.settings.tag != blank -%}
+                  <div class="lp-review__tag">{{ r.settings.tag }}</div>
+                {%- endif -%}
+                {%- if r.settings.title != blank -%}
+                  <h4 class="lp-review__title">{{ r.settings.title }}</h4>
+                {%- endif -%}
+                {%- if r.settings.body != blank -%}
+                  <p class="lp-review__body">{{ r.settings.body }}</p>
+                {%- endif -%}
+                <div class="lp-review__who">
+                  <div class="lp-review__avatar">
+                    {%- assign initials = r.settings.name | default: '?' | split: ' ' -%}
+                    {%- for w in initials limit: 2 -%}{{ w | slice: 0, 1 | upcase }}{%- endfor -%}
+                  </div>
+                  <div>
+                    <div class="lp-review__name">{{ r.settings.name }}</div>
+                    <div class="lp-review__loc">{{ r.settings.loc }}</div>
+                  </div>
+                </div>
+              </article>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ══════════ 7 · FAQ ACCORDION ══════════ {%- endcomment -%}
+  {%- if faq_blocks.size > 0 -%}
+    <div class="lp-faq" id="faq" data-screen="faq">
+      <div class="lp-faq__head">
+        {%- if section.settings.faq_script != blank -%}
+          <span class="lp-gwp-script lp-faq__script">{{ section.settings.faq_script }}</span>
+        {%- endif -%}
+        {%- if section.settings.faq_title != blank -%}
+          <h2 class="lp-faq__title">{{ section.settings.faq_title }}</h2>
+        {%- endif -%}
+      </div>
+      <div class="lp-faq__list">
+        {%- for f in faq_blocks -%}
+          <div class="lp-faq__item{% if forloop.first %} is-open{% endif %}" data-lp-faq {{ f.shopify_attributes }}>
+            <button type="button" class="lp-faq__q" data-lp-faq-toggle aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+              <span class="lp-faq__q-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              <span class="lp-faq__q-text">{{ f.settings.question }}</span>
+              <span class="lp-faq__q-chev" aria-hidden="true">+</span>
+            </button>
+            <div class="lp-faq__a-wrap">
+              <div class="lp-faq__a">{{ f.settings.answer }}</div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+      {%- if section.settings.faq_more_text != blank -%}
+        <div class="lp-faq__more">
+          {{ section.settings.faq_more_text }}
+          {%- if section.settings.faq_more_link_label != blank -%}
+            <a class="lp-faq__link" href="{{ section.settings.faq_more_link | default: '#' }}">{{ section.settings.faq_more_link_label }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ══════════ 8 · DARK MINI-FOOTER ══════════ {%- endcomment -%}
+  {%- if section.settings.footer_show -%}
+    <div class="lp-footer-dark" data-screen="footer">
+      <div class="lp-footer-dark__inner">
+        {%- if section.settings.footer_logo != blank -%}
+          <a class="lp-footer-dark__logo-link" href="{{ section.settings.footer_logo_link | default: '/' }}" aria-label="{{ shop.name | escape }}">
+            <img class="lp-footer-dark__logo"
+                 src="{{ section.settings.footer_logo | image_url: width: 400 }}"
+                 alt="{{ shop.name | escape }}"
+                 loading="lazy">
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.footer_support_label != blank or section.settings.footer_support_email != blank -%}
+          <p class="lp-footer-dark__support">
+            {%- if section.settings.footer_support_label != blank -%}
+              {{ section.settings.footer_support_label }}
+            {%- endif -%}
+            {%- if section.settings.footer_support_email != blank -%}
+              {%- if section.settings.footer_support_label != blank -%} {%- endif -%}
+              <a class="lp-footer-dark__email" href="mailto:{{ section.settings.footer_support_email }}">{{ section.settings.footer_support_email }}</a>
+            {%- endif -%}
+            {%- if section.settings.footer_support_suffix != blank -%}
+              {{ section.settings.footer_support_suffix }}
+            {%- endif -%}
+          </p>
+        {%- endif -%}
+
+        {%- if section.settings.footer_legal != blank -%}
+          <p class="lp-footer-dark__legal">{{ section.settings.footer_legal }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{%- comment -%} ══════════ STYLES ══════════ {%- endcomment -%}
+<style>
+  /* Brand fonts — Shopify CDN */
+  @font-face { font-family: "Brandon Printed";  src: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/BrandonPrinted-One.woff?v=1777398451") format("woff"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "Cervo Neue";       src: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/CervoNeue-LightNeue.otf?v=1777398457") format("opentype"); font-weight: 300; font-display: swap; }
+  @font-face { font-family: "Cervo Neue";       src: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/Typoforge_Studio_-_CervoNeue-RegularNeue.otf?v=1777398457") format("opentype"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "Cervo Neue";       src: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/Typoforge_Studio_-_CervoNeue-BoldNeue.otf?v=1777398457") format("opentype"); font-weight: 700; font-display: swap; }
+  @font-face { font-family: "Gotham SSm";       src: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/GothamSSm-Book.woff?v=1736887231") format("woff"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "Gotham SSm";       src: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/GothamSSm-Bold.woff?v=1736887231") format("woff"); font-weight: 700; font-display: swap; }
+  @font-face { font-family: "Zing Script Rust"; src: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/ZingScriptRustSB-BaseG.woff?v=1777398464") format("woff"); font-weight: 600; font-display: swap; }
+
+  .lp-gwp-root {
+    --gwp-font-display:   "Brandon Printed", "Archivo Black", Impact, sans-serif;
+    --gwp-font-tall:      "Cervo Neue", "Bebas Neue", "Oswald", Impact, sans-serif;
+    --gwp-font-script:    "Zing Script Rust", "Caveat Brush", cursive;
+    --gwp-font-body:      "Gotham SSm", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+    font-family: var(--gwp-font-body);
+    color: var(--gwp-ink);
+    background: var(--gwp-flats);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .lp-gwp-root * { box-sizing: border-box; }
+
+  /* Full-bleed each top-level child so every section spans edge-to-edge
+     regardless of the ancestor's max-width / padding.
+
+     Using margin-only breakout (NOT `left: 50%`). Combining `left: 50%`
+     with `margin-left: -50vw` is fragile — themes commonly override
+     margins on `.ante-section > *`, leaving only the `left: 50%` shift,
+     which pushes the whole layout 50% to the right.
+     `!important` keeps the negative margins from being clobbered. */
+  .lp-gwp-root > .lp-hero-a,
+  .lp-gwp-root > .lp-strip,
+  .lp-gwp-root > .lp-buy,
+  .lp-gwp-root > .lp-press,
+  .lp-gwp-root > .lp-how,
+  .lp-gwp-root > .lp-reviews,
+  .lp-gwp-root > .lp-faq,
+  .lp-gwp-root > .lp-footer-dark {
+    position: relative !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+  }
+
+  /* Belt-and-suspenders: also reset the section element and its
+     Shopify wrapper so any theme-imposed max-width or horizontal padding
+     can't constrain the breakout's starting point. */
+  #shopify-section-{{ section.id }} {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  section.ante-section.lp-gwp-root,
+  .ante-section.lp-gwp-root {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    overflow: visible !important;
+  }
+  .lp-gwp-root img { display: block; max-width: 100%; }
+  .lp-gwp-root h1, .lp-gwp-root h2, .lp-gwp-root h3, .lp-gwp-root h4 { margin: 0; }
+  .lp-gwp-root a { text-decoration: none; }
+
+  .lp-gwp-script {
+    font-family: var(--gwp-font-script);
+    font-style: italic;
+    font-weight: 600;
+    line-height: 0.95;
+    color: var(--gwp-orange);
+  }
+  .lp-gwp-imgph {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #c4b8a2 0%, #8a7c66 100%);
+    border-radius: inherit;
+  }
+
+  /* Button system */
+  .lp-gwp-root .lp-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: var(--gwp-font-body); font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    border: 0; cursor: pointer; text-decoration: none; color: inherit;
+    border-radius: 9999px;
+    transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+    white-space: nowrap;
+  }
+  .lp-gwp-root .lp-btn--orange { background: var(--gwp-orange); color: #fff;
+    box-shadow: 0 10px 22px rgba(208,68,36,.28), 0 4px 6px rgba(0,0,0,.12); }
+  .lp-gwp-root .lp-btn--orange:hover { background: var(--gwp-orange-burn); }
+  .lp-gwp-root .lp-btn--orange:active { transform: translateY(1px); box-shadow: 0 5px 11px rgba(208,68,36,.20); }
+  .lp-gwp-root .lp-btn--ghost { background: rgba(255,255,255,.12); color: #fff;
+    backdrop-filter: blur(6px); border: 2px solid rgba(255,255,255,.45); }
+  .lp-gwp-root .lp-btn--ghost:hover { background: rgba(255,255,255,.22); }
+  .lp-gwp-root .lp-btn--lg { font-size: 16px; padding: 22px 38px; }
+  .lp-gwp-root .lp-btn--block { width: 100%; padding: 24px 28px; font-size: 16px; }
+  .lp-gwp-root .lp-btn:not(.lp-btn--lg):not(.lp-btn--block) { font-size: 14px; padding: 16px 30px; }
+
+  .lp-pill-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gwp-orange); color: #fff;
+    font-family: var(--gwp-font-body); font-weight: 700;
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 8px 16px; border-radius: 9999px;
+  }
+
+  /* ─── HERO ─── */
+  /* Smaller min-height so the bg image aspect is closer to a typical photo,
+     reducing the amount of crop/zoom needed by object-fit: cover. */
+  .lp-hero-a { position: relative; min-height: 540px; overflow: hidden;
+    background: linear-gradient(135deg, #1a2a26 0%, var(--gwp-green) 70%, var(--gwp-green-deep) 100%); }
+  .lp-hero-a__logo { position: absolute; top: 32px; left: 50%; z-index: 5;
+    transform: translateX(-50%); display: block; }
+  .lp-hero-a__logo img { height: 44px; width: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,.45)); }
+  .lp-hero-a__bg-img { position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center 25%; }
+  .lp-hero-a__bg-img--desktop { display: block !important; }
+  .lp-hero-a__bg-img--mobile  { display: none  !important; }
+  .lp-hero-a__scrim { position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.55) 60%, rgba(0,0,0,.75) 100%),
+                linear-gradient(110deg, rgba(0,0,0,.65) 0%, rgba(0,0,0,.20) 50%, transparent 75%); }
+  .lp-hero-a__inner { position: relative; z-index: 2; max-width: 1200px !important;
+    margin-left: auto !important; margin-right: auto !important;
+    padding: 90px 40px 110px; color: #fff;
+    width: 100%; box-sizing: border-box; }
+  .lp-hero-a__eyebrow { margin-bottom: 26px; }
+  .lp-hero-a__script { color: var(--gwp-sunrise); font-size: clamp(40px, 5vw, 64px); line-height: 0.9; margin-bottom: -10px; }
+  .lp-gwp-root .lp-hero-a .lp-hero-a__title,
+  .lp-gwp-root h1.lp-hero-a__title { font-family: var(--gwp-font-display);
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    font-size: clamp(48px, 8vw, 116px); line-height: 0.9; letter-spacing: 0.01em;
+    text-transform: uppercase; max-width: 820px;
+    text-shadow: 0 6px 16px rgba(0,0,0,.4); }
+  .lp-hero-a__sub { font-family: var(--gwp-font-body); font-size: clamp(15px, 1.4vw, 20px);
+    line-height: 1.45; max-width: 540px; margin: 26px 0 36px; color: rgba(255,255,255,.92); }
+  .lp-hero-a__ctas { display: flex; gap: 16px; align-items: center; margin-bottom: 30px; flex-wrap: wrap; }
+
+  .lp-hero-a__kit { max-width: 560px; background: rgba(16, 24, 32, 0.55);
+    border: 1px solid rgba(248, 243, 234, 0.08); border-radius: 18px;
+    padding: 20px 26px 22px; margin-bottom: 26px;
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .lp-hero-a__kit-title { font-family: var(--gwp-font-body); font-weight: 900;
+    font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gwp-sunrise); margin-bottom: 14px; }
+  .lp-hero-a__kit-list { list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px 28px; }
+  .lp-hero-a__kit-item { display: flex; align-items: center; gap: 12px;
+    color: var(--gwp-flats); font-family: var(--gwp-font-body); font-weight: 700;
+    font-size: 15px; line-height: 1.25; }
+  .lp-hero-a__kit-check { width: 22px; height: 22px; border-radius: 50%;
+    border: 2px solid var(--gwp-weedline); color: var(--gwp-weedline);
+    display: inline-grid; place-items: center; flex: 0 0 22px; }
+  .lp-hero-a__kit-check svg { width: 13px; height: 13px; }
+
+  .lp-hero-a__trust { display: flex; gap: 10px; align-items: center;
+    font-family: var(--gwp-font-body); font-size: 13px; letter-spacing: 0.06em;
+    color: rgba(255,255,255,.85); flex-wrap: wrap; }
+  .lp-hero-a__trust strong { font-weight: 700; }
+  .lp-hero-a__trust > span:first-child { color: var(--gwp-sunrise); font-size: 16px; letter-spacing: 0.04em; }
+
+  /* Gift cluster — anchored to the right edge of the 1200px content column
+     (parent is .lp-hero-a__inner, which is position: relative + max-width 1200).
+     bottom: 24px keeps the cards safely inside the hero, not clipping below. */
+  .lp-hero-a__gifts { position: absolute; right: 16px; bottom: 24px; z-index: 3;
+    width: 460px; height: 380px; pointer-events: none; }
+  .lp-hero-a__gifts > * { pointer-events: auto; }
+  .lp-hero-a__gift { position: absolute; width: 250px;
+    background: var(--gwp-flats); border-radius: 16px; padding: 14px 14px 16px;
+    box-shadow: 0 24px 48px rgba(0,0,0,.45), 0 4px 10px rgba(0,0,0,.25); }
+  .lp-hero-a__gift--hat { top: 0; right: 0; transform: rotate(4deg); z-index: 2; }
+  .lp-hero-a__gift--kit { bottom: 0; left: 0; transform: rotate(-5deg); z-index: 1; }
+  .lp-hero-a__gift-media { width: 100%; aspect-ratio: 1 / 1; border-radius: 10px;
+    overflow: hidden; background: var(--gwp-cream-soft); }
+  .lp-hero-a__gift-media img { width: 100%; height: 100%; object-fit: cover; }
+  .lp-hero-a__gift-eyebrow { background: var(--gwp-orange); color: #fff;
+    font-family: var(--gwp-font-body); font-weight: 700;
+    font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 6px 11px; border-radius: 9999px; display: inline-block; margin-bottom: 10px; }
+  .lp-hero-a__gift-eyebrow--alt { background: var(--gwp-weedline); }
+  .lp-hero-a__gift-name { font-family: var(--gwp-font-display); font-size: 22px;
+    line-height: 1; color: var(--gwp-green); margin-top: 12px; text-transform: uppercase; }
+  .lp-hero-a__gift-price { display: flex; align-items: baseline; gap: 10px; margin-top: 6px; }
+  .lp-hero-a__strike { font-family: var(--gwp-font-body); font-size: 14px;
+    color: var(--gwp-gray-50); text-decoration: line-through; }
+  .lp-hero-a__free { font-family: var(--gwp-font-tall); font-weight: 900; font-size: 26px;
+    color: var(--gwp-orange); letter-spacing: 0.02em; }
+
+  .lp-hero-a__or-stamp { position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, calc(-50% - 20px)) rotate(-10deg); z-index: 3;
+    width: 62px; height: 62px; border-radius: 50%;
+    background: var(--gwp-sunrise); color: var(--gwp-ink);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 18px rgba(0,0,0,.45), 0 0 0 4px var(--gwp-flats); }
+  .lp-hero-a__or-stamp .lp-gwp-script { font-size: 36px; color: var(--gwp-orange); }
+
+  /* Stamp — anchored to the right edge of the 1200px content column.
+     Dropped down so it overlaps the top-right of the hero title (the "H" in
+     "FREE GIFT WITH") instead of floating above the title. */
+  .lp-stamp { position: absolute; right: 24px; top: 180px; z-index: 4;
+    width: 170px; height: 170px; background: var(--gwp-orange);
+    border: 4px solid var(--gwp-flats); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transform: rotate(-8deg);
+    box-shadow: 0 12px 24px rgba(0,0,0,.35), inset 0 0 0 3px var(--gwp-orange); }
+  .lp-stamp__inner { text-align: center; color: var(--gwp-flats);
+    border: 2px dashed rgba(255,255,255,.5); border-radius: 50%;
+    width: 152px; height: 152px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px; }
+  .lp-stamp__script { font-size: 38px; color: var(--gwp-sunrise); margin-bottom: -8px; line-height: 0.8; }
+  .lp-stamp__big { font-family: var(--gwp-font-display); font-size: 38px;
+    line-height: 1; letter-spacing: 0.04em; text-transform: uppercase; }
+  .lp-stamp__sub { font-family: var(--gwp-font-body); font-weight: 700;
+    font-size: 9px; line-height: 1.15; letter-spacing: 0.16em;
+    text-transform: uppercase; margin-top: 4px; max-width: 110px; }
+
+  /* ─── VALUE STRIP ─── */
+  .lp-strip { display: grid; grid-template-columns: repeat(4, 1fr);
+    background: var(--gwp-flats);
+    border-top: 1px solid rgba(49,83,75,.1); border-bottom: 1px solid rgba(49,83,75,.1); }
+  .lp-strip__cell { padding: 36px 28px; border-right: 1px solid rgba(49,83,75,.1); }
+  .lp-strip__cell:last-child { border-right: 0; }
+  .lp-strip__num { font-family: var(--gwp-font-tall); font-weight: 700; font-size: 32px;
+    color: var(--gwp-orange); line-height: 1; }
+  .lp-strip__title { font-family: var(--gwp-font-display); font-size: 24px;
+    color: var(--gwp-green); margin-top: 8px; text-transform: uppercase; }
+  .lp-strip__body { font-family: var(--gwp-font-body); font-size: 14px;
+    line-height: 1.45; color: var(--gwp-gray-70); margin-top: 6px; }
+
+  /* ─── BUY BOX ─── */
+  .lp-buy { background: var(--gwp-flats); padding: 90px 40px 110px; scroll-margin-top: 24px; }
+  .lp-buy__head { max-width: 1200px; margin: 0 auto 50px; text-align: center; }
+  .lp-buy__script { font-size: 48px; color: var(--gwp-orange);
+    display: block; line-height: 0.9; margin-bottom: -4px; }
+  .lp-buy__title { font-family: var(--gwp-font-display); font-size: 68px;
+    line-height: 0.9; color: var(--gwp-green); text-transform: uppercase; }
+  .lp-buy__sub { font-family: var(--gwp-font-body); font-size: 18px; line-height: 1.5;
+    color: var(--gwp-gray-70); max-width: 560px; margin: 18px auto 0; }
+  .lp-buy__layout { max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .lp-buy__gallery { position: sticky; top: 24px; }
+  .lp-buy__main { position: relative; width: 100%; aspect-ratio: 1 / 1;
+    border-radius: 14px; overflow: hidden;
+    box-shadow: 0 18px 40px rgba(0,0,0,.18); background: var(--gwp-cream-soft); }
+  .lp-buy__main-img { width: 100%; height: 100%; object-fit: cover; }
+  .lp-buy__main-badge { position: absolute; top: 18px; left: 18px;
+    background: var(--gwp-sunrise); color: var(--gwp-ink);
+    border-radius: 9999px; padding: 10px 18px;
+    display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 8px 16px rgba(0,0,0,.22); }
+  .lp-buy__main-badge .lp-gwp-script { font-size: 24px; line-height: 0.8; }
+  .lp-buy__main-badge span:last-child { font-family: var(--gwp-font-body);
+    font-weight: 900; font-size: 12px; letter-spacing: 0.16em; }
+  .lp-buy__thumbs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 14px; }
+  .lp-buy__thumb { border: 0; padding: 0; background: transparent; cursor: pointer;
+    border-radius: 8px; overflow: hidden; aspect-ratio: 1;
+    outline: 2px solid transparent; outline-offset: 2px;
+    transition: outline-color .12s ease; }
+  .lp-buy__thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .lp-buy__thumb.is-active { outline-color: var(--gwp-orange); }
+  .lp-buy__thumb:hover { outline-color: var(--gwp-green); }
+
+  .lp-buy__form { padding: 4px; }
+  .lp-buy__rating { display: flex; align-items: center; gap: 10px;
+    font-family: var(--gwp-font-body); font-size: 14px; color: var(--gwp-gray-70); }
+  .lp-buy__stars { color: var(--gwp-sunrise); font-size: 18px; letter-spacing: 0.04em; }
+  .lp-buy__rating strong { color: var(--gwp-ink); font-weight: 700; }
+  .lp-buy__name { font-family: var(--gwp-font-display); font-size: 56px;
+    line-height: 0.95; color: var(--gwp-green); margin: 14px 0 8px; text-transform: uppercase; }
+  .lp-buy__pitch { font-family: var(--gwp-font-body); font-size: 16px;
+    color: var(--gwp-gray-70); margin: 0 0 28px; }
+
+  .lp-buy__field { margin-bottom: 24px; }
+  .lp-buy__label { font-family: var(--gwp-font-body); font-weight: 700; font-size: 12px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--gwp-green); margin-bottom: 12px; }
+
+  .lp-buy__species { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .lp-buy__species-pill { background: #fff; border: 2px solid rgba(49,83,75,.18);
+    border-radius: 14px; padding: 12px 8px 10px; cursor: pointer; transition: all .12s ease;
+    display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .lp-buy__species-pill:hover { border-color: var(--gwp-green); }
+  .lp-buy__species-pill.is-active { background: var(--gwp-green); border-color: var(--gwp-green); }
+  .lp-buy__species-pill.is-active .lp-buy__species-label { color: #fff; }
+  .lp-buy__species-thumb { width: 64px; height: 64px; border-radius: 50%;
+    overflow: hidden; display: block; box-shadow: inset 0 0 0 2px rgba(0,0,0,.05);
+    transition: box-shadow .12s ease; }
+  .lp-buy__species-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .lp-buy__species-pill.is-active .lp-buy__species-thumb {
+    box-shadow: inset 0 0 0 2px var(--gwp-sunrise), 0 0 0 2px var(--gwp-sunrise); }
+  .lp-buy__species-label { font-family: var(--gwp-font-body); font-weight: 700; font-size: 12px;
+    letter-spacing: 0.06em; color: var(--gwp-green); text-align: center; line-height: 1.15; }
+
+  .lp-buy__cadences { display: flex; flex-direction: column; gap: 10px; }
+  .lp-buy__cadence { position: relative; text-align: left; cursor: pointer;
+    background: #fff; border: 2px solid rgba(49,83,75,.18);
+    border-radius: 14px; padding: 18px 22px 16px;
+    transition: all .12s ease; font-family: var(--gwp-font-body); }
+  .lp-buy__cadence:hover { border-color: var(--gwp-green); }
+  .lp-buy__cadence.is-active { background: var(--gwp-cream-soft);
+    border-color: var(--gwp-orange); box-shadow: 0 0 0 4px rgba(208,68,36,.12); }
+  .lp-buy__cadence-ribbon { position: absolute; top: -10px; left: 18px;
+    color: #fff; display: inline-flex; align-items: center; gap: 6px;
+    font-weight: 900; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 9999px; }
+  .lp-buy__ribbon-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gwp-sunrise); }
+  .lp-buy__cadence-row { display: flex !important; align-items: center; justify-content: space-between;
+    gap: 12px; margin-top: 4px; visibility: visible !important; }
+  /* `-l` is a plain block stack (label + sub).
+     `-r` must stay `display: flex` so price + per + ship + total
+     wrap correctly; do NOT override its display here. */
+  .lp-buy__cadence-l { display: block       !important; visibility: visible !important; }
+  .lp-buy__cadence-r { display: flex        !important; visibility: visible !important;
+    text-align: right; align-items: baseline; gap: 6px;
+    flex-wrap: wrap; justify-content: flex-end; }
+  .lp-buy__cadence-label { font-family: var(--gwp-font-display); font-size: 24px;
+    color: var(--gwp-green) !important; line-height: 1; text-transform: uppercase;
+    display: block !important; visibility: visible !important; }
+  .lp-buy__cadence-sub { font-size: 12px; color: var(--gwp-gray-70) !important;
+    margin-top: 2px; letter-spacing: 0.04em;
+    display: block !important; visibility: visible !important; }
+  .lp-buy__cadence-r { text-align: right; display: flex; align-items: baseline;
+    gap: 2px; flex-wrap: wrap; justify-content: flex-end; }
+  .lp-buy__cadence-price { font-family: var(--gwp-font-tall); font-weight: 700;
+    font-size: 28px; color: var(--gwp-ink) !important; line-height: 1;
+    display: inline-block !important; visibility: visible !important; }
+  .lp-buy__cadence-per { font-size: 11px; color: var(--gwp-gray-70) !important; letter-spacing: 0.06em;
+    display: inline-block !important; visibility: visible !important; align-self: baseline; }
+  .lp-buy__cadence-ship { flex-basis: 100%; text-align: right;
+    font-family: var(--gwp-font-body); font-size: 11px; font-weight: 600;
+    color: var(--gwp-gray-70); letter-spacing: 0.02em; margin-top: 2px; }
+  .lp-buy__cadence-total { flex-basis: 100%; text-align: right;
+    font-size: 11px; color: var(--gwp-gray-70); letter-spacing: 0.04em; margin-top: 4px; }
+  .lp-buy__cadence-save { position: absolute; top: -10px; right: 18px;
+    background: var(--gwp-sunrise); color: var(--gwp-ink);
+    font-weight: 900; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 9999px; }
+
+  .lp-buy__gift-card { margin: 28px 0 22px; padding: 16px;
+    background: linear-gradient(135deg, var(--gwp-green) 0%, var(--gwp-green-deep) 100%);
+    color: var(--gwp-flats); border-radius: 14px;
+    display: flex; align-items: center; gap: 16px;
+    box-shadow: 0 8px 18px rgba(49,83,75,.25); }
+  .lp-buy__gift-thumb { width: 76px; height: 76px; flex: 0 0 76px;
+    border-radius: 10px; overflow: hidden; background: var(--gwp-cream-soft); }
+  .lp-buy__gift-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .lp-buy__gift-tag { font-family: var(--gwp-font-body); font-weight: 900; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--gwp-sunrise); }
+  .lp-buy__gift-name { font-family: var(--gwp-font-display); font-size: 24px;
+    color: #fff; margin-top: 2px; line-height: 1; text-transform: uppercase; }
+  .lp-buy__gift-note { font-size: 12px; color: rgba(248,243,234,.75); margin-top: 4px; }
+
+  .lp-buy__fine { font-family: var(--gwp-font-body); font-size: 12px;
+    color: var(--gwp-gray-70); text-align: center; margin-top: 14px; letter-spacing: 0.02em;
+    line-height: 1.2; }
+
+  /* ─── PRESS MARQUEE ─── */
+  .lp-press { background: var(--gwp-green); color: var(--gwp-flats);
+    padding: 50px 0; overflow: hidden; }
+  .lp-press__head { text-align: center; margin-bottom: 26px; }
+  .lp-press__script { font-size: 36px; color: var(--gwp-sunrise); }
+  .lp-press__track-wrap { width: 100%;
+    mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%); }
+  .lp-press__track { display: flex; gap: 64px;
+    animation: lp-gwp-marquee 60s linear infinite; width: max-content; }
+  .lp-press__item { display: flex; align-items: center; justify-content: center;
+    height: 64px; flex: 0 0 auto; }
+  .lp-press__item img { max-height: 64px; width: auto; }
+  .lp-press__placeholder { font-family: var(--gwp-font-display); font-size: 24px;
+    color: rgba(248,243,234,.8); letter-spacing: 0.04em; text-transform: uppercase; }
+  @keyframes lp-gwp-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-33.333%); } }
+
+  /* ─── HOW IT WORKS ─── */
+  .lp-how { background: var(--gwp-flats); padding: 90px 40px 110px; scroll-margin-top: 24px; }
+  .lp-how__head { max-width: 880px; margin: 0 auto 60px; text-align: center; }
+  .lp-how__script { font-size: 44px; color: var(--gwp-orange);
+    display: block; line-height: 0.9; margin-bottom: -2px; }
+  .lp-how__title { font-family: var(--gwp-font-display); font-size: clamp(48px, 6vw, 80px);
+    line-height: 0.9; color: var(--gwp-green); text-transform: uppercase; }
+  .lp-how__sub { font-family: var(--gwp-font-body); font-size: 17px; line-height: 1.55;
+    color: var(--gwp-gray-70); max-width: 580px; margin: 18px auto 0; }
+  .lp-how__grid { max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+  .lp-how__step { display: flex; flex-direction: column; }
+  .lp-how__media { position: relative; margin-bottom: 22px; border-radius: 14px;
+    overflow: hidden; box-shadow: 0 12px 28px rgba(0,0,0,.08); aspect-ratio: 3 / 2;
+    background: var(--gwp-cream-soft); }
+  .lp-how__media > img { width: 100%; height: 100%; object-fit: cover; }
+  .lp-how__imgph { aspect-ratio: 3 / 2; }
+  .lp-how__whack { position: absolute; top: -18px; left: -18px;
+    width: 124px; height: 124px; display: grid; place-items: center;
+    transform: rotate(-9deg); filter: drop-shadow(0 10px 14px rgba(16,24,32,.28));
+    pointer-events: none; z-index: 2; }
+  .lp-how__whack-inner { width: 100%; height: 100%; border-radius: 50%;
+    background: var(--gwp-orange); color: var(--gwp-flats);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 10px;
+    box-shadow: inset 0 0 0 2px var(--gwp-flats),
+                inset 0 0 0 3px var(--gwp-orange),
+                inset 0 0 0 5px rgba(248,243,234,.55); }
+  .lp-how__whack-script { font-size: 26px; color: var(--gwp-sunrise);
+    line-height: 0.75; margin-bottom: -2px; }
+  .lp-how__whack-big { font-family: var(--gwp-font-display); font-size: 28px;
+    line-height: 0.95; letter-spacing: 0.02em; color: var(--gwp-flats); text-transform: uppercase; }
+  .lp-how__whack-sub { font-family: var(--gwp-font-body); font-weight: 800;
+    font-size: 7.5px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gwp-flats); opacity: 0.92; margin-top: 3px; max-width: 78px; line-height: 1.05; }
+  .lp-how__eyebrow { font-family: var(--gwp-font-body); font-weight: 700;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gwp-orange); margin-bottom: 6px; }
+  .lp-how__step-title { font-family: var(--gwp-font-display); font-size: 36px;
+    line-height: 0.95; color: var(--gwp-green); margin: 0 0 10px; text-transform: uppercase; }
+  .lp-how__body { font-family: var(--gwp-font-body); font-size: 15px; line-height: 1.55;
+    color: var(--gwp-gray-70); margin: 0; }
+  .lp-how__cta { max-width: 1200px; margin: 70px auto 0;
+    display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+  .lp-how__cta-note { font-family: var(--gwp-font-body); font-size: 12px;
+    color: var(--gwp-gray-70); letter-spacing: 0.04em; }
+
+  /* ─── REVIEWS ─── */
+  .lp-reviews { background: var(--gwp-flats); padding: 90px 0 110px; position: relative; overflow: hidden; }
+  .lp-reviews__head { max-width: 1200px; margin: 0 auto 22px; padding: 0 40px;
+    display: grid; grid-template-columns: 1fr auto; gap: 36px; align-items: end; }
+  .lp-reviews__script { font-size: 42px; color: var(--gwp-orange);
+    display: block; line-height: 0.9; margin-bottom: -4px; }
+  .lp-reviews__title { font-family: var(--gwp-font-display); font-size: clamp(48px, 6vw, 80px);
+    line-height: 0.9; color: var(--gwp-green); text-transform: uppercase; }
+  .lp-reviews__rating { text-align: right; }
+  .lp-reviews__stars { color: var(--gwp-sunrise); font-size: 22px; letter-spacing: 0.06em; }
+  .lp-reviews__rating-num { font-family: var(--gwp-font-tall); font-weight: 700;
+    font-size: 32px; line-height: 1; color: var(--gwp-ink); }
+  .lp-reviews__rating-sub { font-family: var(--gwp-font-body); font-size: 12px;
+    color: var(--gwp-gray-70); letter-spacing: 0.06em; }
+
+  /* Reverse-direction marquee — matches press marquee pace, opposite direction */
+  .lp-reviews__track-wrap { width: 100%; padding: 12px 0 28px;
+    mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%); }
+  .lp-reviews__track { display: flex; gap: 24px; width: max-content;
+    animation: lp-gwp-marquee-rev 60s linear infinite; }
+  .lp-reviews__track-wrap:hover .lp-reviews__track,
+  .lp-reviews__track:hover { animation-play-state: paused; }
+  @keyframes lp-gwp-marquee-rev {
+    0%   { transform: translateX(-33.333%); }
+    100% { transform: translateX(0); }
+  }
+  .lp-review { flex: 0 0 380px;
+    background: #fff; border-radius: 20px; padding: 28px 28px 24px;
+    box-shadow: 0 12px 24px rgba(0,0,0,.06), 0 2px 4px rgba(0,0,0,.04);
+    display: flex; flex-direction: column; }
+  .lp-review__stars { color: var(--gwp-sunrise); font-size: 18px; letter-spacing: 0.06em; }
+  .lp-review__stars-off { color: rgba(0,0,0,.12); }
+  .lp-review__tag { display: inline-block; align-self: flex-start; margin-top: 12px;
+    background: var(--gwp-cream-soft); color: var(--gwp-green);
+    font-family: var(--gwp-font-body); font-weight: 700; font-size: 10px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 9999px; }
+  .lp-review__title { font-family: var(--gwp-font-display); font-size: 24px;
+    line-height: 1.05; color: var(--gwp-green); margin: 14px 0 10px; text-transform: uppercase; }
+  .lp-review__body { font-family: var(--gwp-font-body); font-size: 14px;
+    line-height: 1.55; color: var(--gwp-gray-70); margin: 0 0 22px; flex: 1; }
+  .lp-review__who { display: flex; align-items: center; gap: 12px;
+    padding-top: 18px; border-top: 1px solid rgba(0,0,0,.08); }
+  .lp-review__avatar { width: 40px; height: 40px; border-radius: 50%;
+    background: var(--gwp-orange); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--gwp-font-body); font-weight: 900; font-size: 13px; letter-spacing: 0.04em; }
+  .lp-review__name { font-family: var(--gwp-font-body); font-weight: 700;
+    font-size: 13px; color: var(--gwp-ink); }
+  .lp-review__loc { font-family: var(--gwp-font-body); font-size: 11px;
+    color: var(--gwp-gray-70); letter-spacing: 0.04em; }
+
+  /* ─── FAQ ─── */
+  .lp-faq { background: var(--gwp-flats); padding: 90px 40px 110px; scroll-margin-top: 24px; }
+  .lp-faq__head { max-width: 880px; margin: 0 auto 50px; text-align: center; }
+  .lp-faq__script { font-size: 44px; color: var(--gwp-orange);
+    display: block; line-height: 0.9; margin-bottom: -2px; }
+  .lp-faq__title { font-family: var(--gwp-font-display); font-size: clamp(48px, 6vw, 80px);
+    line-height: 0.9; color: var(--gwp-green); text-transform: uppercase; }
+  .lp-faq__list { max-width: 880px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 12px; }
+  .lp-faq__item { background: #fff; border-radius: 14px; overflow: hidden;
+    border: 2px solid transparent; transition: border-color .12s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,.04); }
+  .lp-faq__item.is-open { border-color: var(--gwp-green); }
+  .lp-faq__q { width: 100%; text-align: left; background: transparent; border: 0; cursor: pointer;
+    display: flex; align-items: center; gap: 20px; padding: 22px 26px;
+    font-family: var(--gwp-font-body); font-weight: 700; font-size: 17px;
+    color: var(--gwp-green); }
+  .lp-faq__q-num { font-family: var(--gwp-font-tall); font-weight: 700; font-size: 22px;
+    color: var(--gwp-orange); line-height: 1; flex: 0 0 auto; }
+  .lp-faq__q-text { flex: 1; }
+  .lp-faq__q-chev { font-family: var(--gwp-font-body); font-weight: 400; font-size: 32px;
+    color: var(--gwp-green); line-height: 0.5; width: 28px; text-align: center; }
+  .lp-faq__item.is-open .lp-faq__q-chev::before { content: '–'; }
+  .lp-faq__item.is-open .lp-faq__q-chev { font-size: 0; }
+  .lp-faq__item.is-open .lp-faq__q-chev::before { font-size: 32px; }
+  .lp-faq__a-wrap { overflow: hidden; max-height: 0; transition: max-height .3s ease; }
+  .lp-faq__item.is-open .lp-faq__a-wrap { max-height: 600px; }
+  .lp-faq__a { padding: 0 26px 24px 76px;
+    font-family: var(--gwp-font-body); font-size: 15px; line-height: 1.6;
+    color: var(--gwp-gray-70); }
+  .lp-faq__more { text-align: center; margin-top: 32px;
+    font-family: var(--gwp-font-body); font-size: 14px; color: var(--gwp-gray-70); }
+  .lp-faq__link { color: var(--gwp-orange); font-weight: 700; text-decoration: none;
+    border-bottom: 2px solid var(--gwp-orange); padding-bottom: 1px; margin-left: 6px; }
+
+  /* ─── DARK MINI-FOOTER ─── */
+  .lp-footer-dark { background: #050a0e; color: var(--gwp-flats);
+    padding: 72px 40px 64px; text-align: center; }
+  .lp-footer-dark__inner { max-width: 1200px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 22px; }
+  .lp-footer-dark__logo-link { display: inline-block; border: 0; }
+  .lp-footer-dark__logo { width: 110px; height: auto; display: block; }
+  .lp-footer-dark__support { font-family: var(--gwp-font-body); font-size: 15px;
+    line-height: 1.55; color: rgba(248,243,234,.85); max-width: 520px; margin: 0; }
+  .lp-footer-dark__email { color: var(--gwp-sunrise); font-weight: 700;
+    text-decoration: none; border-bottom: 2px solid var(--gwp-sunrise);
+    padding-bottom: 1px; white-space: nowrap; }
+  .lp-footer-dark__email:hover { color: var(--gwp-flats); border-bottom-color: var(--gwp-flats); }
+  .lp-footer-dark__legal { font-family: var(--gwp-font-body); font-size: 11px;
+    color: rgba(248,243,234,.45); letter-spacing: 0.06em; margin: 8px 0 0;
+    border-top: 1px solid rgba(255,255,255,.08); padding-top: 22px; width: 100%; max-width: 520px; }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 900px) {
+    .lp-hero-a { min-height: 0; }
+    .lp-hero-a__bg-img--desktop { display: none  !important; }
+    .lp-hero-a__bg-img--mobile  { display: block !important; }
+    .lp-hero-a__logo { top: 22px; }
+    .lp-hero-a__logo img { height: 32px; }
+    .lp-hero-a__inner { padding: 64px 22px 24px; text-align: center; }
+    .lp-hero-a__eyebrow { display: flex; justify-content: center; margin-bottom: 12px; }
+    .lp-pill-eyebrow { font-size: 9px; padding: 5px 10px; }
+    .lp-hero-a__script { font-size: 22px; margin-top: 10px; margin-bottom: -3px; }
+    .lp-gwp-root .lp-hero-a .lp-hero-a__title,
+    .lp-gwp-root h1.lp-hero-a__title { font-size: 20px !important; line-height: 0.95; max-width: 100%; }
+    .lp-hero-a__sub { font-size: 12px; max-width: 100%; margin: 12px 0 18px; }
+    .lp-hero-a__ctas { justify-content: center; flex-direction: column; align-items: stretch; gap: 10px; }
+    .lp-hero-a__ctas .lp-btn { width: 100%; }
+    .lp-btn--lg { font-size: 14px; padding: 18px 24px; }
+    .lp-hero-a__trust { justify-content: center; font-size: 11px; line-height: 1.2; }
+
+    /* Reorder the hero inner children on mobile so the kit checklist
+       appears AFTER the floating gift cards (DOM has kit before gifts;
+       flex `order` flips it visually for mobile only). */
+    .lp-hero-a__inner { display: flex; flex-direction: column; }
+    .lp-hero-a__eyebrow { order: 0; }
+    .lp-hero-a__script  { order: 1; }
+    .lp-hero-a__title   { order: 2; }
+    .lp-hero-a__sub     { order: 3; }
+    .lp-hero-a__ctas    { order: 4; }
+    .lp-hero-a__gifts   { order: 5; }
+    .lp-hero-a__kit     { order: 6; }
+    .lp-hero-a__trust   { order: 7; }
+
+    .lp-hero-a__kit { position: relative; z-index: 2;
+      margin: 24px 0 8px; padding: 16px 18px 18px; max-width: none; }
+    .lp-hero-a__kit-list { grid-template-columns: 1fr; gap: 10px; text-align: left; }
+    .lp-hero-a__kit-item { font-size: 14px; }
+
+    .lp-stamp { display: none !important; }
+
+    .lp-hero-a__gifts { position: relative; right: auto; left: auto; bottom: auto; top: auto;
+      margin: 23px 0 15px; width: auto; height: 280px; z-index: 2; }
+    .lp-hero-a__gift { width: 170px; padding: 10px 10px 12px; }
+    .lp-hero-a__gift--hat { top: 16px; right: 0; transform: rotate(3deg); }
+    .lp-hero-a__gift--kit { bottom: 0; left: 0; transform: rotate(-4deg); }
+    .lp-hero-a__gift-eyebrow { font-size: 8px; padding: 4px 8px; margin-bottom: 8px; line-height: 1.2; }
+    .lp-hero-a__gift-name { font-size: 16px; margin-top: 8px; }
+    .lp-hero-a__or-stamp { width: 42px; height: 42px; }
+    .lp-hero-a__or-stamp .lp-gwp-script { font-size: 22px; }
+
+    .lp-strip { grid-template-columns: 1fr 1fr; }
+    .lp-strip__cell { padding: 22px 18px; border-bottom: 1px solid rgba(49,83,75,.1); }
+    .lp-strip__cell:nth-child(2n) { border-right: 0; }
+    .lp-strip__cell:nth-last-child(-n+2) { border-bottom: 0; }
+    .lp-strip__num { font-size: 22px; }
+    .lp-strip__title { font-size: 18px; }
+    .lp-strip__body { font-size: 12px; }
+
+    .lp-buy { padding: 56px 22px 70px; padding-right: 37px !important; padding-left: 22px !important; }
+    .lp-buy__head { margin-bottom: 32px; }
+    .lp-buy__script { font-size: 32px; }
+    .lp-buy__title { font-size: 96px; line-height: 0.9; }
+    .lp-buy__sub { font-size: 14px; }
+    .lp-buy__layout { grid-template-columns: 1fr; gap: 32px; }
+    .lp-buy__gallery { position: static; }
+    .lp-buy__name { font-size: 36px; }
+    .lp-buy__pitch { font-size: 14px; }
+    .lp-buy__label { font-size: 11px; }
+    .lp-buy__species { gap: 6px; }
+    .lp-buy__species-pill { padding: 8px 4px 7px; gap: 6px; border-radius: 10px; }
+    .lp-buy__species-thumb { width: 42px; height: 42px; }
+    .lp-buy__species-label { font-size: 9px; letter-spacing: 0.02em; }
+    .lp-buy__cadence { padding: 16px 18px 14px; }
+    .lp-buy__cadence-ribbon { font-size: 9px; padding: 4px 8px; }
+    .lp-buy__cadence-label { font-size: 20px; }
+    .lp-buy__cadence-sub { font-size: 11px; }
+    .lp-buy__cadence-price { font-size: 24px; }
+    .lp-buy__cadence-save { font-size: 9px; padding: 4px 8px; }
+    .lp-buy__gift-card { padding: 14px; gap: 12px; }
+    .lp-buy__gift-thumb { width: 64px; height: 64px; flex-basis: 64px; }
+    .lp-buy__gift-name { font-size: 20px; }
+    .lp-buy__gift-tag { font-size: 9px; }
+    .lp-buy__gift-note { font-size: 11px; }
+    .lp-btn--block { padding: 20px 22px; font-size: 14px; }
+
+    .lp-press { padding: 36px 0; }
+    .lp-press__script { font-size: 28px; }
+    .lp-press__track { gap: 40px; }
+
+    .lp-reviews { padding: 56px 0 70px; }
+    .lp-reviews__head { padding: 0 22px; grid-template-columns: 1fr;
+      text-align: center; gap: 16px; }
+    .lp-reviews__script { font-size: 32px; }
+    .lp-reviews__rating { text-align: center; }
+    .lp-reviews__track { gap: 16px; }
+    .lp-review { flex-basis: 300px; padding: 22px 22px 20px; }
+    .lp-review__title { font-size: 20px; }
+    .lp-review__body { font-size: 13px; }
+
+    .lp-how { padding: 56px 22px 70px; }
+    .lp-how__head { margin-bottom: 40px; }
+    .lp-how__script { font-size: 32px; }
+    .lp-how__sub { font-size: 14px; }
+    .lp-how__grid { grid-template-columns: 1fr; gap: 36px; }
+    .lp-how__step-title { font-size: 28px; }
+    .lp-how__body { font-size: 14px; }
+    .lp-how__cta { margin-top: 40px; }
+    .lp-how__whack { width: 96px; height: 96px; top: -14px; left: -10px; }
+    .lp-how__whack-script { font-size: 20px; }
+    .lp-how__whack-big { font-size: 22px; }
+
+    .lp-faq { padding: 56px 22px 70px; }
+    .lp-faq__head { margin-bottom: 32px; }
+    .lp-faq__script { font-size: 32px; }
+    .lp-faq__q { padding: 18px 18px; gap: 12px; font-size: 14px; }
+    .lp-faq__q-num { font-size: 18px; }
+    .lp-faq__q-chev { font-size: 26px; }
+    .lp-faq__a { padding: 0 18px 20px 56px; font-size: 13px; }
+
+    .lp-footer-dark { padding: 48px 22px 40px; }
+    .lp-footer-dark__logo { width: 92px; }
+    .lp-footer-dark__support { font-size: 13px; }
+    .lp-footer-dark__legal { font-size: 10px; padding-top: 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lp-press__track,
+    .lp-reviews__track { animation: none; }
+  }
+
+  /* ─── Suppress theme footer / newsletter / "designed by ante-studio" credit ───
+     Body class is set by Shopify from the template filename:
+     page.plans-lp-gwp-v2.json → body.template-page-pro-plan-gwp, body.template-page-plans-lp-gwp-v2 */
+  body.template-page-pro-plan-gwp, body.template-page-plans-lp-gwp-v2 .ante-footer,
+  body.template-page-pro-plan-gwp, body.template-page-plans-lp-gwp-v2 footer.ante-footer,
+  body.template-page-pro-plan-gwp, body.template-page-plans-lp-gwp-v2 .ante-newsletter,
+  body.template-page-pro-plan-gwp, body.template-page-plans-lp-gwp-v2 .ante-newsletter-bar,
+  body.template-page-pro-plan-gwp, body.template-page-plans-lp-gwp-v2 .ante-credits,
+  body.template-page-pro-plan-gwp, body.template-page-plans-lp-gwp-v2 .ante-credit,
+  body.template-page-pro-plan-gwp, body.template-page-plans-lp-gwp-v2 .ante-footer-credit,
+  body.template-page-pro-plan-gwp, body.template-page-plans-lp-gwp-v2 .ante-studio,
+  body.template-page-pro-plan-gwp, body.template-page-plans-lp-gwp-v2 .ante-studio-credit,
+  body.template-page-pro-plan-gwp, body.template-page-plans-lp-gwp-v2 [data-section-type="ante-footer"],
+  body.template-page-pro-plan-gwp, body.template-page-plans-lp-gwp-v2 [data-section-type="ante-newsletter"],
+  body.template-page-pro-plan-gwp, body.template-page-plans-lp-gwp-v2 [data-section-type="ante-credits"] {
+    display: none !important;
+  }
+</style>
+
+{%- comment -%} ══════════ SCRIPT ══════════ {%- endcomment -%}
+<script>
+  (function () {
+    var root = document.getElementById({{ id | json }});
+    if (!root) return;
+
+    // ── Strip width constraints off every ancestor between our section and
+    //    <body>, so the full-bleed children can actually reach the viewport
+    //    edges. Theme CSS often wraps the section in a fixed-width container;
+    //    this neutralizes that without us needing to know the wrapper class. ──
+    (function clearAncestorConstraints() {
+      var node = root.parentElement;
+      while (node && node !== document.body && node !== document.documentElement) {
+        node.style.setProperty('max-width', 'none',     'important');
+        node.style.setProperty('width',     '100%',     'important');
+        node.style.setProperty('margin-left',  '0',     'important');
+        node.style.setProperty('margin-right', '0',     'important');
+        node.style.setProperty('padding-left', '0',     'important');
+        node.style.setProperty('padding-right','0',     'important');
+        node.style.setProperty('overflow-x',   'visible','important');
+        node = node.parentElement;
+      }
+    })();
+
+    // ── Gallery: thumbs swap main image ──
+    var mainImg     = root.querySelector('[data-lp-buy-main]');
+    var thumbsList  = root.querySelector('[data-lp-thumbs]');
+
+    function wireThumb(t) {
+      t.addEventListener('click', function () {
+        thumbsList.querySelectorAll('[data-lp-thumb]').forEach(function (x) { x.classList.remove('is-active'); });
+        t.classList.add('is-active');
+        var src = t.getAttribute('data-lp-thumb-src');
+        var alt = t.getAttribute('data-lp-thumb-alt') || '';
+        if (mainImg && src && mainImg.tagName === 'IMG') {
+          mainImg.src = src;
+          mainImg.alt = alt;
+        }
+      });
+    }
+    if (thumbsList) {
+      thumbsList.querySelectorAll('[data-lp-thumb]').forEach(wireThumb);
+    }
+
+    // ── Rebuild the gallery (main image + thumbnails) for a chosen species ──
+    function paintGallery(srcs, alts) {
+      if (!mainImg || !thumbsList) return;
+      if (!srcs || srcs.length === 0) return;
+      // Swap main image
+      if (mainImg.tagName !== 'IMG') {
+        // Replace placeholder div with img
+        var img = document.createElement('img');
+        img.className = 'lp-buy__main-img';
+        img.setAttribute('data-lp-buy-main', '');
+        img.loading = 'lazy';
+        mainImg.parentNode.replaceChild(img, mainImg);
+        mainImg = img;
+      }
+      mainImg.src = srcs[0];
+      mainImg.alt = alts[0] || '';
+      // Rebuild thumbnails
+      thumbsList.innerHTML = '';
+      srcs.forEach(function (src, i) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'lp-buy__thumb' + (i === 0 ? ' is-active' : '');
+        btn.setAttribute('data-lp-thumb', '');
+        btn.setAttribute('data-lp-thumb-src', src);
+        btn.setAttribute('data-lp-thumb-alt', alts[i] || '');
+        btn.setAttribute('aria-label', 'View photo ' + (i + 1));
+        var im = document.createElement('img');
+        im.src = src;
+        im.alt = '';
+        im.loading = 'lazy';
+        btn.appendChild(im);
+        wireThumb(btn);
+        thumbsList.appendChild(btn);
+      });
+    }
+
+    // ── Species selection ──
+    var speciesBtns = root.querySelectorAll('[data-lp-species]');
+    var cartSpecies = root.querySelector('[data-lp-cart-species]');
+    function setSpecies(btn) {
+      speciesBtns.forEach(function (b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      if (cartSpecies) cartSpecies.value = btn.getAttribute('data-lp-species-name') || '';
+
+      // Swap the gallery to this species' images (if it has any)
+      var imgsAttr = btn.getAttribute('data-lp-species-imgs') || '';
+      var altsAttr = btn.getAttribute('data-lp-species-alts') || '';
+      var srcs = imgsAttr.split('|').filter(function (s) { return s.length > 0; });
+      var alts = altsAttr.split('|');
+      if (srcs.length > 0) paintGallery(srcs, alts);
+    }
+    speciesBtns.forEach(function (b) {
+      b.addEventListener('click', function () { setSpecies(b); });
+    });
+    // initialize species line-item value + gallery from preselected
+    var activeSpecies = root.querySelector('[data-lp-species].is-active');
+    if (activeSpecies) setSpecies(activeSpecies);
+
+    // ── Cadence selection ──
+    var cadBtns          = root.querySelectorAll('[data-lp-cadence]');
+    var cartVariant      = root.querySelector('[data-lp-cart-variant]');
+    var cartSellingPlan  = root.querySelector('[data-lp-cart-selling-plan]');
+    var ctaLabel         = root.querySelector('[data-lp-cta-label]');
+    // IMPORTANT: scope gift-card queries to the gift card container.
+    // Cadence buttons also carry data-lp-gift-* attributes (for storage of
+    // their gift info), so a root-level querySelector would match the FIRST
+    // cadence button instead of the gift card and overwrite its DOM.
+    var giftCard         = root.querySelector('[data-lp-gift-card]');
+    var giftCardName     = giftCard && giftCard.querySelector('[data-lp-gift-name]');
+    var giftCardNote     = giftCard && giftCard.querySelector('[data-lp-gift-note]');
+    var giftCardTag      = giftCard && giftCard.querySelector('[data-lp-gift-tag]');
+    var giftCardThmb     = giftCard && giftCard.querySelector('[data-lp-gift-thumb]');
+    var baseCta          = {{ section.settings.buy_cta_template | default: 'Start My Plan' | json }};
+
+    function setCadence(btn) {
+      cadBtns.forEach(function (b) {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-checked', 'false');
+      });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-checked', 'true');
+
+      if (cartVariant)  cartVariant.value = btn.getAttribute('data-lp-variant-id') || '';
+
+      // Selling plan: subscription variants require this — disable the input
+      // when there's no plan so Shopify doesn't choke on an empty value.
+      var sp = btn.getAttribute('data-lp-selling-plan') || '';
+      if (cartSellingPlan) {
+        if (sp) {
+          cartSellingPlan.value = sp;
+          cartSellingPlan.disabled = false;
+        } else {
+          cartSellingPlan.value = '';
+          cartSellingPlan.disabled = true;
+        }
+      }
+
+      var ship = btn.getAttribute('data-lp-ship') || '';
+      if (ctaLabel) ctaLabel.textContent = ship ? (baseCta + ' · ' + ship + '/box') : baseCta;
+
+      var gName = (btn.getAttribute('data-lp-gift-name') || '').trim();
+      var gTag  = (btn.getAttribute('data-lp-gift-tag')  || '').trim();
+      var gNote = (btn.getAttribute('data-lp-gift-note') || '').trim();
+      var gImg  = btn.getAttribute('data-lp-gift-image') || '';
+
+      // If this cadence has no gift attached, hide the entire green
+      // "FREE GIFT UNLOCKED" callout above the CTA. Otherwise show it
+      // and update its contents from the cadence's data attrs.
+      var hasGift = !!(gName || gTag || gNote);
+      if (giftCard) giftCard.style.display = hasGift ? '' : 'none';
+
+      if (hasGift) {
+        if (giftCardName) giftCardName.textContent = gName;
+        if (giftCardTag)  giftCardTag.textContent  = gTag;
+        if (giftCardNote) giftCardNote.textContent = gNote;
+        if (giftCardThmb) {
+          giftCardThmb.innerHTML = gImg
+            ? '<img src="' + gImg + '" alt="">'
+            : '<div class="lp-gwp-imgph"></div>';
+        }
+      }
+    }
+    cadBtns.forEach(function (b) {
+      b.addEventListener('click', function () { setCadence(b); });
+    });
+    var activeCad = root.querySelector('[data-lp-cadence].is-active');
+    if (activeCad) setCadence(activeCad);
+
+    // ── Buy form: route through Shopify checkout w/ optional discount code ──
+    var form = root.querySelector('[data-lp-buy-form]');
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        var discount = root.getAttribute('data-discount-code') || '';
+        if (discount) {
+          var sep = form.action.indexOf('?') > -1 ? '&' : '?';
+          form.action = form.action.split('?')[0] +
+            '?return_to=' + encodeURIComponent('/checkout?discount=' + discount);
+        }
+        // If no variant chosen, prevent submit
+        if (cartVariant && !cartVariant.value) {
+          e.preventDefault();
+          var firstCad = root.querySelector('[data-lp-cadence]');
+          if (firstCad) firstCad.focus();
+        }
+      });
+    }
+
+    // ── FAQ accordion ──
+    root.querySelectorAll('[data-lp-faq-toggle]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var item = btn.closest('[data-lp-faq]');
+        if (!item) return;
+        var open = item.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
+
+    // ── Suppress theme-rendered footer / newsletter / "designed by ante-studio"
+    //    that survives the template-level removal. CSS handles the known
+    //    selectors; this JS is a fallback that catches any node containing
+    //    common ante-credit text and any <footer> outside our section. ──
+    function hideThemeFooterArtifacts() {
+      var KNOWN_SEL = [
+        '.ante-footer', '.ante-newsletter', '.ante-newsletter-bar',
+        '.ante-credits', '.ante-credit', '.ante-footer-credit',
+        '.ante-studio', '.ante-studio-credit',
+        '[data-section-type="ante-footer"]',
+        '[data-section-type="ante-newsletter"]',
+        '[data-section-type="ante-credits"]'
+      ].join(',');
+      document.querySelectorAll(KNOWN_SEL).forEach(function (el) {
+        if (!root.contains(el)) el.style.display = 'none';
+      });
+      // Heuristic: hide any <footer> or .site-footer that's not inside our section.
+      document.querySelectorAll('footer, .site-footer, #shopify-section-footer, [id^="shopify-section-footer"]').forEach(function (el) {
+        if (!root.contains(el)) el.style.display = 'none';
+      });
+      // Hide any element whose text contains the ante-studio credit line.
+      var rx = /designed\s+by\s+ante|ante\s*studio|anti\s*studio/i;
+      document.querySelectorAll('body *:not(script):not(style):not(noscript)').forEach(function (el) {
+        if (root.contains(el)) return;
+        if (el.children.length > 0) return; // only leaf text nodes
+        if (rx.test(el.textContent || '')) {
+          // Hide the smallest reasonable container (leaf + parent if it's tiny)
+          el.style.display = 'none';
+          if (el.parentElement && el.parentElement.children.length <= 2 && !root.contains(el.parentElement)) {
+            el.parentElement.style.display = 'none';
+          }
+        }
+      });
+    }
+    hideThemeFooterArtifacts();
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', hideThemeFooterArtifacts);
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Pro Plan — GWP",
+  "presets": [{ "name": "Pro Plan — GWP" }],
+  "settings": [
+    { "type": "header", "content": "Brand colours (override)" },
+    { "type": "color", "id": "brand_green",       "label": "MTB Green",              "default": "#33534B" },
+    { "type": "color", "id": "brand_green_deep",  "label": "Deep Green",             "default": "#00594F" },
+    { "type": "color", "id": "brand_orange",      "label": "Hat Guy Orange (CTA)",   "default": "#D14424" },
+    { "type": "color", "id": "brand_orange_burn", "label": "Orange press state",     "default": "#A8351A" },
+    { "type": "color", "id": "brand_weedline",    "label": "Weedline green (alt)",   "default": "#37B777" },
+    { "type": "color", "id": "brand_sunrise",     "label": "Sunrise yellow",         "default": "#FFCB12" },
+    { "type": "color", "id": "brand_cream",       "label": "Sandy Flats (bg)",       "default": "#F9F3EA" },
+    { "type": "color", "id": "brand_cream_warm",  "label": "Cream warm (FAQ bg)",    "default": "#F9F3EA" },
+    { "type": "color", "id": "brand_cream_soft",  "label": "Cream soft (accents)",   "default": "#F2F3E3" },
+    { "type": "color", "id": "brand_ink",         "label": "Squid Ink (text)",       "default": "#101820" },
+
+    { "type": "header", "content": "1 · Hero" },
+    { "type": "image_picker", "id": "hero_logo", "label": "Logo (overlay)", "info": "Centered above the hero. White lockup recommended." },
+    { "type": "url",          "id": "hero_logo_link", "label": "Logo link" },
+    { "type": "image_picker", "id": "hero_bg_desktop", "label": "Background — Desktop" },
+    { "type": "image_picker", "id": "hero_bg_mobile",  "label": "Background — Mobile"  },
+    { "type": "text",         "id": "hero_eyebrow",       "label": "Eyebrow pill text",   "default": "★ LIMITED-TIME FATHER'S DAY GIFT!" },
+    { "type": "color",        "id": "hero_eyebrow_bg",    "label": "Eyebrow background",  "default": "#D14424" },
+    { "type": "color",        "id": "hero_eyebrow_color", "label": "Eyebrow text colour", "default": "#FFFFFF" },
+    { "type": "text",         "id": "hero_script",        "label": "Script accent",       "default": "it's on us —" },
+    { "type": "textarea",     "id": "hero_title",         "label": "Title (use line breaks)", "default": "FREE\nGIFT WITH EVERY PLAN" },
+    { "type": "textarea",     "id": "hero_sub",           "label": "Subtitle",
+      "default": "A fishing gift that keeps showing up every month. Premium tackle, new baits, helpful tips, and a FREE $70+ fishing kit with any 6 or 12-month plan." },
+    { "type": "text",         "id": "hero_cta_primary_label",   "label": "Primary CTA label",  "default": "Explore Tackle Plans" },
+    { "type": "url",          "id": "hero_cta_primary_link",    "label": "Primary CTA link"   },
+    { "type": "text",         "id": "hero_cta_secondary_label", "label": "Secondary CTA label", "default": "How it works" },
+    { "type": "url",          "id": "hero_cta_secondary_link",  "label": "Secondary CTA link" },
+    { "type": "text",         "id": "kit_title",  "label": "Kit panel title", "default": "THE FREE FIELD KIT INCLUDES:" },
+    { "type": "checkbox",     "id": "kit_show",   "label": "Show kit checklist panel", "default": true },
+    { "type": "text",         "id": "trust_rating", "label": "Trust rating (e.g. 4.8)", "default": "4.8" },
+    { "type": "text",         "id": "trust_text",   "label": "Trust line",
+      "default": "10+ million boxes shipped · Free shipping on multi-month plans" },
+
+    { "type": "header", "content": "1a · Gift Stamp (corner badge)" },
+    { "type": "checkbox", "id": "stamp_show",   "label": "Show stamp", "default": true },
+    { "type": "text",     "id": "stamp_script", "label": "Stamp script", "default": "free" },
+    { "type": "text",     "id": "stamp_big",    "label": "Stamp main",   "default": "GIFT" },
+    { "type": "text",     "id": "stamp_sub",   "label": "Stamp footnote", "default": "WITH EVERY PLAN • APPLIED AT CHECKOUT" },
+
+    { "type": "header", "content": "1b · Floating gift cards" },
+    { "type": "checkbox",     "id": "gift1_show",    "label": "Show gift card 1", "default": true },
+    { "type": "image_picker", "id": "gift1_image",   "label": "Gift 1 image" },
+    { "type": "text",         "id": "gift1_eyebrow", "label": "Gift 1 eyebrow",   "default": "FREE WITH 1 + 4-MO PLANS" },
+    { "type": "text",         "id": "gift1_name",    "label": "Gift 1 name",      "default": "MTB Snapback" },
+    { "type": "text",         "id": "gift1_strike",  "label": "Gift 1 strike price", "default": "$32" },
+    { "type": "text",         "id": "gift1_free",    "label": "Gift 1 free label",   "default": "FREE" },
+    { "type": "text",         "id": "or_text",       "label": "Divider text",        "default": "or" },
+    { "type": "checkbox",     "id": "gift2_show",    "label": "Show gift card 2", "default": true },
+    { "type": "image_picker", "id": "gift2_image",   "label": "Gift 2 image" },
+    { "type": "text",         "id": "gift2_eyebrow", "label": "Gift 2 eyebrow",   "default": "FREE WITH 6 + 12-MO PLANS" },
+    { "type": "text",         "id": "gift2_name",    "label": "Gift 2 name",      "default": "MTB Field Kit" },
+    { "type": "text",         "id": "gift2_strike",  "label": "Gift 2 strike price", "default": "$72" },
+    { "type": "text",         "id": "gift2_free",    "label": "Gift 2 free label",   "default": "FREE" },
+
+    { "type": "header", "content": "3 · Buy box" },
+    { "type": "text",     "id": "buy_script", "label": "Buy script",   "default": "— build your box —" },
+    { "type": "text",     "id": "buy_title",  "label": "Buy title",    "default": "PICK YOUR SPECIES" },
+    { "type": "text",     "id": "buy_sub",    "label": "Buy subtitle",
+      "default": "Every plan ships with a free MTB gift. We do the homework. You catch the fish." },
+    { "type": "text",     "id": "buy_main_badge_script", "label": "Main image badge script", "default": "free" },
+    { "type": "text",     "id": "buy_main_badge_label",  "label": "Main image badge text",   "default": "GIFT INCLUDED" },
+    { "type": "text",     "id": "buy_rating_stars",      "label": "Rating value", "default": "4.8" },
+    { "type": "text",     "id": "buy_rating_count",      "label": "Rating count", "default": "7,840 reviews" },
+    { "type": "text",     "id": "buy_plan_name",         "label": "Plan name",    "default": "PRO PLAN" },
+    { "type": "text",     "id": "buy_plan_pitch",        "label": "Plan pitch",   "default": "Our most popular plan • $40 value in every box" },
+    { "type": "text",     "id": "buy_species_label",     "label": "Species label", "default": "1 · Choose your species" },
+    { "type": "text",     "id": "buy_cadence_label",     "label": "Cadence label", "default": "2 · Choose your cadence" },
+    { "type": "text",     "id": "buy_gift_default_tag",  "label": "Gift default tag",  "default": "★ FREE GIFT UNLOCKED" },
+    { "type": "text",     "id": "buy_gift_default_name", "label": "Gift default name", "default": "Free MTB gift" },
+    { "type": "text",     "id": "buy_gift_default_note", "label": "Gift default note", "default": "Ships with your first box." },
+    { "type": "text",     "id": "buy_cta_template",      "label": "CTA label template",
+      "info": "Cadence ship price (e.g. $27.99/box) is appended.",
+      "default": "Start My Plan" },
+    { "type": "richtext", "id": "buy_fineprint",         "label": "Fine print",
+      "default": "<p>Free U.S. shipping · Cancel anytime · Auto-renews until you say so.</p>" },
+
+    { "type": "header", "content": "Discount" },
+    { "type": "text", "id": "discount_code", "label": "Discount code",
+      "info": "Applied at checkout via /cart/add?return_to=/checkout?discount=…",
+      "default": "trymtb10" },
+
+    { "type": "header", "content": "4 · Press marquee" },
+    { "type": "text", "id": "press_script", "label": "Press script", "default": "— as seen in —" },
+
+    { "type": "header", "content": "5 · How it works" },
+    { "type": "text", "id": "how_script", "label": "How script", "default": "— dead simple —" },
+    { "type": "text", "id": "how_title",  "label": "How title",  "default": "HOW IT WORKS" },
+    { "type": "text", "id": "how_sub",    "label": "How subtitle",
+      "default": "Three steps. Then sit back, get baits, and go catch fish. Skip, swap species, or cancel anytime." },
+    { "type": "text", "id": "how_cta_label", "label": "How CTA label", "default": "Get Started" },
+    { "type": "url",  "id": "how_cta_link",  "label": "How CTA link" },
+    { "type": "text", "id": "how_cta_note",  "label": "How CTA note",
+      "default": "Free shipping on multi-month plans · Skip or cancel anytime." },
+
+    { "type": "header", "content": "6 · Reviews carousel" },
+    { "type": "text", "id": "reviews_script",     "label": "Reviews script",       "default": "the gift that keeps —" },
+    { "type": "text", "id": "reviews_title",      "label": "Reviews title",        "default": "RECEIVING." },
+    { "type": "text", "id": "reviews_rating_num", "label": "Reviews rating number","default": "4.8 / 5" },
+    { "type": "text", "id": "reviews_rating_sub", "label": "Reviews rating sub",   "default": "12,840 verified reviews" },
+
+    { "type": "header", "content": "7 · FAQ" },
+    { "type": "text", "id": "faq_script",          "label": "FAQ script",        "default": "— questions? —" },
+    { "type": "text", "id": "faq_title",           "label": "FAQ title",         "default": "WE GOT ANSWERS" },
+    { "type": "text", "id": "faq_more_text",       "label": "Below-list line",   "default": "Still curious?" },
+    { "type": "text", "id": "faq_more_link_label", "label": "Below-list link label", "default": "Chat with a Hat Guy →" },
+    { "type": "url",  "id": "faq_more_link",       "label": "Below-list link" },
+
+    { "type": "header", "content": "8 · Dark mini-footer" },
+    { "type": "checkbox",     "id": "footer_show",            "label": "Show footer", "default": true },
+    { "type": "image_picker", "id": "footer_logo",            "label": "Badge logo", "info": "MTB primary badge — fill on dark recommended." },
+    { "type": "url",          "id": "footer_logo_link",       "label": "Logo link" },
+    { "type": "text",         "id": "footer_support_label",   "label": "Support label",
+      "info": "Plain copy that precedes the email link.",
+      "default": "Need help with your subscription? Email" },
+    { "type": "text",         "id": "footer_support_email",   "label": "Support email",
+      "info": "Renders as mailto: link.",
+      "default": "support@mysterytacklebox.com" },
+    { "type": "text",         "id": "footer_support_suffix",  "label": "Support suffix (optional)",
+      "info": "Text after the email. Leave blank if not needed.",
+      "default": " and we'll get back within 1 business day." },
+    { "type": "text",         "id": "footer_legal",           "label": "Legal line",
+      "default": "© 2026 CatchCo · Mystery Tackle Box™" },
+
+    { "type": "header", "content": "Section Settings" },
+    { "type": "checkbox", "id": "section_inverse", "label": "Inverted Section", "default": false },
+    { "type": "select",   "id": "section_background_style", "label": "Section Background Style",
+      "options": [
+        { "value": "section-background-style-normal",   "label": "Normal" },
+        { "value": "section-background-style-floating", "label": "Floating" }
+      ], "default": "section-background-style-normal" },
+    { "type": "select",   "id": "section_background_colour", "label": "Section Background Colour",
+      "options": [
+        { "value": "section-background-colour-normal",      "label": "Normal" },
+        { "value": "section-background-colour-alt-100",     "label": "Alt (100)" },
+        { "value": "section-background-colour-alt",         "label": "Alt" },
+        { "value": "section-background-colour-alt-900",     "label": "Alt (900)" },
+        { "value": "section-background-colour-surface-100", "label": "Surface (100)" },
+        { "value": "section-background-colour-surface",     "label": "Surface" },
+        { "value": "section-background-colour-surface-900", "label": "Surface (900)" }
+      ], "default": "section-background-colour-normal" },
+    { "type": "select",   "id": "section_spacing", "label": "Section Spacing",
+      "options": [
+        { "value": "section-spacing-top-bottom", "label": "Top & Bottom" },
+        { "value": "section-spacing-top",        "label": "Top" },
+        { "value": "section-spacing-bottom",     "label": "Bottom" },
+        { "value": "section-spacing-none",       "label": "None" }
+      ], "default": "section-spacing-none" },
+    { "type": "text",     "id": "custom_id",      "label": "Custom ID", "info": "Anchor id for in-page links" },
+    { "type": "checkbox", "id": "section_visible","label": "Section Visible", "default": true }
+  ],
+  "blocks": [
+    {
+      "name": "Kit checklist item",
+      "type": "kit_item",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Item label", "default": "MTB Snapback Trucker Hat" }
+      ]
+    },
+    {
+      "name": "Value strip cell",
+      "type": "value_cell",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number (e.g. 01)", "default": "01" },
+        { "type": "text", "id": "title",  "label": "Title",            "default": "Hand-picked" },
+        { "type": "text", "id": "body",   "label": "Body",
+          "default": "Real anglers curate every box to your species & season." }
+      ]
+    },
+    {
+      "name": "Species",
+      "type": "species",
+      "settings": [
+        { "type": "text",         "id": "name",         "label": "Name", "default": "Bass" },
+        { "type": "checkbox",     "id": "preselected",  "label": "Preselected", "default": false },
+        { "type": "header",       "content": "Buy box gallery (main + thumbs)" },
+        { "type": "paragraph",    "content": "These photos show in the gallery on the LEFT of the buy box when this species is selected. Square 1200x1200 recommended." },
+        { "type": "image_picker", "id": "gallery_1",    "label": "Main product image" },
+        { "type": "text",         "id": "gallery_1_alt","label": "Main image alt text" },
+        { "type": "image_picker", "id": "gallery_2",    "label": "Thumb 2" },
+        { "type": "text",         "id": "gallery_2_alt","label": "Thumb 2 alt text" },
+        { "type": "image_picker", "id": "gallery_3",    "label": "Thumb 3" },
+        { "type": "text",         "id": "gallery_3_alt","label": "Thumb 3 alt text" },
+        { "type": "image_picker", "id": "gallery_4",    "label": "Thumb 4" },
+        { "type": "text",         "id": "gallery_4_alt","label": "Thumb 4 alt text" },
+        { "type": "image_picker", "id": "gallery_5",    "label": "Thumb 5" },
+        { "type": "text",         "id": "gallery_5_alt","label": "Thumb 5 alt text" },
+        { "type": "header",       "content": "Selector pill (small circular icon)" },
+        { "type": "image_picker", "id": "image",        "label": "Pill icon",
+          "info": "The tiny circular image inside the species selector chip (Bass/Trout/etc). NOT the main product photo." },
+        { "type": "color",        "id": "color",        "label": "Pill tint", "default": "#F2F3E3" }
+      ]
+    },
+    {
+      "name": "Gallery photo (fallback)",
+      "type": "gallery_photo",
+      "settings": [
+        { "type": "paragraph",    "content": "Optional fallback photos used only when the selected species has no gallery images of its own." },
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text",         "id": "alt",   "label": "Alt text" }
+      ]
+    },
+    {
+      "name": "Cadence (plan length)",
+      "type": "cadence",
+      "settings": [
+        { "type": "text",     "id": "label",        "label": "Label", "default": "6-Month" },
+        { "type": "text",     "id": "sub",          "label": "Sub",   "default": "Prepaid · free shipping" },
+        { "type": "text",     "id": "ship_price",   "label": "Per-box price (display)", "default": "$27.99" },
+        { "type": "text",     "id": "ship_unit",    "label": "Per-box unit",            "default": "/box" },
+        { "type": "text",     "id": "shipping_line","label": "Shipping line",
+          "info": "Optional line below the per-box price. e.g. \"+ $4.99 shipping\" or \"Free shipping\". Leave blank to hide.",
+          "default": "Free shipping" },
+        { "type": "text",     "id": "total_price",  "label": "Total price (display)",   "default": "$167.94" },
+        { "type": "text",     "id": "ribbon_label", "label": "Ribbon label",
+          "info": "Sits above the card. e.g. + FREE Snapback",
+          "default": "+ FREE Field Kit" },
+        { "type": "color",    "id": "ribbon_color", "label": "Ribbon colour", "default": "#37B777" },
+        { "type": "text",     "id": "save_badge",   "label": "Save badge (top-right)", "default": "Save 12%" },
+        { "type": "checkbox", "id": "preselected",  "label": "Preselected", "default": false },
+        { "type": "header",   "content": "Gift (revealed in buy box)" },
+        { "type": "text",         "id": "gift_tag",   "label": "Gift tag",   "default": "★ FREE GIFT UNLOCKED" },
+        { "type": "text",         "id": "gift_name",  "label": "Gift name",  "default": "MTB Field Kit" },
+        { "type": "text",         "id": "gift_note",  "label": "Gift note",  "default": "Ships with your first box." },
+        { "type": "image_picker", "id": "gift_image", "label": "Gift image (square)" },
+        { "type": "header",   "content": "Cart" },
+        { "type": "product",  "id": "product", "label": "Product (REQUIRED)",
+          "info": "Pick the subscription product for this cadence. Cadence blocks WITHOUT a product attached will NOT render on the page (so users don't see broken un-buyable cards)." }
+      ]
+    },
+    {
+      "name": "Press logo",
+      "type": "press_logo",
+      "settings": [
+        { "type": "image_picker", "id": "logo",  "label": "Logo (white/single-colour)" },
+        { "type": "text",         "id": "label", "label": "Placeholder label", "default": "LOGO" }
+      ]
+    },
+    {
+      "name": "How-it-works step",
+      "type": "how_step",
+      "settings": [
+        { "type": "image_picker", "id": "image",   "label": "Step image" },
+        { "type": "text",         "id": "eyebrow", "label": "Eyebrow", "default": "Step 01" },
+        { "type": "text",         "id": "title",   "label": "Title",   "default": "Pick Your Plan" },
+        { "type": "textarea",     "id": "body",    "label": "Body" },
+        { "type": "header",       "content": "Sticker badge (optional)" },
+        { "type": "checkbox",     "id": "whack_show",   "label": "Show sticker badge", "default": false },
+        { "type": "text",         "id": "whack_script", "label": "Badge script",        "default": "free" },
+        { "type": "text",         "id": "whack_big",    "label": "Badge main",          "default": "GIFT" },
+        { "type": "text",         "id": "whack_sub",    "label": "Badge sub",           "default": "WITH EVERY PLAN" }
+      ]
+    },
+    {
+      "name": "Review",
+      "type": "review",
+      "settings": [
+        { "type": "range",    "id": "stars", "label": "Star count", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "text",     "id": "tag",   "label": "Tag",   "default": "Verified · Trustpilot" },
+        { "type": "text",     "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body",  "label": "Body"  },
+        { "type": "text",     "id": "name",  "label": "Reviewer name" },
+        { "type": "text",     "id": "loc",   "label": "Location / role" }
+      ]
+    },
+    {
+      "name": "FAQ item",
+      "type": "faq_item",
+      "settings": [
+        { "type": "text",     "id": "question", "label": "Question" },
+        { "type": "richtext", "id": "answer",   "label": "Answer" }
+      ]
+    }
+  ]
+}
+{% endschema %}

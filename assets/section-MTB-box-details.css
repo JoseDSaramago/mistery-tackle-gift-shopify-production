@@ -1,0 +1,142 @@
+.box-details-component {
+  text-align: center;
+}
+
+.box-details-component__header {
+  margin: 0;
+}
+
+.box-details-component__subheader {
+  margin: 0;
+}
+
+.box-details-component__img {
+  width: 25px;
+  height: auto;
+}
+
+.box-details-component__subcopy,
+.box-details-component__copy {
+  margin: 0;
+}
+
+.box-details-component__subcopy {
+  font-size: 1.5rem;
+}
+
+.box-details-component__copy {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.box-details-component__box-wrap {
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.box-details-component__box-wrap>* {
+  flex: 0 0 50%;
+}
+
+.box-details-component__box_img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.box-details-component__box-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
+}
+
+
+
+@media screen and (min-width: 641px) and (max-width: 989px) {
+  .box-details-component__img {
+    width: 30px;
+  }
+
+  .box-details-component__copy {
+    text-align: left;
+  }
+
+  .box-details-component__box-text-wrap {
+    width: 210px;
+  }
+
+  .box-details-component__subcopy {
+    text-align: right;
+  }
+}
+
+@media screen and (min-width: 641px) {
+  .box-details-component__copy {
+    font-size: 2.8rem;
+    font-weight: 400;
+  }
+
+  .box-details-component__subcopy {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .box-details-component__img {
+    width: 4rem;
+  }
+
+  .box-details-component__header-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .box-details-component__img {
+    order: 2;
+    margin-left: 2rem;
+  }
+
+  .box-details-component .big_btn {
+    margin-top: 2rem;
+  }
+
+  .box-details-component__subheader {
+    max-width: 670px;
+    margin: auto;
+  }
+
+  .box-details-component__box_img {
+    width: 200px;
+  }
+
+  .box-details-component__boxes-wrap {
+    height: 450px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    background-repeat: no-repeat;
+    background-position: center 50px;
+    background-size: contain;
+  }
+
+  .box-details-component__btn-wrap {
+    position: relative;
+  }
+
+  .box-details-component__btn-wrap .big_btn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .box-details-component__box-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+}
+}

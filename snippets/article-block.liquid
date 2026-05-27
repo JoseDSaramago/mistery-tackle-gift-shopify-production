@@ -1,0 +1,27 @@
+{% comment %}
+  Renders a footer block by the type.
+
+  Usage:
+  {% render 'article-block', header, header_uppercase, text, button_text, button_url, note  %}
+{% endcomment %}
+
+{%- if header != blank -%}
+  <h2 class="article-component__header {{ section.settings.title_size }} {%- if header_uppercase %} uppercase{% endif %}">
+    {{ header }}
+  </h2>
+{%- endif -%}
+{%- if text != blank -%}
+  <div class="article-component__text header_font">{{ text }}</div>
+{%- endif -%}
+{%- if button_text != blank -%}
+  <div class="article-component__btn-wrap">
+    <a class="small_btn mtb-button primary-button header_font" href="{{ button_url }}">
+      {{- button_text -}}
+    </a>
+  </div>
+{%- endif -%}
+{%- if note != blank -%}
+  <div class="article-component__note">
+    <p>{{- note -}}</p>
+  </div>
+{%- endif -%}

@@ -1,0 +1,42 @@
+{% if request.design_mode and section.settings.builder_content_entry_preview == '4dda37f86f5d41bbb93767e14d845e15' %}
+{% include 'content.4dda37f86f5d41bbb93767e14d845e15.builder' %}
+  {% else %}
+    {% include 'model.hp-marketing-popup.builder' %}
+  {% endif %}
+  
+  {% schema %}
+   {
+  "name": "HP | Marketing Popup",
+  "tag": "section",
+  "settings":[
+    {
+      "type": "header",
+      "content": "Custom Builder.io Section"
+    },
+    {
+      "type": "paragraph",
+      "content": "To edit and customize this section, visit the [model in Builder](https://builder.io/content?model=0c759ad4ccdf4038b5cb5dedf44412d3). To learn more about how sections in Builder work with Shopify, [visit the docs](https://www.builder.io/c/docs/shopify/sections-everywhere)."
+    },
+    {
+      "type": "select",
+      "id": "builder_content_entry_preview",
+      "label": "Content Entry Preview",
+      "info": "Targeting is not used while previewing sections in the Shopify theme editor, meaning this preview will not change based on the targeting you have set. If you are using targeting, you need to manually select an entry to preview it. This setting only affects the preview, not what displays on your live site.",
+      "options": [
+        { "value": "4dda37f86f5d41bbb93767e14d845e15", "label": "HP | Marketing Popup | Meateater"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Builder entries used"
+    },
+    {
+    "type": "paragraph",
+    "content": "Name: HP | Marketing Popup | Meateater. Targeting: no targeting. Visit the [entry in Builder](https://builder.io/content/4dda37f86f5d41bbb93767e14d845e15)"
+  }
+  ],
+  "presets":[{
+    "name": "HP | Marketing Popup"
+  }]
+}
+  {% endschema %}

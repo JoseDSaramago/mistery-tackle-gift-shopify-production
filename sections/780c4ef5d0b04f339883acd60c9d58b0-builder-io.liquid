@@ -1,0 +1,42 @@
+{% if request.design_mode and section.settings.builder_content_entry_preview == '0ea28bb7a806429488ba5da47bc72b50' %}
+{% include 'content.0ea28bb7a806429488ba5da47bc72b50.builder' %}
+  {% else %}
+    {% include 'model.lp-scroll-to-section.builder' %}
+  {% endif %}
+  
+  {% schema %}
+   {
+  "name": "Lp scroll to section",
+  "tag": "section",
+  "settings":[
+    {
+      "type": "header",
+      "content": "Custom Builder.io Section"
+    },
+    {
+      "type": "paragraph",
+      "content": "To edit and customize this section, visit the [model in Builder](https://builder.io/content?model=780c4ef5d0b04f339883acd60c9d58b0). To learn more about how sections in Builder work with Shopify, [visit the docs](https://www.builder.io/c/docs/shopify/sections-everywhere)."
+    },
+    {
+      "type": "select",
+      "id": "builder_content_entry_preview",
+      "label": "Content Entry Preview",
+      "info": "Targeting is not used while previewing sections in the Shopify theme editor, meaning this preview will not change based on the targeting you have set. If you are using targeting, you need to manually select an entry to preview it. This setting only affects the preview, not what displays on your live site.",
+      "options": [
+        { "value": "0ea28bb7a806429488ba5da47bc72b50", "label": "LP | Scroll to Section"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Builder entries used"
+    },
+    {
+    "type": "paragraph",
+    "content": "Name: LP | Scroll to Section. Targeting: no targeting. Visit the [entry in Builder](https://builder.io/content/0ea28bb7a806429488ba5da47bc72b50)"
+  }
+  ],
+  "presets":[{
+    "name": "Lp scroll to section"
+  }]
+}
+  {% endschema %}

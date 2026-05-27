@@ -1,0 +1,338 @@
+{{ 'section-MTB-plans.css' | asset_url | stylesheet_tag }}
+
+<section class="plans-component page-width">
+  <style>
+    .plans-component {
+      background-color: {{ section.settings.background_color }};
+      padding-top: {{ section.settings.component_mobile_pt }}px;
+      padding-bottom: {{ section.settings.component_mobile_pb }}px;
+    }
+
+    .plans-component__header, .plan-block__header {
+      color: {{ section.settings.header_color }};
+    }
+
+    div.plan-block_img_wrap-copy, .plan-component__img {
+      height: {{ section.settings.plan_img_mobile_height }}px;
+    }
+
+    {%- if section.settings.plan_props_marker != blank -%}
+      .plan-block__props ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .plan-block__props ul li {
+        position: relative;
+        padding-left: 2.5rem;
+      }
+
+      .plan-block__props ul li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        background-image: url('{{ section.settings.plan_props_marker | image_url: width: 16 }}');
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+    {%- endif -%}
+
+    @media screen and (min-width: 641px) and (max-width: 989px) {
+      .plans-component {
+        padding-top: {{ section.settings.component_tablet_pt }}px;
+        padding-bottom: {{ section.settings.component_tablet_pb }}px;
+      }
+
+      div.plan-block_img_wrap-copy, .plan-component__img {
+        height: {{ section.settings.plan_img_tablet_height }}px;
+      }
+    }
+
+    @media screen and (min-width: 990px) {
+      .plans-component {
+        padding-top: {{ section.settings.component_desktop_pt }}px;
+        padding-bottom: {{ section.settings.component_desktop_pb }}px;
+      }
+
+      div.plan-block_img_wrap-copy, .plan-component__img {
+        height: {{ section.settings.plan_img_desktop_height }}px;
+      }
+    }
+  </style>
+  <h2 class="plans-component__header">{{ section.settings.header }}</h2>
+  <div class="plans-component__subheader header_font">{{ section.settings.subheader }}</div>
+  <div class="plans-list-wrap">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'plan' -%}
+          <style>
+            .plan_wrap-{{ block.id }} {
+              border: 1px dashed {{ block.settings.border_color }};
+            }
+
+            .plan_wrap-{{ block.id }} .plan_name {
+              color: {{block.settings.name_color}};
+              background-color: {{ block.settings.name_bg_color }};
+              border: 1px solid {{ block.settings.name_border_color }};
+            }
+
+            .plan_wrap-{{ block.id }} .plan-price {
+              color: {{ block.settings.price_color }};
+            }
+
+            .plan_wrap-{{ block.id }} .plan-block__props {
+              color: {{ block.settings.plan_props_color }};
+            }
+          </style>
+
+          <a class="plan_wrap plan_wrap-{{ block.id }} link" href="{{ block.settings.plan_url }}">
+            <div class="plan_name">{{ block.settings.plan_name }}</div>
+            <div class="plan-block_img_wrap-copy"></div>
+            <div class="plan-block_img_wrap">
+              {%- if block.settings.plan_img != blank -%}
+                {{
+                  block.settings.plan_img
+                  | image_url: width: '500'
+                  | image_tag: loading: 'lazy', widths: '500', class: 'lazyload plan-component__img'
+                }}
+              {%- endif -%}
+            </div>
+
+            <div class="plan-header__wrap">
+              <h3 class="plan-block__header">{{ block.settings.plan_header }}</h3>
+              <p class="plan-price header_font">{{ block.settings.plan_price }}</p>
+            </div>
+            <div class="plan-block__props header_font">
+              {{ block.settings.plan_props }}
+            </div>
+            <div class="mtb-button primary-button small_btn header_font">{{ block.settings.plan_btn_text }}</div>
+          </a>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MTB Plans",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "header",
+      "label": "Section header"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheader",
+      "label": "Section subheader"
+    },
+    {
+      "type": "color",
+      "id": "header_color",
+      "label": "Headers color"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color"
+    },
+    {
+      "type": "image_picker",
+      "id": "plan_props_marker",
+      "label": "Plan properties marker"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "plan_img_mobile_height",
+      "label": "Plan images mobile height",
+      "min": 100,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 158
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pt",
+      "label": "Component mobile padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pb",
+      "label": "Component mobile padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+
+    {
+      "type": "header",
+      "content": "Tablet Settings"
+    },
+    {
+      "type": "range",
+      "id": "plan_img_tablet_height",
+      "label": "Plan images Tablet height",
+      "min": 200,
+      "max": 400,
+      "step": 2,
+      "unit": "px",
+      "default": 310
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pt",
+      "label": "Component tablet padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pb",
+      "label": "Component tablet padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "plan_img_desktop_height",
+      "label": "Plan images Desktop height",
+      "min": 200,
+      "max": 400,
+      "step": 2,
+      "unit": "px",
+      "default": 310
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pt",
+      "label": "Component desktop padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pb",
+      "label": "Component desktop padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "limit": 1,
+  "blocks": [
+    {
+      "type": "plan",
+      "name": "Plan",
+      "settings": [
+        {
+          "type": "url",
+          "id": "plan_url",
+          "label": "Plan Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "plan_img",
+          "label": "Plan image"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "plan_name",
+          "label": "Plan name"
+        },
+        {
+          "type": "color",
+          "id": "name_color",
+          "label": "Plane name color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "name_bg_color",
+          "label": "Plane name background color",
+          "default": "#31554B"
+        },
+        {
+          "type": "color",
+          "id": "name_border_color",
+          "label": "Plane name border color",
+          "default": "#31554B"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Plane border color",
+          "default": "#551A8B"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "plan_header",
+          "label": "Plan header"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "plan_price",
+          "label": "Plan price"
+        },
+        {
+          "type": "color",
+          "id": "price_color",
+          "label": "Plane price color",
+          "default": "#D14424"
+        },
+        {
+          "type": "richtext",
+          "id": "plan_props",
+          "label": "Plan properties"
+        },
+        {
+          "type": "color",
+          "id": "plan_props_color",
+          "label": "Plane properties color",
+          "default": "#212529"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "plan_btn_text",
+          "label": "Plan button text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTB Plans"
+    }
+  ]
+}
+{% endschema %}

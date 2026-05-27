@@ -1,0 +1,17 @@
+<div class="ante-price{% if static %} static{% endif %}">
+  {% if compare_price > price %}
+    <div class="ante-buy-compare-price{% if mixed %}{% if large %} callout-price{% endif %}{% else %} callout-price{% if large %} large{% endif %}{% endif %}">
+      <span>{{ compare_price | money | replace: ".00", "" }}</span>
+    </div>
+  {% else %}
+    <div class="ante-buy-compare-price{% if mixed %}{% if large %} callout-price{% endif %}{% else %} callout-price{% if large %} large{% endif %}{% endif %}" hidden>
+      <span></span>
+    </div>
+  {% endif %}
+  <span class="ante-buy-price callout-price{% if large %} large{% endif %}">{{ price | money | replace: ".00", "" }}</span>
+  {% if label %}
+    <div class="ante-buy-label callout-price custom{% if large %} large{% endif %}">{{ label }}</div>
+  {% else %}
+    <div class="ante-buy-label callout-price{% if large %} large{% endif %}" hidden></div>
+  {% endif %}
+</div>

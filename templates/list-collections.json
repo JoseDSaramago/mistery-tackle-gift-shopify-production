@@ -1,0 +1,62 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "mtb_article_i3DYeG": {
+      "type": "MTB-article",
+      "settings": {
+        "text_align": "text-align-center",
+        "title_size": "h2",
+        "header_color": "",
+        "header_uppercase": true,
+        "text_color": "#33534b",
+        "text_link_hover_color": "#172421",
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 0,
+        "component_tablet_pt": 30,
+        "component_tablet_pb": 0,
+        "component_desktop_pt": 40,
+        "component_desktop_pb": 0
+      }
+    },
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "title": "Collections",
+        "sort": "alphabetical",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "columns_mobile": "2"
+      }
+    },
+    "mtb_article_ceBTqq": {
+      "type": "MTB-article",
+      "settings": {
+        "text_align": "text-align-center",
+        "title_size": "h2",
+        "header_color": "",
+        "header_uppercase": true,
+        "text_color": "#33534b",
+        "text_link_hover_color": "#172421",
+        "component_mobile_pt": 0,
+        "component_mobile_pb": 20,
+        "component_tablet_pt": 0,
+        "component_tablet_pb": 30,
+        "component_desktop_pt": 0,
+        "component_desktop_pb": 40
+      }
+    }
+  },
+  "order": [
+    "mtb_article_i3DYeG",
+    "main",
+    "mtb_article_ceBTqq"
+  ]
+}

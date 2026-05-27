@@ -1,0 +1,113 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "brand_information_PQh6W4": {
+          "type": "brand_information",
+          "settings": {
+            "brand_logo": "shopify://shop_images/badge-only-MTB-white.png",
+            "brand_logo_mobile_width": 22,
+            "brand_logo_width": 70,
+            "newsletter": "klavio",
+            "klavio_public_api_key": "QXMMHj",
+            "klavio_form": "<div class=\"klaviyo-form-XiQtwB\"></div>",
+            "newsletter_heading": "<strong>JOIN OUR LIST</strong>",
+            "newsletter_text": "Get $10 off your first box",
+            "enable_follow_on_shop": true,
+            "newsletter_submit_text": "SIGN UP!",
+            "custom_sign_in_icon": "shopify://shop_images/icon-sign-in.webp",
+            "show_social": true,
+            "social_icons_size": 38
+          }
+        },
+        "link_list_YbFMaW": {
+          "type": "link_list",
+          "settings": {
+            "heading": "<strong>MYSTERY TACKLE BOX</strong>",
+            "menu": "mystery-tackle-box"
+          }
+        },
+        "link_list_idpcdE": {
+          "type": "link_list",
+          "settings": {
+            "heading": "<strong>NEED HELP?</strong>",
+            "menu": "need-help"
+          }
+        },
+        "link_list_EqPfdB": {
+          "type": "link_list",
+          "settings": {
+            "heading": "<strong>COMPANY</strong>",
+            "menu": "company"
+          }
+        },
+        "image_JLnw8q": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/mtb-original.png",
+            "image_width": 100,
+            "alignment": ""
+          }
+        },
+        "image_HiRzpD": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/logo-catchco-white.png",
+            "image_width": 100,
+            "alignment": ""
+          }
+        },
+        "trustpilot_mark_jRkipQ": {
+          "type": "trustpilot_mark",
+          "disabled": true,
+          "settings": {
+            "trustpilot_header": ""
+          }
+        }
+      },
+      "block_order": [
+        "brand_information_PQh6W4",
+        "link_list_YbFMaW",
+        "link_list_idpcdE",
+        "link_list_EqPfdB",
+        "image_JLnw8q",
+        "image_HiRzpD",
+        "trustpilot_mark_jRkipQ"
+      ],
+      "custom_css": [],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "footer_bg_mobile_img": "shopify://shop_images/bg.jpg",
+        "footer_bg_img": "shopify://shop_images/bg.jpg",
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": false,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 36,
+        "padding_bottom": 0,
+        "max_columns": 4,
+        "footer_bottom_bg": "#0d1714",
+        "terms_link": "shopify://pages/terms-and-conditions",
+        "privacy_link": "shopify://pages/privacy-policy",
+        "sms_mms_terms_link": "shopify://pages/sms-mms-terms"
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

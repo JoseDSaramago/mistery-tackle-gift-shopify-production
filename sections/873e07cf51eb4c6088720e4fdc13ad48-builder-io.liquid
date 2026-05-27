@@ -1,0 +1,42 @@
+{% if request.design_mode and section.settings.builder_content_entry_preview == '0dfdf9e4b095400e86a9e5774a80cf0c' %}
+{% include 'content.0dfdf9e4b095400e86a9e5774a80cf0c.builder' %}
+  {% else %}
+    {% include 'model.hp-reviews-ugc.builder' %}
+  {% endif %}
+  
+  {% schema %}
+   {
+  "name": "HP | Reviews UGC",
+  "tag": "section",
+  "settings":[
+    {
+      "type": "header",
+      "content": "Custom Builder.io Section"
+    },
+    {
+      "type": "paragraph",
+      "content": "To edit and customize this section, visit the [model in Builder](https://builder.io/content?model=873e07cf51eb4c6088720e4fdc13ad48). To learn more about how sections in Builder work with Shopify, [visit the docs](https://www.builder.io/c/docs/shopify/sections-everywhere)."
+    },
+    {
+      "type": "select",
+      "id": "builder_content_entry_preview",
+      "label": "Content Entry Preview",
+      "info": "Targeting is not used while previewing sections in the Shopify theme editor, meaning this preview will not change based on the targeting you have set. If you are using targeting, you need to manually select an entry to preview it. This setting only affects the preview, not what displays on your live site.",
+      "options": [
+        { "value": "0dfdf9e4b095400e86a9e5774a80cf0c", "label": "HP | Reviews UGC"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Builder entries used"
+    },
+    {
+    "type": "paragraph",
+    "content": "Name: HP | Reviews UGC. Targeting: no targeting. Visit the [entry in Builder](https://builder.io/content/0dfdf9e4b095400e86a9e5774a80cf0c)"
+  }
+  ],
+  "presets":[{
+    "name": "HP | Reviews UGC"
+  }]
+}
+  {% endschema %}

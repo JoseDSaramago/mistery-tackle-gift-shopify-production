@@ -1,0 +1,137 @@
+<style>
+  :root {
+    --content-width: 1792px;
+
+    --section-vertical-padding: 164px;
+    --section-horizontal-padding: 64px;
+    
+    --spacing-large: 128px;
+    --spacing-medium: 48px;
+    --spacing-small: 32px;
+    --spacing-x-small: 20px;
+
+    --padding-x-large: 32px;
+    --padding-large: 28px;
+    --padding-medium: 24px;
+    --padding-small: 20px;
+
+    --padding-button-x: 20px;
+    --padding-button-y: 24px;
+    --padding-button: var(--padding-button-y) var(--padding-button-x);
+    --padding-button-small-x: 20px;
+    --padding-button-small-y: 20px;
+    --padding-button-small: var(--padding-button-small-y) var(--padding-button-small-x);
+    --padding-tag-x: 10px;
+    --padding-tag-y: 8px;
+    --padding-tag: var(--padding-tag-y) var(--padding-tag-x);
+    --padding-tab-x: 20px;
+    --padding-tab-y: 24px;
+    --padding-tab: var(--padding-tab-y) var(--padding-tab-x);
+
+    --radius-large: 6px;
+    --radius-medium: 4px;
+    --radius-small: 2px;
+    --radius-x-small: 1px;
+
+    --micropad-x-large: 12px;
+    --micropad-large: 10px;
+    --micropad-medium: 8px;
+    --micropad-small: 6px;
+    --micropad-x-small: 4px;
+
+    --break-size: 1920px;
+    --break-gap: 32px;
+    --column-count: 12;
+
+    --width-1: calc((var(--break-size) - (var(--break-gap) * (var(--column-count) - 1)) - (var(--section-horizontal-padding) * 2)) / var(--column-count));
+    --width-2: calc(var(--width-1) * 2 + var(--break-gap) * 1);
+    --width-3: calc(var(--width-1) * 3 + var(--break-gap) * 2);
+    --width-4: calc(var(--width-1) * 4 + var(--break-gap) * 3);
+    --width-5: calc(var(--width-1) * 5 + var(--break-gap) * 4);
+    --width-6: calc(var(--width-1) * 6 + var(--break-gap) * 5);
+    --width-7: calc(var(--width-1) * 7 + var(--break-gap) * 6);
+    --width-8: calc(var(--width-1) * 8 + var(--break-gap) * 7);
+    --width-9: calc(var(--width-1) * 9 + var(--break-gap) * 8);
+    --width-10: calc(var(--width-1) * 10 + var(--break-gap) * 9);
+    --width-11: calc(var(--width-1) * 11 + var(--break-gap) * 10);
+    --width-12: calc(var(--width-1) * 12 + var(--break-gap) * 11);
+  }
+
+  @media (max-width: 1919px) {
+    :root {
+      --content-width: 1360px;
+
+      --section-vertical-padding: 120px;
+      --section-horizontal-padding: 40px;
+
+      --spacing-large: 96px;
+      --spacing-medium: 40px;
+      --spacing-small: 24px;
+      --spacing-x-small: 16px;
+
+      --padding-x-large: 28px;
+      --padding-large: 24px;
+      --padding-medium: 20px;
+      --padding-small: 16px;
+
+      --padding-button-x: 18px;
+      --padding-button-y: 22px;
+      --padding-button-small-x: 18px;
+      --padding-button-small-y: 18px;
+      --padding-tag-x: 8px;
+      --padding-tag-y: 6px;
+      --padding-tab-x: 14px;
+      --padding-tab-y: 18px;
+
+      --break-size: 1440px;
+      --break-gap: 24px;
+      --column-count: 12;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    :root {
+      --section-vertical-padding: 80px;
+      --section-horizontal-padding: 28px;
+
+      --spacing-large: 64px;
+      --spacing-medium: 32px;
+      --spacing-small: 20px;
+      --spacing-x-small: 14px;
+
+      --break-size: 769px;
+      --break-gap: 20px;
+      --column-count: 8;
+    }
+  }
+
+  @media (max-width: 600px) {
+    :root {
+      --section-vertical-padding: 40px;
+      --section-horizontal-padding: 16px;
+
+      --spacing-large: 32px;
+      --spacing-medium: 24px;
+      --spacing-small: 16px;
+      --spacing-x-small: 12px;
+
+      --padding-x-large: 24px;
+      --padding-large: 20px;
+      --padding-medium: 16px;
+      --padding-small: 12px;
+
+      --padding-button-x: 16px;
+      --padding-button-y: 18px;
+      --padding-button-small-x: 16px;
+      --padding-button-small-y: 12px;
+      --padding-tag-x: 6px;
+      --padding-tag-y: 4px;
+      --padding-tab-x: 12px;
+      --padding-tab-y: 16px;
+
+      --break-size: 376px;
+      --break-gap: 16px;
+      --column-count: 6;
+    }
+  }
+</style>

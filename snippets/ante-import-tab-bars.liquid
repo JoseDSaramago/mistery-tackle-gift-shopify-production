@@ -1,0 +1,426 @@
+<style>
+  body {
+    --tabs-transition-ease: var(--transition-drop-ease);
+    --tabs-transition-duration: .25s;
+  }
+
+  .tab-bar {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-medium);
+    gap: var(--micropad-x-large);
+    padding: var(--micropad-x-small);
+    justify-content: center;
+  }
+
+  .tab-bar-button {
+    all: unset;
+    cursor: pointer;
+    user-select: none;
+    z-index: 1;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tab-contents {
+    position: relative;
+    transition: height var(--tabs-transition-duration) var(--tabs-transition-ease);
+    display: flex;
+    interpolate-size: initial;
+  }
+
+  .tab-contents:not(.transitioning) {
+    height: auto !important;
+  }
+
+  .tab-contents:not(.transitioning) .tab-content.active {
+    position: initial;
+  }
+
+  .tab-content {
+    transform: translateX(-64px);
+    opacity: 0;
+    transition: transform var(--tabs-transition-duration) var(--tabs-transition-ease), opacity var(--tabs-transition-duration) var(--tabs-transition-ease);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    width: 100%;
+  }
+
+  .tab-content.active {
+    transform: initial;
+    opacity: 1;
+    pointer-events: initial;
+  }
+
+  .tab-content.active ~ .tab-content {
+    transform: translateX(64px);
+  }
+
+  .tab-bar-button {
+    all: unset;
+    background-color: var(--color-tab-active);
+    border-radius: 100px;
+    border: 1px solid #9A652A;
+    padding: var(--padding-button);
+    min-height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--micropad-medium);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 110%;
+    color: var(--color-tab-active-text) !important;
+    cursor: pointer;
+    transition: transform .15s,
+                box-shadow .15s,
+                background-color var(--tabs-transition-duration) var(--tabs-transition-ease),
+                border var(--tabs-transition-duration) var(--tabs-transition-ease),
+                color var(--tabs-transition-duration) var(--tabs-transition-ease);
+    box-sizing: border-box;
+    text-align: center;
+    font-family: var(--font);
+    box-shadow: 2px 4px 0 0 var(--color-elevated-shadow);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    user-select: none;
+    min-width: 90px;
+    text-transform: uppercase;
+  }
+
+  .tab-bar-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 1;
+    pointer-events: none;
+    background-image: url("https://cdn.shopify.com/s/files/1/0672/1794/8724/files/smaller.jpg?v=1757504298");
+    background-position: 50%;
+    background-size: cover;
+    transition: opacity var(--tabs-transition-duration) var(--tabs-transition-ease);
+  }
+
+  .tab-bar-button:hover {
+    transform: translate(-1px, -2px);
+    box-shadow: 3px 6px 0 0 var(--color-elevated-shadow);
+  }
+
+  .tab-bar-button:active {
+    transform: translate(1px, 2px);
+    box-shadow: 1px 2px 0 0 var(--color-elevated-shadow);
+  }
+
+  .tab-bar-button:not(.active) {
+    box-shadow: 2px 4px 0 0 var(--color-tab-border);
+    border: 1px solid var(--color-tab-border);
+    color: var(--color-tab-text) !important;
+    background-color: var(--color-tab);
+  }
+
+  .tab-bar-button:not(.active)::before {
+    opacity: 0;
+  }
+
+  .tab-bar-button:not(.active):hover {
+    box-shadow: 3px 6px 0 0 var(--color-border);
+  }
+
+  .tab-bar-button:not(.active):active {
+    box-shadow: 1px 2px 0 0 var(--color-border);
+  }
+
+  @media (max-width: 1919px) {
+    .tab-bar-button {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tab-bar-button {
+      font-size: 12px;
+    }
+  }
+</style>
+<script>
+  {% if settings.ante_tab_bar_style == "slide_tabs" %}
+    const tabBarResizeObserver = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.target.classList.contains("tab-bar")) continue
+        if (entry.target.classList.contains("initialised")) {
+          entry.target.update()
+        }
+      }
+    })
+
+    function initTabBars() {
+      const tabBars = document.querySelectorAll(".tab-bar:not(.initialised)")
+      for (const tabBar of tabBars) {
+        tabBar.classList.add("initialised")
+
+        const activeIndicator = document.createElement("div")
+        activeIndicator.className = "tab-bar-active"
+        tabBar.appendChild(activeIndicator)
+
+        const buttons = tabBar.querySelectorAll(".tab-bar-button")
+        const contentsWrap = tabBar.nextElementSibling?.classList.contains("tab-contents")
+          ? tabBar.nextElementSibling
+          : null
+        const contents = contentsWrap
+          ? Array.from(contentsWrap.querySelectorAll(".tab-content"))
+          : []
+        let locked = false
+
+        function getParentBox() {
+          const parentRect = tabBar.getBoundingClientRect()
+          const style = getComputedStyle(tabBar)
+          return {
+            rect: parentRect,
+            left: parentRect.left + parseFloat(style.paddingLeft),
+            right: parentRect.right - parseFloat(style.paddingRight),
+            top: parentRect.top + parseFloat(style.paddingTop),
+            bottom: parentRect.bottom - parseFloat(style.paddingBottom)
+          }
+        }
+
+        const getCenter = rect => ({
+          x: rect.left + rect.width / 2,
+          y: rect.top + rect.height / 2
+        })
+
+        function updateIndicator() {
+          const active = tabBar.querySelector(".tab-bar-button.active")
+          if (active) {
+            const rect = active.getBoundingClientRect()
+            const parentBox = getParentBox()
+            activeIndicator.style.left = rect.left - parentBox.rect.left + "px"
+            activeIndicator.style.right = parentBox.rect.right - rect.right + "px"
+            activeIndicator.style.top = rect.top - parentBox.rect.top + "px"
+            activeIndicator.style.bottom = parentBox.rect.bottom - rect.bottom + "px"
+          }
+        }
+
+        tabBar.update = () => {
+          updateIndicator()
+        }
+
+        for (const button of buttons) {
+          button.addEventListener("mouseenter", () => {
+            if (locked) return
+            const active = tabBar.querySelector(".tab-bar-button.active")
+            if (!active) return
+
+            const parentBox = getParentBox()
+            const rect = active.getBoundingClientRect()
+            const hoverRect = button.getBoundingClientRect()
+            const activeCenter = getCenter(rect)
+            const hoverCenter = getCenter(hoverRect)
+
+            if (button === active) {
+              const isFirstCol = rect.left <= parentBox.left + 1
+              const isLastCol = rect.right >= parentBox.right - 1
+              const left = rect.left - parentBox.rect.left - (isFirstCol ? 0 : 5)
+              const right = parentBox.rect.right - rect.right - (isLastCol ? 0 : 5)
+              activeIndicator.style.left = left + "px"
+              activeIndicator.style.right = right + "px"
+              activeIndicator.style.top = rect.top - parentBox.rect.top + "px"
+              activeIndicator.style.bottom = parentBox.rect.bottom - rect.bottom + "px"
+              return
+            }
+
+            const isFirstCol = rect.left <= parentBox.left + 1
+            const isLastCol = rect.right >= parentBox.right - 1
+            const isFirstRow = rect.top <= parentBox.top + 1
+            const isLastRow = rect.bottom >= parentBox.bottom - 1
+
+            if (hoverCenter.x < activeCenter.x) {
+              const left = rect.left - parentBox.rect.left - (isFirstCol ? 0 : 10)
+              activeIndicator.style.left = left + "px"
+              activeIndicator.style.right = parentBox.rect.right - rect.right + "px"
+            } else if (hoverCenter.x > activeCenter.x) {
+              const right = parentBox.rect.right - rect.right - (isLastCol ? 0 : 10)
+              activeIndicator.style.left = rect.left - parentBox.rect.left + "px"
+              activeIndicator.style.right = right + "px"
+            } else {
+              activeIndicator.style.left = rect.left - parentBox.rect.left + "px"
+              activeIndicator.style.right = parentBox.rect.right - rect.right + "px"
+            }
+
+            if (hoverCenter.y < activeCenter.y) {
+              const top = rect.top - parentBox.rect.top - (isFirstRow ? 0 : 2)
+              activeIndicator.style.top = top + "px"
+              activeIndicator.style.bottom = parentBox.rect.bottom - rect.bottom + "px"
+            } else if (hoverCenter.y > activeCenter.y) {
+              const bottom = parentBox.rect.bottom - rect.bottom - (isLastRow ? 0 : 2)
+              activeIndicator.style.top = rect.top - parentBox.rect.top + "px"
+              activeIndicator.style.bottom = bottom + "px"
+            } else {
+              activeIndicator.style.top = rect.top - parentBox.rect.top + "px"
+              activeIndicator.style.bottom = parentBox.rect.bottom - rect.bottom + "px"
+            }
+          })
+
+          button.addEventListener("mouseleave", () => {
+            if (!locked) updateIndicator()
+          })
+
+          button.addEventListener("click", () => {
+            if (locked || button.classList.contains("active")) return
+            const currentActive = tabBar.querySelector(".tab-bar-button.active")
+            locked = true
+
+            const toRect = button.getBoundingClientRect()
+            const fromRect = currentActive.getBoundingClientRect()
+            const parentBox = getParentBox()
+            const duration = parseFloat(getComputedStyle(activeIndicator).getPropertyValue("--tabs-transition-duration")) * 2000 / 3
+
+            if (contentsWrap) {
+              const activeContent = contentsWrap.querySelector(".tab-content.active")
+              const border =
+                parseFloat(getComputedStyle(contentsWrap).borderTopWidth) +
+                parseFloat(getComputedStyle(contentsWrap).borderBottomWidth)
+
+              contentsWrap.style.height = activeContent
+                ? activeContent.offsetHeight + border + "px"
+                : border + "px"
+            }
+
+
+            if (currentActive) currentActive.classList.remove("active")
+            button.classList.add("active")
+
+            if (contentsWrap) {
+              const target = button.textContent.trim()
+              contents.forEach(c => c.classList.toggle("active", c.dataset.tab === target))
+              contentsWrap.classList.add("transitioning")
+              const activeContent = contentsWrap.querySelector(".tab-content.active")
+              const border =
+                parseFloat(getComputedStyle(contentsWrap).borderTopWidth) +
+                parseFloat(getComputedStyle(contentsWrap).borderBottomWidth)
+
+              contentsWrap.style.height = activeContent
+                ? activeContent.offsetHeight + border + "px"
+                : border + "px"
+            }
+
+            const fromCenter = getCenter(fromRect)
+            const toCenter = getCenter(toRect)
+
+            if (toCenter.x < fromCenter.x) {
+              activeIndicator.style.left = toRect.left - parentBox.rect.left + "px"
+              setTimeout(() => {
+                activeIndicator.style.right = parentBox.rect.right - toRect.right + "px"
+              }, duration / 2)
+            } else {
+              activeIndicator.style.right = parentBox.rect.right - toRect.right + "px"
+              setTimeout(() => {
+                activeIndicator.style.left = toRect.left - parentBox.rect.left + "px"
+              }, duration / 2)
+            }
+
+            if (toCenter.y < fromCenter.y) {
+              activeIndicator.style.top = toRect.top - parentBox.rect.top + "px"
+              setTimeout(() => {
+                activeIndicator.style.bottom = parentBox.rect.bottom - toRect.bottom + "px"
+              }, duration / 2)
+            } else {
+              activeIndicator.style.bottom = parentBox.rect.bottom - toRect.bottom + "px"
+              setTimeout(() => {
+                activeIndicator.style.top = toRect.top - parentBox.rect.top + "px"
+              }, duration / 2)
+            }
+
+            setTimeout(() => {
+              locked = false
+              if (contentsWrap) contentsWrap.classList.remove("transitioning")
+            }, duration)
+
+            tabBar.dispatchEvent(new CustomEvent("tab-changed", {
+              detail: button.textContent
+            }))
+          })
+        }
+
+        tabBarResizeObserver.observe(tabBar)
+
+        updateIndicator()
+      }
+    }
+  {% else %}
+    function initTabBars() {
+      const tabBars = document.querySelectorAll(".tab-bar:not(.initialised)")
+      for (const tabBar of tabBars) {
+        tabBar.classList.add("initialised")
+
+        const buttons = tabBar.querySelectorAll(".tab-bar-button")
+        const contentsWrap = tabBar.nextElementSibling?.classList.contains("tab-contents")
+          ? tabBar.nextElementSibling
+          : null
+        if (!contentsWrap) continue
+
+        const contents = Array.from(contentsWrap.querySelectorAll(".tab-content"))
+
+        for (const button of buttons) {
+          button.addEventListener("click", () => {
+            if (button.classList.contains("active")) return
+
+            const currentActive = tabBar.querySelector(".tab-bar-button.active")
+            if (currentActive) currentActive.classList.remove("active")
+
+            const activeContent = contentsWrap.querySelector(".tab-content.active")
+            const border =
+              parseFloat(getComputedStyle(contentsWrap).borderTopWidth) +
+              parseFloat(getComputedStyle(contentsWrap).borderBottomWidth)
+
+            contentsWrap.style.height = activeContent
+              ? activeContent.offsetHeight + border + "px"
+              : border + "px"
+
+            button.classList.add("active")
+            const target = button.textContent.trim()
+            contents.forEach(c => c.classList.toggle("active", c.dataset.tab === target))
+
+            contentsWrap.classList.add("transitioning")
+            const newContent = contentsWrap.querySelector(".tab-content.active")
+            contentsWrap.style.height = newContent
+              ? newContent.offsetHeight + border + "px"
+              : border + "px"
+
+            const duration = parseFloat(getComputedStyle(contentsWrap).getPropertyValue("--tabs-transition-duration")) * 1000
+            setTimeout(() => {
+              contentsWrap.classList.remove("transitioning")
+            }, duration)
+
+            tabBar.dispatchEvent(new CustomEvent("tab-changed", {
+              detail: button.textContent
+            }))
+          })
+        }
+
+        const initial = contentsWrap.querySelector(".tab-content.active")
+        const border =
+          parseFloat(getComputedStyle(contentsWrap).borderTopWidth) +
+          parseFloat(getComputedStyle(contentsWrap).borderBottomWidth)
+
+        contentsWrap.style.height = initial
+          ? initial.offsetHeight + border + "px"
+          : border + "px"
+      }
+    }
+  {% endif %}
+
+  addEventListener("DOMContentLoaded", () => {
+    initTabBars()
+
+    document.addEventListener("shopify:section:load", () => {
+      initTabBars()
+    })
+  })
+</script>

@@ -1,0 +1,42 @@
+{% if request.design_mode and section.settings.builder_content_entry_preview == '3ddb14aae58946cd905e908c8090e061' %}
+{% include 'content.3ddb14aae58946cd905e908c8090e061.builder' %}
+  {% else %}
+    {% include 'model.texas-elite-swimbait-bundle.builder' %}
+  {% endif %}
+  
+  {% schema %}
+   {
+  "name": "Texas elite swimbait bund",
+  "tag": "section",
+  "settings":[
+    {
+      "type": "header",
+      "content": "Custom Builder.io Section"
+    },
+    {
+      "type": "paragraph",
+      "content": "To edit and customize this section, visit the [model in Builder](https://builder.io/content?model=24987d380f8143b6beb6eb6c9d8a1a44). To learn more about how sections in Builder work with Shopify, [visit the docs](https://www.builder.io/c/docs/shopify/sections-everywhere)."
+    },
+    {
+      "type": "select",
+      "id": "builder_content_entry_preview",
+      "label": "Content Entry Preview",
+      "info": "Targeting is not used while previewing sections in the Shopify theme editor, meaning this preview will not change based on the targeting you have set. If you are using targeting, you need to manually select an entry to preview it. This setting only affects the preview, not what displays on your live site.",
+      "options": [
+        { "value": "3ddb14aae58946cd905e908c8090e061", "label": "Texas Elite + Swimbait Bundle - 12/5/202"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Builder entries used"
+    },
+    {
+    "type": "paragraph",
+    "content": "Name: Texas Elite + Swimbait Bundle - 12/5/202. Targeting: no targeting. Visit the [entry in Builder](https://builder.io/content/3ddb14aae58946cd905e908c8090e061)"
+  }
+  ],
+  "presets":[{
+    "name": "Texas elite swimbait bund"
+  }]
+}
+  {% endschema %}

@@ -1,0 +1,375 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .customer-section {
+      background-color: {{ section.settings.bg_color }};
+      border-top: 3px solid {{ section.settings.border_top_color }};
+      padding-top: {{ section.settings.component_mobile_pt }}px;
+      padding-bottom: {{ section.settings.component_mobile_pb }}px;
+    }
+
+  .customer-section__title {
+    color: {{ section.settings.header_color }};
+  }
+
+  .customer-section_input-label {
+    color: {{ section.settings.labels_color }};
+  }
+
+  .customer-section-{{ section.id }} .field .customer-section__input {
+    background-color: {{ section.settings.input_bg }};
+    border-color: {{ section.settings.input_border }};
+  }
+
+  .customer-section-{{ section.id }} .field .customer-section__input:focus {
+    box-shadow: 0 0 0 .2rem #eee9ce;
+  }
+
+    @media screen and (min-width: 641px) and (max-width: 989px) {
+      .customer-section-{{ section.id }} {
+        padding-top: {{section.settings.component_tablet_pt}}px;
+        padding-bottom: {{section.settings.component_tablet_pb}}px;
+      }
+    }
+
+    @media screen and (min-width: 990px) {
+      .customer-section-{{ section.id }} {
+        padding-top: {{section.settings.component_desktop_pt}}px;
+        padding-bottom: {{section.settings.component_desktop_pb}}px;
+      }
+    }
+  }
+</style>
+
+{%- if section.settings.enable_shop_login_button == false -%}
+  {%- assign hide_shop_login_button = true -%}
+{%- endif -%}
+
+<div class="customer login customer-section-{{ section.id }} customer-section page-width header_font">
+  <h1 id="recover" tabindex="-1">
+    {{ 'customer.recover_password.title' | t }}
+  </h1>
+  <div>
+    <p>
+      {{ 'customer.recover_password.subtext' | t }}
+    </p>
+
+    {%- form 'recover_customer_password', data-shopify-captcha: 'true' -%}
+      {% assign recover_success = form.posted_successfully? %}
+      <div class="field">
+        <input
+          class="customer-section__input"
+          type="email"
+          value=""
+          name="email"
+          id="RecoverEmail"
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="email"
+          {% if form.errors %}
+            aria-invalid="true"
+            aria-describedby="RecoverEmail-email-error"
+            autofocus
+          {% endif %}
+          placeholder="{{ 'customer.login_page.email' | t }}"
+        >
+        <label for="RecoverEmail">
+          {{ 'customer.login_page.email' | t }}
+        </label>
+      </div>
+      {%- if form.errors -%}
+        <small id="RecoverEmail-email-error" class="form__message">
+          <span class="svg-wrapper">
+            {{- 'icon-error.svg' | inline_asset_content -}}
+          </span>
+          {{ form.errors.messages.form }}
+        </small>
+      {%- endif -%}
+
+      <button>
+        {{ 'customer.login_page.submit' | t }}
+      </button>
+
+      <a href="#login">
+        {{ 'customer.login_page.cancel' | t }}
+      </a>
+    {%- endform -%}
+  </div>
+
+  <h5 class="customer-section__title" id="login" tabindex="-1">
+    {{ section.settings.header }}
+  </h5>
+
+  <div>
+    {%- if recover_success == true -%}
+      <h3 class="form__message" tabindex="-1" autofocus>
+        <span class="svg-wrapper">
+          {{- 'icon-success.svg' | inline_asset_content -}}
+        </span>
+        {{ 'customer.recover_password.success' | t }}
+      </h3>
+    {%- endif -%}
+    {%- form 'customer_login', novalidate: 'novalidate' -%}
+      {%- if form.errors and customer.email != blank and customer.password != blank -%}
+        <div class="error-summary error-message">{{ form.errors | default_errors }},</div>
+      {%- endif -%}
+
+      {%- if shop.features.login_with_shop_classic_customer_accounts? -%}
+        <section name="sign-in-with-shop-provider">
+          {{ shop | login_button: hide_button: hide_shop_login_button }}
+          {%- unless hide_shop_login_button -%}
+            <p>{{ 'customer.login_page.alternate_provider_separator' | t }}</p>
+          {%- endunless -%}
+        </section>
+      {%- endif -%}
+
+      <div class="customer-section_input-label">
+        <p>{{ section.settings.email_label }}</p>
+      </div>
+
+      <div class="field">
+        <input
+          class="customer-section__input"
+          type="email"
+          name="customer[email]"
+          id="CustomerEmail"
+          autocomplete="email"
+          autocorrect="off"
+          autocapitalize="off"
+          placeholder="{{ 'customer.login_page.email' | t }}"
+          {% if form.errors and customer.email == blank %}
+            aria-invalid="true"
+            class="input-error"
+          {% endif %}
+        >
+        {%- if form.errors and customer.email == blank -%}
+          <div>
+            <p class="error-message">Please enter a valid email address.</p>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if form.password_needed -%}
+        <div class="customer-section_input-label">
+          <p>{{ section.settings.password_label }}</p>
+        </div>
+        <div class="field">
+          <input
+            class="customer-section__input"
+            type="password"
+            name="customer[password]"
+            id="CustomerPassword"
+            autocomplete="current-password"
+            placeholder="{{ 'customer.login_page.password' | t }}"
+            {% if form.errors and customer.password == blank %}
+              aria-invalid="true"
+              class="input-error"
+            {% endif %}
+          >
+          {%- if form.errors and customer.password == blank -%}
+            <div>
+              <p class="error-message">Please enter a password.</p>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <input type="hidden" name="form_type" value="{{ customer.email }}">
+      <button type="hidden" class="customer-section__submit">{{ section.settings.sign_in_text }}</button>
+    {%- endform -%}
+
+    <div class="customer-section__btn-wrap">
+      <button class="mtb-button primary-button small_btn">{{ section.settings.sign_in_text }}</button>
+    </div>
+
+    <a href="#recover">{{ 'customer.login_page.forgot_password' | t }}</a>
+
+    <div class="customer-section__sign_in_article">
+      <div class="customer-section__hr-text font_header" data-content="OR"></div>
+      <h5 class="customer-section__title">{{ section.settings.social_sign_in_header }}</h5>
+
+      <div class="social-login-buttons">
+        <a
+          class="social-button google-button header_font"
+          href="https://accounts.google.com/o/oauth2/auth?response_type=code&amp;redirect_uri=https%3A%2F%2Ftha659-8b.myshopify.com%2Faccount%2F&amp;client_id={{ google_client_id }}&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&amp;access_type=offline&amp;approval_prompt=auto"
+        >
+          <span class="svg-wrapper">{{ 'icon-google.svg' | inline_asset_content }}</span> GOOGLE
+        </a>
+
+        <a
+          class="social-button facebook-button header_font"
+          href="https://www.facebook.com/v9.0/dialog/oauth?client_id={{ google_client_id }}&amp;redirect_uri=https%3A%2F%2Fshopkarls.com%2Fsocialconnect%2Ffacebook%2Fconnect%2F&amp;state=74b3b7f20d5de335bb0d1c44401b6061&amp;scope=public_profile%2Cemail"
+        >
+          <span class="svg-wrapper">{{ 'icon-facebook-f.svg' | inline_asset_content }}</span> FACEBOOK
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {%- if shop.checkout.guest_login -%}
+    <div>
+      <hr>
+      <h2>{{ 'customer.login_page.guest_title' | t }}</h2>
+
+      {%- form 'guest_login' -%}
+        <button>
+          {{ 'customer.login_page.guest_continue' | t }}
+        </button>
+      {%- endform -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-login.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_shop_login_button",
+      "label": "t:sections.main-login.shop_login_button.enable",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_top_color",
+      "label": "Border Top Color",
+      "default": "#abb98d"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "header",
+      "label": "Header"
+    },
+    {
+      "type": "color",
+      "id": "header_color",
+      "label": "Header Color"
+    },
+    {
+      "type": "color",
+      "id": "labels_color",
+      "label": "Labels Color",
+      "default": "#3b3a3e"
+    },
+    {
+      "type": "color",
+      "id": "input_bg",
+      "label": "Input Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_border",
+      "label": "Input Border Color",
+      "default": "#eee9ce"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "email_label",
+      "label": "Email Label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "password_label",
+      "label": "Password Label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "sign_in_text",
+      "label": "Sign In Button Text",
+      "default": "SIGN IN"
+    },
+    {
+      "type": "text",
+      "id": "google_client_id",
+      "label": "Google Client ID"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "social_sign_in_header",
+      "label": "Social Sign In Header",
+      "default": "SIGN IN WITH..."
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pt",
+      "label": "Component mobile padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pb",
+      "label": "Component mobile padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+
+    {
+      "type": "header",
+      "content": "Tablet Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pt",
+      "label": "Component tablet padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pb",
+      "label": "Component tablet padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pt",
+      "label": "Component desktop padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pb",
+      "label": "Component desktop padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ]
+}
+{% endschema %}

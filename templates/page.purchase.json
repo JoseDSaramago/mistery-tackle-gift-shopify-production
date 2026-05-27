@@ -1,0 +1,188 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "mtb_article_gcexJJ": {
+      "type": "MTB-article",
+      "blocks": {
+        "section_hngbCU": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Purchase Optioins & Cancellation Policy</strong>",
+            "text": "",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_hngbCU"
+      ],
+      "settings": {
+        "text_align": "text-align-center",
+        "title_size": "h2",
+        "header_color": "#856245",
+        "header_uppercase": true,
+        "text_color": "#33534b",
+        "text_link_hover_color": "#172421",
+        "component_mobile_pt": 20,
+        "component_mobile_pb": 10,
+        "component_tablet_pt": 30,
+        "component_tablet_pb": 30,
+        "component_desktop_pt": 40,
+        "component_desktop_pb": 10
+      }
+    },
+    "mtb_article_77CFVA": {
+      "type": "MTB-article",
+      "blocks": {
+        "section_mUTjEF": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "",
+            "text": "<p>Through the Site and Services, you can place orders for fishing products (“Products”) in a la carte purchases (“Standalone Purchases”) or through a subscription (“Subscription”). You are responsible for knowing the local laws and ordinances that govern fishing activities wherever you may be fishing. Mystery Tackle Box will not be liable for your use of any Product ordered through the Services that are not legal to use wherever you may be fishing. Please note, all prices listed on the site are in U.S. currency.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_bVanB9": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Standalone Purchases</strong>",
+            "text": "<p>You may make Standalone Purchases by selecting Products and adding them to your cart and then completing the purchase transaction process, as directed on the Site. By making a purchase through the Site, you are authorizing Mystery Tackle Box to charge the payment method (e.g., credit card) chosen for the amount indicated on the purchase confirmation page. Returns for Standalone Purchases are subject to Mystery Tackle Box’s Return Policy located at <a href=\"/pages/returns\" target=\"_blank\" title=\"Returns & Exchanges\">https://mysterytacklebox.com/pages/returns</a>. The Return Policy is subject to change in our sole discretion without notice. Once you have made a Standalone Purchase, you may cancel your order so long as your order has not yet shipped. If you wish to cancel any Standalone Purchase, please contact Customer Service at <a href=\"mailto:support@mysterytacklebox.com\" target=\"_blank\" title=\"mailto:support@mysterytacklebox.com\">support@mysterytacklebox.com</a>. You must include your order number in your cancellation request.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_iVYmN4": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Subscriptions</strong>",
+            "text": "<p>By registering an Account and enrolling in a Subscription (“Enrollment”), you will choose which of our periodic shipments you wish to receive, and also provide other information that will assist us in fulfilling your orders and your expectations. We will use such information to fulfill your periodic orders and we may use such information in order to present you with opportunities for additional products that we feel may be of interest to you. You will also register a payment method (e.g., a credit card) and such registration of your payment method constitutes your authorization to charge such amounts to that payment method and otherwise constitutes your promise to pay for items purchased from the Site.</p><p>Upon Enrollment, you will choose which one or more of our Product plans you wish to order. We will send shipments to you at the frequency and value that you choose. You acknowledge and agree that it is impossible for the value of our shipments to exactly equal the approximate value you have chosen, and your order from Mystery Tackle Box signifies your acknowledgment that the value of each shipment will be within one U.S. Dollar of the value that you have chosen. You may change the desired approximate value of your periodic shipment, or cancel your Subscription at any time. Any change or cancellation of Subscription will be effective immediately as to all Products not yet billed to your account as of the date and time of the change or cancellation. Products already billed but not sent as of the date and time of the change or cancellation will be sent as previously scheduled and cannot be refunded. You may change or cancel your Subscription by accessing your Account through the Site or by contacting Customer Service at <a href=\"mailto:support@mysterytacklebox.com\" target=\"_blank\" title=\"mailto:support@mysterytacklebox.com\">support@mysterytacklebox.com</a>.</p><p>Your use of the Site is your acknowledgement that you have enrolled to receive fishing-related products that are unknown to you at the time of ordering and receipt by you. Mystery Tackle Box offers no refunds or credits for returned Subscription Products except in our sole discretion. If you did not receive your Subscription shipment during any month, you must contact us within 30 days of that month's shipment date in order to receive a replacement.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_73tWQL": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Product Descriptions</strong>",
+            "text": "<p>All Product features, content, specifications, and prices described or depicted on the Site and Services are subject to change at any time without notice. Certain measures, attributes, and similar descriptions are approximate and are provided for convenience purposes only. We make reasonable efforts to accurately display the attributes of the Products, including (if applicable) the colors, fonts, and design sizes; however, the actual colors, fonts and designs you see on the device you use to access the Site and Services will depend on your device and its systems, and we cannot guarantee that your device will accurately display such Product attributes. The inclusion of any Products on the Site at a particular time does not imply or warrant that these Products will be available at any time. We attempt to ensure that information on the Site is complete, accurate, and current. Despite our efforts, the information on the Site may occasionally be inaccurate, incomplete, or outdated. We make no representation as to the accuracy, completeness, or currency of any information on the Site. For example, Products included on the Site may be unavailable, may have different attributes than those listed or depicted or may actually carry a different price than that stated on the Site. In addition, we may make changes in information about price and availability without notice.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_RRLttH": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Product Orders and Sales</strong>",
+            "text": "<p>By placing an order using the Site and Services, a customer makes a binding offer for a contract of sale. We will send an order confirmation email to the customer. The order confirmation is not an acceptance of the order, but only an acknowledgment that the order was received. The offer is accepted when we confirm in a second email to the customer that we have either begun to process or shipped the order. We do not guarantee the continued availability of any Product found on the Site or Services. We reserve the right, without prior notice, to limit the order quantity on any Product and/or to refuse service to any customer. We also may require verification of information prior to the acceptance and/or shipment of any Product order.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_EMc8Gq": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Delivery, Shipment and Title</strong>",
+            "text": "<p>We will make delivery of accepted Product orders in accordance with our Shipping Policy located at <a href=\"/pages/shipping\" target=\"_blank\" title=\"Shipping Information\">https://mysterytacklebox.com/pages/shipping</a>. </p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_gtCJ4j": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Payments</strong>",
+            "text": "<p>Customers may choose to pay by credit card or PayPal. We reserve the right to limit the method of payment chosen by the customer depending on order value, shipment destination, or other criteria. In addition, we may offer one-time promotional codes from time to time. One-time promotional codes may only be used once per household and we reserve the right to cancel orders made by customers abusing this policy. Additional terms may apply when you submit the promotional code on the Site.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_JVYaJe": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Purchased goods</strong>",
+            "text": "<p>Catch Co. assumes no responsibility and shall not be liable for any loss or damage caused by, or resulting from, the misapplication of any product sold from the mysterytacklebox.com website. Our products are sold with the express understanding that the purchaser and/or users are thoroughly familiar with the correct application and proper care.</p><p>It is the purchasers' and users' responsibility to determine the suitability of a product for any particular use. Check all applicable industry, trade association, federal, state and local regulations. Read and understand all cautions and warnings before ordering from this website.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        },
+        "section_73VLDQ": {
+          "type": "section",
+          "settings": {
+            "section_id": "",
+            "header": "<strong>Cancellation</strong>",
+            "text": "<p>Mystery Tackle Box subscriptions are always final and any refunds for any unshipped boxes are always at the company's discretion. The customer is always responsible for knowing when their rebill date is and ensuring that they are aware of the next payment date. You may stop your subscription at any time by doing so in your customer portal, or by reaching out to our customer service team at <a href=\"mailto:support@mysterytacklebox.com\"><span style=\"text-decoration:underline\">support@mysterytacklebox.com</span></a>.</p>",
+            "button_text": "",
+            "button_url": "",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_mUTjEF",
+        "section_bVanB9",
+        "section_iVYmN4",
+        "section_73tWQL",
+        "section_RRLttH",
+        "section_EMc8Gq",
+        "section_gtCJ4j",
+        "section_JVYaJe",
+        "section_73VLDQ"
+      ],
+      "settings": {
+        "text_align": "text-align-left",
+        "title_size": "h4",
+        "header_color": "",
+        "header_uppercase": true,
+        "text_color": "#33534b",
+        "text_link_hover_color": "#172421",
+        "component_mobile_pt": 0,
+        "component_mobile_pb": 20,
+        "component_tablet_pt": 0,
+        "component_tablet_pb": 30,
+        "component_desktop_pt": 0,
+        "component_desktop_pb": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "mtb_article_gcexJJ",
+    "mtb_article_77CFVA"
+  ]
+}

@@ -1,0 +1,129 @@
+.plans-component {
+  text-align: center;
+}
+
+.plans-component__header {
+  margin: 0;
+  padding: 0;
+}
+
+.plans-component__subheader {
+  margin: 1rem 0;
+}
+
+.plan_wrap {
+  display: block;
+  margin-top: 2rem;
+  position: relative;
+  border-radius: 4px;
+  text-decoration: none;
+  padding: 0 0.5rem 8rem;
+}
+
+.plans-list-wrap {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.plan_name {
+  padding: 0.8rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  /* right: 4rem; */
+  text-align: center;
+  min-width: 140px;
+}
+
+.plan-header__wrap {
+  text-align: left;
+}
+
+.plan-block__header {
+  font-size: 2.4rem;
+  margin: 1rem 0 0 0;
+}
+
+.plan-price {
+  margin: 0;
+}
+
+.plan-block__props {
+  font-size: 1.2rem;
+  text-align: left;
+  margin-top: 1rem;
+}
+
+.plan-block__props ul {
+  padding-left: 2rem;
+  margin: 0;
+}
+
+.plan-block__props ul li {
+  margin-bottom: 0.5rem;
+}
+
+.plans-component .small_btn {
+  padding: 1.5rem 1.7rem;
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+}
+
+.plan-block_img_wrap {
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+div.plan-block_img_wrap-copy {
+  display: block;
+  margin-top: 2rem;
+}
+
+.plan-component__img {
+  object-fit: contain;
+}
+
+@media screen and (min-width: 641px) and (max-width: 989px) {
+  .plan-component__img {
+    max-width: 50vw;
+  }
+}
+
+@media screen and (min-width: 641px) {
+  .plan_name {
+    font-size: 1.6rem;
+  }
+
+  .plan-block__header {
+    font-size: 3rem;
+  }
+
+  .plan-header__wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .plan_wrap {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .plans-list-wrap {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .plan-component__img {
+    max-width: 30vw;
+  }
+}

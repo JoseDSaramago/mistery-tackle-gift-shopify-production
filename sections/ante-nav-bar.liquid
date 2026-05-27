@@ -1,0 +1,1402 @@
+<style>
+  body {
+    --ante-base-header-height: 84px;
+    --ante-cta-header-height: 102px;
+  }
+
+  @media (max-width: 1919px) {
+    body {
+      --ante-base-header-height: 72px;
+      --ante-cta-header-height: 86px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    body {
+      --ante-base-header-height: 63px !important;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    body {
+      --ante-base-header-height: 55px !important;
+    }
+  }
+
+  body {
+    --ante-header-height: var(--ante-base-header-height);
+  }
+
+  @media (min-width: 1025px) {
+    body.cta-header {
+      --ante-header-height: var(--ante-cta-header-height);
+    }
+  }
+
+  {% if section.settings.nav_style == "bar" or section.settings.nav_style == "bar_floating_cta" %}
+    body {
+      --sticky-top: calc(var(--ante-header-height) + min(var(--section-horizontal-padding), 40px));
+    }
+    {% if section.settings.nav_style == "bar_floating_cta" %}
+      body.cta-header {
+        --sticky-top: calc(var(--ante-header-height) + min(var(--section-horizontal-padding), 40px) * 2);
+      }
+    {% endif %}
+  {% elsif section.settings.nav_style == "floating" or section.settings.nav_style == "floating_separate_logo" %}
+    body {
+      --sticky-top: calc(var(--ante-header-height) + min(var(--section-horizontal-padding), 40px) * 2);
+    }
+  {% endif %}
+
+  @media (max-width: 1024px) {
+    body.nav-scrolled {
+      --sticky-top: var(--section-horizontal-padding);
+    }
+  }
+</style>
+
+<style>
+  #shopify-section-{{ section.id }} {
+    position: sticky;
+    top: 0;
+    z-index: 99 !important;
+    overflow: visible;
+    background: initial;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} + .shopify-section:has(section#ante-announcement-bar) {
+    padding-bottom: min(40px, var(--section-horizontal-padding));
+  }
+
+  #shopify-section-{{ section.id }} + .shopify-section:has(section:not(#ante-announcement-bar)) {
+    padding-top: min(40px, var(--section-horizontal-padding));
+  }
+
+  #shopify-section-{{ section.id }} *,
+  #shopify-section-{{ section.id }} *::before,
+  #shopify-section-{{ section.id }} *::after {
+    transition: background .25s, color .25s;
+  }
+
+  #ante-lander-nav,
+  #ante-lander-nav-cta {
+    background: transparent;
+    transition: opacity .25s, transform .25s, background 25s;
+    overflow: visible;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-large);
+    pointer-events: auto;
+  }
+
+  #ante-lander-nav .ante-container {
+    padding: 0;
+    width: 100%;
+  }
+
+  #ante-lander-nav .nav-container,
+  #ante-lander-nav-cta .ante-container {
+    align-items: initial;
+    overflow: visible !important;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+    background: var(--color-background);
+  }
+
+  #ante-lander-nav .lander-nav {
+    height: var(--ante-header-height);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: var(--spacing-small);
+    justify-content: space-between;
+    position: relative;
+    transition: height .25s, background .25s;
+  }
+
+  #ante-lander-nav .lander-nav-logo {
+    height: 58px;
+  }
+
+  #ante-lander-nav .nav-container .lander-nav-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #ante-lander-nav .lander-nav .lander-nav-logo .ante-image:last-child {
+    display: none;
+  }
+
+  #ante-lander-nav.ante-inverse .lander-nav .lander-nav-logo .ante-image:first-child {
+    display: none;
+  }
+
+  #ante-lander-nav.ante-inverse .lander-nav .lander-nav-logo .ante-image:last-child {
+    display: flex;
+  }
+
+  @media (max-width: 1919px) {
+    #ante-lander-nav .lander-nav-logo {
+      height: 50px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    #ante-lander-nav .lander-nav-logo {
+      height: 40px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    #ante-lander-nav .lander-nav-logo {
+      height: 38px;
+    }
+  }
+
+  #ante-lander-nav .lander-nav-logo .ante-image {
+    height: 100%;
+  }
+
+  #ante-lander-nav .lander-nav-menu,
+  #ante-lander-nav .hamburger-menu {
+    grid-column: 1;
+    grid-row: 1;
+    transition: opacity .5s var(--transition-drop-ease);
+  }
+
+  #ante-lander-nav .lander-nav-menu {
+    display: flex;
+    gap: var(--spacing-x-small);
+    width: 0;
+  }
+
+  #ante-lander-nav .lander-nav-menu a,
+  #ante-lander-nav .lander-nav-buttons a,
+  #ante-lander-nav .lander-nav-menu-drop a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  #ante-lander-nav .lander-nav-menu a::before,
+  #ante-lander-nav .lander-nav-buttons a::before,
+  #ante-lander-nav .lander-nav-menu-drop a::before {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    width: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-text-default);
+    height: 2px;
+    transition: width .25s;
+  }
+
+  #ante-lander-nav .lander-nav-buttons a::before {
+    bottom: -2px;
+  }
+
+  #ante-lander-nav .lander-nav-menu a:hover::before,
+  #ante-lander-nav .lander-nav-buttons a:hover::before,
+  #ante-lander-nav .lander-nav-menu-drop a:hover::before {
+    width: 100%;
+  }
+
+  #ante-lander-nav .lander-nav-buttons {
+    display: flex;
+    gap: var(--micropad-x-large);
+    justify-content: flex-end;
+  }
+
+  #ante-lander-nav .lander-nav-buttons path {
+    fill: var(--color-text-default);
+  }
+
+  #ante-lander-nav .hamburger-menu {
+    min-width: initial;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+  }
+
+  #ante-lander-nav .hamburger-menu.active .hamburger-line {
+    transition-delay: 0.12s;
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: rotate(45deg);
+  }
+
+  #ante-lander-nav .hamburger-menu.active .hamburger-line:before {
+    top: 0;
+    transition: top 75ms ease, opacity 75ms ease 0.12s;
+    opacity: 0;
+  }
+
+  #ante-lander-nav .hamburger-menu.active .hamburger-line:after {
+    bottom: 0;
+    transition: bottom 75ms ease, transform 75ms cubic-bezier(0.215, 0.61, 0.355, 1) 0.12s;
+    transform: rotate(-90deg);
+  }
+
+  #ante-lander-nav .hamburger-line {
+    position: relative;
+    display: block;
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    transition-duration: 75ms;
+  }
+
+  #ante-lander-nav .hamburger-line,
+  #ante-lander-nav .hamburger-line:before,
+  #ante-lander-nav .hamburger-line:after {
+    left: 0;
+    content: "";
+    width: 19px;
+    height: 2px;
+    background: var(--color-text-default);
+    transition: top 75ms ease 0.12s, bottom 75ms ease 0.12s, opacity 75ms ease, transform 75ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  #ante-lander-nav .hamburger-line:before {
+    position: absolute;
+    top: -6px;
+  }
+
+  #ante-lander-nav .hamburger-line:after {
+    position: absolute;
+    bottom: -6px;
+  }
+
+  #ante-lander-nav .lander-nav-menu-drop-container {
+    height: 0;
+    overflow: hidden;
+    transition: var(--transition-drop);
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
+    box-sizing: border-box;
+  }
+
+  #ante-lander-nav .lander-nav-menu-drop-container.open {
+    height: auto;
+  }
+
+  #ante-lander-nav .lander-nav-menu-drop {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-x-small);
+    align-items: flex-start;
+    width: 100%;
+    padding: var(--spacing-small) var(--section-horizontal-padding) var(--spacing-small);
+    background: var(--color-surface-100);
+  }
+
+  #ante-lander-nav .lander-nav-menu-drop a::before {
+    background: var(--color-text-default);
+  }
+
+  #ante-lander-nav .lander-nav-menu-drop > :first-child {
+    display: none;
+  }
+
+  #ante-lander-nav .lander-nav-menu-drop .divider {
+    background: var(--color-border);
+    width: 100%;
+    min-height: 1px;
+    opacity: .2;
+  }
+
+  #ante-lander-nav .lander-nav-cart-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    background: var(--color-sale);
+    min-width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    border-radius: 10px;
+    padding: 4px;
+    line-height: 1;
+    color: var(--color-text-default);
+  }
+
+  #ante-lander-nav .nav-mobile {
+    display: none;
+  }
+
+  #ante-lander-nav .hamburger-menu {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media (max-width: 950px) {
+    #ante-lander-nav .nav-mobile {
+      display: flex;
+    }
+
+    #ante-lander-nav .hamburger-menu {
+      pointer-events: initial;
+      opacity: 1
+    }
+
+    #ante-lander-nav .lander-nav-menu {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  #ante-lander-nav .lander-nav-cta {
+    opacity: 0;
+    position: absolute;
+    inset: 0;
+    background: var(--color-background);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: none;
+    padding: var(--spacing-x-small) 0;
+    gap: var(--micropad-medium);
+    border-radius: var(--radius-medium);
+    z-index: 1;
+    transition: opacity .25s;
+  }
+
+  body.cta-header #ante-lander-nav.scrolled .lander-nav-cta {
+    opacity: 1;
+    pointer-events: initial;
+  }
+
+  .lander-nav-cta-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--micropad-x-large);
+    justify-content: center;
+  }
+
+  .ante-lander-nav .lander-nav-cta-facts {
+    display: flex;
+    gap: 10px;
+  }
+
+  .ante-lander-nav .lander-nav-cta-fact {
+    display: flex;
+    align-items: center;
+    gap: var(--micropad-medium);
+  }
+
+  #ante-lander-nav-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    display: none;
+    pointer-events: none;
+    opacity: 0;
+    transition: transform .25s, opacity .25s;
+    transform: translateY(10px);
+  }
+
+  #ante-lander-nav-cta.active {
+    opacity: 1;
+    transform: initial;
+    pointer-events: auto;
+  }
+
+  #ante-lander-nav-cta .ante-container {
+    padding: var(--spacing-x-small) 0;
+  }
+
+  #ante-lander-nav-cta .ante-buy-button-container {
+    width: 100%;
+  }
+
+  @media (max-width: 1024px) {
+    #ante-lander-nav .lander-nav-cta {
+      display: none;
+    }
+
+    #ante-lander-nav.scrolled {
+      opacity: 0;
+      transform: translateY(-10px);
+      pointer-events: none;
+    }
+
+    #ante-lander-nav-cta {
+      display: flex;
+    }
+
+    #ante-lander-nav-cta .ante-button {
+      max-width: 347px;
+      margin: 0 auto;
+    }
+
+    .ante-lander-nav .lander-nav-cta-facts {
+      justify-content: center;
+    }
+
+    #ante-lander-nav-cta .lander-nav-cta-fact:last-child:not(:first-child) {
+      display: none;
+    }
+
+    #ante-lander-nav-cta .lander-nav-cta-facts {
+      margin-top: var(--spacing-x-small);
+    }
+
+    #ante-lander-nav-cta h6 {
+      display: none;
+    }
+  }
+</style>
+
+<style>
+  {% if section.settings.nav_style == "bar" or section.settings.nav_style == "bar_floating_cta" %}
+    #ante-lander-nav,
+    #ante-lander-nav-cta {
+      background: var(--color-background);
+      transition: opacity .25s, transform .25s, box-shadow .25s, filter .25s, background .25s;
+    }
+
+    #ante-lander-nav .lander-nav-cta::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: var(--ante-page-width);
+      transform: translateX(-50%);
+      background: var(--color-background);
+      z-index: -1;
+    }
+
+    #ante-lander-nav .lander-nav-menu-drop-container {
+      left: calc(var(--section-horizontal-padding) * -1);
+      right: calc(var(--section-horizontal-padding) * -1);
+      z-index: 2;
+    }
+
+    {% if section.settings.nav_contrast_style == "solid_border" %}
+      #ante-lander-nav {
+        box-shadow: 0 4px var(--color-elevated-shadow);
+      }
+
+      #ante-lander-nav-cta {
+        box-shadow: 0 -4px var(--color-elevated-shadow);
+      }
+
+      #ante-lander-nav .lander-nav-menu-drop-container {
+        box-shadow: 0 3px var(--color-elevated-shadow);
+      }
+      
+      @media (max-width: 1024px) {
+        #ante-lander-nav {
+          box-shadow: 0 3px var(--color-elevated-shadow);
+        }
+
+        #ante-lander-nav-cta {
+          box-shadow: 0 -3px var(--color-elevated-shadow);
+        }
+      }
+
+      #ante-lander-nav.at-top {
+        box-shadow: 0 0 var(--color-elevated-shadow);
+      }
+    {% elsif section.settings.nav_contrast_style == "drop_shadow" %}
+      #ante-lander-nav {
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8)) !important;
+      }
+
+      #ante-lander-nav-cta {
+        filter: drop-shadow(0 -4px 8px rgba(0, 0, 0, 0.8)) !important;
+      }
+
+      @media (max-width: 1024px) {
+        #ante-lander-nav {
+          filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.8)) !important;
+        }
+
+        #ante-lander-nav-cta {
+          filter: drop-shadow(0 -3px 6px rgba(0, 0, 0, 0.8)) !important;
+        }
+      }
+
+      #ante-lander-nav.at-top {
+        filter: none !important;
+      }
+
+      #ante-lander-nav.mobile-drop-open {
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8)) !important;
+      }
+
+      @media (max-width: 1024px) {
+        #ante-lander-nav.mobile-drop-open {
+          filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.8)) !important;
+        }
+      }
+    {% elsif section.settings.nav_contrast_style == "drop_shadow_weak" %}
+      #ante-lander-nav {
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1)) !important;
+      }
+
+      #ante-lander-nav-cta {
+        filter: drop-shadow(0 -4px 8px rgba(0, 0, 0, 0.1)) !important;
+      }
+
+      @media (max-width: 1024px) {
+        #ante-lander-nav {
+          filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.1)) !important;
+        }
+
+        #ante-lander-nav-cta {
+          filter: drop-shadow(0 -3px 6px rgba(0, 0, 0, 0.1)) !important;
+        }
+      }
+
+      #ante-lander-nav.at-top {
+        filter: none !important;
+      }
+
+      #ante-lander-nav.mobile-drop-open {
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1)) !important;
+      }
+
+      @media (max-width: 1024px) {
+        #ante-lander-nav.mobile-drop-open {
+          filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.1)) !important;
+        }
+      }
+    {% endif %}
+  {% endif %}
+  {% if section.settings.nav_style == "bar_floating_cta" %}
+    #ante-lander-nav.scrolled {
+      opacity: 0;
+      transform: translateY(-10px);
+      pointer-events: none;
+    }
+
+    #ante-lander-nav .lander-nav {
+      height: var(--ante-base-header-height);
+    }
+
+    #ante-lander-nav-cta {
+      display: none;
+      bottom: initial;
+      top: min(var(--section-horizontal-padding), 40px);
+      transform: initial;
+      background: transparent;
+      z-index: -1;
+    }
+
+    body.ante-loaded #ante-lander-nav-cta {
+      display: initial;
+      animation:
+        anteLanderNavCtaSlideOut .25s cubic-bezier(0.4, 0, 1, 0.6) forwards,
+        anteLanderNavCtaScaleOut .25s cubic-bezier(0, 0.4, 0.6, 1) forwards;
+      animation-composition: add;
+    }
+
+    #ante-lander-nav-cta.active {
+      display: initial;
+      pointer-events: auto;
+      animation:
+        anteLanderNavCtaSlideIn .25s cubic-bezier(0, 0.6, 0.6, 1) forwards,
+        anteLanderNavCtaScaleIn .25s cubic-bezier(0.8, 0, 0.5, 1) forwards !important;
+      animation-composition: add;
+    }
+
+    #ante-lander-nav-cta:not(.active) {
+      filter: none !important;
+    }
+
+    #ante-lander-nav-cta .ante-container {
+      border-radius: var(--radius-medium);
+      padding: var(--spacing-x-small) var(--padding-medium);
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
+
+    @keyframes anteLanderNavCtaSlideIn {
+      from { transform: translateY(calc(-100% - min(var(--section-horizontal-padding), 40px))); }
+      to { transform: translateY(0); }
+    }
+
+    @keyframes anteLanderNavCtaScaleIn {
+      from { transform: scale(0.9); }
+      to { transform: scale(1); }
+    }
+
+    @keyframes anteLanderNavCtaSlideOut {
+      from { transform: translateY(0); }
+      to { transform: translateY(calc(-100% - min(var(--section-horizontal-padding), 40px))); }
+    }
+
+    @keyframes anteLanderNavCtaScaleOut {
+      from { transform: scale(1); }
+      to { transform: scale(0.9); }
+    }
+
+    #ante-lander-nav-cta .ante-buy-button-container {
+      width: initial;
+    }
+
+    @media (max-width: 1024px) {
+      #ante-lander-nav-cta {
+        bottom: var(--section-horizontal-padding);
+        top: initial;
+        transform: translateY(10px);
+        animation: initial !important;
+        opacity: 0;
+      }
+
+      #ante-lander-nav-cta .ante-buy-button-container {
+        width: 100%;
+      }
+
+      #ante-lander-nav-cta .ante-container {
+        flex-direction: column;
+      }
+
+      #ante-lander-nav-cta.active {
+        opacity: 1;
+      }
+    }
+  {% endif %}
+  {% if section.settings.nav_style == "floating" or section.settings.nav_style == "floating_separate_logo" %}
+    #shopify-section-{{ section.id }} {
+      top: min(var(--section-horizontal-padding), 40px);
+    }
+
+    #ante-lander-nav .nav-container,
+    #ante-lander-nav-cta .ante-container {
+      border-radius: var(--radius-medium);
+      transition: border-radius .5s var(--transition-drop-ease), box-shadow .25s, filter .25s;
+      position: relative;
+    }
+
+    #ante-lander-nav .lander-nav {
+      background: var(--color-background);
+      padding: 0 var(--padding-x-large);
+      border-radius: var(--radius-medium);
+    }
+
+    #ante-lander-nav-cta {
+      bottom: var(--section-horizontal-padding);
+    }
+
+    #ante-lander-nav-cta .ante-container {
+      padding: var(--spacing-x-small) var(--padding-medium);
+    }
+
+    #ante-lander-nav .nav-container:has(.lander-nav-menu-drop-container.open) {
+      border-radius: var(--radius-medium) var(--radius-medium) 0 0;
+    }
+
+    #ante-lander-nav .lander-nav-menu-drop-container {
+      left: -2px;
+      right: -2px;
+      transform: translateY(calc(100% - var(--radius-medium)));
+      border-radius: 0 0 var(--radius-medium) var(--radius-medium);
+      z-index: -1;
+    }
+
+    #ante-lander-nav .lander-nav-menu-drop {
+      padding-top: calc(var(--spacing-small) + var(--radius-medium));
+      margin: 0 2px 2px 2px;
+      border-radius: 0 0 var(--radius-medium) var(--radius-medium);
+    }
+
+    #ante-lander-nav .lander-nav-cta {
+      padding-left: var(--padding-x-large);
+      padding-right: var(--padding-x-large);
+    }
+
+    @media (max-width: 1024px) {
+      #ante-lander-nav .lander-nav {
+        padding: 0 var(--padding-medium);
+      }
+    }
+
+    {% if section.settings.nav_contrast_style == "solid_border" %}
+      #ante-lander-nav .nav-container {
+        box-shadow: 0 0 0 2px var(--color-elevated-shadow);
+      }
+
+      #ante-lander-nav.at-top .nav-container {
+        box-shadow: 0 0 0 0 var(--color-elevated-shadow);
+      }
+
+      #ante-lander-nav .nav-container:has(.lander-nav-menu-drop-container.open) {
+        box-shadow: 0 0 0 2px var(--color-elevated-shadow);
+      }
+
+      #ante-lander-nav .lander-nav-menu-drop {
+        box-shadow: 0 0 0 2px var(--color-elevated-shadow);
+        transition: box-shadow .25s;
+      }
+
+      #ante-lander-nav.at-top .lander-nav-menu-drop {
+        box-shadow: 0 0 0 0 var(--color-elevated-shadow);
+      }
+
+      #ante-lander-nav .lander-nav-menu-drop-container.open .lander-nav-menu-drop {
+        box-shadow: 0 0 0 2px var(--color-elevated-shadow);
+      }
+    {% elsif section.settings.nav_contrast_style == "drop_shadow" %}
+      #ante-lander-nav .nav-container,
+      #ante-lander-nav-cta .ante-container {
+        filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.8)) !important;
+      }
+
+      @media (max-width: 1024px) {
+        #ante-lander-nav .nav-container,
+        #ante-lander-nav-cta .ante-container {
+          filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.8)) !important;
+        }
+      }
+
+      #ante-lander-nav.at-top .nav-container {
+        filter: none !important;
+      }
+
+      #ante-lander-nav.mobile-drop-open .nav-container {
+        filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.8)) !important;
+      }
+
+      @media (max-width: 1024px) {
+        #ante-lander-nav.mobile-drop-open .nav-container {
+          filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.8)) !important;
+        }
+      }
+    {% elsif section.settings.nav_contrast_style == "drop_shadow_weak" %}
+      #ante-lander-nav .nav-container,
+      #ante-lander-nav-cta .ante-container {
+        filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.1)) !important;
+      }
+
+      @media (max-width: 1024px) {
+        #ante-lander-nav .nav-container,
+        #ante-lander-nav-cta .ante-container {
+          filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.1)) !important;
+        }
+      }
+
+      #ante-lander-nav.at-top .nav-container {
+        filter: none !important;
+      }
+
+      #ante-lander-nav.mobile-drop-open .nav-container {
+        filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.1)) !important;
+      }
+
+      @media (max-width: 1024px) {
+        #ante-lander-nav.mobile-drop-open .nav-container {
+          filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.1)) !important;
+        }
+      }
+    {% endif %}
+  {% endif %}
+  {% if section.settings.nav_style == "floating_separate_logo" %}
+    @media (min-width: 601px) {
+      #ante-lander-nav .ante-container {
+        flex-direction: row;
+        gap: var(--spacing-large);
+        transition: gap .5s var(--transition-drop-ease);
+      }
+
+      #ante-lander-nav .nav-container {
+        margin: 0;
+        width: initial;
+        flex: 1;
+      }
+
+      #ante-lander-nav .ante-container > .lander-nav-logo {
+        transition: opacity .5s var(--transition-drop-ease), width .5s var(--transition-drop-ease);
+        position: relative;
+      }
+
+      #ante-lander-nav .nav-container .lander-nav-logo {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+        transition: opacity .5s var(--transition-drop-ease), transform .5s var(--transition-drop-ease);
+        pointer-events: none;
+      }
+
+      #ante-lander-nav .ante-container > .lander-nav-logo .ante-image:first-child {
+        visibility: hidden;
+      }
+
+      #ante-lander-nav .ante-container > .lander-nav-logo .ante-image:last-child {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      #ante-lander-nav .ante-image:last-child img {
+        max-width: initial !important;
+      }
+
+      #ante-lander-nav:not(.at-top) .ante-container {
+        gap: 0;
+      }
+
+      #ante-lander-nav:not(.at-top) .ante-container > .lander-nav-logo {
+        opacity: 0;
+        width: 0;
+      }
+
+      #ante-lander-nav:not(.at-top) .nav-container .lander-nav-logo {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+        pointer-events: initial;
+      }
+
+      #ante-lander-nav.at-top .lander-nav-menu {
+        opacity: 1;
+        pointer-events: initial;
+      }
+
+      #ante-lander-nav.at-top .nav-mobile {
+        display: none;
+      }
+
+      #ante-lander-nav.at-top .hamburger-menu {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      @media (max-width: 750px) {
+        #ante-lander-nav.at-top .nav-mobile {
+          display: flex;
+        }
+
+        #ante-lander-nav.at-top .hamburger-menu {
+          pointer-events: initial;
+          opacity: 1
+        }
+
+        #ante-lander-nav.at-top .lander-nav-menu {
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
+    }
+
+    @media (max-width: 600px) {
+      #ante-lander-nav .ante-container > .lander-nav-logo {
+        display: none;
+      }
+    }
+  {% endif %}
+</style>
+
+{% assign has_fact = false %}
+{% for block in section.blocks %}
+  {% if block.type == "cta_fact" %}
+    {% assign has_fact = true %}
+  {% endif %}
+{% endfor %}
+
+{% assign has_menu_link = false %}
+{% for block in section.blocks %}
+  {% if block.type == "menu_link" %}
+    {% assign has_menu_link = true %}
+  {% endif %}
+{% endfor %}
+
+{% assign menu_links = section.blocks | where: 'type', 'menu_link' %}
+
+<section id="ante-lander-nav" class="ante-lander-nav ante-section nav-section at-top nav-type-{{ section.settings.nav_style }}{% if section.settings.inverted_colours %} ante-inverse{% endif %}">
+  <div class="ante-container">
+    {% if section.settings.nav_style == "floating_separate_logo" %}
+      <div class="lander-nav-logo">
+        <a href="/">
+          {% render "ante-image", image: section.settings.floating_logo %}
+          {% render "ante-image", image: section.settings.floating_logo %}
+        </a>
+      </div>
+    {% endif %}
+    <div class="nav-container">
+      <div class="lander-nav">
+        <div class="lander-nav-logo">
+          <a href="/">
+            {% render "ante-image", image: section.settings.logo, force: true %}
+            {% render "ante-image", image: section.settings.logo_inverse, force: true %}
+          </a>
+        </div>
+        <nav class="lander-nav-menu">
+          {% for link in section.settings.menu.links %}
+            <a class="body-base" href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+          {% for block in menu_links %}
+            <a class="body-base" href="{{ block.settings.menu_link_url }}"{% if block.settings.open_in_new_tab %} target="_blank"{% endif %}>{{ block.settings.menu_link_text }}</a>
+          {% endfor %}
+        </nav>
+        {% if section.settings.menu != blank or has_menu_link %}
+          <div class="hamburger-menu">
+            <div class="hamburger-line"></div>
+          </div>
+        {% else %}
+          <div></div>
+        {% endif %}
+        <div class="lander-nav-buttons">
+          {% if section.settings.enable_account_button %}
+            <a href="{{ routes.account_url }}">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12.3848 2.00098C9.47955 2.00098 7.12166 4.35887 7.12166 7.26414C7.12166 10.1694 9.47955 12.5273 12.3848 12.5273C15.29 12.5273 17.6479 10.1694 17.6479 7.26414C17.6479 4.35887 15.29 2.00098 12.3848 2.00098ZM12.3848 10.422C10.6375 10.422 9.22692 9.01151 9.22692 7.26414C9.22692 5.51677 10.6375 4.10624 12.3848 4.10624C14.1322 4.10624 15.5427 5.51677 15.5427 7.26414C15.5427 9.01151 14.1322 10.422 12.3848 10.422ZM21.8585 22.001V20.9484C21.8585 16.8747 18.5637 13.5799 14.49 13.5799H10.2796C6.20587 13.5799 2.91113 16.8747 2.91113 20.9484V22.001H5.01639V20.9484C5.01639 18.0431 7.37429 15.6852 10.2796 15.6852H14.49C17.3953 15.6852 19.7532 18.0431 19.7532 20.9484V22.001H21.8585Z"/></svg>
+            </a>
+          {% endif %}
+          {% if section.settings.enable_cart_button %}
+            <a href="{{ routes.cart_url }}">
+              <svg width="23" height="20" fill="none" viewBox="0 0 23 20"><g clip-path="url(#A)"><use href="#B"/><path d="M18.348 17.395a1.932 1.932 0 1 1-3.864 0 1.932 1.932 0 1 1 3.864 0zm2.8-14.234H9.125v2.034h10.753l-1.22 5.186a1.53 1.53 0 0 1-.529.855c-.268.217-.601.337-.945.34H8.845a1.53 1.53 0 0 1-.961-.332 1.52 1.52 0 0 1-.538-.863L5.21.949a1.02 1.02 0 0 0-.991-.788H.914v2.034h2.491l1.957 8.643c.175.791.616 1.498 1.25 2.003s1.422.776 2.232.769h8.338a3.53 3.53 0 0 0 3.457-2.77l1.5-6.431c.07-.302-.002-.62-.195-.862a1.02 1.02 0 0 0-.796-.384z"/></g><defs><clipPath id="A"><path fill="#fff" transform="translate(.004 .161)" d="M0 0h23v19.167H0z"/></clipPath><path id="B" d="M10.52 17.395a1.93 1.93 0 1 1-3.864 0 1.93 1.93 0 1 1 3.864 0z"/></defs></svg>
+              <div class="lander-nav-cart-count"{% if cart.item_count < 1 %} hidden{% endif %}>{{ cart.item_count }}</div>
+            </a>
+          {% endif %}
+        </div>
+        {% if section.settings.use_cta and section.settings.nav_style != "bar_floating_cta" %}
+          <div class="lander-nav-cta">
+            <div class="lander-nav-cta-content">
+              <h6>{{ section.settings.cta_title }}</h6>
+              {% if has_fact %}
+                <div class="lander-nav-cta-facts">
+                  {% for block in section.blocks %}
+                    {% if block.type == "cta_fact" %}
+                      <div class="lander-nav-cta-fact">
+                        {% render "ante-svg", icon: "check", colour: "text-alt" %}
+                        <div class="body-caption alt">{{ block.settings.text }}</div>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+            {% render "ante-buy-button", small: true %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="lander-nav-menu-drop-container nav-mobile">
+        <div class="lander-nav-menu-drop">
+          {% for link in section.settings.menu.links %}
+            <div class="divider"></div>
+            <a class="body-large bold" href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+          {% for block in menu_links %}
+            <div class="divider"></div>
+            <a class="body-large bold" href="{{ block.settings.menu_link_url }}"{% if block.settings.open_in_new_tab %} target="_blank"{% endif %}>{{ block.settings.menu_link_text }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if section.settings.use_cta %}
+  <section id="ante-lander-nav-cta" class="ante-lander-nav ante-section{% if section.settings.inverted_colours != section.settings.invert_on_scroll %} ante-inverse{% endif %}">
+    <div class="ante-container">
+      {% render "ante-buy-button", small: true %}
+      <div class="lander-nav-cta-content">
+        <h6>{{ section.settings.cta_title }}</h6>
+        {% if has_fact %}
+          <div class="lander-nav-cta-facts">
+            {% for block in section.blocks %}
+              {% if block.type == "cta_fact" %}
+                <div class="lander-nav-cta-fact">
+                  {% render "ante-svg", icon: "check" %}
+                  <div class="body-caption alt">{{ block.settings.text }}</div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<script type="module">
+  const navContainer = document.querySelector("#ante-lander-nav")
+  const ctaContainer = document.querySelector("#ante-lander-nav-cta")
+  const nav = document.querySelector("#ante-lander-nav .lander-nav")
+  const menuButton = document.querySelector("#ante-lander-nav .hamburger-menu")
+  const menuDrop = document.querySelector("#ante-lander-nav .lander-nav-menu-drop-container")
+  const container = document.querySelector("#ante-lander-nav .ante-container")
+  
+  let lastScrollY = window.scrollY
+  let scrollDelta = 0
+  let scrollTimeout
+  let lastCTA = 0
+
+  const selectors = `{{ section.settings.hide_elements }}`.split(",").map(s => s.trim()).filter(Boolean)
+
+  function throttleCheckCTA(scrollingDown) {
+    const now = Date.now()
+    if (now - lastCTA > 100) {
+      checkCTAVisibility(scrollingDown)
+      lastCTA = now
+    }
+  }
+
+  let invertTimeout
+  function scroll() {
+    const currentY = window.scrollY
+    const diff = currentY - lastScrollY
+    scrollDelta += diff
+    lastScrollY = currentY
+
+    if (currentY <= 100) {
+      navContainer.classList.add("at-top")
+      {% if section.settings.invert_on_scroll %}
+        clearTimeout(invertTimeout)
+        invertTimeout = null
+        {% if section.settings.inverted_colours %}
+          navContainer.classList.add("ante-inverse")
+        {% else %}
+          navContainer.classList.remove("ante-inverse")
+        {% endif %}
+      {% endif %}
+    } else {
+      navContainer.classList.remove("at-top")
+      {% if section.settings.invert_on_scroll %}
+        if (!invertTimeout) {
+          invertTimeout = setTimeout(() => {
+            invertTimeout = null
+            {% if section.settings.inverted_colours %}
+              navContainer.classList.remove("ante-inverse")
+            {% else %}
+              navContainer.classList.add("ante-inverse")
+            {% endif %}
+          }, 250)
+        }
+      {% endif %}
+    }
+
+    if (Math.abs(scrollDelta) > 10) {
+      if (scrollDelta < 0) {
+        document.body.classList.remove("nav-scrolled")
+        navContainer.classList.remove("scrolled")
+        throttleCheckCTA(false)
+      } else {
+        if (currentY > 100) {
+          document.body.classList.add("nav-scrolled")
+          navContainer.classList.add("scrolled")
+        }
+        throttleCheckCTA(true)
+      }
+      menuButton.classList.remove("active")
+      menuDrop.classList.remove("open")
+      navContainer.classList.remove("mobile-drop-open")
+      scrollDelta = 0
+      clearTimeout(scrollTimeout)
+    } else {
+      clearTimeout(scrollTimeout)
+      scrollTimeout = setTimeout(() => {
+        scrollDelta = 0
+      }, 250)
+    }
+  }
+
+  function checkCTAVisibility(scrollingDown) {
+    if (!scrollingDown) {
+      {% if section.settings.use_cta %}
+        document.body.classList.remove("cta-header")
+        ctaContainer.classList.remove("active")
+      {% endif %}
+      return
+    }
+
+    {% if section.settings.use_cta %}
+      const buttonElements = Array.from(document.querySelectorAll("buy-button"))
+        .filter(e => !navContainer.contains(e) && !ctaContainer.contains(e))
+    {% else %}
+      const buttonElements = Array.from(document.querySelectorAll("buy-button"))
+        .filter(e => !navContainer.contains(e))
+    {% endif %}
+
+    const buffer = ({{ section.settings.cta_hide_buffer | default: 15 }} / 100) * window.innerHeight
+    const headerHeight = parseFloat(getComputedStyle(document.body).getPropertyValue("--ante-header-height"))
+
+    const isButtonVisible = buttonElements.some(el => {
+      const rect = el.getBoundingClientRect()
+      return rect.width > 0 &&
+            rect.height > 0 &&
+            rect.bottom > headerHeight + buffer &&
+            rect.top < window.innerHeight - buffer &&
+            rect.right > 0 &&
+            rect.left < window.innerWidth
+    })
+
+    const isHideSelectorVisible = selectors.some(selector => {
+      const elements = document.querySelectorAll(selector)
+      return Array.from(elements).some(el => {
+        const rect = el.getBoundingClientRect()
+        return rect.width > 0 &&
+              rect.height > 0 &&
+              rect.bottom > headerHeight + buffer &&
+              rect.top < window.innerHeight - buffer &&
+              rect.right > 0 &&
+              rect.left < window.innerWidth
+      })
+    })
+
+    let isFooterVisible = false
+    const footer = document.getElementById("ante-footer")
+    if (footer && footer.parentElement && footer.parentElement.previousElementSibling) {
+      const prev = footer.parentElement.previousElementSibling
+      const rect = prev.getBoundingClientRect()
+      if (rect.bottom <= window.innerHeight - buffer) {
+        isFooterVisible = true
+      }
+    }
+
+    const shouldShowCTA = !isButtonVisible && !isHideSelectorVisible && !isFooterVisible
+
+    {% if section.settings.use_cta %}
+      document.body.classList.toggle("cta-header", shouldShowCTA)
+      ctaContainer.classList.toggle("active", shouldShowCTA)
+    {% endif %}
+  }
+
+  window.addEventListener("scroll", scroll)
+  scroll()
+
+  window.addEventListener("resize", () => {
+    checkCTAVisibility()
+    if (getComputedStyle(menuDrop).display === "none") {
+      menuDrop.classList.remove("open")
+      menuButton.classList.remove("active")
+      navContainer.classList.remove("mobile-drop-open")
+    }
+  })
+
+  checkCTAVisibility()
+
+  menuButton.addEventListener("click", e => {
+    menuButton.classList.toggle("active")
+    menuDrop.classList.toggle("open")
+    navContainer.classList.toggle("mobile-drop-open")
+  })
+
+  menuDrop.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+    menuButton.classList.remove("active")
+    menuDrop.classList.remove("open")
+    navContainer.classList.remove("mobile-drop-open")
+  }))
+  
+  document.addEventListener("click", e => {
+    if (!container.contains(e.target)) {
+      menuButton.classList.remove("active")
+      menuDrop.classList.remove("open")
+      navContainer.classList.remove("mobile-drop-open")
+    }
+  })
+
+  {% if section.settings.enable_cart_button %}
+    const cartCount = document.querySelector("#ante-lander-nav .lander-nav-cart-count")
+
+    setInterval(async () => {
+      cartCount.textContent = await fetch("/cart.js").then(e => e.json()).then(e => e.item_count)
+      if (cartCount.textContent === "0") {
+        cartCount.hidden = true
+      } else {
+        cartCount.hidden = false
+      }
+    }, 3000)
+  {% endif %}
+</script>
+            
+{% schema %}
+  {
+    "name": "Nav Bar [UTA]",
+    "presets": [
+      {
+        "name": "Nav Bar [UTA]"
+      }
+    ],
+    "settings": [
+      {
+        "type": "select",
+        "id": "nav_style",
+        "label": "Nav Style",
+        "options": [
+          {
+            "value": "bar",
+            "label": "Bar"
+          },
+          {
+            "value": "bar_floating_cta",
+            "label": "Bar (Floating CTA)"
+          },
+          {
+            "value": "floating",
+            "label": "Floating"
+          },
+          {
+            "value": "floating_separate_logo",
+            "label": "Floating (Separate Logo)"
+          }
+        ],
+        "default": "bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "inverted_colours",
+        "label": "Inverted Colours",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "invert_on_scroll",
+        "label": "Invert Colours On Scroll",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "nav_contrast_style",
+        "label": "Nav Contrast Style",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "solid_border",
+            "label": "Solid Border"
+          },
+          {
+            "value": "drop_shadow",
+            "label": "Drop Shadow"
+          },
+          {
+            "value": "drop_shadow_weak",
+            "label": "Drop Shadow (Weak)"
+          }
+        ],
+        "default": "solid_border",
+        "info": "The contrast style is a way for the nav bar to stop itself blending in with the rest of the page when you are scrolling down."
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_inverse",
+        "label": "Logo (Inverse)",
+        "info": "Used if the nav bar is using inverted colours"
+      },
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_cart_button",
+        "label": "Enable Cart Button",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_account_button",
+        "label": "Enable Account Button",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Floating (Separate Logo) Settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "floating_logo",
+        "label": "Floating Logo"
+      },
+      {
+        "type": "header",
+        "content": "CTA Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_cta",
+        "label": "Use CTA",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "cta_title",
+        "label": "CTA Title",
+        "default": "CTA Title",
+        "placeholder": "CTA Title"
+      },
+      {
+        "type": "text",
+        "id": "hide_elements",
+        "label": "Hide When Elements Visible",
+        "placeholder": "#buy-box",
+        "default": "#buy-box",
+        "info": "Hide the CTA when the following elements are visible. Use CSS selectors. You can find section IDs using the browser dev tools. Comma separated."
+      },
+      {
+        "type": "number",
+        "id": "cta_hide_buffer",
+        "label": "CTA Hide Buffer",
+        "default": 15,
+        "info": "In percenage of the screen height, how far are elements allowed to get on the screen before they trigger the CTA to get hidden"
+      },
+      {"type":"header","content":"Section Settings"},{"type": "checkbox","id": "section_visible","label":"Section Visible","default":true,"info": "Turning this off hides the section but doesn't remove it from the page."}
+    ],
+    "blocks": [
+      {
+        "name": "Menu Link",
+        "type": "menu_link",
+        "settings": [
+          {
+            "type": "text",
+            "id": "menu_link_text",
+            "label": "Menu Link Text",
+            "default": "Menu Link Text",
+            "placeholder": "Menu Link Text"
+          },
+          {
+            "type": "url",
+            "id": "menu_link_url",
+            "label": "Menu Link URL",
+            "info": "Use \"#section-id\" to link to a section from the current page. Each [UTA] section has a \"Custom ID\" you can customise"
+          },
+          {
+            "type": "checkbox",
+            "id": "open_in_new_tab",
+            "label": "Open In New Tab",
+            "default": false
+          }
+        ]
+      },
+      {
+        "name": "CTA Fact",
+        "type": "cta_fact",
+        "settings": [
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text",
+            "default": "Text",
+            "placeholder": "Text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,110 @@
+html { scroll-behavior: smooth; }
+
+.header-wrapper, .footer, .utility-bar { z-index: 99; }
+
+.product__title>* { font-size: 32px; margin-top:10px !important;}
+button.product-form__submit {color:#fff; font-weight: 700;}
+.header__menu-item span { font-weight: 700;}
+.menu-drawer__menu-item.link { font-weight:700 !important;}
+
+.rich-text__heading { 
+  font-family: 'brandon', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 36px !important;
+}
+
+.rich-text__text {margin-top: 5px !important;}
+
+.product__info-container>*+* { margin: 1rem 0 !important; }
+.jdgm-carousel-wrapper { padding: 0 !important;}
+.jdgm-form-wrapper { font-family: 'gotham'; sans-serif;}
+
+.jdgm-carousel-item__review-title {
+  font-size:18px !important;
+  line-height:1.2 !important;
+  margin-top: 10px !important;
+}
+
+.jdgm-carousel-item__reviewer-name {
+  font-family: 'gotham', sans-serif !important;
+}
+
+.jdgm-carousel-item__review-body>p { 
+  font-family: 'gotham', sans-serif !important;
+  font-size: 13px !important;
+  margin-top:5px !important; 
+  padding-bottom:10px !important;
+}
+
+.jdgm-rev-widg__title {
+  font-family: 'brandon', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 36px !important;
+}
+
+a.jdgm-write-rev-link {
+  font-family: 'gotham', sans-serif;
+  text-transform: uppercase;
+}
+
+.jdgm-widget:not(.jdgm-review-widget--small,.jdgm-review-widget--medium) .jdgm-write-rev-link {
+  background-color: #fb5a2e;
+  border:none;
+  border-radius:100px;
+}
+
+.rating-star { --color-rating-star: darkorange !important; }
+
+@media (max-width: 480px) {
+  .jdgm-rev-widg__title { font-size: 30px !important; }
+  .rich-text__heading { font-size: 30px !important;}
+}
+
+/* Header */
+.header_link,
+.header_linkheader__active-menu-item
+{
+  font-size: 1.2rem;
+  color: rgb(54, 83, 77);
+}
+
+/* Common */
+a {
+  color: rgb(var(--color-common-link));
+}
+
+a:hover {
+  color: rgb(var(--color-hover-common-link));
+}
+
+.link--text,
+.link--text:visited,
+.link--text:active {
+  color: rgb(var(--color-foreground));
+}
+
+.link--text:hover {
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+h1.article-template__title { font-family: 'gotham', sans-serif; font-weight: 600; line-height:1.1; font-size:34px;}
+.article-template__content h2 { font-size: 30px; }
+.article-template__content p { font-family: 'gotham', sans-serif; line-height: 1.5;}
+
+#bloggy--article { max-width: 800px; margin:0 auto;}
+#bloggy--article h2 { font-size:30px; margin-bottom:20px !important;}
+#bloggy--article h3 { font-size:24px; margin-bottom:15px !important;}
+
+.bloggle--blog-item-img {height:370px !important;}
+
+#bloggle_sideBar { padding:15px !important; font-family: 'Gotham_SSm';}
+
+@media only screen and (max-width: 768px) {
+  #article-header h1 { font-size: 26px;}
+  #bloggy--article h2 { font-size:22px;}
+  #bloggy--article h3 { font-size:18px;}
+  .bloggle--blog-item-img {height:220px !important;}
+}
+.product-media-modal__dialog { color: transparent !important; }

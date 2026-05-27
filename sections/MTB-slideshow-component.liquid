@@ -1,0 +1,255 @@
+{{ 'section-MTB-slideshow.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'jquery-3.6.0.min.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'slick.min.js' | asset_url }}" defer="defer"></script>
+
+<link rel="stylesheet" href="{{ 'slick.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'slick-theme.css' | asset_url }}">
+
+<style>
+  .slideshow-container {
+      padding-top: {{ section.settings.component_mobile_pt }}px;
+      padding-bottom: {{ section.settings.component_mobile_pb }}px;
+    }
+
+    @media screen and (min-width: 641px)  and (max-width: 989px) {
+       .slideshow-container {
+         padding-top: {{ section.settings.component_tablet_pt }}px;
+        padding-bottom: {{ section.settings.component_tablet_pb }}px;
+       }
+     }
+
+     @media screen and (min-width: 989px) {
+       .slideshow-container {
+         padding-top: {{ section.settings.component_desktop_pt }}px;
+         padding-bottom: {{ section.settings.component_desktop_pb }}px;
+       }
+     }
+</style>
+
+<section class="slideshow-container page-width">
+  <div class="slideshow-container__buttons-wrap">
+    <div class="slideshow-container_slider-wrap">
+      {% for block in section.blocks %}
+        {%- if block.settings.image != blank -%}
+          {{
+            block.settings.image
+            | image_url: width: '500'
+            | image_tag: loading: 'lazy', widths: '500', class: 'lazyload slideshow-container_slider-img'
+          }}
+        {%- endif -%}
+      {% endfor %}
+    </div>
+    <button class="tablet-desktop arrow slideshow-arrow prev" type="button">
+      {{- 'icon-chevron-left.svg' | inline_asset_content -}}
+    </button>
+    <button class="tablet-desktop arrow slideshow-arrow next" type="button">
+      {{- 'icon-chevron-right.svg' | inline_asset_content -}}
+    </button>
+  </div>
+  <div class="dots"></div>
+</section>
+
+<script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', function(){
+
+    const $slider = $('.slideshow-container_slider-wrap');
+
+    $slider.slick({
+      slidesToShow: {{ section.settings.slides_to_show_desktop | default: 6 }},
+      slidesToScroll: 1,
+            autoplay: {{ section.settings.auto_rotate | default: false }},
+            autoplaySpeed: {{ section.settings.change_slides_speed | default: 5 }} * 1000,
+            dots: true,
+            appendDots: $('.dots'),
+            infinite: true,
+            prevArrow: '.slideshow-arrow.prev',
+            nextArrow: '.slideshow-arrow.next',
+      responsive: [
+        {
+          breakpoint: 989,
+          settings: {
+            slidesToShow: {{ section.settings.slides_to_show_tablet | default: 6 }},
+            slidesToScroll: 1,
+            autoplay: {{ section.settings.auto_rotate | default: false }},
+            autoplaySpeed: {{ section.settings.change_slides_speed | default: 5 }} * 1000,
+            dots: true,
+            appendDots: $('.dots'),
+            infinite: true,
+            prevArrow: '.slideshow-arrow.prev',
+            nextArrow: '.slideshow-arrow.next',
+          }
+        },
+        {
+          breakpoint: 641,
+          settings: {
+            arrows: false,
+            slidesToShow: {{ section.settings.slides_to_show_mobile | default: 6 }},
+            slidesToScroll: 1,
+            autoplay: {{ section.settings.auto_rotate | default: false }},
+            autoplaySpeed: {{ section.settings.change_slides_speed | default: 5 }} * 1000,
+            dots: true,
+            appendDots: $('.dots'),
+            infinite: true,
+          }
+        }
+      ]
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "MTB Slideshow",
+  "tag": "section",
+  "class": "section",
+  "limit": 1,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "auto_rotate",
+      "label": "Auto-rotate slides",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "change_slides_speed",
+      "min": 3,
+      "max": 9,
+      "step": 2,
+      "unit": "s",
+      "label": "Change slides every",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "slides_to_show_mobile",
+      "label": "Slides to show on Mobile",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pt",
+      "label": "Component mobile padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pb",
+      "label": "Component mobile padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+
+    {
+      "type": "header",
+      "content": "Tablet Settings"
+    },
+    {
+      "type": "range",
+      "id": "slides_to_show_tablet",
+      "label": "Slides to show on Tablet",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pt",
+      "label": "Component tablet padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pb",
+      "label": "Component tablet padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "slides_to_show_desktop",
+      "label": "Slides to show on Desktop",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pt",
+      "label": "Component desktop padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pb",
+      "label": "Component desktop padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTB Slideshow",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

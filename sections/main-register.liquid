@@ -1,0 +1,352 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .customer-section {
+      background-color: {{ section.settings.bg_color }};
+      border-top: 3px solid {{ section.settings.border_top_color }};
+      padding-top: {{ section.settings.component_mobile_pt }}px;
+      padding-bottom: {{ section.settings.component_mobile_pb }}px;
+    }
+
+  .customer-section__title {
+    color: {{ section.settings.header_color }};
+  }
+
+  .customer-section_input-label {
+    color: {{ section.settings.labels_color }};
+  }
+
+  .customer-section .field .customer-section__input {
+    background-color: {{ section.settings.input_bg }};
+    border-color: {{ section.settings.input_border }};
+  }
+
+  .customer-section .field .customer-section__input:focus {
+    box-shadow: 0 0 0 .2rem #eee9ce;
+  }
+
+    @media screen and (min-width: 641px) and (max-width: 989px) {
+      .customer-section {
+        padding-top: {{section.settings.component_tablet_pt}}px;
+        padding-bottom: {{section.settings.component_tablet_pb}}px;
+      }
+    }
+
+    @media screen and (min-width: 990px) {
+      .customer-section {
+        padding-top: {{section.settings.component_desktop_pt}}px;
+        padding-bottom: {{section.settings.component_desktop_pb}}px;
+      }
+    }
+  }
+</style>
+
+<div class="customer register customer-section customer-section">
+  <h5 class="customer-section__title" id="login" tabindex="-1">
+    {{ section.settings.header }}
+  </h5>
+
+  <div class="social-login-buttons">
+    <a
+      class="social-button google-button header_font"
+      href="https://accounts.google.com/o/oauth2/auth?response_type=code&amp;redirect_uri=https%3A%2F%2Ftha659-8b.myshopify.com%2Faccount%2F&amp;client_id={{ google_client_id }}&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&amp;access_type=offline&amp;approval_prompt=auto"
+    >
+      <span class="svg-wrapper">{{ 'icon-google.svg' | inline_asset_content }}</span> GOOGLE
+    </a>
+
+    <a
+      class="social-button facebook-button header_font"
+      href="https://www.facebook.com/v9.0/dialog/oauth?client_id={{ google_client_id }}&amp;redirect_uri=https%3A%2F%2Fshopkarls.com%2Fsocialconnect%2Ffacebook%2Fconnect%2F&amp;state=74b3b7f20d5de335bb0d1c44401b6061&amp;scope=public_profile%2Cemail"
+    >
+      <span class="svg-wrapper">{{ 'icon-facebook-f.svg' | inline_asset_content }}</span> FACEBOOK
+    </a>
+  </div>
+
+  {%- form 'create_customer', novalidate: 'novalidate' -%}
+    {%- if form.errors -%}
+      <h2 class="form__message" tabindex="-1" autofocus>
+        <span class="svg-wrapper">
+          {{- 'icon-error.svg' | inline_asset_content -}}
+        </span>
+        {{ 'templates.contact.form.error_heading' | t }}
+      </h2>
+      <ul>
+        {%- for field in form.errors -%}
+          <li>
+            {%- if field == 'form' -%}
+              {{ form.errors.messages[field] }}
+            {%- else -%}
+              <a href="#RegisterForm-{{ field }}">
+                {{ form.errors.translated_fields[field] | capitalize }}
+                {{ form.errors.messages[field] }}
+              </a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+    <div class="customer-section__form-row">
+      <div>
+        <div class="customer-section_input-label">
+          <p>{{ section.settings.first_name_label }}</p>
+        </div>
+        <div class="field">
+          <input
+            class="customer-section__input"
+            type="text"
+            name="customer[first_name]"
+            id="RegisterForm-FirstName"
+            {% if form.first_name %}
+              value="{{ form.first_name }}"
+            {% endif %}
+            autocomplete="given-name"
+            placeholder="{{ 'customer.register.first_name' | t }}"
+          >
+        </div>
+      </div>
+      <div>
+        <div class="customer-section_input-label">
+          <p>{{ section.settings.last_name_label }}</p>
+        </div>
+        <div class="field">
+          <input
+            class="customer-section__input"
+            type="text"
+            name="customer[last_name]"
+            id="RegisterForm-LastName"
+            {% if form.last_name %}
+              value="{{ form.last_name }}"
+            {% endif %}
+            autocomplete="family-name"
+            placeholder="{{ 'customer.register.last_name' | t }}"
+          >
+        </div>
+      </div>
+    </div>
+    <div class="customer-section_input-label">
+      <p>{{ section.settings.email_label }}</p>
+    </div>
+    <div class="field">
+      <input
+        class="customer-section__input"
+        type="email"
+        name="customer[email]"
+        id="RegisterForm-email"
+        {% if form.email %}
+          value="{{ form.email }}"
+        {% endif %}
+        spellcheck="false"
+        autocapitalize="off"
+        autocomplete="email"
+        aria-required="true"
+        {% if form.errors contains 'email' %}
+          aria-invalid="true"
+          aria-describedby="RegisterForm-email-error"
+        {% endif %}
+        placeholder="{{ 'customer.register.email' | t }}"
+      >
+    </div>
+    {%- if form.errors contains 'email' -%}
+      <span id="RegisterForm-email-error" class="form__message">
+        <span class="svg-wrapper">
+          {{- 'icon-error.svg' | inline_asset_content -}}
+        </span>
+        {{ form.errors.translated_fields.email | capitalize }}
+        {{ form.errors.messages.email }}.
+      </span>
+    {%- endif -%}
+    <div class="customer-section_input-label">
+      <p>{{ section.settings.password_label }}</p>
+    </div>
+    <div class="field">
+      <input
+        class="customer-section__input"
+        type="password"
+        name="customer[password]"
+        id="RegisterForm-password"
+        aria-required="true"
+        {% if form.errors contains 'password' %}
+          aria-invalid="true"
+          aria-describedby="RegisterForm-password-error"
+        {% endif %}
+        placeholder="{{ 'customer.register.password' | t }}"
+      >
+    </div>
+    {%- if form.errors contains 'password' -%}
+      <span id="RegisterForm-password-error" class="form__message">
+        <span class="svg-wrapper">
+          {{- 'icon-error.svg' | inline_asset_content -}}
+        </span>
+        {{ form.errors.translated_fields.password | capitalize }}
+        {{ form.errors.messages.password }}.
+      </span>
+    {%- endif -%}
+    <button type="hidden" class="customer-section__submit">
+      {{ section.settings.sign_up_text }}
+    </button>
+  {%- endform -%}
+
+  <div class="customer-section__btn-wrap">
+    <button class="mtb-button primary-button small_btn">{{ section.settings.sign_up_text }}</button>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-register.name",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_top_color",
+      "label": "Border Top Color",
+      "default": "#abb98d"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "header",
+      "label": "Header"
+    },
+    {
+      "type": "color",
+      "id": "header_color",
+      "label": "Header Color"
+    },
+    {
+      "type": "color",
+      "id": "labels_color",
+      "label": "Labels Color",
+      "default": "#3b3a3e"
+    },
+    {
+      "type": "color",
+      "id": "input_bg",
+      "label": "Input Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_border",
+      "label": "Input Border Color",
+      "default": "#eee9ce"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "first_name_label",
+      "label": "First Name Label",
+      "default": "First Name"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "last_name_label",
+      "label": "Last Name Label",
+      "default": "Last Name"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "email_label",
+      "label": "Email Label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "password_label",
+      "label": "Password Label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "sign_up_text",
+      "label": "Sign Up Button Text",
+      "default": "SIGN UP"
+    },
+    {
+      "type": "text",
+      "id": "google_client_id",
+      "label": "Google Client ID"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "social_sign_in_header",
+      "label": "Social Sign In Header",
+      "default": "SIGN IN WITH..."
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pt",
+      "label": "Component mobile padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pb",
+      "label": "Component mobile padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+
+    {
+      "type": "header",
+      "content": "Tablet Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pt",
+      "label": "Component tablet padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pb",
+      "label": "Component tablet padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pt",
+      "label": "Component desktop padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pb",
+      "label": "Component desktop padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,5 @@
+/*
+Generated time: April 23, 2026 21:36
+This file was created by the app developer. Feel free to contact the original developer with any questions. It was minified (compressed) by AVADA. AVADA do NOT own this script.
+*/
+.previous-boxes__box-img-wrap{display:inline-block;padding:1.5rem;border:1px solid;border-radius:4px;width:100%}.previous-boxes__box_wrap{position:relative}.previous-boxes__box-img{width:100%;height:auto;object-fit:cover;max-height:28rem}.previous-boxes__blocks-wrap{padding-top:2rem;display:grid;grid-template-columns:repeat(1,1fr);gap:1.5rem}.previous-boxes__box-text-wrap{position:absolute;bottom:3rem;left:3rem;text-shadow:#000 0 0 4px}.previous-boxes__header{margin:0;text-align:center}@media screen and (min-width:641px) and (max-width:989px){.previous-boxes__box-img{max-height:35rem}}@media screen and (min-width:990px){.previous-boxes__blocks-wrap{grid-template-columns:repeat(3,1fr)}.previous-boxes__box-img{min-height:30rem}}

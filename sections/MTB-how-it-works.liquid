@@ -1,0 +1,248 @@
+{{ 'section-MTB-how-it-works.css' | asset_url | stylesheet_tag }}
+
+<section class="how-it-works-component page-width">
+  <style>
+     .how-it-works-component {
+      padding-top: {{ section.settings.component_mobile_pt }}px;
+      padding-bottom: {{ section.settings.component_mobile_pb }}px;
+    }
+
+    .how-it-works__header {
+      color: {{ section.settings.header_color }};
+    }
+
+    .how-it-works__item-number-wrap {
+      background-color: {{ section.settings.item_number_bg_color }};
+
+    }
+
+    .how-it-works__item-number {
+      color: {{ section.settings.item_number_color }};
+    }
+
+    .how-it-works__item-img {
+      height: {{ section.settings.item_img_height }}px;
+    }
+
+     .how-it-works__item-text {
+      color: {{ section.settings.item_text_color }};
+    }
+
+    .how-it-works__item-header {
+      color: {{ section.settings.item_header_color }}
+    }
+
+    @media screen and (min-width: 641px) and (max-width: 989px) {
+      .how-it-works-component {
+        padding-top: {{ section.settings.component_tablet_pt }}px;
+        padding-bottom: {{ section.settings.component_tablet_pb }}px;
+      }
+    }
+
+    @media screen and (min-width: 990px) {
+     .how-it-works-component {
+        padding-top: {{ section.settings.component_desktop_pt }}px;
+        padding-bottom: {{ section.settings.component_desktop_pb }}px;
+      }
+    }
+  </style>
+
+  <div class="how-it-works__content">
+    <div class="how-it-works__header-wrap">
+      <h2 class="how-it-works__header">{{ section.settings.component_header }}</h2>
+    </div>
+
+    <div class="how-it-works__items-wrap">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'item' -%}
+            <div class="how-it-works__item_wrap">
+              {%- if block.settings.item_number != blank -%}
+                <div class="how-it-works__item-number-wrap">
+                  <p class="how-it-works__item-number header_font">{{ block.settings.item_number }}</p>
+                </div>
+              {%- endif -%}
+
+              <div class="how-it-works__item-img-wrap">
+                {%- if block.settings.item_image != blank -%}
+                  {{
+                    block.settings.item_image
+                    | image_url: width: '900'
+                    | image_tag: loading: 'lazy', widths: '900', class: 'how-it-works__item-img'
+                  }}
+                {%- endif -%}
+              </div>
+              <div class="how-it-works__item-text-wrap header_font">
+                {%- if block.settings.item_header != blank -%}
+                  <h5 class="how-it-works__item-header">{{ block.settings.item_header }}</h5>
+                {%- endif -%}
+                {%- if block.settings.item_text != blank -%}
+                  <p class="how-it-works__item-text">{{ block.settings.item_text }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MTB How It Works",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "component_header",
+      "label": "Component header"
+    },
+    {
+      "type": "color",
+      "id": "header_color",
+      "label": "Header color",
+      "default": "#00574f"
+    },
+    {
+      "type": "color",
+      "id": "item_number_color",
+      "label": "Number Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "item_number_bg_color",
+      "label": "Number Background Color",
+      "default": "#dd5739"
+    },
+    {
+      "type": "color",
+      "id": "item_header_color",
+      "label": "Item Header Color",
+      "default": "#33534b"
+    },
+    {
+      "type": "color",
+      "id": "item_text_color",
+      "label": "Item Text Color",
+      "default": "#212529"
+    },
+    {
+      "type": "range",
+      "id": "item_img_height",
+      "label": "Item Image Height",
+      "min": 60,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 120
+    },
+
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pt",
+      "label": "Component mobile padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pb",
+      "label": "Component mobile padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Tablet Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pt",
+      "label": "Component tablet padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pb",
+      "label": "Component tablet padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pt",
+      "label": "Component desktop padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pb",
+      "label": "Component desktop padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "limit": 1,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "item_number",
+          "label": "Number"
+        },
+        {
+          "type": "image_picker",
+          "id": "item_image",
+          "label": "Point image"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "item_header",
+          "label": "Header"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "item_text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MTB How It Works"
+    }
+  ]
+}
+{% endschema %}

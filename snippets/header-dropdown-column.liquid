@@ -1,0 +1,258 @@
+{% comment %}
+  Renders a single column in the dropdown menu.
+
+  Usage:
+  {% render 'header-dropdown-column',
+    column_link: block.settings.column_1_link,
+    column_image: block.settings.column_1_image,
+    column_title: block.settings.column_1_title,
+    column_subtitle: block.settings.column_1_subtitle,
+    column_promo_text: block.settings.column_1_promo_text,
+    column_menu: block.settings.menu,
+    column_text_align: block.settings.column_text_align,
+    column_promo_text_color: block.settings.column_promo_text_color,
+    nav_names_padding: block.settings.nav_names_padding,
+    submenu_uppercase: submenu_uppercase,
+    submenu_bold: submenu_bold,
+    show_active: show_active,
+    is_mobile: false,
+    section: section,
+    column_width: block.settings.column_width,
+    column_flag_text: block.settings.column_1_flag_text,
+    column_flag_text_color: block.settings.column_1_flag_text_color,
+    column_flag_bg_color: block.settings.column_1_flag_bg_color
+  %}
+{% endcomment %}
+
+{%- assign subtitle_class = 'header__submenu-column-subtitle' -%}
+{%- assign promo_class = 'header__submenu-column-promo' -%}
+{%- assign image_class = 'header__submenu-column-image' -%}
+{%- if is_mobile -%}
+  {%- assign subtitle_class = 'header__submenu-mobile-column-subtitle' -%}
+  {%- assign promo_class = 'header__submenu-mobile-column-promo' -%}
+  {%- assign image_class = 'header__submenu-mobile-column-image' -%}
+{%- endif -%}
+
+{%- liquid
+  assign padding_names = nav_names_padding | split: ','
+  assign padding_names_array = ''
+  for name in padding_names
+    assign trimmed_name = name | strip
+    if padding_names_array == ''
+      assign padding_names_array = trimmed_name
+    else
+      assign padding_names_array = padding_names_array | append: '|' | append: trimmed_name
+    endif
+  endfor
+-%}
+
+{%- liquid
+  if column_width == blank
+    assign column_width = 24
+  endif
+  assign column_width_value = column_width | append: 'rem'
+-%}
+<div
+  class="header__submenu-column"
+  style="min-width: {{ column_width_value }}; max-width: {{ column_width_value }};"
+>
+  <ul class="list-menu list-menu--disclosure" role="list">
+    {%- unless is_mobile -%}
+      {%- if column_link != blank -%}
+        <li>
+          <a
+            href="{{ column_link }}"
+            class="header__submenu-column-link"
+            style="display: block; text-decoration: none;"
+          >
+            {%- liquid
+              assign text_align = column_text_align | default: 'left'
+              if text_align == 'center'
+                assign justify_style = 'justify-content: center;'
+              elsif text_align == 'right'
+                assign justify_style = 'justify-content: flex-end;'
+              else
+                assign justify_style = 'justify-content: flex-start;'
+              endif
+              assign text_align_style = 'text-align: ' | append: text_align | append: ';'
+              assign align_style = justify_style | append: ' ' | append: text_align_style
+            -%}
+            {%- if column_image != blank -%}
+              <div
+                class="{{ image_class }}"
+                style="{{ align_style }}"
+              >
+                {%- if column_flag_text != blank -%}
+                  <div
+                    class="header__submenu-column-flag"
+                    style="color: {{ column_flag_text_color | default: '#ffffff' }}; background-color: {{ column_flag_bg_color | default: '#d14424' }};"
+                  >
+                    {{ column_flag_text }}
+                  </div>
+                {%- endif -%}
+                {{
+                  column_image
+                  | image_url: width: 300
+                  | image_tag: loading: 'lazy', widths: '300', class: 'header__submenu-image'
+                }}
+              </div>
+            {%- endif -%}
+            {%- if column_title != blank -%}
+              <div
+                class="header__menu-item list-menu__item header__submenu-column-title"
+                style="{{ align_style }}"
+              >
+                <span
+                  class="
+                    header_font header_link
+                    {%- if submenu_uppercase %} uppercase{% endif %}
+                    {%- if submenu_bold %} bold{% endif %}
+                  "
+                >
+                  {{ column_title | strip_html | strip | escape }}
+                </span>
+              </div>
+            {%- endif -%}
+            {%- if column_subtitle != blank -%}
+              <div
+                class="header__menu-item list-menu__item {{ subtitle_class }}"
+                style="{{ align_style }}"
+              >
+                {{ column_subtitle }}
+              </div>
+            {%- endif -%}
+            {%- if column_promo_text != blank -%}
+              <div
+                class="header__menu-item list-menu__item {{ promo_class }}{% if is_mobile %} header_font{% endif %}"
+                style="color: {{ column_promo_text_color | default: '#d14424' }}; {{ align_style }}"
+              >
+                {{ column_promo_text }}
+              </div>
+            {%- endif -%}
+          </a>
+        </li>
+      {%- else -%}
+        {%- liquid
+          assign text_align_non_link = column_text_align | default: 'left'
+          if text_align_non_link == 'center'
+            assign justify_style_non_link = 'justify-content: center;'
+          elsif text_align_non_link == 'right'
+            assign justify_style_non_link = 'justify-content: flex-end;'
+          else
+            assign justify_style_non_link = 'justify-content: flex-start;'
+          endif
+          assign text_align_style_non_link = 'text-align: ' | append: text_align_non_link | append: ';'
+          assign align_style_non_link = justify_style_non_link | append: ' ' | append: text_align_style_non_link
+        -%}
+        {%- if column_image != blank -%}
+          <li
+            class="{{ image_class }}"
+            style="{{ align_style_non_link }}"
+          >
+            {%- if column_flag_text != blank -%}
+              <div
+                class="header__submenu-column-flag"
+                style="color: {{ column_flag_text_color | default: '#ffffff' }}; background-color: {{ column_flag_bg_color | default: '#d14424' }};"
+              >
+                {{ column_flag_text }}
+              </div>
+            {%- endif -%}
+            {{
+              column_image
+              | image_url: width: 300
+              | image_tag: loading: 'lazy', widths: '300', class: 'header__submenu-image'
+            }}
+          </li>
+        {%- endif -%}
+        {%- if column_title != blank -%}
+          <li>
+            <div
+              class="header__menu-item list-menu__item header__submenu-column-title"
+              style="{{ align_style_non_link }}"
+            >
+              <span
+                class="
+                  header_font header_link
+                  {%- if submenu_uppercase %} uppercase{% endif %}
+                  {%- if submenu_bold %} bold{% endif %}
+                "
+              >
+                {{ column_title | strip_html | strip | escape }}
+              </span>
+            </div>
+          </li>
+        {%- endif -%}
+        {%- if column_subtitle != blank -%}
+          <li>
+            <div
+              class="header__menu-item list-menu__item {{ subtitle_class }}"
+              style="{{ align_style_non_link }}"
+            >
+              {{ column_subtitle }}
+            </div>
+          </li>
+        {%- endif -%}
+        {%- if column_promo_text != blank -%}
+          <li>
+            <div
+              class="header__menu-item list-menu__item {{ promo_class }}{% if is_mobile %} header_font{% endif %}"
+              style="color: {{ column_promo_text_color | default: '#d14424' }}; {{ align_style_non_link }}"
+            >
+              {{ column_promo_text }}
+            </div>
+          </li>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endunless -%}
+    {%- if column_menu != blank -%}
+      {%- for submenu_link in column_menu.links -%}
+        {%- liquid
+          assign has_extra_padding = false
+          if nav_names_padding != blank
+            for name in padding_names
+              assign trimmed_name = name | strip
+              if submenu_link.title == trimmed_name
+                assign has_extra_padding = true
+                break
+              endif
+            endfor
+          endif
+        -%}
+        <li>
+          <a
+            href="{{ submenu_link.url }}"
+            class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if show_active and submenu_link.current %} list-menu__item--active{% endif %}{% if has_extra_padding %} header__menu-item--extra-margin{% endif %}"
+            {% if submenu_link.current %}
+              aria-current="page"
+            {% endif %}
+          >
+            {%- if is_mobile and section != blank -%}
+              {% assign target_title = submenu_link.title | downcase %}
+              {% for nav_block in section.blocks %}
+                {% if nav_block.type == 'nav_img' %}
+                  {% assign block_name = nav_block.settings.nav_name | downcase %}
+                  {% if target_title == block_name and nav_block.settings.nav_image != blank %}
+                    {{
+                      nav_block.settings.nav_image
+                      | image_url: width: '60'
+                      | image_tag: loading: 'lazy', widths: '60', class: 'lazyload burger__img'
+                    }}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            {%- endif -%}
+            <span
+              class="
+                header_font header_link
+                {%- if submenu_uppercase %} uppercase{% endif %}
+                {%- if submenu_bold %} bold{% endif %}
+              "
+            >
+              {{ submenu_link.title | escape }}
+            </span>
+          </a>
+        </li>
+      {%- endfor -%}
+    {%- endif -%}
+  </ul>
+</div>

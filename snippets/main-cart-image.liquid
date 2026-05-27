@@ -1,0 +1,74 @@
+{% comment %}
+  Renders cart plroduct image
+
+  Usage:
+  {% render 'main-cart-image', item, regular, pro, elite, imgView %}
+{% endcomment %}
+
+<div class="cart-item__image-wrap">
+  {% if imgView == 'sku' %}
+  
+    {% assign img_sku_url = "https://tha659-8b.myshopify.com/cdn/shop/files/" | append: item.sku | append: ".jpg" %}
+    {% assign fallback_url = item.image | image_url: width: 300 %}
+    
+    <img
+      src="{{ img_sku_url }}"
+      onerror="this.onerror=null; this.src='{{ fallback_url }}';" 
+      loading="lazy"
+      width="300"
+      height="{{ 150 | divided_by: item.image.aspect_ratio | ceil }}"
+      class="lazyload cart-item-sku__img"
+      alt="{{  item.title }}"
+    >
+
+  {% elsif imgView == 'variant' %}
+    {% assign plan = item.title | split: '|' | first | strip %}
+    {% assign plan_downcase = plan | downcase %}
+  
+    {%- case plan_downcase -%}
+      {%- when 'regular' -%}
+        <div class="cart-item__image-variant-wrap">
+          {{
+            item.image
+            | image_url: width: '64'
+            | image_tag: loading: 'lazy', widths: '64', class: 'lazyload cart-item__img-variant'
+          }}
+        </div>
+        {{
+          regular
+          | image_url: width: '300'
+          | image_tag: loading: 'lazy', widths: '300', class: 'lazyload cart-item__img'
+        }}
+      {%- when 'pro' -%}
+        <div class="cart-item__image-variant-wrap">
+          {{
+            item.image
+            | image_url: width: '64'
+            | image_tag: loading: 'lazy', widths: '64', class: 'lazyload cart-item__img-variant'
+          }}
+        </div>
+        {{ pro | image_url: width: '300' | image_tag: loading: 'lazy', widths: '300', class: 'lazyload cart-item__img' }}
+      {%- when 'elite' -%}
+        <div class="cart-item__image-variant-wrap">
+          {{
+            item.image
+            | image_url: width: '64'
+            | image_tag: loading: 'lazy', widths: '64', class: 'lazyload cart-item__img-variant'
+          }}
+        </div>
+        {{
+          elite
+          | image_url: width: '300'
+          | image_tag: loading: 'lazy', widths: '300', class: 'lazyload cart-item__img'
+        }}
+      {%- else -%}
+        {{
+          item.image
+          | image_url: width: '300'
+          | image_tag: loading: 'lazy', widths: '300', class: 'lazyload cart-item__img'
+        }}
+    {%- endcase -%}
+  
+  {% endif %}
+</div>
+

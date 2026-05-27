@@ -1,0 +1,308 @@
+{{ 'section-MTB-Trustpilot.css' | asset_url | stylesheet_tag }}
+
+<section class="trustpilot-component trustpilot-component-{{ section.id }} page-width  {% if section.settings.is_mobile_only %} mobile{% endif %}">
+  <style>
+    .trustpilot-component-{{ section.id }} {
+      padding-top: {{ section.settings.component_mobile_pt }}px;
+      padding-bottom: {{ section.settings.component_mobile_pb }}px;
+    }
+
+    .trustpilot-component-{{ section.id }} .trustpilot-component__header-logo {
+      width: {{ section.settings.component_header_logo_mobile_width }}px;
+    }
+
+    .trustpilot-component-{{ section.id }} .trustpilot-component__header-img {
+      width: {{ section.settings.component_header_img_mobile_width }}px;
+    }
+
+    @media screen and (min-width: 641px)  and (max-width: 989px) {
+      .trustpilot-component-{{ section.id }} {
+        padding-top: {{ section.settings.component_tablet_pt }}px;
+        padding-bottom: {{ section.settings.component_tablet_pb }}px;
+      }
+
+      .trustpilot-component-{{ section.id }} .trustpilot-component__header-logo {
+        width: {{ section.settings.component_header_logo_tablet_width }}px;
+      }
+
+      .trustpilot-component-{{ section.id }} .trustpilot-component__header-img {
+        width: {{ section.settings.component_header_img_tablet_width }}px;
+      }
+    }
+
+    @media screen and (min-width: 989px) {
+      .trustpilot-component-{{ section.id }} {
+        padding-top: {{ section.settings.component_desktop_pt }}px;
+        padding-bottom: {{ section.settings.component_desktop_pb }}px;
+      }
+
+      .trustpilot-component-{{ section.id }} .trustpilot-component__header-logo {
+        width: {{ section.settings.component_header_logo_desktop_width }}px;
+      }
+
+      .trustpilot-component-{{ section.id }} .trustpilot-component__header-img {
+        width: {{ section.settings.component_header_img_desktop_width }}px;
+      }
+    }
+  </style>
+
+  <div class="trustpilot-component__header page-width">
+    <div class="trustpilot-component__header-images">
+      {%- if section.settings.header_logo != blank -%}
+        <div class="trustpilot-component__header-logo-wrap">
+          {{
+            section.settings.header_logo
+            | image_url: width: '2000'
+            | image_tag: loading: 'lazy', widths: '2000', class: 'lazyload trustpilot-component__header-logo'
+          }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.header_img != blank -%}
+        <div>
+          {{
+            section.settings.header_img
+            | image_url: width: '2000'
+            | image_tag: loading: 'lazy', widths: '2000', class: 'lazyload trustpilot-component__header-img'
+          }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.header_copy != blank -%}
+      <p class="trustpilot-component__header-copy">{{ section.settings.header_copy }}</p>
+    {%- endif -%}
+  </div>
+
+  {%- case section.settings.trustpilot_widgets -%}
+    {%- when 'trustpilot_micro_star' -%}
+      {%- render 'trustpilot-micro-star', theme_color: section.settings.theme_color -%}
+    {%- when 'trustpilot_slider' -%}
+      {%- render 'trustpilot-slider', theme_color: section.settings.theme_color -%}
+    {%- when 'trustpilot_grid' -%}
+      {%- render 'trustpilot-grid', theme_color: section.settings.theme_color -%}
+  {%- endcase -%}
+
+  {%- if section.settings.button_text != blank -%}
+    <div class="page-width trustpilot-component__btn-wrap">
+      <a class="middle_btn mtb-button primary-button header_font" href="{{ section.settings.button_url }}">
+        {{- section.settings.button_text -}}
+      </a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "MTB Trustpilot",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "header_img",
+      "label": "Header Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_logo",
+      "label": "Header Logo"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "header_copy",
+      "label": "Header Copy"
+    },
+    {
+      "type": "select",
+      "id": "trustpilot_widgets",
+      "label": "Trustpilot widget",
+      "options": [
+        {
+          "value": "trustpilot_micro_star",
+          "label": "Trustpilot Micro-star"
+        },
+        {
+          "value": "trustpilot_slider",
+          "label": "Trustpilot Slider"
+        },
+        {
+          "value": "trustpilot_grid",
+          "label": "Trustpilot Grid"
+        }
+      ],
+      "default": "trustpilot_micro_star"
+    },
+    {
+      "type": "select",
+      "id": "theme_color",
+      "label": "theme Color",
+      "options": [
+        {
+          "value": "dark",
+          "label": "Dark"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        }
+      ],
+      "default": "dark"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "button_text",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button Link"
+    },
+
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_mobile_only",
+      "label": "Show on mobile only",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "component_header_img_mobile_width",
+      "label": "Component Header Image mobile width",
+      "min": 200,
+      "max": 400,
+      "step": 2,
+      "unit": "px",
+      "default": 288
+    },
+    {
+      "type": "range",
+      "id": "component_header_logo_mobile_width",
+      "label": "Component Header Logo mobile width",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pt",
+      "label": "Component mobile padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "component_mobile_pb",
+      "label": "Component mobile padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+
+    {
+      "type": "header",
+      "content": "Tablet Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_header_img_tablet_width",
+      "label": "Component Header Image Tablet mobile width",
+      "min": 400,
+      "max": 600,
+      "step": 2,
+      "unit": "px",
+      "default": 520
+    },
+    {
+      "type": "range",
+      "id": "component_header_logo_tablet_width",
+      "label": "Component Header Logo Tablet mobile width",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pt",
+      "label": "Component tablet padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "component_tablet_pb",
+      "label": "Component tablet padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "component_header_img_desktop_width",
+      "label": "Component Header Image Desktop mobile width",
+      "min": 600,
+      "max": 800,
+      "step": 2,
+      "unit": "px",
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "component_header_logo_desktop_width",
+      "label": "Component Header Logo Desktop mobile width",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pt",
+      "label": "Component desktop padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "component_desktop_pb",
+      "label": "Component desktop padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "MTB Trustpilot"
+    }
+  ]
+}
+{% endschema %}
