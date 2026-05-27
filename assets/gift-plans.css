@@ -1,0 +1,684 @@
+/* ==========================================================================
+   Gift Plans — Estilos base
+   Prefijo BEM: .gift-plans__
+   Mobile-first (base: 375px, breakpoint principal: 768px)
+   ========================================================================== */
+
+/* ─── Utilidades ─────────────────────────────────────────────────────────── */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ─── Hero ───────────────────────────────────────────────────────────────── */
+
+.gift-plans__hero {
+  background-color: var(--gp-hero-bg-color, #31554b);
+  background-image: var(--gp-hero-bg-image, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--gp-hero-text-color, #ffffff);
+  padding-top: var(--gp-hero-pad-top, 48px);
+  padding-bottom: var(--gp-hero-pad-bottom, 48px);
+}
+
+.gift-plans__hero-content {
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.gift-plans__hero-eyebrow {
+  display: block;
+  font-family: var(--font, GothamSSm, helvetica);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 12px;
+  color: var(--gp-hero-text-color, #ffffff);
+}
+
+.gift-plans__hero-title {
+  font-family: var(--font-heading, "Brandon Grotesque", helvetica);
+  font-size: 48px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1;
+  margin: 0 0 16px;
+  color: var(--gp-hero-text-color, #ffffff);
+}
+
+.gift-plans__hero-subtitle {
+  font-family: var(--font, GothamSSm, helvetica);
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 540px;
+  margin: 0 auto 24px;
+  opacity: 0.9;
+  color: var(--gp-hero-text-color, #ffffff);
+}
+
+.gift-plans__hero-cta {
+  display: inline-block;
+  padding: 14px 32px;
+  background-color: var(--color-button, #1a1a1a);
+  color: var(--color-button-text, #fff);
+  font-family: var(--font, GothamSSm, helvetica);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.gift-plans__hero-cta:hover {
+  opacity: 0.85;
+}
+
+/* Promo banner */
+.gift-plans__hero-promo {
+  background-color: var(--gp-hero-promo-bg, #dd5739);
+  color: var(--gp-hero-promo-color, #ffffff);
+  padding: 10px 20px;
+  margin-top: 32px;
+}
+
+.gift-plans__hero-promo-text {
+  font-family: var(--font, GothamSSm, helvetica);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .gift-plans__hero-title {
+    font-size: 72px;
+  }
+
+  .gift-plans__hero-subtitle {
+    font-size: 18px;
+  }
+
+  .gift-plans__hero-promo {
+    margin-top: 48px;
+  }
+}
+
+/* ─── Configurator — contenedor ──────────────────────────────────────────── */
+
+.gift-plans__configurator {
+  background-color: var(--color-background, #fff);
+  padding: 40px 0 60px;
+}
+
+.gift-plans__configurator-inner {
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* ─── Steps ──────────────────────────────────────────────────────────────── */
+
+.gift-plans__step {
+  position: relative;
+  margin-bottom: 0;
+  padding: 32px 0 32px 64px; /* 64px = 44px círculo + 20px gap */
+  border-bottom: none;
+  transition: opacity 0.25s;
+}
+
+/* Conector vertical entre steps — centrado bajo el círculo del número */
+.gift-plans__step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 22px; /* centro del círculo de 44px */
+  top: 76px;  /* debajo del círculo */
+  bottom: 0;
+  width: 2px;
+  background-color: var(--color-border, #e0e0e0);
+  transition: background-color 0.3s;
+}
+
+.gift-plans__step.is-completed::before {
+  background-color: #31554b;
+}
+
+.gift-plans__step-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+/* Círculo posicionado absolute a la izquierda del step (fuera del padding) */
+.gift-plans__step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--color-text-default, #1a1a1a);
+  color: #fff;
+  font-family: var(--font-heading, "Brandon Grotesque", helvetica);
+  font-size: 22px;
+  font-weight: 800;
+  flex-shrink: 0;
+  transition: background-color 0.25s;
+  position: absolute;
+  left: -64px; /* compensa el padding-left del step */
+  top: 0;
+  overflow: hidden;
+}
+
+.gift-plans__step-title {
+  font-family: var(--font-heading, "Brandon Grotesque", helvetica);
+  font-size: 22px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-default, #1a1a1a);
+  margin: 0;
+  transition: color 0.25s;
+}
+
+/* Estado: bloqueado */
+.gift-plans__step.is-locked {
+  opacity: 0.4;
+  pointer-events: none;
+  user-select: none;
+}
+
+.gift-plans__step.is-locked .gift-plans__step-number {
+  background-color: var(--color-border, #ccc);
+}
+
+/* Estado: activo */
+.gift-plans__step.is-active .gift-plans__step-number {
+  background-color: #dd5739;
+}
+
+/* Estado: completado */
+.gift-plans__step.is-completed .gift-plans__step-number {
+  background-color: #31554b;
+  font-size: 20px;
+}
+
+.gift-plans__step.is-completed .gift-plans__step-number::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #31554b;
+  font-size: 20px;
+}
+
+.gift-plans__step.is-completed .gift-plans__step-title {
+  color: var(--color-text-alt, #777);
+}
+
+/* Scroll suave al step activo */
+.gift-plans__step.is-active {
+  scroll-margin-top: 80px;
+}
+
+/* ─── Box cards (Step 1) ──────────────────────────────────────────────────── */
+
+.gift-plans__box-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.gift-plans__box-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: var(--color-surface-100, #fafafa);
+  border: 2px solid var(--color-border, #e0e0e0);
+  border-radius: var(--radius-medium, 10px);
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  user-select: none;
+}
+
+.gift-plans__box-card:hover {
+  border-color: var(--color-text-default, #1a1a1a);
+}
+
+.gift-plans__box-card.is-selected {
+  border-color: var(--color-text-default, #1a1a1a);
+  background-color: var(--color-background, #fff);
+  box-shadow: var(--elevated-shadow, 3px 3px 0 0 rgba(0,0,0,0.15));
+}
+
+/* Focus visible en el radio oculto */
+.gift-plans__box-radio:focus-visible + .gift-plans__box-badge,
+.gift-plans__box-card:focus-within {
+  outline: 2px solid var(--color-text-default, #1a1a1a);
+  outline-offset: 2px;
+}
+
+.gift-plans__box-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-text-default, #1a1a1a);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.gift-plans__box-image-wrap {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: var(--radius-small, 8px);
+  overflow: hidden;
+  background-color: var(--color-border, #e0e0e0);
+}
+
+.gift-plans__box-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gift-plans__box-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gift-plans__box-title {
+  font-family: var(--font-heading, "Brandon Grotesque", helvetica);
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-text-default, #1a1a1a);
+  margin: 0;
+}
+
+.gift-plans__box-detail {
+  font-family: var(--font, GothamSSm, helvetica);
+  font-size: 13px;
+  color: var(--color-text-alt, #555);
+}
+
+@media screen and (min-width: 768px) {
+  .gift-plans__box-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gift-plans__box-card {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .gift-plans__box-image-wrap {
+    width: 100%;
+    height: 160px;
+  }
+}
+
+/* ─── Duration options (Step 2) ───────────────────────────────────────────── */
+
+.gift-plans__duration-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gift-plans__duration-option {
+  cursor: pointer;
+  user-select: none;
+}
+
+.gift-plans__duration-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background-color: var(--color-surface-100, #fafafa);
+  border: 2px solid var(--color-border, #ddd);
+  border-radius: var(--radius-medium, 10px);
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.gift-plans__duration-option:hover .gift-plans__duration-card {
+  border-color: var(--color-text-default, #1a1a1a);
+}
+
+.gift-plans__duration-option.is-selected .gift-plans__duration-card {
+  background-color: var(--color-text-default, #1a1a1a);
+  border-color: var(--color-text-default, #1a1a1a);
+}
+
+/* Focus visible */
+.gift-plans__duration-radio:focus-visible ~ .gift-plans__duration-card,
+.gift-plans__duration-option:focus-within .gift-plans__duration-card {
+  outline: 2px solid var(--color-text-default, #1a1a1a);
+  outline-offset: 2px;
+}
+
+.gift-plans__duration-card-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.gift-plans__duration-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--color-text-default, #1a1a1a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.15s;
+}
+
+.gift-plans__duration-dot::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-text-default, #1a1a1a);
+  transform: scale(0);
+  transition: transform 0.15s;
+}
+
+.gift-plans__duration-option.is-selected .gift-plans__duration-dot {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.gift-plans__duration-option.is-selected .gift-plans__duration-dot::after {
+  transform: scale(1);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.gift-plans__duration-name {
+  font-family: var(--font, GothamSSm, helvetica);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-default, #1a1a1a);
+  transition: color 0.15s;
+}
+
+.gift-plans__duration-option.is-selected .gift-plans__duration-name {
+  color: #fff;
+}
+
+.gift-plans__duration-card-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gift-plans__duration-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background-color: #e8f3ff;
+  color: #0057a8;
+  border: 1px dashed #99c5f0;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.gift-plans__duration-option.is-selected .gift-plans__duration-tag {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.gift-plans__duration-price {
+  font-family: var(--font, GothamSSm, helvetica);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-default, #1a1a1a);
+  min-width: 56px;
+  text-align: right;
+  transition: color 0.15s;
+}
+
+.gift-plans__duration-option.is-selected .gift-plans__duration-price {
+  color: #fff;
+}
+
+/* ─── Formulario de destinatario (Step 3) ────────────────────────────────── */
+
+.gift-plans__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gift-plans__form-fieldset {
+  border: 1px solid var(--color-border, #e0e0e0);
+  border-radius: var(--radius-large, 16px);
+  padding: 24px;
+  margin: 0;
+  background-color: var(--color-background, #fff);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.gift-plans__form-legend {
+  font-family: var(--font-heading, "Brandon Grotesque", helvetica);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-default, #1a1a1a);
+  padding: 0 8px;
+  /* Legend flota sobre el borde superior del fieldset */
+  background-color: var(--color-background, #fff);
+}
+
+.gift-plans__form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.gift-plans__form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gift-plans__form-field--full {
+  grid-column: 1 / -1;
+}
+
+.gift-plans__form-label {
+  font-family: var(--font, GothamSSm, helvetica);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-default, #1a1a1a);
+}
+
+.gift-plans__form-label-optional {
+  font-weight: 400;
+  text-transform: none;
+  font-size: 12px;
+  color: var(--color-text-alt, #888);
+  letter-spacing: 0;
+}
+
+.gift-plans__form-question {
+  font-family: var(--font, GothamSSm, helvetica);
+  font-size: 15px;
+  color: var(--color-text-default, #1a1a1a);
+  margin: 0 0 12px;
+  font-style: italic;
+}
+
+/* Inputs base */
+.gift-plans__form-input {
+  all: unset;
+  width: 100%;
+  padding: 13px 16px;
+  background-color: var(--color-input-background, #f5f5f5);
+  color: var(--color-input-text, #1a1a1a);
+  border-radius: var(--radius-small, 8px);
+  border: 1px solid var(--color-border, #ddd);
+  font-size: 15px;
+  font-family: var(--font, GothamSSm, helvetica);
+  box-sizing: border-box;
+  transition: box-shadow 0.2s;
+  cursor: text;
+}
+
+.gift-plans__form-input:focus {
+  box-shadow: 0 0 0 2px var(--color-text-default, #1a1a1a);
+}
+
+.gift-plans__form-input--error {
+  box-shadow: 0 0 0 2px #e53e3e !important;
+}
+
+.gift-plans__form-input--date {
+  cursor: pointer;
+}
+
+/* Select */
+.gift-plans__form-select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23333' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  appearance: none;
+}
+
+/* Textarea */
+.gift-plans__form-textarea {
+  resize: vertical;
+  min-height: 100px;
+  cursor: text;
+}
+
+/* Mensajes de error */
+.gift-plans__form-error {
+  font-size: 12px;
+  color: #e53e3e;
+  min-height: 14px;
+  font-weight: 500;
+  font-family: var(--font, GothamSSm, helvetica);
+}
+
+/* Contador de caracteres */
+.gift-plans__form-char-count {
+  font-size: 12px;
+  color: var(--color-text-alt, #888);
+  text-align: right;
+  font-family: var(--font, GothamSSm, helvetica);
+}
+
+@media screen and (min-width: 768px) {
+  .gift-plans__form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ─── Submit ──────────────────────────────────────────────────────────────── */
+
+.gift-plans__submit-wrap {
+  margin-top: 8px;
+}
+
+.gift-plans__submit-note {
+  font-family: var(--font, GothamSSm, helvetica);
+  font-size: 13px;
+  color: var(--color-text-alt, #888);
+  text-align: center;
+  margin: 0 0 14px;
+  line-height: 1.5;
+}
+
+.gift-plans__submit {
+  all: unset;
+  display: block;
+  width: 100%;
+  padding: 18px 24px;
+  background-color: var(--color-button, #1a1a1a);
+  color: var(--color-button-text, #fff);
+  border-radius: 100px;
+  font-family: var(--font, GothamSSm, helvetica);
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-align: center;
+  box-sizing: border-box;
+  box-shadow: var(--elevated-shadow, 3px 3px 0 0 rgba(0, 0, 0, 0.15));
+  transition: box-shadow 0.15s, transform 0.15s, opacity 0.15s;
+}
+
+.gift-plans__submit:hover:not(:disabled) {
+  box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.2);
+  transform: translate(-1px, -1px);
+}
+
+.gift-plans__submit:active:not(:disabled) {
+  box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.1);
+  transform: translate(1px, 1px);
+}
+
+.gift-plans__submit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.gift-plans__submit:focus-visible {
+  outline: 2px solid var(--color-text-default, #1a1a1a);
+  outline-offset: 3px;
+}
+
+.gift-plans__submit-error {
+  margin-top: 12px;
+  padding: 12px 16px;
+  background-color: #fff5f5;
+  border: 1px solid #feb2b2;
+  border-radius: var(--radius-small, 8px);
+  font-size: 14px;
+  color: #c53030;
+  font-family: var(--font, GothamSSm, helvetica);
+}

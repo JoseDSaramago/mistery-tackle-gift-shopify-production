@@ -1,0 +1,251 @@
+{%- comment -%}
+  Formulario de datos del destinatario para el configurador de gift plans.
+  Sin parámetros — se usa como bloque completo dentro del Step 3.
+{%- endcomment -%}
+
+<form class="gift-plans__form" id="gp-recipient-form" novalidate>
+
+  <!-- Fieldset 1: Información personal -->
+  <fieldset class="gift-plans__form-fieldset" id="gp-fieldset-personal">
+    <legend class="gift-plans__form-legend">Recipient Details</legend>
+
+    <div class="gift-plans__form-grid">
+
+      <!-- Nombre -->
+      <div class="gift-plans__form-field gift-plans__form-field--full">
+        <label class="gift-plans__form-label" for="gp-recipient-name">
+          Recipient's Name <span aria-hidden="true">*</span>
+        </label>
+        <input
+          class="gift-plans__form-input"
+          type="text"
+          id="gp-recipient-name"
+          name="properties[recipient_name]"
+          autocomplete="name"
+          placeholder="Full name"
+          required
+          aria-required="true"
+          aria-describedby="gp-error-recipient-name"
+        >
+        <span class="gift-plans__form-error" id="gp-error-recipient-name" role="alert"></span>
+      </div>
+
+      <!-- Email -->
+      <div class="gift-plans__form-field gift-plans__form-field--full">
+        <label class="gift-plans__form-label" for="gp-recipient-email">
+          Recipient's Email <span aria-hidden="true">*</span>
+        </label>
+        <input
+          class="gift-plans__form-input"
+          type="email"
+          id="gp-recipient-email"
+          name="properties[recipient_email]"
+          autocomplete="email"
+          placeholder="email@example.com"
+          required
+          aria-required="true"
+          aria-describedby="gp-error-recipient-email"
+        >
+        <span class="gift-plans__form-error" id="gp-error-recipient-email" role="alert"></span>
+      </div>
+
+    </div>
+  </fieldset>
+
+  <!-- Fieldset 2: Dirección de envío -->
+  <fieldset class="gift-plans__form-fieldset" id="gp-fieldset-address">
+    <legend class="gift-plans__form-legend">Shipping Address</legend>
+
+    <div class="gift-plans__form-grid">
+
+      <!-- Dirección -->
+      <div class="gift-plans__form-field gift-plans__form-field--full">
+        <label class="gift-plans__form-label" for="gp-recipient-address">
+          Street Address <span aria-hidden="true">*</span>
+        </label>
+        <input
+          class="gift-plans__form-input"
+          type="text"
+          id="gp-recipient-address"
+          name="properties[recipient_address]"
+          autocomplete="street-address"
+          placeholder="123 Main St"
+          required
+          aria-required="true"
+          aria-describedby="gp-error-recipient-address"
+        >
+        <span class="gift-plans__form-error" id="gp-error-recipient-address" role="alert"></span>
+      </div>
+
+      <!-- Ciudad -->
+      <div class="gift-plans__form-field gift-plans__form-field--half">
+        <label class="gift-plans__form-label" for="gp-recipient-city">
+          City <span aria-hidden="true">*</span>
+        </label>
+        <input
+          class="gift-plans__form-input"
+          type="text"
+          id="gp-recipient-city"
+          name="properties[recipient_city]"
+          autocomplete="address-level2"
+          placeholder="Tampa"
+          required
+          aria-required="true"
+          aria-describedby="gp-error-recipient-city"
+        >
+        <span class="gift-plans__form-error" id="gp-error-recipient-city" role="alert"></span>
+      </div>
+
+      <!-- Estado -->
+      <div class="gift-plans__form-field gift-plans__form-field--half">
+        <label class="gift-plans__form-label" for="gp-recipient-state">
+          State <span aria-hidden="true">*</span>
+        </label>
+        <select
+          class="gift-plans__form-input gift-plans__form-select"
+          id="gp-recipient-state"
+          name="properties[recipient_state]"
+          autocomplete="address-level1"
+          required
+          aria-required="true"
+          aria-describedby="gp-error-recipient-state"
+        >
+          <option value="" disabled selected>Select</option>
+          <option value="AL">Alabama</option>
+          <option value="AK">Alaska</option>
+          <option value="AZ">Arizona</option>
+          <option value="AR">Arkansas</option>
+          <option value="CA">California</option>
+          <option value="CO">Colorado</option>
+          <option value="CT">Connecticut</option>
+          <option value="DE">Delaware</option>
+          <option value="DC">District of Columbia</option>
+          <option value="FL">Florida</option>
+          <option value="GA">Georgia</option>
+          <option value="HI">Hawaii</option>
+          <option value="ID">Idaho</option>
+          <option value="IL">Illinois</option>
+          <option value="IN">Indiana</option>
+          <option value="IA">Iowa</option>
+          <option value="KS">Kansas</option>
+          <option value="KY">Kentucky</option>
+          <option value="LA">Louisiana</option>
+          <option value="ME">Maine</option>
+          <option value="MD">Maryland</option>
+          <option value="MA">Massachusetts</option>
+          <option value="MI">Michigan</option>
+          <option value="MN">Minnesota</option>
+          <option value="MS">Mississippi</option>
+          <option value="MO">Missouri</option>
+          <option value="MT">Montana</option>
+          <option value="NE">Nebraska</option>
+          <option value="NV">Nevada</option>
+          <option value="NH">New Hampshire</option>
+          <option value="NJ">New Jersey</option>
+          <option value="NM">New Mexico</option>
+          <option value="NY">New York</option>
+          <option value="NC">North Carolina</option>
+          <option value="ND">North Dakota</option>
+          <option value="OH">Ohio</option>
+          <option value="OK">Oklahoma</option>
+          <option value="OR">Oregon</option>
+          <option value="PA">Pennsylvania</option>
+          <option value="RI">Rhode Island</option>
+          <option value="SC">South Carolina</option>
+          <option value="SD">South Dakota</option>
+          <option value="TN">Tennessee</option>
+          <option value="TX">Texas</option>
+          <option value="UT">Utah</option>
+          <option value="VT">Vermont</option>
+          <option value="VA">Virginia</option>
+          <option value="WA">Washington</option>
+          <option value="WV">West Virginia</option>
+          <option value="WI">Wisconsin</option>
+          <option value="WY">Wyoming</option>
+        </select>
+        <span class="gift-plans__form-error" id="gp-error-recipient-state" role="alert"></span>
+      </div>
+      
+
+      <!-- Zip -->
+      <div class="gift-plans__form-field gift-plans__form-field--half">
+        <label class="gift-plans__form-label" for="gp-recipient-zip">
+          Zip Code <span aria-hidden="true">*</span>
+        </label>
+        <input
+          class="gift-plans__form-input"
+          type="text"
+          id="gp-recipient-zip"
+          name="properties[recipient_zip]"
+          autocomplete="postal-code"
+          placeholder="33601"
+          pattern="[0-9]{5}"
+          inputmode="numeric"
+          maxlength="5"
+          required
+          aria-required="true"
+          aria-describedby="gp-error-recipient-zip"
+        >
+        <span class="gift-plans__form-error" id="gp-error-recipient-zip" role="alert"></span>
+      </div>
+
+      <!-- País (oculto, fijo US) -->
+      <input
+        type="hidden"
+        name="properties[recipient_country]"
+        value="US"
+      >
+
+    </div>
+  </fieldset>
+
+  <!-- Fieldset 3: Fecha y mensaje -->
+  <fieldset class="gift-plans__form-fieldset" id="gp-fieldset-delivery">
+    <legend class="gift-plans__form-legend">Gift Delivery</legend>
+
+    <div class="gift-plans__form-grid">
+
+      <!-- Pregunta visible + fecha -->
+      <div class="gift-plans__form-field gift-plans__form-field--full">
+        <p class="gift-plans__form-question">
+          When should we tell the recipient about their gift?
+        </p>
+        <label class="gift-plans__form-label" for="gp-start-date">
+          Start Date <span aria-hidden="true">*</span>
+        </label>
+        <input
+          class="gift-plans__form-input gift-plans__form-input--date"
+          type="date"
+          id="gp-start-date"
+          name="properties[start_date]"
+          required
+          aria-required="true"
+          aria-describedby="gp-error-start-date"
+        >
+        <span class="gift-plans__form-error" id="gp-error-start-date" role="alert"></span>
+      </div>
+
+      <!-- Mensaje (opcional) -->
+      <div class="gift-plans__form-field gift-plans__form-field--full">
+        <label class="gift-plans__form-label" for="gp-gift-message">
+          Gift Message
+          <span class="gift-plans__form-label-optional">(Optional)</span>
+        </label>
+        <textarea
+          class="gift-plans__form-input gift-plans__form-textarea"
+          id="gp-gift-message"
+          name="properties[gift_message]"
+          placeholder="Write a personal message..."
+          rows="4"
+          maxlength="500"
+          aria-describedby="gp-gift-message-count"
+        ></textarea>
+        <span class="gift-plans__form-char-count" id="gp-gift-message-count" aria-live="polite">
+          0 / 500
+        </span>
+      </div>
+
+    </div>
+  </fieldset>
+
+</form>

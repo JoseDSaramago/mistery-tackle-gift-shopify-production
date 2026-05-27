@@ -1,0 +1,29 @@
+{%- comment -%}
+  Opción de duración para el configurador de gift plans.
+  Parámetros:
+    - duration: número de meses (3, 6, 12)
+    - label: texto visible ("3 Months", "6 Months", "12 Months")
+    - tag_text: texto opcional para badge ("Best Value", etc.)
+{%- endcomment -%}
+
+<label class="gift-plans__duration-option" data-duration="{{ duration }}">
+  <input
+    type="radio"
+    name="gift_duration"
+    value="{{ duration }}"
+    class="gift-plans__duration-radio sr-only"
+    aria-label="{{ label }}"
+  >
+  <span class="gift-plans__duration-card">
+    <span class="gift-plans__duration-card-left">
+      <span class="gift-plans__duration-dot"></span>
+      <span class="gift-plans__duration-name">{{ label }}</span>
+    </span>
+    <span class="gift-plans__duration-card-right">
+      {%- if tag_text != blank -%}
+        <span class="gift-plans__duration-tag">{{ tag_text }}</span>
+      {%- endif -%}
+      <span class="gift-plans__duration-price" data-price-for="{{ duration }}">—</span>
+    </span>
+  </span>
+</label>

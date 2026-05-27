@@ -1,0 +1,41 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "gift_plans_hero": {
+      "type": "gift-plans-hero",
+      "settings": {
+        "eyebrow": "MYSTERY TACKLE BOX",
+        "title": "GIFT PLAN",
+        "subtitle": "Give the #1 fishing gift: a unique tackle discovery box for all skill levels shipped monthly",
+        "show_cta": false,
+        "cta_text": "Build Your Gift",
+        "show_promo_banner": true,
+        "promo_banner_text": "🔥 SAVE 15% off all gift plans • No code needed • Discount applied in cart 🔥",
+        "promo_bg_color": "#dd5739",
+        "promo_text_color": "#ffffff",
+        "bg_color": "#31554b",
+        "text_color": "#ffffff",
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48,
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80
+      }
+    },
+    "gift_plans_configurator": {
+      "type": "gift-plans-configurator",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "gift_plans_hero",
+    "gift_plans_configurator"
+  ]
+}

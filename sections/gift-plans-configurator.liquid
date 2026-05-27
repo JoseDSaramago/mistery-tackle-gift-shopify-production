@@ -1,0 +1,141 @@
+{{ 'gift-plans.css' | asset_url | stylesheet_tag }}
+
+<section class="gift-plans__configurator" id="gift-plans-configurator">
+  <div class="gift-plans__configurator-inner page-width">
+
+    <!-- Step 1: Box Size — generado desde bloques del schema -->
+    <div class="gift-plans__step" data-step="1">
+      <div class="gift-plans__step-header">
+        <span class="gift-plans__step-number">1</span>
+        <h2 class="gift-plans__step-title">Choose Your Box Size</h2>
+      </div>
+      <div class="gift-plans__step-content gift-plans__box-grid">
+        {%- for block in section.blocks -%}
+          {%- assign product  = block.settings.product -%}
+          {%- assign box_size = product.metafields.custom.box_size -%}
+          {%- if product != blank and box_size != blank -%}
+            {%- render 'gift-box-card', product: product, box_size: box_size -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- Step 2: Duration — el JS genera las opciones según el box seleccionado -->
+    <div class="gift-plans__step" data-step="2">
+      <div class="gift-plans__step-header">
+        <span class="gift-plans__step-number">2</span>
+        <h2 class="gift-plans__step-title">Choose Duration</h2>
+      </div>
+      <div class="gift-plans__step-content gift-plans__duration-list" id="gp-duration-list">
+        <!-- Opciones generadas dinámicamente por gift-plans.js -->
+      </div>
+    </div>
+
+    <!-- Step 3: Recipient Info -->
+    <div class="gift-plans__step" data-step="3">
+      <div class="gift-plans__step-header">
+        <span class="gift-plans__step-number">3</span>
+        <h2 class="gift-plans__step-title">Recipient Information</h2>
+      </div>
+      <div class="gift-plans__step-content">
+        {%- render 'gift-recipient-form' -%}
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="gift-plans__submit-wrap">
+      <p class="gift-plans__submit-note">
+        You'll enter your billing info at checkout. The recipient's address above is where we'll ship the boxes.
+      </p>
+      <button type="button" class="gift-plans__submit" disabled>
+        Add to Cart — <span data-submit-price>$0.00</span>
+      </button>
+      <div class="gift-plans__submit-error" hidden></div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  window.GIFT_PLANS_DATA = {
+    {%- for block in section.blocks -%}
+      {%- assign product  = block.settings.product -%}
+      {%- assign box_size = product.metafields.custom.box_size -%}
+      {%- if product != blank and box_size != blank -%}
+        {{ box_size | json }}: {
+          handle: {{ product.handle | json }},
+          title: {{ product.title | json }},
+          image: {{ product.featured_image | image_url: width: 600 | json }},
+          items_per_box: {{ product.metafields.custom.items_per_box | json }},
+          value_per_box: {{ product.metafields.custom.value_per_box | json }},
+          popularity_label: {{ product.metafields.custom.popularity_label | json }},
+          selling_plans: [
+            {%- assign sp_first = true -%}
+            {%- for group in product.selling_plan_groups -%}
+              {%- for sp in group.selling_plans -%}
+                {%- unless sp_first -%},{%- endunless -%}
+                {%- assign sp_first = false -%}
+                { id: {{ sp.id }}, name: {{ sp.name | json }} }
+              {%- endfor -%}
+            {%- endfor -%}
+          ],
+          variants: [
+            {%- for variant in product.variants -%}
+            {
+              id: {{ variant.id }},
+              title: {{ variant.title | json }},
+              duration: {{ variant.title | remove: ' Months' | remove: ' months' | plus: 0 }},
+              price: {{ variant.price }},
+              price_formatted: {{ variant.price | money | json }},
+              available: {{ variant.available }},
+              sku: {{ variant.sku | json }}
+            }{% unless forloop.last %},{% endunless %}
+            {%- endfor -%}
+          ]
+        }{% unless forloop.last %},{% endunless %}
+      {%- endif -%}
+    {%- endfor -%}
+  };
+
+  /* Validación: alertar si no hay productos configurados en los bloques */
+  if (Object.keys(window.GIFT_PLANS_DATA).length === 0) {
+    console.error('[Gift Plans] No hay productos configurados. Agrega bloques en el theme editor.');
+  }
+
+  console.log('[Gift Plans] Data loaded:', window.GIFT_PLANS_DATA);
+</script>
+
+<script src="{{ 'gift-plans.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Gift Plans Configurator",
+  "tag": "section",
+  "class": "gift-plans-configurator-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "box",
+      "name": "Box Option",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Gift Box Product",
+          "info": "El producto debe tener el metafield custom.box_size configurado"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gift Plans Configurator",
+      "blocks": [
+        { "type": "box" },
+        { "type": "box" },
+        { "type": "box" }
+      ]
+    }
+  ]
+}
+{% endschema %}
